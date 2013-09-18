@@ -157,12 +157,13 @@ datum/controller/vote
 
 
 		if(restart)
-			world << "World restarting due to vote..."
-			feedback_set_details("end_error","restart vote")
-			if(blackbox)	blackbox.save_all_data_to_sql()
-			sleep(50)
-			log_game("Rebooting due to restart vote")
-			world.Reboot()
+			world << "Sorry. No restart, guys. Call the shitty shuttle."
+	//		world << "World restarting due to vote..."
+	//		feedback_set_details("end_error","restart vote")		Broken vote by Jarlo
+	//		if(blackbox)	blackbox.save_all_data_to_sql()
+	//		sleep(50)
+	//		log_game("Rebooting due to restart vote")
+	//		world.Reboot()
 
 		return .
 

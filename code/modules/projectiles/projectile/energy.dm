@@ -17,8 +17,8 @@
 
 // Если кто ещё вздумает "пофиксить" тазер то лучше сразу врежте себе по яйцам и вырежте печень.
 
-	agony = 65
-	damage_type = HALLOSS
+//	agony = 65
+//	damage_type = HALLOSS
 	//Damage will be handled on the MOB side, to prevent window shattering.
 
 

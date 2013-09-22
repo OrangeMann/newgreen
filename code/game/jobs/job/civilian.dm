@@ -207,8 +207,8 @@
 
 
 
-//Griff //BS12 EDIT
-/*
+
+
 /datum/job/clown
 	title = "Clown"
 	flag = CLOWN
@@ -281,7 +281,7 @@
 		H.mind.special_verbs += /client/proc/mimewall
 		H.miming = 1
 		return 1
-*/
+
 
 
 /datum/job/janitor

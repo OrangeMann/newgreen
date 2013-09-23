@@ -443,11 +443,11 @@ datum
 				if(!M) M = holder.my_atom
 				if(!data) data = 1
 				switch(data)
-					if(1 to 15)
+					if(1 to 5)
 						M.eye_blurry = max(M.eye_blurry, 10)
-					if(15 to 25)
+					if(5 to 10)
 						M.drowsyness  = max(M.drowsyness, 20)
-					if(25 to INFINITY)
+					if(10 to INFINITY)
 						M.Paralyse(20)
 						M.drowsyness  = max(M.drowsyness, 30)
 				data++
@@ -469,11 +469,11 @@ datum
 					M.losebreath = max(10, M.losebreath-10)
 				holder.remove_reagent(src.id, 0.2)
 				switch(data)
-					if(1 to 15)
+					if(1 to 5)
 						M.eye_blurry = max(M.eye_blurry, 10)
-					if(15 to 25)
+					if(5 to 10)
 						M.drowsyness  = max(M.drowsyness, 20)
-					if(25 to INFINITY)
+					if(10 to INFINITY)
 						M.sleeping += 1
 						M.adjustOxyLoss(-M.getOxyLoss())
 						M.SetWeakened(0)

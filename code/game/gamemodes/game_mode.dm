@@ -52,6 +52,7 @@ Stealth and Camouflage Items;
 Whitespace:Seperator;
 Devices and Tools;
 /obj/item/weapon/card/emag:3:Cryptographic Sequencer;
+/obj/item/device/hacktool:4:Hacktool (Slow, but stealthy.  Unlimited uses);
 /obj/item/weapon/storage/toolbox/syndicate:1:Fully Loaded Toolbox;
 /obj/item/weapon/storage/box/syndie_kit/space:3:Space Suit;
 /obj/item/clothing/glasses/thermal/syndi:3:Thermal Imaging Glasses;

@@ -3389,6 +3389,7 @@ datum
 					if(!M) M = holder.my_atom
 					M:adjustOxyLoss(0.5)
 					M:adjustOxyLoss(0.5)
+					M.adjustToxLoss(2*REM)
 					M:weakened = max(M:weakened, 15)
 					M:silent = max(M:silent, 15)
 					return

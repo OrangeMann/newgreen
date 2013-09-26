@@ -6,6 +6,6 @@
 ######################################################################
 
 # not_a_user - Admin
-testunit - Host
+macleod962 - Host
 lethalghost - Host
 barka - Host

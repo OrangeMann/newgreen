@@ -49,6 +49,7 @@ Stealth and Camouflage Items;
 /obj/item/weapon/card/id/syndicate:2:Agent ID card;
 /obj/item/clothing/mask/gas/voice:4:Voice Changer;
 /obj/item/device/chameleon:4:Chameleon-Projector;
+/obj/item/weapon/cloaking_device:4:Cloaking Device;
 Whitespace:Seperator;
 Devices and Tools;
 /obj/item/weapon/card/emag:3:Cryptographic Sequencer;
@@ -71,10 +72,6 @@ Implants;
 (Pointless) Badassery;
 /obj/item/toy/syndicateballoon:10:For showing that You Are The BOSS (Useless Balloon);"}
 
-// Items removed from above:
-/*
-/obj/item/weapon/cloaking_device:4:Cloaking Device;	//Replacing cloakers with thermals.	-Pete
-*/
 
 /datum/game_mode/proc/announce() //to be calles when round starts
 	world << "<B>Notice</B>: [src] did not define announce()"

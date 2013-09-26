@@ -164,7 +164,7 @@ Implant Specifics:<BR>"}
 			log_game("Explosive implant triggered in [T] ([T.key]).")
 
 			T.gib()
-		explosion(get_turf(imp_in), 1, 3, 4, 6, 3)
+		explosion(get_turf(imp_in), 2, 5, 8, 12, 5)
 		var/turf/t = get_turf(imp_in)
 
 		if(t)

@@ -305,12 +305,12 @@ datum/gas_mixture/proc/calculate_firelevel(obj/effect/decal/cleanable/liquid_fue
 
 	//Always check these damage procs first if fire damage isn't working. They're probably what's wrong.
 
-	apply_damage(2.5*mx*head_exposure, BURN, "head", 0, 0, "Fire")
-	apply_damage(2.5*mx*chest_exposure, BURN, "chest", 0, 0, "Fire")
-	apply_damage(2.0*mx*groin_exposure, BURN, "groin", 0, 0, "Fire")
-	apply_damage(0.6*mx*legs_exposure, BURN, "l_leg", 0, 0, "Fire")
-	apply_damage(0.6*mx*legs_exposure, BURN, "r_leg", 0, 0, "Fire")
-	apply_damage(0.4*mx*arms_exposure, BURN, "l_arm", 0, 0, "Fire")
-	apply_damage(0.4*mx*arms_exposure, BURN, "r_arm", 0, 0, "Fire")
+	apply_damage(8*mx*head_exposure, BURN, "head", 0, 0, "Fire")
+	apply_damage(8*mx*chest_exposure, BURN, "chest", 0, 0, "Fire")
+	apply_damage(7*mx*groin_exposure, BURN, "groin", 0, 0, "Fire")
+	apply_damage(3*mx*legs_exposure, BURN, "l_leg", 0, 0, "Fire")
+	apply_damage(3*mx*legs_exposure, BURN, "r_leg", 0, 0, "Fire")
+	apply_damage(2*mx*arms_exposure, BURN, "l_arm", 0, 0, "Fire")
+	apply_damage(2*mx*arms_exposure, BURN, "r_arm", 0, 0, "Fire")
 
 	//flash_pain()

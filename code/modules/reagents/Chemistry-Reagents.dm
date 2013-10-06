@@ -292,27 +292,27 @@ datum
 				if(!M) M = holder.my_atom
 				M.drowsyness = max(M.drowsyness-2*REM, 0)
 				if(holder.has_reagent("toxin"))
-					holder.remove_reagent("toxin", 2*REM)
+					holder.remove_reagent("toxin", 4*REM)
 				if(holder.has_reagent("stoxin"))
-					holder.remove_reagent("stoxin", 2*REM)
+					holder.remove_reagent("stoxin", 4*REM)
 				if(holder.has_reagent("plasma"))
-					holder.remove_reagent("plasma", 1*REM)
+					holder.remove_reagent("plasma", 2*REM)
 				if(holder.has_reagent("sacid"))
-					holder.remove_reagent("sacid", 1*REM)
+					holder.remove_reagent("sacid", 2*REM)
 				if(holder.has_reagent("cyanide"))
-					holder.remove_reagent("cyanide", 1*REM)
+					holder.remove_reagent("cyanide", 2*REM)
 				if(holder.has_reagent("amatoxin"))
-					holder.remove_reagent("amatoxin", 2*REM)
+					holder.remove_reagent("amatoxin", 4*REM)
 				if(holder.has_reagent("chloralhydrate"))
 					holder.remove_reagent("chloralhydrate", 5*REM)
 				if(holder.has_reagent("carpotoxin"))
-					holder.remove_reagent("carpotoxin", 1*REM)
+					holder.remove_reagent("carpotoxin", 2*REM)
 				if(holder.has_reagent("zombiepowder"))
-					holder.remove_reagent("zombiepowder", 0.5*REM)
+					holder.remove_reagent("zombiepowder", 1*REM)
 				if(holder.has_reagent("mindbreaker"))
-					holder.remove_reagent("mindbreaker", 2*REM)
-				M.hallucination = max(0, M.hallucination - 5*REM)
-				M.adjustToxLoss(-2*REM)
+					holder.remove_reagent("mindbreaker", 4*REM)
+				M.hallucination = max(0, M.hallucination - 10*REM)
+				M.adjustToxLoss(-5*REM)
 				..()
 				return
 
@@ -444,11 +444,11 @@ datum
 				if(!data) data = 1
 				switch(data)
 					if(1 to 5)
-						M.eye_blurry = max(M.eye_blurry, 10)
+						M.eye_blurry = max(M.eye_blurry, 5)
 					if(5 to 10)
-						M.drowsyness  = max(M.drowsyness, 20)
+						M.drowsyness  = max(M.drowsyness, 10)
 					if(10 to INFINITY)
-						M.Paralyse(20)
+						M.Paralyse(15)
 						M.drowsyness  = max(M.drowsyness, 30)
 				data++
 				..()
@@ -498,7 +498,7 @@ datum
 				if(!M) M = holder.my_atom
 				if(M.losebreath >= 10)
 					M.losebreath = max(10, M.losebreath-5)
-				holder.remove_reagent(src.id, 0.5 * REAGENTS_METABOLISM)
+				holder.remove_reagent(src.id, 1 * REAGENTS_METABOLISM)
 				return
 
 		space_drugs
@@ -1340,8 +1340,8 @@ datum
 					return
 				if(!M) M = holder.my_atom
 				if(prob(33))
-					M.take_organ_damage(1*REM, 0)
-				M.adjustOxyLoss(3)
+					M.take_organ_damage(2*REM, 0)
+				M.adjustOxyLoss(5)
 				if(prob(20)) M.emote("gasp")
 				..()
 				return
@@ -1357,7 +1357,7 @@ datum
 				if(M.stat == 2.0)
 					return
 				if(!M) M = holder.my_atom
-				M.heal_organ_damage(0,2*REM)
+				M.heal_organ_damage(2*REM)
 				..()
 				return
 
@@ -1372,7 +1372,7 @@ datum
 				if(M.stat == 2.0) //THE GUY IS **DEAD**! BEREFT OF ALL LIFE HE RESTS IN PEACE etc etc. He does NOT metabolise shit anymore, god DAMN
 					return
 				if(!M) M = holder.my_atom
-				M.heal_organ_damage(0,3*REM)
+				M.heal_organ_damage(3*REM)
 				..()
 				return
 
@@ -1387,7 +1387,7 @@ datum
 				if(M.stat == 2.0)
 					return  //See above, down and around. --Agouri
 				if(!M) M = holder.my_atom
-				M.adjustOxyLoss(-2*REM)
+				M.adjustOxyLoss(-4*REM)
 				if(holder.has_reagent("lexorin"))
 					holder.remove_reagent("lexorin", 2*REM)
 				..()
@@ -1421,10 +1421,10 @@ datum
 				if(M.stat == 2.0)
 					return
 				if(!M) M = holder.my_atom
-				if(M.getOxyLoss() && prob(80)) M.adjustOxyLoss(-1*REM)
-				if(M.getBruteLoss() && prob(80)) M.heal_organ_damage(1*REM,0)
-				if(M.getFireLoss() && prob(80)) M.heal_organ_damage(0,1*REM)
-				if(M.getToxLoss() && prob(80)) M.adjustToxLoss(-1*REM)
+				if(M.getOxyLoss() && prob(80)) M.adjustOxyLoss(-2*REM)
+				if(M.getBruteLoss() && prob(80)) M.heal_organ_damage(2*REM,0)
+				if(M.getFireLoss() && prob(80)) M.heal_organ_damage(0.5*REM)
+				if(M.getToxLoss() && prob(80)) M.adjustToxLoss(-2*REM)
 				..()
 				return
 
@@ -1605,7 +1605,7 @@ datum
 				if(M.stat == 2.0)
 					return
 				if(!M) M = holder.my_atom
-				M.heal_organ_damage(2*REM,0)
+				M.heal_organ_damage(4*REM,0)
 				..()
 				return
 
@@ -1633,10 +1633,10 @@ datum
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
 				if(M.bodytemperature < 170)
-					M.adjustCloneLoss(-1)
-					M.adjustOxyLoss(-1)
+					M.adjustCloneLoss(-2)
+					M.adjustOxyLoss(-2)
 					M.heal_organ_damage(1,1)
-					M.adjustToxLoss(-1)
+					M.adjustToxLoss(-2)
 				..()
 				return
 
@@ -1650,10 +1650,10 @@ datum
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
 				if(M.bodytemperature < 170)
-					M.adjustCloneLoss(-3)
-					M.adjustOxyLoss(-3)
+					M.adjustCloneLoss(-5)
+					M.adjustOxyLoss(-5)
 					M.heal_organ_damage(3,3)
-					M.adjustToxLoss(-3)
+					M.adjustToxLoss(-4)
 				..()
 				return
 
@@ -2136,7 +2136,7 @@ datum
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
-				M.adjustToxLoss(1*REM)
+				M.adjustToxLoss(2*REM)
 				..()
 				return
 

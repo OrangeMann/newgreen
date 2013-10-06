@@ -33,15 +33,15 @@
 /obj/item/projectile/energy/dart
 	name = "dart"
 	icon_state = "toxin"
-	damage = 5
+	damage = 15
 	damage_type = TOX
-	weaken = 5
+	weaken = 7
 
 
 /obj/item/projectile/energy/bolt
 	name = "bolt"
 	icon_state = "cbbolt"
-	damage = 10
+	damage = 20
 	damage_type = TOX
 	nodamage = 0
 	weaken = 10
@@ -50,13 +50,13 @@
 
 /obj/item/projectile/energy/bolt/large
 	name = "largebolt"
-	damage = 20
+	damage = 40
 
 
 /obj/item/projectile/energy/neurotoxin
 	name = "neuro"
 	icon_state = "neurotoxin"
-	damage = 5
+	damage = 10
 	damage_type = TOX
 	weaken = 5
 

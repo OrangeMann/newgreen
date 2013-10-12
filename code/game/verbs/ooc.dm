@@ -85,7 +85,7 @@ var/global/normal_ooc_colour = "#002eb8"
 	set category = "Fun"
 	normal_ooc_colour = newColor
 
-
+/*
 /client/verb/looc(msg as text)
 	set name = "LOOC" //Gave this shit a shorter name so you only have to time out "ooc" rather than "ooc message" to use it --NeoFite
 	set desc = "Local OOC, seen only by those in view."
@@ -150,3 +150,4 @@ var/global/normal_ooc_colour = "#002eb8"
 			if (C.mob in heard)
 				prefix = "LOOC"
 			C << "<font color='#6699CC'><span class='ooc'><span class='prefix'>[prefix]:</span> <EM>[src.key]:</EM> <span class='message'>[msg]</span></span></font>"
+			*/

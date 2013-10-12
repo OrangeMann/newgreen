@@ -119,3 +119,16 @@
 	msg = "<b>Current Moderators ([num_mods_online]):</b>\n" + msg
 	msg += "<b>There are also [num_admins_online] admins online.</b> To view online admins, type 'adminwho'\n"
 	src << msg
+
+/client/verb/active_players()
+	set category = "OOC"
+	set name = "Active Players"
+	var/total = 0
+	for(var/mob/living/M in world)
+		if(!M.client) continue
+		if(M.client.inactivity > 10 * 60 * 10) continue
+		if(M.stat == 2) continue
+
+		total++
+
+	usr << "<b>Active Players: [total]</b>"

@@ -173,9 +173,9 @@
 		..()
 
 /obj/item/clothing/glasses/thermal/syndi	//These are now a traitor item, concealed as mesons.	-Pete
-	name = "Optical Meson Scanner"
-	desc = "Used for seeing walls, floors, and stuff through anything."
-	icon_state = "meson"
+	name = "sunglasses"
+	desc = "Strangely ancient technology used to help provide rudimentary eye cover. Enhanced shielding blocks many flashes."
+	icon_state = "sun"
 	origin_tech = "magnets=3;syndicate=4"
 
 /obj/item/clothing/glasses/thermal/monocle

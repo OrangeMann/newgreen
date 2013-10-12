@@ -463,7 +463,7 @@
 		del(src)
 
 	if(usr.a_intent == "disarm" && get_dist(usr, src) <= 1 && !usr.buckled)
-		if(prob(100))
+		if(prob(70))
 			visible_message("<span class='notice'>[user] climbs on the [src].</span>")
 			usr.loc = src.loc
 		else

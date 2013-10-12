@@ -180,7 +180,7 @@
 	return
 
 
-/mob/living/carbon/alien/humanoid/attack_slime(mob/living/carbon/slime/M as mob)
+/*/mob/living/carbon/alien/humanoid/attack_metroid(mob/living/carbon/metroid/M as mob)
 	if (!ticker)
 		M << "You cannot attack people before the game has started."
 		return
@@ -195,7 +195,7 @@
 
 		var/damage = rand(1, 3)
 
-		if(istype(M, /mob/living/carbon/slime/adult))
+		if(istype(M, /mob/living/carbon/metroid/adult))
 			damage = rand(10, 40)
 		else
 			damage = rand(5, 35)
@@ -239,7 +239,7 @@
 		updatehealth()
 
 	return
-
+*/
 /mob/living/carbon/alien/humanoid/attack_animal(mob/living/simple_animal/M as mob)
 	if(M.melee_damage_upper == 0)
 		M.emote("[M.friendly] [src]")

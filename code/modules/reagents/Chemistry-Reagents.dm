@@ -86,9 +86,9 @@ datum
 			on_update(var/atom/A)
 				return
 
-		slimejelly
-			name = "Slime Jelly"
-			id = "slimejelly"
+		metroidjelly
+			name = "metroid Jelly"
+			id = "metroidjelly"
 			description = "A gooey semi-liquid produced from one of the deadliest lifeforms in existence. SO REAL."
 			reagent_state = LIQUID
 			color = "#801E28" // rgb: 128, 30, 40
@@ -233,7 +233,7 @@ datum
 							T.overlays -= T.wet_overlay
 							T.wet_overlay = null
 
-				for(var/mob/living/carbon/slime/M in T)
+				for(var/mob/living/carbon/metroid/M in T)
 					M.adjustToxLoss(rand(15,20))
 
 				var/hotspot = (locate(/obj/fire) in T)
@@ -377,10 +377,10 @@ datum
 				..()
 				return
 
-		slimetoxin
+		metroidtoxin
 			name = "Mutation Toxin"
 			id = "mutationtoxin"
-			description = "A corruptive toxin produced by slimes."
+			description = "A corruptive toxin produced by metroids."
 			reagent_state = LIQUID
 			color = "#13BC5E" // rgb: 19, 188, 94
 
@@ -390,15 +390,15 @@ datum
 					var/mob/living/carbon/human/human = M
 					if(human.dna.mutantrace == null)
 						M << "\red Your flesh rapidly mutates!"
-						human.dna.mutantrace = "slime"
+						human.dna.mutantrace = "metroid"
 						human.update_mutantrace()
 				..()
 				return
 
-		aslimetoxin
+		ametroidtoxin
 			name = "Advanced Mutation Toxin"
 			id = "amutationtoxin"
-			description = "An advanced corruptive toxin produced by slimes."
+			description = "An advanced corruptive toxin produced by metroids."
 			reagent_state = LIQUID
 			color = "#13BC5E" // rgb: 19, 188, 94
 
@@ -419,7 +419,7 @@ datum
 						W.layer = initial(W.layer)
 						W.loc = M.loc
 						W.dropped(M)
-					var/mob/living/carbon/slime/new_mob = new /mob/living/carbon/slime(M.loc)
+					var/mob/living/carbon/metroid/new_mob = new /mob/living/carbon/metroid(M.loc)
 					new_mob.a_intent = "hurt"
 					new_mob.universal_speak = 1
 					if(M.mind)
@@ -1183,7 +1183,7 @@ datum
 					for(var/obj/effect/decal/cleanable/C in src)
 						del(C)
 
-					for(var/mob/living/carbon/slime/M in T)
+					for(var/mob/living/carbon/metroid/M in T)
 						M.adjustToxLoss(rand(5,10))
 
 			reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
@@ -1276,8 +1276,8 @@ datum
 				return
 			reaction_obj(var/obj/O, var/volume)
 				src = null
-				/*if(istype(O,/obj/item/weapon/reagent_containers/food/snacks/egg/slime))
-					var/obj/item/weapon/reagent_containers/food/snacks/egg/slime/egg = O
+				/*if(istype(O,/obj/item/weapon/reagent_containers/food/snacks/egg/metroid))
+					var/obj/item/weapon/reagent_containers/food/snacks/egg/metroid/egg = O
 					if (egg.grown)
 						egg.Hatch()*/
 				if((!O) || (!volume))	return 0
@@ -1979,15 +1979,15 @@ datum
 						M.bodytemperature += 5 * TEMPERATURE_DAMAGE_COEFFICIENT
 						if(holder.has_reagent("frostoil"))
 							holder.remove_reagent("frostoil", 5)
-						if(istype(M, /mob/living/carbon/slime))
+						if(istype(M, /mob/living/carbon/metroid))
 							M.bodytemperature += rand(5,20)
 					if(15 to 25)
 						M.bodytemperature += 10 * TEMPERATURE_DAMAGE_COEFFICIENT
-						if(istype(M, /mob/living/carbon/slime))
+						if(istype(M, /mob/living/carbon/metroid))
 							M.bodytemperature += rand(10,20)
 					if(25 to INFINITY)
 						M.bodytemperature += 15 * TEMPERATURE_DAMAGE_COEFFICIENT
-						if(istype(M, /mob/living/carbon/slime))
+						if(istype(M, /mob/living/carbon/metroid))
 							M.bodytemperature += rand(15,20)
 				holder.remove_reagent(src.id, FOOD_METABOLISM)
 				data++
@@ -2066,16 +2066,16 @@ datum
 						M.bodytemperature -= 5 * TEMPERATURE_DAMAGE_COEFFICIENT
 						if(holder.has_reagent("capsaicin"))
 							holder.remove_reagent("capsaicin", 5)
-						if(istype(M, /mob/living/carbon/slime))
+						if(istype(M, /mob/living/carbon/metroid))
 							M.bodytemperature -= rand(5,20)
 					if(15 to 25)
 						M.bodytemperature -= 10 * TEMPERATURE_DAMAGE_COEFFICIENT
-						if(istype(M, /mob/living/carbon/slime))
+						if(istype(M, /mob/living/carbon/metroid))
 							M.bodytemperature -= rand(10,20)
 					if(25 to INFINITY)
 						M.bodytemperature -= 15 * TEMPERATURE_DAMAGE_COEFFICIENT
 						if(prob(1)) M.emote("shiver")
-						if(istype(M, /mob/living/carbon/slime))
+						if(istype(M, /mob/living/carbon/metroid))
 							M.bodytemperature -= rand(15,20)
 				data++
 				holder.remove_reagent(src.id, FOOD_METABOLISM)
@@ -2083,7 +2083,7 @@ datum
 				return
 
 			reaction_turf(var/turf/simulated/T, var/volume)
-				for(var/mob/living/carbon/slime/M in T)
+				for(var/mob/living/carbon/metroid/M in T)
 					M.adjustToxLoss(rand(15,30))
 
 		sodiumchloride
@@ -2706,16 +2706,16 @@ datum
 								M.bodytemperature -= 5 * TEMPERATURE_DAMAGE_COEFFICIENT
 								if(holder.has_reagent("capsaicin"))
 									holder.remove_reagent("capsaicin", 5)
-								if(istype(M, /mob/living/carbon/slime))
+								if(istype(M, /mob/living/carbon/metroid))
 									M.bodytemperature -= rand(5,20)
 							if(15 to 25)
 								M.bodytemperature -= 10 * TEMPERATURE_DAMAGE_COEFFICIENT
-								if(istype(M, /mob/living/carbon/slime))
+								if(istype(M, /mob/living/carbon/metroid))
 									M.bodytemperature -= rand(10,20)
 							if(25 to INFINITY)
 								M.bodytemperature -= 15 * TEMPERATURE_DAMAGE_COEFFICIENT
 								if(prob(1)) M.emote("shiver")
-								if(istype(M, /mob/living/carbon/slime))
+								if(istype(M, /mob/living/carbon/metroid))
 									M.bodytemperature -= rand(15,20)
 						data++
 						holder.remove_reagent(src.id, FOOD_METABOLISM)

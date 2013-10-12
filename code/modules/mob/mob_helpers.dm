@@ -30,15 +30,15 @@
 		return 1
 	return 0
 
-/proc/isslime(A)
-	if(istype(A, /mob/living/carbon/slime))
+/proc/ismetroid(A)
+	if(istype(A, /mob/living/carbon/metroid))
 		return 1
 	return 0
 
-/proc/isslimeadult(A)
-	if(istype(A, /mob/living/carbon/slime/adult))
-		return 1
-	return 0
+///proc/ismetroidadult(A)
+//	if(istype(A, /mob/living/carbon/metroid/adult))
+//		return 1
+//	return 0
 
 /proc/isrobot(A)
 	if(istype(A, /mob/living/silicon/robot))

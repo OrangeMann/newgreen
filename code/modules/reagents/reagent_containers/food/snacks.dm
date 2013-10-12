@@ -52,7 +52,7 @@
 				M << "\red You cannot force any more of [src] to go down your throat."
 				return 0
 		else
-			if(!istype(M, /mob/living/carbon/slime))		//If you're feeding it to someone else.
+			if(!istype(M, /mob/living/carbon/metroid))		//If you're feeding it to someone else.
 				var/fullness = M.nutrition + (M.reagents.get_reagent_amount("nutriment") * 25)
 				if (fullness <= (550 * (1 + M.overeatduration / 1000)))
 					for(var/mob/O in viewers(world.view, user))
@@ -376,7 +376,7 @@
 			if(6)
 				reagents.add_reagent("coco", 3)
 			if(7)
-				reagents.add_reagent("slimejelly", 3)
+				reagents.add_reagent("metroidjelly", 3)
 			if(8)
 				reagents.add_reagent("banana", 3)
 			if(9)
@@ -404,7 +404,7 @@
 			src.name = "Frosted Jelly Donut"
 			reagents.add_reagent("sprinkles", 2)
 
-/obj/item/weapon/reagent_containers/food/snacks/donut/slimejelly
+/obj/item/weapon/reagent_containers/food/snacks/donut/metroidjelly
 	name = "Jelly Donut"
 	desc = "You jelly?"
 	icon_state = "jdonut1"
@@ -412,7 +412,7 @@
 		..()
 		reagents.add_reagent("nutriment", 3)
 		reagents.add_reagent("sprinkles", 1)
-		reagents.add_reagent("slimejelly", 5)
+		reagents.add_reagent("metroidjelly", 5)
 		bitesize = 5
 		if(prob(30))
 			src.icon_state = "jdonut2"
@@ -1171,13 +1171,13 @@
 		reagents.add_reagent("water", 5)
 		bitesize = 5
 
-/obj/item/weapon/reagent_containers/food/snacks/slimesoup
-	name = "slime soup"
+/obj/item/weapon/reagent_containers/food/snacks/metroidsoup
+	name = "metroid soup"
 	desc = "If no water is available, you may substitute tears."
-	icon_state = "slimesoup"
+	icon_state = "metroidsoup"
 	New()
 		..()
-		reagents.add_reagent("slimejelly", 5)
+		reagents.add_reagent("metroidjelly", 5)
 		reagents.add_reagent("water", 10)
 		bitesize = 5
 
@@ -1257,7 +1257,7 @@
 				reagents.add_reagent("nutriment", 6)
 				reagents.add_reagent("blood", 10)
 			if(7)
-				reagents.add_reagent("slimejelly", 10)
+				reagents.add_reagent("metroidjelly", 10)
 				reagents.add_reagent("water", 10)
 			if(8)
 				reagents.add_reagent("carbon", 10)
@@ -1630,10 +1630,10 @@
 		..()
 		reagents.add_reagent("cherryjelly", 5)
 
-/obj/item/weapon/reagent_containers/food/snacks/jelliedtoast/slime
+/obj/item/weapon/reagent_containers/food/snacks/jelliedtoast/metroid
 	New()
 		..()
-		reagents.add_reagent("slimejelly", 5)
+		reagents.add_reagent("metroidjelly", 5)
 
 /obj/item/weapon/reagent_containers/food/snacks/jellyburger
 	name = "Jelly Burger"
@@ -1644,10 +1644,10 @@
 		reagents.add_reagent("nutriment", 5)
 		bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/jellyburger/slime
+/obj/item/weapon/reagent_containers/food/snacks/jellyburger/metroid
 	New()
 		..()
-		reagents.add_reagent("slimejelly", 5)
+		reagents.add_reagent("metroidjelly", 5)
 
 /obj/item/weapon/reagent_containers/food/snacks/jellyburger/cherry
 	New()
@@ -1811,23 +1811,23 @@
 		reagents.add_reagent("nutriment", 2)
 		bitesize = 3
 
-/obj/item/weapon/reagent_containers/food/snacks/jellysandwich/slime
+/obj/item/weapon/reagent_containers/food/snacks/jellysandwich/metroid
 	New()
 		..()
-		reagents.add_reagent("slimejelly", 5)
+		reagents.add_reagent("metroidjelly", 5)
 
 /obj/item/weapon/reagent_containers/food/snacks/jellysandwich/cherry
 	New()
 		..()
 		reagents.add_reagent("cherryjelly", 5)
 /*
-/obj/item/weapon/reagent_containers/food/snacks/boiledslimecore
-	name = "Boiled slime Core"
+/obj/item/weapon/reagent_containers/food/snacks/boiledmetroidcore
+	name = "Boiled metroid Core"
 	desc = "A boiled red thing."
-	icon_state = "boiledslimecore"
+	icon_state = "boiledmetroidcore"
 	New()
 		..()
-		reagents.add_reagent("slimejelly", 5)
+		reagents.add_reagent("metroidjelly", 5)
 		bitesize = 3
 */
 /obj/item/weapon/reagent_containers/food/snacks/mint

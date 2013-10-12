@@ -71,7 +71,7 @@
 					return
 
 				if(ismob(target))//Blood!
-					if(istype(target, /mob/living/carbon/slime))
+					if(istype(target, /mob/living/carbon/metroid))
 						user << "\red You are unable to locate any blood."
 						return
 					if(src.reagents.has_reagent("blood"))
@@ -103,9 +103,9 @@
 						user << "\red [target] is empty."
 						return
 
-					if(!target.is_open_container() && !istype(target,/obj/structure/reagent_dispensers) && !istype(target,/obj/item/slime_extract))
-						user << "\red You cannot directly remove reagents from this object."
-						return
+//					if(!target.is_open_container() && !istype(target,/obj/structure/reagent_dispensers) && !istype(target,/obj/item/metroid_core))
+//						user << "\red You cannot directly remove reagents from this object."
+//						return
 
 					var/trans = target.reagents.trans_to(src, amount_per_transfer_from_this) // transfer from, transfer to - who cares?
 
@@ -121,12 +121,16 @@
 				if(istype(target, /obj/item/weapon/implantcase/chem))
 					return
 
-				if(!target.is_open_container() && !ismob(target) && !istype(target, /obj/item/weapon/reagent_containers/food) && !istype(target, /obj/item/slime_extract) && !istype(target, /obj/item/clothing/mask/cigarette) && !istype(target, /obj/item/weapon/storage/fancy/cigarettes))
+				if(!target.is_open_container() && !ismob(target) && !istype(target, /obj/item/weapon/reagent_containers/food) && !istype(target, /obj/item/metroid_core) && !istype(target, /obj/item/clothing/mask/cigarette) && !istype(target, /obj/item/weapon/storage/fancy/cigarettes))
 					user << "\red You cannot directly fill this object."
 					return
 				if(target.reagents.total_volume >= target.reagents.maximum_volume)
 					user << "\red [target] is full."
 					return
+
+				if(istype(target, /obj/item/metroid_core))
+					var/obj/item/metroid_core/core = target
+					core.Flush = 30 // reset flush counter
 
 				if(ismob(target) && target != user)
 					var/time = 30 //Injecting through a hardsuit takes longer due to needing to find a port.

@@ -54,7 +54,7 @@ There are several things that need to be remembered:
 
 	All of these are named after the variable they update from. They are defined at the mob/ level like
 	update_clothing was, so you won't cause undefined proc runtimes with usr.update_inv_wear_id() if the usr is a
-	slime etc. Instead, it'll just return without doing any work. So no harm in calling it for slimes and such.
+	metroid etc. Instead, it'll just return without doing any work. So no harm in calling it for metroids and such.
 
 
 >	There are also these special cases:
@@ -428,7 +428,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 
 	if(dna)
 		switch(dna.mutantrace)
-			if("golem","slime","shadow","adamantine")
+			if("golem","metroid","shadow","adamantine")
 				overlays_lying[MUTANTRACE_LAYER]	= image("icon" = 'icons/effects/genetics.dmi', "icon_state" = "[dna.mutantrace][fat]_[gender]_l")
 				overlays_standing[MUTANTRACE_LAYER]	= image("icon" = 'icons/effects/genetics.dmi', "icon_state" = "[dna.mutantrace][fat]_[gender]_s")
 			else

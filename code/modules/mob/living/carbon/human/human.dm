@@ -93,9 +93,9 @@
 			loc = tmob.loc
 			tmob.loc = oldloc
 			now_pushing = 0
-			for(var/mob/living/carbon/slime/slime in view(1,tmob))
-				if(slime.Victim == tmob)
-					slime.UpdateFeed()
+			for(var/mob/living/carbon/metroid/metroid in view(1,tmob))
+				if(metroid.Victim == tmob)
+					metroid.UpdateFeed()
 			return
 
 		if(istype(tmob, /mob/living/carbon/human) && (FAT in tmob.mutations))
@@ -311,7 +311,7 @@
 		if(armor >= 2)	return
 
 
-/mob/living/carbon/human/attack_slime(mob/living/carbon/slime/M as mob)
+/*/mob/living/carbon/human/attack_metroid(mob/living/carbon/metroid/M as mob)
 	if(M.Victim) return // can't attack while eating!
 
 	if (health > -100)
@@ -322,7 +322,7 @@
 
 		var/damage = rand(1, 3)
 
-		if(istype(M, /mob/living/carbon/slime/adult))
+		if(istype(M, /mob/living/carbon/metroid/adult))
 			damage = rand(10, 35)
 		else
 			damage = rand(5, 25)
@@ -372,7 +372,7 @@
 		updatehealth()
 
 	return
-
+*/
 
 /mob/living/carbon/human/restrained()
 	if (handcuffed)

@@ -3,8 +3,8 @@
 /obj/machinery/door/firedoor
 	name = "\improper Emergency Shutter"
 	desc = "Emergency air-tight shutter, capable of sealing off breached areas."
-	icon = 'icons/obj/doors/DoorHazard.dmi'
-	icon_state = "door_open"
+	icon = 'icons/obj/doors/Door1.dmi'
+	icon_state = "fdoor0"
 	req_one_access = list(access_atmospherics, access_engine_equip)
 	opacity = 0
 	density = 0
@@ -136,7 +136,7 @@
 				spawn(0)
 					close()
 			return
-		var/access_granted = 0
+/*		var/access_granted = 0
 		var/users_name
 		if(!istype(C, /obj)) //If someone hit it with their hand.  We need to see if they are allowed.
 			if(allowed(user))
@@ -180,7 +180,7 @@
 			user.visible_message("\blue \The [src] [density ? "open" : "close"]s for \the [user].",\
 			"\The [src] [density ? "open" : "close"]s.",\
 			"You hear a beep, and a door opening.")
-
+*/
 		var/needs_to_close = 0
 		if(density)
 			if(alarmed)

@@ -121,7 +121,7 @@
 	return attack_hand(user)
 
 
-/obj/structure/window/proc/attack_generic(mob/user as mob, damage = 0)	//used by attack_alien, attack_animal, and attack_slime
+/obj/structure/window/proc/attack_generic(mob/user as mob, damage = 0)	//used by attack_alien, attack_animal, and attack_metroid
 	health -= damage
 	if(health <= 0)
 		user.visible_message("<span class='danger'>[user] smashes through [src]!</span>")
@@ -144,9 +144,9 @@
 	attack_generic(M, M.melee_damage_upper)
 
 
-/obj/structure/window/attack_slime(mob/user as mob)
-	if(!isslimeadult(user)) return
-	attack_generic(user, rand(10, 15))
+//obj/structure/window/attack_metroid(mob/user as mob)
+//	if(!ismetroidadult(user)) return
+//	attack_generic(user, rand(10, 15))
 
 
 /obj/structure/window/attackby(obj/item/weapon/W as obj, mob/user as mob)

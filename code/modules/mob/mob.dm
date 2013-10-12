@@ -131,6 +131,34 @@
 /mob/proc/restrained()
 	return
 
+/mob/proc/db_click(text, t1)
+	var/obj/item/weapon/W = equipped()
+	switch(text)
+		if("mask")
+			if (wear_mask)
+				return
+			if (!( W.slot_flags & SLOT_MASK ))
+				return
+			u_equip(W)
+			wear_mask = W
+			W.equipped(src, text)
+		if("back")
+			if (back)
+				return
+			if (!istype(W, /obj/item))
+				return
+			if (!( W.slot_flags & SLOT_BACK ))
+				return
+			if(istype(W,/obj/item/weapon/twohanded) && W:wielded)
+				usr << "<span class='warning'>Unwield the [initial(W.name)] first!</span>"
+				return
+			u_equip(W)
+			back = W
+			W.equipped(src, text)
+		else
+	return
+
+
 //This proc is called whenever someone clicks an inventory ui slot.
 /mob/proc/attack_ui(slot)
 	var/obj/item/W = get_active_hand()

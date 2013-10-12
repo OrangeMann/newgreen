@@ -329,7 +329,7 @@
 				L.amount_grown = min(L.amount_grown + damage, L.max_grown)
 
 
-/mob/living/simple_animal/attack_slime(mob/living/carbon/slime/M as mob)
+/mob/living/simple_animal/attack_metroid(mob/living/carbon/metroid/M as mob)
 	if (!ticker)
 		M << "You cannot attack people before the game has started."
 		return
@@ -340,7 +340,7 @@
 
 	var/damage = rand(1, 3)
 
-	if(istype(src, /mob/living/carbon/slime/adult))
+	if(istype(src, /mob/living/carbon/metroid/adult))
 		damage = rand(20, 40)
 	else
 		damage = rand(5, 35)

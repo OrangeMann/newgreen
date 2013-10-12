@@ -1,10 +1,4 @@
-/mob/living/carbon/slime/say(var/message)
-	if (silent)
-		return
-	else
-		return ..()
-
-/mob/living/carbon/slime/say_quote(var/text)
+/mob/living/carbon/metroid/say_quote(var/text)
 	var/ending = copytext(text, length(text))
 
 	if (ending == "?")
@@ -14,8 +8,8 @@
 
 	return "telepathically chirps, \"[text]\"";
 
-/mob/living/carbon/slime/say_understands(var/other)
-	if (istype(other, /mob/living/carbon/slime))
+/mob/living/carbon/metroid/say_understands(var/other)
+	if (istype(other, /mob/living/carbon/metroid))
 		return 1
 	return ..()
 

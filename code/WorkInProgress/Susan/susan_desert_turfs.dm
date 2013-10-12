@@ -315,7 +315,7 @@ Alien plants should do something if theres a lot of poison
 
 //hostile entities or npcs
 
-/obj/item/projectile/slimeglob
+/obj/item/projectile/metroidglob
 	icon = 'icons/obj/projectiles.dmi'
 	icon_state = "toxin"
 	damage = 20
@@ -443,7 +443,7 @@ Alien plants should do something if theres a lot of poison
 		if(target == start)
 			return
 
-		var/obj/item/projectile/slimeglob/A = new /obj/item/projectile/slimeglob(user:loc)
+		var/obj/item/projectile/metroidglob/A = new /obj/item/projectile/metroidglob(user:loc)
 		playsound(user, 'sound/weapons/bite.ogg', 100, 1)
 
 		if(!A)	return
@@ -459,8 +459,8 @@ Alien plants should do something if theres a lot of poison
 		return
 */
 
-obj/effect/critter/fleshmonster/fleshslime
-	name = "Flesh Slime"
+obj/effect/critter/fleshmonster/fleshmetroid
+	name = "Flesh metroid"
 	icon = 'code/WorkInProgress/Susan/biocraps.dmi'
 	icon_state = "livingflesh"
 	desc = "A creature that appears to be made out of living tissue strewn together haphazardly. Some kind of liquid bubbles from its maw."

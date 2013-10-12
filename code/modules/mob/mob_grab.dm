@@ -200,7 +200,7 @@
 							return
 						*/
 
-					if(istype(affecting, /mob/living/carbon/slime))
+					if(istype(affecting, /mob/living/carbon/metroid))
 						assailant << "\blue You squeeze [affecting], but nothing interesting happens."
 						return
 

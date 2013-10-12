@@ -49,7 +49,7 @@ LOOK FOR SURGERY.DM*/
 			user << "\red You're going to need to remove that mask/helmet/glasses first."
 			return
 
-		if(istype(M, /mob/living/carbon/alien) || istype(M, /mob/living/carbon/slime))//Aliens don't have eyes./N
+		if(istype(M, /mob/living/carbon/alien) || istype(M, /mob/living/carbon/metroid))//Aliens don't have eyes./N
 			user << "\red You cannot locate any eyes on this creature!"
 			return
 
@@ -429,7 +429,7 @@ LOOK FOR SURGERY.DM*/
 						M:appendix_op_stage = 4.0
 		return
 
-	if(user.zone_sel.selecting == "head" || istype(M, /mob/living/carbon/slime))
+	if(user.zone_sel.selecting == "head" || istype(M, /mob/living/carbon/metroid))
 
 		var/mob/living/carbon/human/H = M
 		if(istype(H) && ( \
@@ -449,7 +449,7 @@ LOOK FOR SURGERY.DM*/
 
 		switch(M:brain_op_stage)
 			if(0.0)
-				if(istype(M, /mob/living/carbon/slime))
+				if(istype(M, /mob/living/carbon/metroid))
 					if(M.stat == 2)
 						for(var/mob/O in (viewers(M) - user - M))
 							O.show_message("\red [M.name] is beginning to have its flesh cut open with [src] by [user].", 1)
@@ -489,7 +489,7 @@ LOOK FOR SURGERY.DM*/
 				M:brain_op_stage = 1.0
 
 			if(1)
-				if(istype(M, /mob/living/carbon/slime))
+				if(istype(M, /mob/living/carbon/metroid))
 					if(M.stat == 2)
 						for(var/mob/O in (viewers(M) - user - M))
 							O.show_message("\red [M.name] is having its silky innards cut apart with [src] by [user].", 1)
@@ -498,11 +498,11 @@ LOOK FOR SURGERY.DM*/
 						M:brain_op_stage = 2.0
 					return
 			if(2.0)
-				if(istype(M, /mob/living/carbon/slime))
+				if(istype(M, /mob/living/carbon/metroid))
 					if(M.stat == 2)
-						var/mob/living/carbon/slime/slime = M
-						if(slime.cores > 0)
-							if(istype(M, /mob/living/carbon/slime))
+						var/mob/living/carbon/metroid/metroid = M
+						if(metroid.cores > 0)
+							if(istype(M, /mob/living/carbon/metroid))
 								user << "\red You attempt to remove [M]'s core, but [src] is ineffective!"
 					return
 
@@ -556,7 +556,7 @@ LOOK FOR SURGERY.DM*/
 			user << "\red You're going to need to remove that mask/helmet/glasses first."
 			return
 
-		if(istype(M, /mob/living/carbon/alien) || istype(M, /mob/living/carbon/slime))//Aliens don't have eyes./N
+		if(istype(M, /mob/living/carbon/alien) || istype(M, /mob/living/carbon/metroid))//Aliens don't have eyes./N
 			user << "\red You cannot locate any eyes on this creature!"
 			return
 
@@ -654,7 +654,7 @@ LOOK FOR SURGERY.DM*/
 
 	src.add_fingerprint(user)
 
-	if(user.zone_sel.selecting == "head" || istype(M, /mob/living/carbon/slime))
+	if(user.zone_sel.selecting == "head" || istype(M, /mob/living/carbon/metroid))
 
 		var/mob/living/carbon/human/H = M
 		if(istype(H) && ( \
@@ -674,7 +674,7 @@ LOOK FOR SURGERY.DM*/
 
 		switch(M:brain_op_stage)
 			if(1.0)
-				if(istype(M, /mob/living/carbon/slime))
+				if(istype(M, /mob/living/carbon/metroid))
 					return
 				if(M != user)
 					for(var/mob/O in (viewers(M) - user - M))
@@ -706,21 +706,21 @@ LOOK FOR SURGERY.DM*/
 				M:brain_op_stage = 2.0
 
 			if(2.0)
-				if(istype(M, /mob/living/carbon/slime))
+				if(istype(M, /mob/living/carbon/metroid))
 					if(M.stat == 2)
-						var/mob/living/carbon/slime/slime = M
-						if(slime.cores > 0)
+						var/mob/living/carbon/metroid/metroid = M
+						if(metroid.cores > 0)
 							for(var/mob/O in (viewers(M) - user - M))
 								O.show_message("\red [M.name] is having one of its cores sawed out with [src] by [user].", 1)
 
-							slime.cores--
-							M << "\red [user] begins to remove one of your cores with [src]! ([slime.cores] cores remaining)"
-							user << "\red You cut one of [M]'s cores out with [src]! ([slime.cores] cores remaining)"
+							metroid.cores--
+							M << "\red [user] begins to remove one of your cores with [src]! ([metroid.cores] cores remaining)"
+							user << "\red You cut one of [M]'s cores out with [src]! ([metroid.cores] cores remaining)"
 
-							new slime.coretype(M.loc)
+							new metroid.coretype(M.loc)
 
-							if(slime.cores <= 0)
-								M.icon_state = "[slime.colour] baby slime dead-nocore"
+							if(metroid.cores <= 0)
+								M.icon_state = "[metroid.colour] baby metroid dead-nocore"
 
 					return
 

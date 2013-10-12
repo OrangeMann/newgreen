@@ -51,13 +51,13 @@
 	return 0
 
 /obj/machinery/smartfridge/extract
-	name = "\improper Slime Extract Storage"
-	desc = "A refrigerated storage unit for slime extracts"
+	name = "\improper metroid Extract Storage"
+	desc = "A refrigerated storage unit for metroid extracts"
 
-/obj/machinery/smartfridge/extract/accept_check(var/obj/item/O as obj)
-	if(istype(O,/obj/item/slime_extract))
-		return 1
-	return 0
+//obj/machinery/smartfridge/extract/accept_check(var/obj/item/O as obj)
+//	if(istype(O,/obj/item/metroid_core))
+//		return 1
+//	return 0
 
 
 /obj/machinery/smartfridge/power_change()

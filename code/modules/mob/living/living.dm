@@ -377,6 +377,6 @@
 	if ((s_active && !( s_active in contents ) ))
 		s_active.close(src)
 
-	if(update_slimes)
-		for(var/mob/living/carbon/slime/M in view(1,src))
+	if(update_metroids)
+		for(var/mob/living/carbon/metroid/M in view(1,src))
 			M.UpdateFeed(src)

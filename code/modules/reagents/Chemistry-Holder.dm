@@ -265,15 +265,15 @@ datum
 								matching_other = 1
 
 							else
-								/*if(istype(my_atom, /obj/item/slime_core))
-									var/obj/item/slime_core/M = my_atom
+								if(istype(my_atom, /obj/item/metroid_core))
+									var/obj/item/metroid_core/M = my_atom
 
-									if(M.POWERFLAG == C.required_other && M.Uses > 0) // added a limit to slime cores -- Muskets requested this
-										matching_other = 1*/
-								if(istype(my_atom, /obj/item/slime_extract))
-									var/obj/item/slime_extract/M = my_atom
+									if(M.POWERFLAG == C.required_other && M.Uses > 0) // added a limit to metroid cores -- Muskets requested this
+										matching_other = 1
+								if(istype(my_atom, /obj/item/metroid_core))
+									var/obj/item/metroid_core/M = my_atom
 
-									if(M.Uses > 0) // added a limit to slime cores -- Muskets requested this
+									if(M.Uses > 0) // added a limit to metroid cores -- Muskets requested this
 										matching_other = 1
 
 
@@ -287,7 +287,7 @@ datum
 										preserved_data = get_data(B)
 									remove_reagent(B, (multiplier * C.required_reagents[B]), safety = 1)
 
-								var/created_volume = C.result_amount*multiplier
+//								var/created_volume = C.result_amount*multiplier
 								if(C.result)
 									feedback_add_details("chemical_reaction","[C.result]|[C.result_amount*multiplier]")
 									multiplier = max(multiplier, 1) //this shouldnt happen ...
@@ -302,27 +302,27 @@ datum
 								for(var/mob/M in seen)
 									M << "\blue \icon[my_atom] The solution begins to bubble."
 
-							/*	if(istype(my_atom, /obj/item/slime_core))
-									var/obj/item/slime_core/ME = my_atom
+							/*	if(istype(my_atom, /obj/item/metroid_core))
+									var/obj/item/metroid_core/ME = my_atom
 									ME.Uses--
-									if(ME.Uses <= 0) // give the notification that the slime core is dead
+									if(ME.Uses <= 0) // give the notification that the metroid core is dead
 										for(var/mob/M in viewers(4, get_turf(my_atom)) )
 											M << "\blue \icon[my_atom] The innards begin to boil!"
 								*/
-								if(istype(my_atom, /obj/item/slime_extract))
-									var/obj/item/slime_extract/ME2 = my_atom
-									ME2.Uses--
-									if(ME2.Uses <= 0) // give the notification that the slime core is dead
-										for(var/mob/M in seen)
-											M << "\blue \icon[my_atom] The [my_atom]'s power is consumed in the reaction."
-											ME2.name = "used slime extract"
-											ME2.desc = "This extract has been used up."
+//								if(istype(my_atom, /obj/item/metroid_core))
+//									var/obj/item/metroid_core/ME2 = my_atom
+//									ME2.Uses--
+//									if(ME2.Uses <= 0) // give the notification that the metroid core is dead
+//										for(var/mob/M in seen)
+//											M << "\blue \icon[my_atom] The [my_atom]'s power is consumed in the reaction."
+//											ME2.name = "used metroid extract"
+//											ME2.desc = "This extract has been used up."
 
-								playsound(get_turf(my_atom), 'sound/effects/bubbles.ogg', 80, 1)
-
-								C.on_reaction(src, created_volume)
-								reaction_occured = 1
-								break
+//								playsound(get_turf(my_atom), 'sound/effects/bubbles.ogg', 80, 1)
+//
+//								C.on_reaction(src, created_volume)
+//								reaction_occured = 1
+//								break
 
 				while(reaction_occured)
 				update_total()
@@ -534,3 +534,5 @@ datum
 atom/proc/create_reagents(var/max_vol)
 	reagents = new/datum/reagents(max_vol)
 	reagents.my_atom = src
+
+

@@ -10,10 +10,10 @@
 	desc = "It smells faintly of plasma"
 	icon_state = "petehat"
 
-/obj/item/clothing/head/collectable/slime
-	name = "collectable slime cap!"
+/obj/item/clothing/head/collectable/metroid
+	name = "collectable metroid cap!"
 	desc = "It just latches right in place!"
-	icon_state = "slime"
+	icon_state = "metroid"
 
 /obj/item/clothing/head/collectable/xenom
 	name = "collectable xenomorph helmet!"
@@ -59,11 +59,11 @@
 	icon_state = "welding"
 	item_state = "welding"
 
-/obj/item/clothing/head/collectable/slime
-	name = "collectable slime hat"
+/obj/item/clothing/head/collectable/metroid
+	name = "collectable metroid hat"
 	desc = "Just like a real Brain Slug!"
-	icon_state = "headslime"
-	item_state = "headslime"
+	icon_state = "headmetroid"
+	item_state = "headmetroid"
 
 /obj/item/clothing/head/collectable/flatcap
 	name = "collectable flat cap"

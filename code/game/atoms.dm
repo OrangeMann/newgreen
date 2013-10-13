@@ -21,7 +21,7 @@
 	//Detective Work, used for the duplicate data points kept in the scanners
 	var/list/original_atom
 
-/atom/proc/throw_impact(atom/hit_atom, var/speed)
+/*/atom/proc/throw_impact(atom/hit_atom, var/speed)
 	if(istype(hit_atom,/mob/living))
 		var/mob/living/M = hit_atom
 		M.hitby(src,speed)
@@ -43,7 +43,7 @@
 			if(istype(src,/mob/living))
 				var/mob/living/M = src
 				M.take_organ_damage(20)
-
+*/
 
 /atom/proc/assume_air(datum/gas_mixture/giver)
 	del(giver)

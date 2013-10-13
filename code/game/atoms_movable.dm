@@ -58,6 +58,47 @@
 					src.throw_impact(A,speed)
 					src.throwing = 0
 
+/atom/proc/throw_impact(atom/hit_atom)
+	if(istype(hit_atom,/mob/living))
+		var/mob/living/M = hit_atom
+		M.visible_message("\red [hit_atom] has been hit by [src].")
+
+		if(!istype(src, /obj/item)) // this is a big item that's being thrown at them~
+
+			if(istype(M, /mob/living/carbon/human))
+				var/armor_block = M:run_armor_check("chest", "melee")
+				M:apply_damage(rand(20,45), BRUTE, "chest", armor_block)
+
+				visible_message("\red <B>[M] has been knocked down by the force of [src]!</B>")
+				M:apply_effect(rand(4,12), WEAKEN, armor_block)
+
+				M:UpdateDamageIcon()
+			else
+				M.take_organ_damage(rand(20,45))
+
+
+		else if(src.vars.Find("throwforce"))
+			M.take_organ_damage(src:throwforce)
+
+			log_attack("<font color='red'>[hit_atom] ([M.ckey]) was hit by [src] thrown by ([src.fingerprintslast])</font>")
+			log_admin("ATTACK: [hit_atom] ([M.ckey]) was hit by [src] thrown by ([src.fingerprintslast])")
+			message_admins("ATTACK: [hit_atom] ([M.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[M]'>JMP</A>) was hit by [src] thrown by ([src.fingerprintslast])", 2)
+
+	else if(isobj(hit_atom))
+		var/obj/O = hit_atom
+		if(!O.anchored)
+			step(O, src.dir)
+		O.hitby(src)
+
+	else if(isturf(hit_atom))
+		var/turf/T = hit_atom
+		if(T.density)
+			spawn(2)
+				step(src, turn(src.dir, 180))
+			if(istype(src,/mob/living))
+				var/mob/living/M = src
+				M.take_organ_damage(20)
+
 /atom/movable/proc/throw_at(atom/target, range, speed)
 	if(!target || !src)	return 0
 	//use a modified version of Bresenham's algorithm to get from the atom's current position to that of the target

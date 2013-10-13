@@ -7,8 +7,8 @@
 	spawn_positions = -1
 	supervisors = "absolutely everyone"
 	selection_color = "#dddddd"
-	access = list()			//See /datum/job/assistant/get_access()
-	minimal_access = list()	//See /datum/job/assistant/get_access()
+	access = list(access_maint_tunnels)
+	minimal_access = list(access_maint_tunnels)
 	alt_titles = list("Technical Assistant","Medical Intern","Research Assistant","Security Cadet")
 
 /datum/job/assistant/equip(var/mob/living/carbon/human/H)
@@ -17,9 +17,10 @@
 	H.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(H), slot_shoes)
 	H.equip_to_slot_or_del(new /obj/item/weapon/storage/wallet/random(H.back), slot_r_hand)
 	return 1
-
+/*
 /datum/job/assistant/get_access()
 	if(config.assistant_maint)
 		return list(access_maint_tunnels)
 	else
 		return list()
+*/

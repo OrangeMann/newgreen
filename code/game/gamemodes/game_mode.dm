@@ -49,7 +49,7 @@ Stealth and Camouflage Items;
 /obj/item/weapon/card/id/syndicate:2:Agent ID card;
 /obj/item/clothing/mask/gas/voice:4:Voice Changer;
 /obj/item/device/chameleon:4:Chameleon-Projector;
-/obj/item/weapon/cloaking_device:4:Cloaking Device;
+/obj/item/weapon/cloaking_device:8:Cloaking Device;
 Whitespace:Seperator;
 Devices and Tools;
 /obj/item/weapon/card/emag:3:Cryptographic Sequencer;

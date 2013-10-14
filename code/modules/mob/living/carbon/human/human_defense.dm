@@ -54,7 +54,7 @@ emp_act
 	if(check_shields(P.damage, "the [P.name]"))
 		P.on_hit(src, 2)
 		return 2
-
+/*
 //BEGIN BOOK'S TASER NERF.
 	if(istype(P, /obj/item/projectile/energy/electrode))
 		var/datum/organ/external/select_area = get_organ(def_zone) // We're checking the outside, buddy!
@@ -87,7 +87,7 @@ emp_act
 
 		return
 //END TASER NERF
-
+*/
 
 	return (..(P , def_zone))
 

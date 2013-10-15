@@ -343,7 +343,7 @@ datum/objective/silence
 
 
 datum/objective/escape
-	explanation_text = "Escape on the shuttle or an escape pod alive and free."
+	explanation_text = "Escape on the shuttle alive, without being arrested."
 
 
 	check_completion()
@@ -370,7 +370,7 @@ datum/objective/escape
 					return 1
 			return 0
 
-		var/area/check_area = location.loc
+/*		var/area/check_area = location.loc
 		if(istype(check_area, /area/shuttle/escape/centcom))
 			return 1
 		if(istype(check_area, /area/shuttle/escape_pod1/centcom))
@@ -383,7 +383,7 @@ datum/objective/escape
 			return 1
 		else
 			return 0
-
+*/
 
 
 datum/objective/survive
@@ -400,7 +400,7 @@ datum/objective/survive
 		return 1
 
 // Similar to the anti-rev objective, but for traitors
-datum/objective/brig
+/*datum/objective/brig
 	var/already_completed = 0
 
 	find_target()
@@ -433,7 +433,7 @@ datum/objective/brig
 				return 1
 			return 0
 		return 0
-
+*/
 // Harm a crew member, making an example of them
 datum/objective/harm
 	var/already_completed = 0

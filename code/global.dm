@@ -213,7 +213,7 @@ var/sqlpass = ""
 
 	// Variables which change is necessary for conducting's Event
 var/timetorespawn = 30
-var/mouse_respawn_time = 30 //Amount of time that must pass between a player dying as a mouse and repawning as a mouse. In minutes.
+var/mouse_respawn_time = 5 //Amount of time that must pass between a player dying as a mouse and repawning as a mouse. In minutes.
 
 	// For FTP requests. (i.e. downloading runtime logs.)
 	// However it'd be ok to use for accessing attack logs and such too, which are even laggier.

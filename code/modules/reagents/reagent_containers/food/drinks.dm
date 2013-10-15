@@ -400,3 +400,33 @@
 	desc = "A cup with the british flag emblazoned on it."
 	icon_state = "britcup"
 	volume = 30
+
+/obj/item/weapon/reagent_containers/food/drinks/ntcup
+	name = "cup"
+	desc = "A cup with the Nanotraseen logo emblazoned on it."
+	icon_state = "ntcup"
+	volume = 30
+
+/obj/item/weapon/reagent_containers/food/drinks/engicup
+	name = "cup"
+	desc = "A cup with the engineering logo emblazoned on it."
+	icon_state = "engicup"
+	volume = 30
+
+/obj/item/weapon/reagent_containers/food/drinks/piratecup
+	name = "cup"
+	desc = "A cup with the jolly rodger emblazoned on it."
+	icon_state = "piratecup"
+	volume = 30
+
+/obj/item/weapon/reagent_containers/food/drinks/chchcup
+	name = "cup"
+	desc = "A cup with the black engineering logo emblazoned on it."
+	icon_state = "chchcup"
+	volume = 30
+
+/obj/item/weapon/reagent_containers/food/drinks/mesacup
+	name = "cup"
+	desc = "A cup with the black mesa logo emblazoned on it."
+	icon_state = "mesacup"
+	volume = 30

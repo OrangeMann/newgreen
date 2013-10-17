@@ -25,6 +25,7 @@
 	..()
 	for(var/obj/structure/table/T in src.loc)
 		if(T != src)
+			new /obj/item/weapon/table_parts/( get_turf(src.loc), 2 )
 			del(T)
 	update_icon()
 	for(var/direction in list(1,2,4,8,5,6,9,10))

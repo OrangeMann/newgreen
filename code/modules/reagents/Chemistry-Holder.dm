@@ -320,7 +320,7 @@ datum
 
 //								playsound(get_turf(my_atom), 'sound/effects/bubbles.ogg', 80, 1)
 //
-//								C.on_reaction(src, created_volume)
+								C.on_reaction(src, C.result_amount*multiplier)
 //								reaction_occured = 1
 //								break
 

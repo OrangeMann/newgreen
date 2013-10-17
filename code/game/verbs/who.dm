@@ -47,7 +47,7 @@
 	set name = "Adminwho"
 
 	var/msg = ""
-	var/num_mods_online = 0
+//	var/num_mods_online = 0
 	var/num_admins_online = 0
 	if(holder)
 		for(var/client/C in admins)
@@ -69,22 +69,22 @@
 				msg += "\n"
 
 				num_admins_online++
-			else
-				num_mods_online++
+//			else
+//				num_mods_online++
 	else
 		for(var/client/C in admins)
 			if(R_ADMIN & C.holder.rights || !(R_MOD & C.holder.rights))
 				if(!C.holder.fakekey)
 					msg += "\t[C] is a [C.holder.rank]\n"
 					num_admins_online++
-			else
-				num_mods_online++
+//			else
+//				num_mods_online++
 
 	msg = "<b>Current Admins ([num_admins_online]):</b>\n" + msg
-	msg += "<b>There are also [num_mods_online] moderators online.</b> To view online moderators, type 'modwho'\n"
+//	msg += "<b>There are also [num_mods_online] moderators online.</b> To view online moderators, type 'modwho'\n"
 	src << msg
 
-/client/verb/modwho()
+/*/client/verb/modwho()
 	set category = "Admin"
 	set name = "Modwho"
 
@@ -119,7 +119,7 @@
 	msg = "<b>Current Moderators ([num_mods_online]):</b>\n" + msg
 	msg += "<b>There are also [num_admins_online] admins online.</b> To view online admins, type 'adminwho'\n"
 	src << msg
-
+*/
 /client/verb/active_players()
 	set category = "OOC"
 	set name = "Active Players"

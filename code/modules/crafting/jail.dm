@@ -2,11 +2,13 @@
 //Jail shit here
 
 
-/obj/item/weapon/ore/sand //unusable. Can't smelted. Need grey sprite...
-	name = "Sand"
-	icon_state = "Glass ore"
+/obj/item/weapon/ore/sand //unusable.
+	name = "sand"
+	icon_state = "jailsand"	//Can't smelted.
 	origin_tech = "materials=1"
 	desc = "ON PATH TO MOTHERLAND!"
+	w_class = 2.0
+
 
 //paper spoon!
 /obj/item/weapon/paperspoon
@@ -19,7 +21,7 @@
 	flags = FPRINT | TABLEPASS | CONDUCT
 	force = 4.0	//SUPER ROBUSTABLE, SRSLY!
 	w_class = 2.0
-	throwforce = 15.0
+	throwforce = 5.0
 	throw_speed = 4
 	throw_range = 4
 
@@ -31,13 +33,13 @@
 	var/last_act = 0
 	proc/digproc(mob/user as mob)
 		var/loca = usr.loc
-		sleep(50)
+		sleep(100)
 		if (usr.loc == loca)
-			sleep(50)
+			sleep(100)
 			if (usr.loc == loca)
-				sleep(50)
+				sleep(100)
 				if (usr.loc == loca)
-					sleep(50)
+					sleep(100)
 					if (usr.loc == loca)
 						if (sandcapas == 1)
 							src.jailer = 0

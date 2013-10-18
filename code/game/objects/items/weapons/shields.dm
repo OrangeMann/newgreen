@@ -62,9 +62,14 @@
 
 
 /obj/item/weapon/cloaking_device/attack_self(mob/user as mob)
-	explosion(usr.loc,1,3,4)
-	msg_admin_attack("[usr.key] zashquared with a cloacking device. Kick him!")//Θαξ νευσι --Jarlo
-
+	src.active = !( src.active )
+	if (src.active)
+		user << "\blue The cloaking device is now active."
+		src.icon_state = "shield1"
+	else
+		user << "\blue The cloaking device is now inactive."
+		src.icon_state = "shield0"
+		src.add_fingerprint(user)
 	return
 
 /obj/item/weapon/cloaking_device/emp_act(severity)

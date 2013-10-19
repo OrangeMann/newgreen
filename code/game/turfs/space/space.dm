@@ -2,10 +2,12 @@
 	icon = 'icons/turf/space.dmi'
 	name = "\proper space"
 	icon_state = "0"
-
-	temperature = T0C
+	oxygen = 0.01
+	nitrogen = 0.01
+	temperature = TCMB
+//	temperature = T0C
 	thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
-//	heat_capacity = 700000 No.
+	heat_capacity = 700000
 
 /turf/space/New()
 	if(!istype(src, /turf/space/transit))

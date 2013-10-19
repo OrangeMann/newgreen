@@ -61,6 +61,7 @@
 
 
 	attackby(obj/item/weapon/W as obj, mob/user as mob)
+		..()//Fix.
 		if (istype(W, /obj/item/weapon/paperspoon))
 			var/obj/item/weapon/paperspoon/P = W
 			if (jailer == 0)
@@ -72,7 +73,51 @@
 			else
 				usr << "\red I can't. It's wall is busy."
 
+/turf/simulated/wall/jail
+	var/jailer = 0
+	var/sandcapas = 3	//so easy to dig.
+	var/last_act = 0
+	proc/digproc(mob/user as mob)
+		var/loca = usr.loc
+		sleep(100)
+		if (usr.loc == loca)
+			sleep(100)
+			if (usr.loc == loca)
+				sleep(100)
+				if (usr.loc == loca)
+					sleep(100)
+					if (usr.loc == loca)
+						if (sandcapas == 1)
+							src.jailer = 0
+							src.ChangeTurf(/turf/simulated/floor/plating)
+							var/turf/simulated/floor/F = src
+							F.burn_tile()
+							F.icon_state = "wall_thermite"
+							usr << "\blue You finish picking the wall."
+						else
+							usr << "\blue You picked out some sand."
+							var/obj/item/weapon/ore/sand/S = new(usr)
+							S.loc = usr.loc	//recheck.
+							sandcapas -= 1
+							digproc() //again.
+					else src.jailer = 0
+				else src.jailer = 0
+			else src.jailer = 0
+		else src.jailer = 0
 
+
+	attackby(obj/item/weapon/W as obj, mob/user as mob)
+		..()
+		if (istype(W, /obj/item/weapon/paperspoon))
+			var/obj/item/weapon/paperspoon/P = W
+			if (jailer == 0)
+				src.jailer = usr.key
+				last_act = world.time
+				playsound(user, P.drill_sound, 20, 1)
+				usr << "\red You start picking a wall."
+				digproc(user)
+			else
+				usr << "\red I can't. It's wall is busy."
 
 /obj/structure/sink/attackby(obj/item/O as obj, mob/user as mob)
 	if (istype(O, /obj/item/weapon/paper))

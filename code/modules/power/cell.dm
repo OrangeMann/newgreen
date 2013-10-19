@@ -78,8 +78,9 @@
 
 			rigged = 1
 
-			log_admin("LOG: [user.name] ([user.ckey]) injected a power cell with plasma, rigging it to explode.")
-			message_admins("LOG: [user.name] ([user.ckey]) injected a power cell with plasma, rigging it to explode.")
+			log_attack("<font color='red'>[user.name] ([user.ckey]) injected a power cell with plasma.</font>")
+			log_admin("ATTACK: [user] ([user.ckey]) injected a power cell with plasma.")
+			message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?src=\ref[src];adminplayerobservejump=\ref[user]'>JMP</A>) injected a power cell with plasma.")
 
 		S.reagents.clear_reagents()
 

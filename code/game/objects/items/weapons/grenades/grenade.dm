@@ -71,6 +71,11 @@
 	if(user)
 		msg_admin_attack("[user.name] ([user.ckey]) primed \a [src] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 
+		log_attack("<font color='red'>[user.name] ([user.ckey]) primed a flashbang.</font>")
+		log_admin("ATTACK: [user] ([user.ckey]) primed a flashbang.")
+		message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[user]'>JMP</A>) primed a flashbang.", 2)
+
+
 	icon_state = initial(icon_state) + "_active"
 	active = 1
 	playsound(loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)

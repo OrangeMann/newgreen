@@ -695,6 +695,10 @@ var/global/list/obj/item/device/pda/PDAs = list()
 					var/obj/item/device/pda/P = locate(href_list["target"])
 					if(!isnull(P))
 						if (!P.toff && cartridge:shock_charges > 0)
+							log_admin("ATTACK: [U] ([U.ckey]) triggered a Detomatix Cartridge.")
+							message_admins("ATTACK: [U] ([U.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[U]'>JMP</A>) triggered a Detomatix Cartridge.", 2)
+							log_attack("<font color='red'>[U.name] ([U.ckey]) triggered a Detomatix Cartridge.</font>")
+
 							cartridge:shock_charges--
 
 							var/difficulty = 0

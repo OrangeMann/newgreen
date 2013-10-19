@@ -170,24 +170,23 @@
 
 /obj/item/weapon/wrapping_paper/attack(mob/target as mob, mob/user as mob)
 	if (!istype(target, /mob/living/carbon/human)) return
-	var/mob/living/carbon/human/H = target
-
-	if (istype(H.wear_suit, /obj/item/clothing/suit/straight_jacket) || H.stat)
+	if (istype(target:wear_suit, /obj/item/clothing/suit/straight_jacket) || target:stat)
 		if (src.amount > 2)
-			var/obj/effect/spresent/present = new /obj/effect/spresent (H.loc)
+			var/obj/effect/spresent/present = new /obj/effect/spresent (target:loc)
 			src.amount -= 2
 
-			if (H.client)
-				H.client.perspective = EYE_PERSPECTIVE
-				H.client.eye = present
+			if (target:client)
+				target:client:perspective = EYE_PERSPECTIVE
+				target:client:eye = present
 
-			H.loc = present
-			H.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been wrapped with [src.name]  by [user.name] ([user.ckey])</font>")
-			user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to wrap [H.name] ([H.ckey])</font>")
-
-			log_attack("[user.name] ([user.ckey]) used the [src.name] to wrap [H.name] ([H.ckey])")
+			target:loc = present
+			target.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been wrapped with [src.name]  by [user.name] ([user.ckey])</font>")
+			user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to wrap [target.name] ([target.ckey])</font>")
+			log_admin("ATTACK: [user] ([user.ckey]) wrapped up [target] ([target.ckey]) with [src].")
+			message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[user]'>JMP</A>) wrapped up [target] ([target.ckey]) with [src].", 2)
+			log_attack("<font color='red'>[user.name] ([user.ckey]) used the [src.name] to wrap [target.name] ([target.ckey])</font>")
 
 		else
-			user << "\blue You need more paper."
+			user << "/blue You need more paper."
 	else
-		user << "They are moving around too much. A straightjacket would help."
+		user << "Theyre moving around too much. a Straitjacket would help."

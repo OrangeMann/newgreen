@@ -233,7 +233,7 @@
 							assailant.visible_message("\red [assailant] has tightened \his grip on [affecting]'s neck!")
 							affecting.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been strangled (kill intent) by [assailant.name] ([assailant.ckey])</font>")
 							assailant.attack_log += text("\[[time_stamp()]\] <font color='red'>Strangled (kill intent) [affecting.name] ([affecting.ckey])</font>")
-							msg_admin_attack("[assailant.name] ([assailant.ckey]) Strangled (kill intent) [affecting.name] ([affecting.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[assailant.x];Y=[assailant.y];Z=[assailant.z]'>JMP</a>)")
+							message_admins("ATTACK: [assailant] ([assailant.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[assailant]'>JMP</A>) strangled [affecting] ([affecting.ckey]).", 2)
 
 							assailant.next_move = world.time + 10
 							affecting.losebreath += 1

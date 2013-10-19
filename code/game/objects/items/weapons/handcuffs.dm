@@ -51,10 +51,12 @@
 			return
 		if (istype(C, /mob/living/carbon/human))
 			if(!C.handcuffed)
-
 				C.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been handcuffed (attempt) by [user.name] ([user.ckey])</font>")
 				user.attack_log += text("\[[time_stamp()]\] <font color='red'>Attempted to handcuff [C.name] ([C.ckey])</font>")
-				log_attack("[user.name] ([user.ckey]) Attempted to handcuff [C.name] ([C.ckey])")
+
+				log_admin("ATTACK: [user] ([user.ckey]) handcuffed [C] ([C.ckey]).")
+				log_attack("<font color='red'>[user.name] ([user.ckey]) Attempted to handcuff [C.name] ([C.ckey])</font>")
+
 
 				var/obj/effect/equip_e/human/O = new /obj/effect/equip_e/human(  )
 				O.source = user

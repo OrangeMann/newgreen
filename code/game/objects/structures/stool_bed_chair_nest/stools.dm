@@ -7,6 +7,20 @@
 	flags = FPRINT
 	pressure_resistance = 15
 
+/obj/structure/stool/verb/Use()
+	set name = "Use"
+	set category = "Object"
+	set src in oview(0)
+	if (ishuman(usr))
+		src.MouseDrop_T(usr,usr)
+
+/obj/structure/stool/verb/Leave()
+	set name = "Leave"
+	set category = "Object"
+	set src in oview(0)
+	if	(ishuman(usr))
+		attack_hand(usr)
+
 /obj/structure/stool/ex_act(severity)
 	switch(severity)
 		if(1.0)

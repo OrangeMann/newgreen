@@ -46,7 +46,7 @@
 			var/contained = english_list(injected)
 			M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been injected ([contained]) with [src.name] by [user.name] ([user.ckey])</font>")
 			user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to inject [M.name] ([M.key]) with [contained]</font>")
-			msg_admin_attack("[user.name] ([user.ckey]) injected [M.name] ([M.key]) with [src.name], which had [contained] (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
+			message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[user]'>JMP</A>) fed [M] ([M.ckey]) with [src].", 2)
 
 	return
 

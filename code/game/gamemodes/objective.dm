@@ -370,20 +370,20 @@ datum/objective/escape
 					return 1
 			return 0
 
-/*		var/area/check_area = location.loc
+		var/area/check_area = location.loc
 		if(istype(check_area, /area/shuttle/escape/centcom))
 			return 1
-		if(istype(check_area, /area/shuttle/escape_pod1/centcom))
+/*		if(istype(check_area, /area/shuttle/escape_pod1/centcom))
 			return 1
 		if(istype(check_area, /area/shuttle/escape_pod2/centcom))
 			return 1
 		if(istype(check_area, /area/shuttle/escape_pod3/centcom))
 			return 1
-		if(istype(check_area, /area/shuttle/escape_pod5/centcom))
+		if(istype(check_area, /area/shuttle/escape_pod5/centcom))*/
 			return 1
 		else
 			return 0
-*/
+
 
 
 datum/objective/survive

@@ -1357,7 +1357,13 @@ datum
 				if(M.stat == 2.0)
 					return
 				if(!M) M = holder.my_atom
-				M.heal_organ_damage(2*REM)
+				if(!data) data = 1
+				data++
+				M:heal_organ_damage(0,1)
+				if(volume > REAGENTS_OVERDOSE)
+					M:adjustToxLoss(1)
+//				if(data >= 125)
+//					M:adjustToxLoss(0.1)
 				..()
 				return
 
@@ -1372,7 +1378,13 @@ datum
 				if(M.stat == 2.0) //THE GUY IS **DEAD**! BEREFT OF ALL LIFE HE RESTS IN PEACE etc etc. He does NOT metabolise shit anymore, god DAMN
 					return
 				if(!M) M = holder.my_atom
-				M.heal_organ_damage(3*REM)
+				if(!data) data = 1
+				data++
+				M:heal_organ_damage(0,3)
+				if(volume > REAGENTS_OVERDOSE)
+					M:adjustToxLoss(1)
+//				if(data >= 125)
+//					M:adjustToxLoss(0.2)
 				..()
 				return
 
@@ -1387,9 +1399,15 @@ datum
 				if(M.stat == 2.0)
 					return  //See above, down and around. --Agouri
 				if(!M) M = holder.my_atom
-				M.adjustOxyLoss(-4*REM)
+				if(!data) data = 1
+				data++
+				M:adjustOxyLoss(-2)
 				if(holder.has_reagent("lexorin"))
-					holder.remove_reagent("lexorin", 2*REM)
+					holder.remove_reagent("lexorin", 2)
+				if(volume > REAGENTS_OVERDOSE)
+					M:adjustToxLoss(1)
+//				if(data >= 125)
+//					M:adjustToxLoss(0.2)
 				..()
 				return
 
@@ -1404,9 +1422,15 @@ datum
 				if(M.stat == 2.0)
 					return
 				if(!M) M = holder.my_atom
-				M.adjustOxyLoss(-M.getOxyLoss())
+				if(!data) data = 1
+				data++
+				M:oxyloss = 0
 				if(holder.has_reagent("lexorin"))
-					holder.remove_reagent("lexorin", 2*REM)
+					holder.remove_reagent("lexorin", 2)
+				if(volume > REAGENTS_OVERDOSE)
+					M:adjustToxLoss(1)
+//				if(data >= 50)
+//					M:adjustToxLoss(0.2)
 				..()
 				return
 
@@ -1421,10 +1445,13 @@ datum
 				if(M.stat == 2.0)
 					return
 				if(!M) M = holder.my_atom
-				if(M.getOxyLoss() && prob(80)) M.adjustOxyLoss(-2*REM)
-				if(M.getBruteLoss() && prob(80)) M.heal_organ_damage(2*REM,0)
-				if(M.getFireLoss() && prob(80)) M.heal_organ_damage(0.5*REM)
-				if(M.getToxLoss() && prob(80)) M.adjustToxLoss(-2*REM)
+				if(M:getOxyLoss() && prob(40)) M:adjustOxyLoss(-1)
+				if(M:getBruteLoss() && prob(40)) M:heal_organ_damage(1,0)
+				if(M:getFireLoss() && prob(40)) M:heal_organ_damage(0,1)
+				if(M:getToxLoss() && prob(40)) M:adjustToxLoss(-1)
+//				if(volume > REAGENTS_OVERDOSE)
+//					M:adjustToxLoss(1)
+//As hilarious as it was watching Asanadas projectile vomit everywhere from some overzealous medibots, and some antitoxin making 170 units, it was waaay bad.
 				..()
 				return
 
@@ -1498,18 +1525,16 @@ datum
 			description = "Synaptizine is used to treat various diseases."
 			reagent_state = LIQUID
 			color = "#C8A5DC" // rgb: 200, 165, 220
-			custom_metabolism = 0.01
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
-				M.drowsyness = max(M.drowsyness-5, 0)
+				M:drowsyness = max(M:drowsyness-5, 0)
 				M.AdjustParalysis(-1)
 				M.AdjustStunned(-1)
 				M.AdjustWeakened(-1)
-				if(holder.has_reagent("mindbreaker"))
-					holder.remove_reagent("mindbreaker", 5)
-				M.hallucination = max(0, M.hallucination - 10)
 				if(prob(60))	M.adjustToxLoss(1)
+				if(volume > REAGENTS_OVERDOSE)
+					M:adjustToxLoss(1)
 				..()
 				return
 
@@ -1523,10 +1548,16 @@ datum
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
-				M.jitteriness = max(M.jitteriness-5,0)
-				if(prob(80)) M.adjustBrainLoss(1*REM)
-				if(prob(50)) M.drowsyness = max(M.drowsyness, 3)
-				if(prob(10)) M.emote("drool")
+				if(!data) data = 1
+				data++
+				M:jitteriness = max(M:jitteriness-5,0)
+				if(prob(80)) M:adjustBrainLoss(1)
+				if(prob(50)) M:drowsyness = max(M:drowsyness, 3)
+				if(prob(10)) M:emote("drool")
+				if(volume > REAGENTS_OVERDOSE)
+					M:adjustToxLoss(1)
+//				if(data >= 50)
+//					M:adjustToxLoss(0.4)
 				..()
 				return
 
@@ -1536,11 +1567,14 @@ datum
 			description = "Hyronalin is a medicinal drug used to counter the effect of radiation poisoning."
 			reagent_state = LIQUID
 			color = "#C8A5DC" // rgb: 200, 165, 220
-			custom_metabolism = 0.05
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
-				M.radiation = max(M.radiation-3*REM,0)
+				M:radiation = max(M:radiation-3,0)
+				if(volume > REAGENTS_OVERDOSE)
+					M:adjustToxLoss(1)
+//				if(data >= 50)
+//					M:adjustToxLoss(0.2)
 				..()
 				return
 
@@ -1550,17 +1584,22 @@ datum
 			description = "Arithrazine is an unstable medication used for the most extreme cases of radiation poisoning."
 			reagent_state = LIQUID
 			color = "#C8A5DC" // rgb: 200, 165, 220
-			custom_metabolism = 0.05
 
 			on_mob_life(var/mob/living/M as mob)
 				if(M.stat == 2.0)
 					return  //See above, down and around. --Agouri
 				if(!M) M = holder.my_atom
-				M.radiation = max(M.radiation-7*REM,0)
-				M.adjustToxLoss(-1*REM)
+				if(!data) data = 1
+				data++
+				M:radiation = max(M:radiation-7,0)
+				M:adjustToxLoss(-1)
 				if(prob(15))
 					M.take_organ_damage(1, 0)
 				..()
+				if(volume > REAGENTS_OVERDOSE)
+					M:adjustToxLoss(1)
+//				if(data >= 50)
+//					M:adjustToxLoss(0.3)
 				return
 
 		alkysine
@@ -1569,11 +1608,13 @@ datum
 			description = "Alkysine is a drug used to lessen the damage to neurological tissue after a catastrophic injury. Can heal brain tissue."
 			reagent_state = LIQUID
 			color = "#C8A5DC" // rgb: 200, 165, 220
-			custom_metabolism = 0.05
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
-				M.adjustBrainLoss(-3*REM)
+				M:adjustBrainLoss(-3)
+				M:adjustToxLoss(0.1)
+				if(volume > REAGENTS_OVERDOSE)
+					M:adjustToxLoss(1)
 				..()
 				return
 
@@ -1586,14 +1627,18 @@ datum
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
-				M.eye_blurry = max(M.eye_blurry-5 , 0)
-				M.eye_blind = max(M.eye_blind-5 , 0)
-				M.disabilities &= ~NEARSIGHTED
-				M.eye_stat = max(M.eye_stat-5, 0)
-//				M.sdisabilities &= ~1		Replaced by eye surgery
+				if(!data) data = 1
+				data++
+				M:eye_blurry = max(M:eye_blurry-5 , 0)
+				M:eye_blind = max(M:eye_blind-5 , 0)
+				M:disabilities &= ~1
+				M:eye_stat = max(M:eye_stat-5, 0)
+				if(volume > REAGENTS_OVERDOSE)
+					M:adjustToxLoss(1)
+//				if(data >= 100)
+//					M:adjustToxLoss(0.2)
 				..()
 				return
-
 		bicaridine
 			name = "Bicaridine"
 			id = "bicaridine"
@@ -1605,9 +1650,16 @@ datum
 				if(M.stat == 2.0)
 					return
 				if(!M) M = holder.my_atom
-				M.heal_organ_damage(4*REM,0)
+				if(!data) data = 1
+				data++
+				M:heal_organ_damage(2,0)
+				if(volume > REAGENTS_OVERDOSE)
+					M:adjustToxLoss(1)
+//				if(data >= 125)
+//					M:adjustToxLoss(0.2)
 				..()
 				return
+
 
 		hyperzine
 			name = "Hyperzine"
@@ -1615,11 +1667,17 @@ datum
 			description = "Hyperzine is a highly effective, long lasting, muscle stimulant."
 			reagent_state = LIQUID
 			color = "#C8A5DC" // rgb: 200, 165, 220
-			custom_metabolism = 0.03
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
-				if(prob(5)) M.emote(pick("twitch","blink_r","shiver"))
+				if(!data) data = 1
+				data++
+				if(prob(5)) M:emote(pick("twitch","blink_r","shiver"))
+				holder.remove_reagent(src.id, 0.2)
+				if(volume > REAGENTS_OVERDOSE)
+					M:adjustToxLoss(1)
+//				if(data >= 50)
+//					M:adjustToxLoss(0.2)
 				..()
 				return
 
@@ -1633,10 +1691,12 @@ datum
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
 				if(M.bodytemperature < 170)
-					M.adjustCloneLoss(-2)
-					M.adjustOxyLoss(-2)
-					M.heal_organ_damage(1,1)
-					M.adjustToxLoss(-2)
+					M:adjustCloneLoss(-1)
+					M:adjustOxyLoss(-3)
+					M:heal_organ_damage(3,3)
+					M:adjustToxLoss(-3)
+					M:halloss = 0
+					M:hallucination = max(M:hallucination - 5,0)
 				..()
 				return
 
@@ -1650,10 +1710,10 @@ datum
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
 				if(M.bodytemperature < 170)
-					M.adjustCloneLoss(-5)
-					M.adjustOxyLoss(-5)
-					M.heal_organ_damage(3,3)
-					M.adjustToxLoss(-4)
+					M:adjustCloneLoss(-3)
+					M:adjustOxyLoss(-3)
+					M:heal_organ_damage(3,3)
+					M:adjustToxLoss(-3)
 				..()
 				return
 
@@ -1663,10 +1723,15 @@ datum
 			description = "An all-purpose antiviral agent."
 			reagent_state = LIQUID
 			color = "#C8A5DC" // rgb: 200, 165, 220
-			custom_metabolism = 0.01
 
-			on_mob_life(var/mob/living/M as mob)
-				..()
+			on_mob_life(var/mob/living/M as mob)//no more mr. panacea
+				if(!data) data = 1
+				data++
+				holder.remove_reagent(src.id, 0.1)
+				if(volume > REAGENTS_OVERDOSE)
+					M:adjustToxLoss(1)
+//				if(data >= 100)
+//					M:adjustToxLoss(0.1)
 				return
 
 		carpotoxin

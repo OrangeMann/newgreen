@@ -20,7 +20,7 @@
 	var/mess = 0 //Need to clean out it if it's full of exploded clone.
 	var/attempting = 0 //One clone attempt at a time thanks
 	var/eject_wait = 0 //Don't eject them as soon as they are created fuckkk
-	var/biomass = CLONE_BIOMASS
+//	var/biomass = CLONE_BIOMASS
 
 //The return of data disks?? Just for transferring between genetics machine/cloning machine.
 //TO-DO: Make the genetics machine accept them.
@@ -273,6 +273,7 @@
 		src.locked = 0
 		src.go_out()
 		return
+	/*
 	else if (istype(W, /obj/item/weapon/reagent_containers/food/snacks/meat))
 		user << "\blue \The [src] processes \the [W]."
 		biomass += 50
@@ -281,7 +282,7 @@
 		return
 	else
 		..()
-
+	*/
 //Put messages in the connected computer's temp var for display.
 /obj/machinery/clonepod/proc/connected_message(var/message)
 	if ((isnull(src.connected)) || (!istype(src.connected, /obj/machinery/computer/cloning)))
@@ -337,7 +338,7 @@
 	src.occupant.add_side_effect("Bad Stomach") // Give them an extra side-effect for free.
 	src.occupant = null
 
-	src.biomass -= CLONE_BIOMASS
+//	src.biomass -= CLONE_BIOMASS
 
 	return
 

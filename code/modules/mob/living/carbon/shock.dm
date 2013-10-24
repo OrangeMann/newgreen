@@ -2,13 +2,14 @@
 /mob/living/carbon/var/shock_stage = 0
 
 // proc to find out in how much pain the mob is at the moment
+
 /mob/living/carbon/proc/updateshock()
 	src.traumatic_shock = 			\
 	1	* src.getOxyLoss() + 		\
-	0.5	* src.getToxLoss() + 		\
-	2.5	* src.getFireLoss() + 		\
-	1.5	* src.getBruteLoss() + 		\
-	2	* src.getCloneLoss() + 		\
+	1	* src.getToxLoss() + 		\
+	1	* src.getFireLoss() + 		\
+	1	* src.getBruteLoss() + 		\
+	1	* src.getCloneLoss() + 		\
 	1	* src.halloss
 
 	if(reagents.has_reagent("alkysine"))
@@ -23,7 +24,7 @@
 		src.traumatic_shock -= 20
 	if(src.analgesic)
 		src.traumatic_shock = 0
-
+/*
 	// broken or ripped off organs will add quite a bit of pain
 	if(istype(src,/mob/living/carbon/human))
 		var/mob/living/carbon/human/M = src
@@ -36,7 +37,7 @@
 				src.traumatic_shock += 30
 				if(organ.status & ORGAN_SPLINTED)
 					src.traumatic_shock -= 20
-
+*/
 	if(src.traumatic_shock < 0)
 		src.traumatic_shock = 0
 

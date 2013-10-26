@@ -278,7 +278,8 @@ client/proc/remove_gun_icons()
 	del usr.gun_run_icon
 
 client/verb/ToggleGunMode()
-	set hidden = 1
+	return	//Blocked. Jarlo.
+/*	set hidden = 1
 	gun_mode = !gun_mode
 	if(gun_mode)
 		usr << "You will now take people captive."
@@ -290,7 +291,7 @@ client/verb/ToggleGunMode()
 		remove_gun_icons()
 	if(usr.gun_setting_icon)
 		usr.gun_setting_icon.icon_state = "gun[gun_mode]"
-
+*/
 
 client/verb/AllowTargetMove()
 	set hidden=1

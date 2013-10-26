@@ -21,12 +21,18 @@
 	throwpass = 1	//You can throw objects over this, despite it's density.")
 	var/parts = /obj/item/weapon/table_parts
 	var/dented = 0
-
+	var/tabletype = 1
 /obj/structure/table/New()
 	..()
 	for(var/obj/structure/table/T in src.loc)
 		if(T != src)
-			new /obj/item/weapon/table_parts/( get_turf(src.loc), 2 )
+			switch(T.tabletype)					//Bug'o'fix. Wood table must spawn WOOD PARTS, right?
+				if (1)
+					new /obj/item/weapon/table_parts/( get_turf(src.loc), 2 )
+				if (2)
+					new /obj/item/weapon/table_parts/reinforced( get_turf(src.loc), 2 )
+				if (3)
+					new /obj/item/weapon/table_parts/wood( get_turf(src.loc), 2 )
 			del(T)
 	update_icon()
 	for(var/direction in list(1,2,4,8,5,6,9,10))
@@ -375,6 +381,7 @@
  * Wooden tables
  */
 /obj/structure/table/woodentable
+	tabletype = 3
 	name = "wooden table"
 	desc = "Do not apply fire to this. Rumour says it burns easily."
 	icon_state = "wood_table"
@@ -384,6 +391,7 @@
  * Reinforced tables
  */
 /obj/structure/table/reinforced
+	tabletype = 2
 	name = "reinforced table"
 	desc = "A version of the four legged table. It is stronger."
 	icon_state = "reinf_table"

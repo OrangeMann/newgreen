@@ -72,6 +72,7 @@
 				for(var/mob/O in viewers(world.view, user))
 					O.show_message(text("\blue [] starts a table launcher.", user), 1)								//YAY!
 				if(get_fuel() > 4)
+					sleep(15)	//Don't shut down when u start it.
 					busy = 0
 					remove_fuel()
 				else
@@ -97,7 +98,7 @@
 
 		if (istype(target, /obj/structure/reagent_dispensers/fueltank) && get_dist(src,target) <= 1)
 			if (src.started == 1)
-				usr << "\red Shut down your launcher."
+				usr << "\red Shut down your launcher first."
 				return
 			else
 				target.reagents.trans_to(src, max_fuel)
@@ -131,7 +132,7 @@
 			for(var/mob/O in viewers(world.view, user))
 				O.show_message(text("\red [] fired a table!", user), 1)
 			user << "\red You fire the table launcher!"
-			var/obj/item/weapon/table_parts/F = tables[1] //Now with less copypasta!
+			var/obj/item/weapon/table_parts/F = tables[1]
 			tables -= F
 			F.loc = user.loc
 			F.throw_at(target, 30, 2)
@@ -143,11 +144,18 @@
 				H.apply_damage(10, BRUTE)
 			sleep(5)
 			F.icon_state = 0
-			if((istype(F, /obj/item/weapon/table_parts/)))
-				new /obj/structure/table/( get_turf(F.loc), 2 )
-			if((istype(F, /obj/item/weapon/table_parts/reinforced/)))
-				new /obj/structure/table/reinforced( get_turf(F.loc), 2 )
-			if((istype(F, /obj/item/weapon/table_parts/wood/)))
-				new /obj/structure/table/woodentable( get_turf(F.loc), 2 )
-
+			switch(F.tabletype)
+				if (1)
+					new /obj/structure/table/( get_turf(F.loc), 2 )
+				if (2)
+					new /obj/structure/table/reinforced( get_turf(F.loc), 2 )
+				if (3)
+					new /obj/structure/table/woodentable( get_turf(F.loc), 2 )
 			del(F)
+
+/obj/item/weapon/table_parts/			//Bug'fix
+	var/tabletype = 1
+/obj/item/weapon/table_parts/reinforced/
+	tabletype = 2
+/obj/item/weapon/table_parts/wood/
+	tabletype = 3

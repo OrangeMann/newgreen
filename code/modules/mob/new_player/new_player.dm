@@ -2,6 +2,7 @@
 
 /mob/new_player
 	var/ready = 0
+	var/nowhitelistready = 0
 	var/spawning = 0//Referenced when you want to delete the new_player later on in the code.
 	var/totalPlayers = 0		 //Player counts for the Lobby tab
 	var/totalPlayersReady = 0
@@ -70,7 +71,7 @@
 					totalPlayers++
 					if(player.ready)totalPlayersReady++
 
-	Topic(href, href_list[])
+/*	Topic(href, href_list[])
 		if(!client)	return 0
 
 		if(href_list["show_preferences"])
@@ -105,6 +106,48 @@
 				observer.key = key
 
 				del(src)
+				return 1*/
+
+	Topic(href, href_list[])
+		if(!client)	return 0
+
+		if(href_list["show_preferences"])
+			client.prefs.ShowChoices(src)
+			return 1
+
+		if(href_list["ready"])
+			if(nowhitelistready && check_bwhitelist(ckey(key)) && !whiteoff)
+				nowhitelistready = 0
+			if(config.use_bwhitelist && !check_bwhitelist(ckey(key)))
+				nowhitelistready = !nowhitelistready
+			else
+				ready = !ready
+
+		if(href_list["refresh"])
+			src << browse(null, "window=playersetup") //closes the player setup window
+			new_player_panel_proc()
+
+		if(href_list["observe"])
+
+			if(alert(src,"Are you sure you wish to observe? You will not be able to play this round!","Player Setup","Yes","No") == "Yes")
+				if(!client)	return 1
+				var/mob/dead/observer/observer = new()
+
+				spawning = 1
+				src << sound(null, repeat = 0, wait = 0, volume = 85, channel = 1) // MAD JAMS cant last forever yo
+
+				observer.started_as_observer = 1
+				close_spawn_windows()
+				var/obj/O = locate("landmark*Observer-Start")
+				src << "\blue Now teleporting."
+				observer.loc = O.loc
+				if(client.prefs.be_random_name)
+					client.prefs.real_name = random_name()
+				observer.real_name = client.prefs.real_name
+				observer.name = observer.real_name
+				observer.key = key
+
+				del(src)
 				return 1
 
 		if(href_list["late_join"])
@@ -117,7 +160,10 @@
 				if(!is_alien_whitelisted(src, client.prefs.species) && config.usealienwhitelist)
 					src << alert("You are currently not whitelisted to play [client.prefs.species].")
 					return 0
-
+//			if(config.use_bwhitelist && !check_bwhitelist(ckey(key)))
+//				close_spawn_windows()
+//				usr.spawnprisoner()
+//				return
 			LateChoices()
 
 		if(href_list["manifest"])
@@ -132,7 +178,9 @@
 			if(!is_alien_whitelisted(src, client.prefs.species) && config.usealienwhitelist)
 				src << alert("You are currently not whitelisted to play [client.prefs.species].")
 				return 0
-
+			if(config.use_bwhitelist && !check_bwhitelist(ckey(key)))
+				usr << "\blue Bad boy =(("
+				return
 			AttemptLateSpawn(href_list["SelectedJob"])
 			return
 

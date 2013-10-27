@@ -1,7 +1,7 @@
 /datum/configuration
 	var/server_name = null				// server name (for world name / status)
 	var/server_suffix = 0				// generate numeric suffix based on server port
-
+	var/use_bwhitelist = 0					// use bwhitelist
 	var/log_ooc = 1						// log OOC channel
 	var/log_access = 0					// log login/logout
 	var/log_say = 1						// log client say
@@ -47,7 +47,7 @@
 	var/hostedby = null
 	var/respawn = 1
 	var/guest_jobban = 1
-	var/usewhitelist = 0
+	var/usewhitelist = 1
 	var/kick_inactive = 0				//force disconnect for inactive players
 	var/load_jobs_from_txt = 0
 	var/ToRban = 0
@@ -160,6 +160,9 @@
 			switch (name)
 				if ("admin_legacy_system")
 					config.admin_legacy_system = 1
+
+				if ("use_bwhitelist")
+					config.use_bwhitelist = 1
 
 				if ("use_age_restriction_for_jobs")
 					config.use_age_restriction_for_jobs = 1

@@ -277,7 +277,7 @@ client/proc/remove_gun_icons()
 	del usr.item_use_icon
 	del usr.gun_run_icon
 
-client/verb/ToggleGunMode()
+client/proc/ToggleGunMode()
 	return	//Blocked. Jarlo.
 /*	set hidden = 1
 	gun_mode = !gun_mode

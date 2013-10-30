@@ -99,7 +99,7 @@
 
 	mode
 		name = "Toggle Gun Mode"
-//		icon_state = "gun0"
+		icon_state = 0
 		screen_loc = ui_gun_select
 		//dir = 1
 

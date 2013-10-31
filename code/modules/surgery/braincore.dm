@@ -82,18 +82,22 @@
 		..()
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		user.visible_message("\blue [user] separates [target]'s brain from \his spine with \the [tool].",	\
-		"\blue You separate [target]'s brain from spine with \the [tool].")
+		if (target.brain > 0)
+			user.visible_message("\blue [user] separates [target]'s brain from \his spine with \the [tool].",	\
+			"\blue You separate [target]'s brain from spine with \the [tool].")
 
-		user.attack_log += "\[[time_stamp()]\]<font color='red'> Debrained [target.name] ([target.ckey]) with [tool.name] (INTENT: [uppertext(user.a_intent)])</font>"
-		target.attack_log += "\[[time_stamp()]\]<font color='orange'> Debrained by [user.name] ([user.ckey]) with [tool.name] (INTENT: [uppertext(user.a_intent)])</font>"
-		msg_admin_attack("[user.name] ([user.ckey]) debrained [target.name] ([target.ckey]) with [tool.name] (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
+			user.attack_log += "\[[time_stamp()]\]<font color='red'> Debrained [target.name] ([target.ckey]) with [tool.name] (INTENT: [uppertext(user.a_intent)])</font>"
+			target.attack_log += "\[[time_stamp()]\]<font color='orange'> Debrained by [user.name] ([user.ckey]) with [tool.name] (INTENT: [uppertext(user.a_intent)])</font>"
+			msg_admin_attack("[user.name] ([user.ckey]) debrained [target.name] ([target.ckey]) with [tool.name] (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 
-		var/obj/item/brain/B = new(target.loc)
-		B.transfer_identity(target)
+			var/obj/item/brain/B = new(target.loc)
+			target.brain = 0
+			B.transfer_identity(target)
 
-		target:brain_op_stage = 4.0
-		target.death()//You want them to die after the brain was transferred, so not to trigger client death() twice.
+			target:brain_op_stage = 4.0
+			target.death()//You want them to die after the brain was transferred, so not to trigger client death() twice.
+		else return
+
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		user.visible_message("\red [user]'s hand slips, cutting a vein in [target]'s brain with \the [tool]!", \
@@ -103,7 +107,8 @@
 			user:bloody_body(target)
 			user:bloody_hands(target, 0)
 
-
+mob/living/carbon/human
+	var/brain = 1	//SO LOT BRAINS NOT ALLOWED -- Jarlo
 //////////////////////////////////////////////////////////////////
 //				BRAIN DAMAGE FIXING								//
 //////////////////////////////////////////////////////////////////

@@ -154,6 +154,7 @@ obj/structure/sign/poster/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	P.resulting_poster = src
 	P.loc = loc
 	loc = P
+	del(src)
 
 
 //seperated to reduce code duplication. Moved here for ease of reference and to unclutter r_wall/attackby()

@@ -345,11 +345,11 @@ commented out in r5061, I left it because of the shroom thingies
 		user << "\red You start [P.drill_verb][fail_message ? fail_message : ""]."
 
 		if(fail_message && prob(90))
-			if(prob(25))
-				excavate_find(5, src.finds[1])
-			else if(prob(50))
+			if(prob(75))
+				excavate_find(1, src.finds[1])
+			else if(prob(15))
 				src.finds.Remove(src.finds[1])
-				if(prob(50))
+				if(prob(5))
 					artifact_debris()
 
 		if(do_after(user,P.digspeed))
@@ -358,16 +358,11 @@ commented out in r5061, I left it because of the shroom thingies
 			if(finds.len)
 				var/datum/find/F = src.finds[1]
 				if(round(src.excavation_level + P.excavation_amount) == F.excavation_required)
-					//Chance to extract any items here perfectly, otherwise just pull them out along with the rock surrounding them
-					if(src.excavation_level + P.excavation_amount > F.excavation_required)
-						//if you can get slightly over, perfect extraction
-						excavate_find(100, F)
-					else
-						excavate_find(80, F)
+					excavate_find(100, F)
 
 				else if(src.excavation_level + P.excavation_amount > F.excavation_required - F.clearance_range)
 					//just pull the surrounding rock out
-					excavate_find(0, F)
+					excavate_find(10, F)
 
 			if( src.excavation_level + P.excavation_amount >= 100 || (!finds.len && !excavation_minerals.len) )
 				//if players have been excavating this turf, have a chance to leave some rocky debris behind
@@ -491,7 +486,7 @@ commented out in r5061, I left it because of the shroom thingies
 
 	return
 
-/turf/simulated/mineral/proc/excavate_find(var/prob_clean = 0, var/datum/find/F)
+/turf/simulated/mineral/proc/excavate_find(var/prob_clean = 10, var/datum/find/F)
 	//with skill and luck, players can cleanly extract finds
 	//otherwise, they come out inside a chunk of rock
 	var/obj/item/weapon/X
@@ -504,19 +499,6 @@ commented out in r5061, I left it because of the shroom thingies
 
 	//some find types delete the /obj/item/weapon/archaeological_find and replace it with something else, this handles when that happens
 	//yuck
-	var/display_name = "something"
-	if(!X)
-		X = last_find
-	if(X)
-		display_name = X.name
-
-	//many finds are ancient and thus very delicate - luckily there is a specialised energy suspension field which protects them when they're being extracted
-	if(prob(F.prob_delicate))
-		var/obj/effect/suspension_field/S = locate() in src
-		if(!S || S.field_type != get_responsive_reagent(F.find_type))
-			if(X)
-				src.visible_message("\red<b>[pick("[display_name] crumbles away into dust","[display_name] breaks apart")].</b>")
-				del(X)
 
 	src.finds.Remove(F)
 

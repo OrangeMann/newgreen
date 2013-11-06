@@ -1587,7 +1587,7 @@
 #include "code\ZAS\ZAS_Zones.dm"
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
-#include "maps\tgstation2.dmm"
+#include "maps\kot.dmm"
 #include "maps\RandomZLevels\stationCollision.dm"
 #include "maps\RandomZLevels\stationCollision.dmm"
 // END_INCLUDE

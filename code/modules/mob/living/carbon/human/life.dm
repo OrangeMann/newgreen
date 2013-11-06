@@ -230,6 +230,10 @@
 			if(pass_flags & PASSTABLE)
 				pass_flags &= ~PASSTABLE
 
+
+/*	Account's code don't work. I commited it, just cuz it's don't compiling.
+
+
 		// Make nanoregen heal youu, -3 all damage types
 		if((NANOREGEN in augmentations) || (mRegen in mutations))
 			var/healed = 0
@@ -285,7 +289,7 @@
 			if(healed)
 				if(prob(5))
 					src << "\blue You feel your wounds mending..."
-
+*/
 		if(!(/mob/living/carbon/human/proc/morph in src.verbs))
 			if(mMorph in mutations)
 				src.verbs += /mob/living/carbon/human/proc/morph

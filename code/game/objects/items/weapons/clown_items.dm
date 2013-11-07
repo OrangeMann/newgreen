@@ -17,8 +17,10 @@
 		M.stop_pulling()
 		M << "\blue You slipped on the [name]!"
 		playsound(src.loc, 'sound/misc/slip.ogg', 50, 1, -3)
-		M.Stun(4)
-		M.Weaken(2)
+		M.Stun(7)
+		M.Weaken(4)
+		spawn(2)
+			step(M, M.dir)
 
 /*
  * Soap
@@ -32,8 +34,10 @@
 		M.stop_pulling()
 		M << "\blue You slipped on the [name]!"
 		playsound(src.loc, 'sound/misc/slip.ogg', 50, 1, -3)
-		M.Stun(3)
-		M.Weaken(2)
+		M.Stun(7)
+		M.Weaken(4)
+		spawn(2)
+			step(M, M.dir)
 
 /obj/item/weapon/soap/afterattack(atom/target, mob/user as mob)
 	//I couldn't feasibly  fix the overlay bugs caused by cleaning items we are wearing.

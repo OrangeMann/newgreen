@@ -1,4 +1,3 @@
-
 //The advanced pea-green monochrome lcd of tomorrow.
 
 var/global/list/obj/item/device/pda/PDAs = list()
@@ -1140,6 +1139,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		playsound(src.loc, 'sound/misc/slip.ogg', 50, 1, -3)
 		M.Stun(8)
 		M.Weaken(5)
+		spawn(2)
+			step(M, M.dir)
+
 
 /obj/item/device/pda/proc/available_pdas()
 	var/list/names = list()

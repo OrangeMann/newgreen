@@ -231,18 +231,14 @@
 				pass_flags &= ~PASSTABLE
 
 
-/*	Account's code don't work. I commited it, just cuz it's don't compiling.
-
+/*	Account's code don't work. I commited it, just cuz it's don't compiling.	*/
+/*	MY COOOOOODE WOOOOORKS! --ACCount	*/
 
 		// Make nanoregen heal youu, -3 all damage types
-		if((NANOREGEN in augmentations) || (mRegen in mutations))
+		if(mRegen in mutations)
 			var/healed = 0
-			var/hptoreg = 0
-			if(NANOREGEN in augmentations)
-				hptoreg += 3
-			if(mRegen in mutations)
-				hptoreg += 2
-			if(stat==UNCONSCIOUS) hptoreg/=2
+			var/hptoreg = 3
+			if(stat==UNCONSCIOUS) hptoreg*=2
 			if(stat==DEAD) hptoreg=0
 
 			for(var/i=0, i<hptoreg, i++)
@@ -286,10 +282,9 @@
 				else
 					break
 
-			if(healed)
-				if(prob(5))
-					src << "\blue You feel your wounds mending..."
-*/
+			if(prob(healed))
+				src << "\blue You feel your wounds mending..."
+
 		if(!(/mob/living/carbon/human/proc/morph in src.verbs))
 			if(mMorph in mutations)
 				src.verbs += /mob/living/carbon/human/proc/morph
@@ -355,7 +350,7 @@
 						damage = 1
 						if(prob(1))
 							src << "\red You mutate!"
-							randmutb(src)
+							randmutg(src)
 							domutcheck(src,null)
 							emote("gasp")
 						updatehealth()

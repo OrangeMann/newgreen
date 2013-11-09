@@ -352,4 +352,5 @@ field_generator power level display
 					temp = 0
 					message_admins("A singulo exists and a containment field has failed.",1)
 					investigate_log("has <font color='red'>failed</font> whilst a singulo exists.","singulo")
+					world << sound('sound/effects/singulogone.ogg')
 			O.last_warning = world.time

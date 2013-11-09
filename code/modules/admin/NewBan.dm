@@ -252,40 +252,6 @@ var/savefile/Banlist
 	return 0
 	*/
 //////////////////////////////////// WHITELIST ////////////////////////////////////
-var/list/bwhitelist
-
-/proc/load_bwhitelist()
-	var/black
-	log_admin("Loading whitelist")
-	bwhitelist = list()
-	var/DBConnection/dbcon = new()
-	dbcon.Connect("dbi:mysql:forum2:[sqladdress]:[sqlport]","[sqllogin]","[sqlpass]")
-	if(!dbcon.IsConnected())
-		log_admin("Failed to load bwhitelist. Error: [dbcon.ErrorMsg()]")
-		return
-	var/DBQuery/query = dbcon.NewQuery("SELECT byond FROM forum2.Z_whitelist ORDER BY byond ASC")
-	query.Execute()
-	while(query.NextRow())
-		bwhitelist += "[query.item[1]]"
-	if (bwhitelist.len < 1)
-		log_admin("Failed to load black bwhitelist or its empty")
-		//return
-	black = bwhitelist.len
-	dbcon.Disconnect()
-
-	dbcon.Connect("dbi:mysql:[sqldb]:[sqladdress]:[sqlport]","[sqllogin]","[sqlpass]")
-	if(!dbcon.IsConnected())
-		log_admin("Failed to load bwhitelist from green. Error: [dbcon.ErrorMsg()]")
-		return
-	query = dbcon.NewQuery("SELECT byond FROM whitelist ORDER BY byond ASC")
-	query.Execute()
-	while(query.NextRow())
-		bwhitelist += "[query.item[1]]"
-	if (bwhitelist.len - black < 1)
-		log_admin("Failed to load green bwhitelist or its empty")
-		//return
-	dbcon.Disconnect()
-	log_admin("whitelist init complete. it consists of [black] + [bwhitelist.len - black] users")
 
 
 
@@ -316,20 +282,3 @@ var/list/bwhitelist
 		return
 	dbcon.Disconnect()
 	log_admin("whitelist init complete. it consists of [bwhitelist.len] users")*/
-
-
-
-
-/proc/check_bwhitelist(var/K)
-	for(var/mob/M in world)
-		if(M.ckey == K && M.whiteoff)
-			return 0
-	if (!bwhitelist)
-		load_bwhitelist()
-		if (!bwhitelist)
-			return 0
-	if (K in bwhitelist)
-		return 1
-	return 0
-
-

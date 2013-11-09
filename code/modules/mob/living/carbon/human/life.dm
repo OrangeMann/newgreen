@@ -215,10 +215,96 @@
 			adjustCloneLoss(0.1)
 
 	proc/handle_mutations_and_radiation()
-
 		if(getFireLoss())
 			if((COLD_RESISTANCE in mutations) || (prob(1)))
 				heal_organ_damage(0,1)
+
+		if(mHallucination in mutations)
+			hallucination = 100
+			halloss = 0
+
+		if(mSmallsize in mutations)
+			if(!(pass_flags & PASSTABLE))
+				pass_flags |= PASSTABLE
+		else
+			if(pass_flags & PASSTABLE)
+				pass_flags &= ~PASSTABLE
+
+
+/*	Account's code don't work. I commited it, just cuz it's don't compiling.	*/
+/*	MY COOOOOODE WOOOOORKS! --ACCount	*/
+
+		// Make nanoregen heal youu, -3 all damage types
+		if(mRegen in mutations)
+			var/healed = 0
+			var/hptoreg = 3
+			if(stat==UNCONSCIOUS) hptoreg*=2
+			if(stat==DEAD) hptoreg=0
+
+			for(var/i=0, i<hptoreg, i++)
+				var/list/damages = new/list()
+				if(getToxLoss())
+					damages+="tox"
+				if(getOxyLoss())
+					damages+="oxy"
+				if(getCloneLoss())
+					damages+="clone"
+				if(getBruteLoss())
+					damages+="brute"
+				if(getFireLoss())
+					damages+="burn"
+				if(halloss != 0)
+					damages+="hal"
+
+				if(damages.len)
+					switch(pick(damages))
+						if("tox")
+							adjustToxLoss(-1)
+							healed = 1
+						if("oxy")
+							adjustOxyLoss(-1)
+							healed = 1
+						if("clone")
+							adjustCloneLoss(-1)
+							healed = 1
+						if("brute")
+							heal_organ_damage(1,0)
+							healed = 1
+						if("burn")
+							heal_organ_damage(0,1)
+							healed = 1
+						if("hal")
+							if(halloss > 0)
+								halloss -= 1
+							if(halloss < 0)
+								halloss = 0
+							healed = 1
+				else
+					break
+
+			if(prob(healed))
+				src << "\blue You feel your wounds mending..."
+
+		if(!(/mob/living/carbon/human/proc/morph in src.verbs))
+			if(mMorph in mutations)
+				src.verbs += /mob/living/carbon/human/proc/morph
+		else
+			if(!(mMorph in mutations))
+				src.verbs -= /mob/living/carbon/human/proc/morph
+
+		if(!(/mob/living/carbon/human/proc/remoteobserve in src.verbs))
+			if(mRemote in mutations)
+				src.verbs += /mob/living/carbon/human/proc/remoteobserve
+		else
+			if(!(mRemote in mutations))
+				src.verbs -= /mob/living/carbon/human/proc/remoteobserve
+
+		if(!(/mob/living/carbon/human/proc/remotesay in src.verbs))
+			if(mRemotetalk in mutations)
+				src.verbs += /mob/living/carbon/human/proc/remotesay
+		else
+			if(!(mRemotetalk in mutations))
+				src.verbs -= /mob/living/carbon/human/proc/remotesay
 
 		if ((HULK in mutations) && health <= 25)
 			mutations.Remove(HULK)
@@ -238,16 +324,6 @@
 				radiation = 0
 
 			else
-				if(species.flags & RAD_ABSORB)
-					var/rads = radiation/25
-					radiation -= rads
-					nutrition += rads
-					heal_overall_damage(rads,rads)
-					adjustOxyLoss(-(rads))
-					adjustToxLoss(-(rads))
-					updatehealth()
-					return
-
 				var/damage = 0
 				switch(radiation)
 					if(1 to 49)
@@ -274,7 +350,7 @@
 						damage = 1
 						if(prob(1))
 							src << "\red You mutate!"
-							randmutb(src)
+							randmutg(src)
 							domutcheck(src,null)
 							emote("gasp")
 						updatehealth()
@@ -326,7 +402,7 @@
 
 					if(!is_lung_ruptured())
 						if(!breath || breath.total_moles < BREATH_MOLES / 5 || breath.total_moles > BREATH_MOLES * 5)
-							if(prob(5))
+							if(prob(1))
 								rupture_lung()
 
 					// Handle chem smoke effect  -- Doohl

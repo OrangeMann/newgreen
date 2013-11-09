@@ -77,6 +77,7 @@
 	desc = "Some sterile gauze to wrap around bloody stumps."
 	icon_state = "brutepack"
 	origin_tech = "biotech=1"
+	heal_brute = 7
 
 /obj/item/stack/medical/bruise_pack/attack(mob/living/carbon/M as mob, mob/user as mob)
 	if(..())
@@ -103,6 +104,7 @@
 				else
 					user.visible_message( 	"\blue [user] places bandaid over [W.desc] on [M]'s [affecting.display_name].", \
 									"\blue You place bandaid over [W.desc] on [M]'s [affecting.display_name]." )
+			affecting.heal_damage(heal_brute,0)
 			use(1)
 
 /obj/item/stack/medical/ointment
@@ -111,7 +113,7 @@
 	gender = PLURAL
 	singular_name = "ointment"
 	icon_state = "ointment"
-	heal_burn = 1
+	heal_burn = 7
 	origin_tech = "biotech=1"
 
 /obj/item/stack/medical/ointment/attack(mob/living/carbon/M as mob, mob/user as mob)
@@ -128,6 +130,7 @@
 		else
 			user.visible_message( 	"\blue [user] salves wounds on [M]'s [affecting.display_name].", \
 									"\blue You salve wounds on [M]'s [affecting.display_name]." )
+			affecting.heal_damage(heal_burn,0)
 			use(1)
 
 /obj/item/stack/medical/bruise_pack/tajaran

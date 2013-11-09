@@ -116,12 +116,7 @@
 			return 1
 
 		if(href_list["ready"])
-			if(nowhitelistready && check_bwhitelist(ckey(key)) && !whiteoff)
-				nowhitelistready = 0
-			if(config.use_bwhitelist && !check_bwhitelist(ckey(key)))
-				nowhitelistready = !nowhitelistready
-			else
-				ready = !ready
+			ready = !ready
 
 		if(href_list["refresh"])
 			src << browse(null, "window=playersetup") //closes the player setup window
@@ -178,9 +173,6 @@
 			if(!is_alien_whitelisted(src, client.prefs.species) && config.usealienwhitelist)
 				src << alert("You are currently not whitelisted to play [client.prefs.species].")
 				return 0
-			if(config.use_bwhitelist && !check_bwhitelist(ckey(key)))
-				usr << "\blue Bad boy =(("
-				return
 			AttemptLateSpawn(href_list["SelectedJob"])
 			return
 

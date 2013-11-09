@@ -31,8 +31,7 @@
 	LoadBansjob()
 	if(config.usewhitelist)
 		load_whitelist()
-	if(config.use_bwhitelist)
-		load_bwhitelist()
+
 	jobban_loadbanfile()
 	jobban_updatelegacybans()
 	LoadBans()

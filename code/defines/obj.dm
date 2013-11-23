@@ -313,3 +313,40 @@
 			if(Flush <= 0)
 				reagents.clear_reagents()
 				Flush = 30
+
+////////*Types*///////
+
+//Oils
+/obj/item/metroid_core/t1
+	name = "metroid core"
+	desc = "A very slimy and tender part of a Metroid. They also legend to have \"magical powers\"."
+	icon = 'surgery.dmi'
+	icon_state = "metroid core"
+
+//Mobs
+/obj/item/metroid_core/t2
+	name = "metroid core"
+	desc = "A very slimy and tender part of a Metroid. They also legend to have \"magical powers\"."
+	icon = 'surgery.dmi'
+	icon_state = "metroid core"
+
+//Bork
+/obj/item/metroid_core/t3
+	name = "metroid core"
+	desc = "A very slimy and tender part of a Metroid. They also legend to have \"magical powers\"."
+	icon = 'surgery.dmi'
+	icon_state = "metroid core"
+
+//Nothing
+/obj/item/metroid_core/t4
+	name = "metroid core"
+	desc = "A very slimy and tender part of a Metroid. They also legend to have \"magical powers\"."
+	icon = 'surgery.dmi'
+	icon_state = "metroid core"
+
+//Nothing
+/obj/item/metroid_core/t5
+	name = "metroid core"
+	desc = "A very slimy and tender part of a Metroid. They also legend to have \"magical powers\"."
+	icon = 'surgery.dmi'
+	icon_state = "metroid core"

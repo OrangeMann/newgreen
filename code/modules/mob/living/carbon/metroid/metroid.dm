@@ -37,7 +37,11 @@
 
 	var/list/Friends = list() // A list of potential friends
 	var/list/FriendsWeight = list() // A list containing values respective to Friends. This determines how many times a Metroid "likes" something. If the Metroid likes it more than 2 times, it becomes a friend
-	var/coretype = /obj/item/metroid_core
+	var/list/mctrand = list(/obj/item/metroid_core/t1      =2,
+							/obj/item/metroid_core/t2      =2,
+							/obj/item/metroid_core/t3      =2
+							)
+//	var/coretype = /obj/item/metroid_core
 
 	// Metroids pass on genetic data, so all their offspring have the same "Friends",
 
@@ -801,3 +805,5 @@ mob/living/carbon/metroid/var/temperature_resistance = T0C+75
 		return 0
 
 	return 1
+
+

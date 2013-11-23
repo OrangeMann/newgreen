@@ -103,19 +103,19 @@ mob/living/carbon/human/proc/handle_pain()
 	var/toxDamageMessage = null
 	var/toxMessageProb = 1
 	switch(getToxLoss())
-		if(1 to 5)
+		if(10 to 20)
 			toxMessageProb = 1
 			toxDamageMessage = "Your body stings slightly."
-		if(6 to 10)
+		if(21 to 30)
 			toxMessageProb = 2
 			toxDamageMessage = "Your whole body hurts a little."
-		if(11 to 15)
+		if(31 to 45)
 			toxMessageProb = 2
 			toxDamageMessage = "Your whole body hurts."
-		if(15 to 25)
+		if(46 to 55)
 			toxMessageProb = 3
 			toxDamageMessage = "Your whole body hurts badly."
-		if(26 to INFINITY)
+		if(56 to INFINITY)
 			toxMessageProb = 5
 			toxDamageMessage = "Your body aches all over, it's driving you mad."
 

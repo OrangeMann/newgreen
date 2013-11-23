@@ -118,7 +118,7 @@
 
 		if (radiation)
 
-			if(istype(src,/mob/living/carbon/monkey/diona)) //Filthy check. Dionaea don't take rad damage.
+			if(istype(src,/mob/living/carbon/monkey/diona && /mob/living/carbon/human/android)) //Filthy check. Dionaea don't take rad damage.
 				var/rads = radiation/25
 				radiation -= rads
 				nutrition += rads

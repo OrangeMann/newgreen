@@ -29,7 +29,7 @@
 	var/gender = NEUTER
 
 	// Restrict some styles to specific races
-	var/list/species_allowed = list("Human")
+	var/list/species_allowed = list("Human", "Android")
 
 	// Whether or not the accessory can be affected by colouration
 	var/do_colouration = 1
@@ -51,191 +51,225 @@
 		name = "Bald"
 		icon_state = "bald"
 		gender = MALE
-		species_allowed = list("Human","Unathi")
+		species_allowed = list("Human","Unathi", "Android")
 
 	short
 		name = "Short Hair"	  // try to capatilize the names please~
 		icon_state = "hair_a" // you do not need to define _s or _l sub-states, game automatically does this for you
+		species_allowed = list("Human","Unathi", "Android")
 
 	cut
 		name = "Cut Hair"
 		icon_state = "hair_c"
+		species_allowed = list("Human", "Android")
 
 	long
 		name = "Shoulder-length Hair"
 		icon_state = "hair_b"
+		species_allowed = list("Human", "Android")
 
 	longalt
 		name = "Shoulder-length Hair Alt"
 		icon_state = "hair_longfringe"
+		species_allowed = list("Human", "Android")
 
 	longish
 		name = "Longer Hair"
 		icon_state = "hair_b2"
+		species_allowed = list("Human", "Android")
 
 	longer
 		name = "Long Hair"
 		icon_state = "hair_vlong"
+		species_allowed = list("Human", "Android")
 
 	longeralt
 		name = "Long Hair Alt"
 		icon_state = "hair_vlongfringe"
+		species_allowed = list("Human", "Android")
 
 	longest
 		name = "Very Long Hair"
 		icon_state = "hair_longest"
+		species_allowed = list("Human", "Android")
 
 	longfringe
 		name = "Long Fringe"
 		icon_state = "hair_longfringe"
+		species_allowed = list("Human", "Android")
 
 	ladylike
 		name = "Ladylike"
 		icon_state = "hair_test"
-		species_allowed = list("Human","Unathi")
+		species_allowed = list("Human","Unathi", "Android")
 
 	ladylike2
 		name = "Ladylike Alt"
 		icon_state = "hair_levb"
-		species_allowed = list("Human","Unathi")
+		species_allowed = list("Human","Unathi", "Android")
 
 	longestalt
 		name = "Longer Fringe"
 		icon_state = "hair_vlongfringe"
+		species_allowed = list("Human", "Android")
 
 	halfbang
 		name = "Half-banged Hair"
 		icon_state = "hair_halfbang"
+		species_allowed = list("Human", "Android")
 
 	halfbangalt
 		name = "Half-banged Hair Alt"
 		icon_state = "hair_halfbang_alt"
+		species_allowed = list("Human", "Android")
 
 	ponytail1
 		name = "Ponytail 1"
 		icon_state = "hair_ponytail"
+		species_allowed = list("Human", "Android")
 
 	ponytail2
 		name = "Ponytail 2"
 		icon_state = "hair_pa"
 		gender = FEMALE
+		species_allowed = list("Human", "Android")
 
 	ponytail3
 		name = "Ponytail 3"
 		icon_state = "hair_ponytail3"
+		species_allowed = list("Human", "Android")
 
 	parted
 		name = "Parted"
 		icon_state = "hair_parted"
+		species_allowed = list("Human", "Android")
 
 	pompadour
 		name = "Pompadour"
 		icon_state = "hair_pompadour"
 		gender = MALE
-		species_allowed = list("Human","Unathi")
+		species_allowed = list("Human","Unathi", "Android")
 
 	quiff
 		name = "Quiff"
 		icon_state = "hair_quiff"
 		gender = MALE
+		species_allowed = list("Human", "Android")
 
 	bedhead
 		name = "Bedhead"
 		icon_state = "hair_bedhead"
+		species_allowed = list("Human", "Android")
 
 	bedhead2
 		name = "Bedhead 2"
 		icon_state = "hair_bedheadv2"
+		species_allowed = list("Human", "Android")
 
 	bedhead3
 		name = "Bedhead 3"
 		icon_state = "hair_bedheadv3"
+		species_allowed = list("Human", "Android")
 
 	beehive
 		name = "Beehive"
 		icon_state = "hair_beehive"
 		gender = FEMALE
-		species_allowed = list("Human","Unathi")
+		species_allowed = list("Human","Unathi", "Android")
 
 	bobcurl
 		name = "Bobcurl"
 		icon_state = "hair_bobcurl"
 		gender = FEMALE
-		species_allowed = list("Human","Unathi")
+		species_allowed = list("Human","Unathi", "Android")
 
 	bob
 		name = "Bob"
 		icon_state = "hair_bobcut"
 		gender = FEMALE
-		species_allowed = list("Human","Unathi")
+		species_allowed = list("Human","Unathi", "Android")
 
 	bowl
 		name = "Bowl"
 		icon_state = "hair_bowlcut"
 		gender = MALE
+		species_allowed = list("Human", "Android")
 
 	buzz
 		name = "Buzzcut"
 		icon_state = "hair_buzzcut"
 		gender = MALE
-		species_allowed = list("Human","Unathi")
+		species_allowed = list("Human","Unathi", "Android")
 
 	crew
 		name = "Crewcut"
 		icon_state = "hair_crewcut"
 		gender = MALE
+		species_allowed = list("Human", "Android")
 
 	combover
 		name = "Combover"
 		icon_state = "hair_combover"
 		gender = MALE
+		species_allowed = list("Human", "Android")
 
 	devillock
 		name = "Devil Lock"
 		icon_state = "hair_devilock"
+		species_allowed = list("Human", "Android")
 
 	dreadlocks
 		name = "Dreadlocks"
 		icon_state = "hair_dreads"
+		species_allowed = list("Human", "Android")
 
 	curls
 		name = "Curls"
 		icon_state = "hair_curls"
+		species_allowed = list("Human", "Android")
 
 	afro
 		name = "Afro"
 		icon_state = "hair_afro"
+		species_allowed = list("Human", "Android")
 
 	afro2
 		name = "Afro 2"
 		icon_state = "hair_afro2"
+		species_allowed = list("Human", "Android")
 
 	afro_large
 		name = "Big Afro"
 		icon_state = "hair_bigafro"
 		gender = MALE
+		species_allowed = list("Human", "Android")
 
 	sargeant
 		name = "Flat Top"
 		icon_state = "hair_sargeant"
 		gender = MALE
+		species_allowed = list("Human", "Android")
 
 	emo
 		name = "Emo"
 		icon_state = "hair_emo"
+		species_allowed = list("Human", "Android")
 
 	fag
 		name = "Flow Hair"
 		icon_state = "hair_f"
+		species_allowed = list("Human", "Android")
 
 	feather
 		name = "Feather"
 		icon_state = "hair_feather"
+		species_allowed = list("Human", "Android")
 
 	hitop
 		name = "Hitop"
 		icon_state = "hair_hitop"
 		gender = MALE
+		species_allowed = list("Human", "Android")
 
 	mohawk
 		name = "Mohawk"
@@ -245,77 +279,92 @@
 		name = "Adam Jensen Hair"
 		icon_state = "hair_jensen"
 		gender = MALE
+		species_allowed = list("Human", "Android")
 
 	gelled
 		name = "Gelled Back"
 		icon_state = "hair_gelled"
 		gender = FEMALE
+		species_allowed = list("Human", "Android")
 
 	spiky
 		name = "Spiky"
 		icon_state = "hair_spikey"
-		species_allowed = list("Human","Unathi")
+		species_allowed = list("Human","Unathi", "Android")
 
 	kusangi
 		name = "Kusanagi Hair"
 		icon_state = "hair_kusanagi"
+		species_allowed = list("Human", "Android")
 
 	kusanagialt
 		name = "Kusanagi Alternative Hair"
 		icon_state = "hair_kusanagialt"
+		species_allowed = list("Human", "Android")
 
 	hamasaki
 		name = "Hamasaki Hair"
 		icon_state = "hair_hamasaki"
+		species_allowed = list("Human", "Android")
 
 	kagami
 		name = "Pigtails"
 		icon_state = "hair_kagami"
 		gender = FEMALE
+		species_allowed = list("Human", "Android")
 
 	himecut
 		name = "Hime Cut"
 		icon_state = "hair_himecut"
 		gender = FEMALE
+		species_allowed = list("Human", "Android")
 
 	braid
 		name = "Floorlength Braid"
 		icon_state = "hair_braid"
 		gender = FEMALE
+		species_allowed = list("Human", "Android")
 
 	odango
 		name = "Odango"
 		icon_state = "hair_odango"
 		gender = FEMALE
+		species_allowed = list("Human", "Android")
 
 	ombre
 		name = "Ombre"
 		icon_state = "hair_ombre"
 		gender = FEMALE
+		species_allowed = list("Human", "Android")
 
 	unitfringe
 		name = "Test Fringe"
 		icon_state = "test4"
 		gender = FEMALE
+		species_allowed = list("Human", "Android")
 
 	updo
 		name = "Updo"
 		icon_state = "hair_updo"
 		gender = FEMALE
+		species_allowed = list("Human", "Android")
 
 	skinhead
 		name = "Skinhead"
 		icon_state = "hair_skinhead"
+		species_allowed = list("Human", "Android")
 
 	balding
 		name = "Balding Hair"
 		icon_state = "hair_e"
 		gender = MALE // turnoff!
+		species_allowed = list("Human", "Android")
 
 
 	bald
 		name = "Bald"
 		icon_state = "bald"
+		species_allowed = list("Human", "Android")
 /*
 ///////////////////////////////////
 /  =---------------------------=  /
@@ -333,72 +382,87 @@
 		name = "Shaved"
 		icon_state = "bald"
 		gender = NEUTER
-		species_allowed = list("Human","Unathi","Tajaran","Skrell","Vox")
+		species_allowed = list("Human","Unathi","Tajaran","Skrell","Vox", "Android")
 
 	watson
 		name = "Watson Mustache"
 		icon_state = "facial_watson"
+		species_allowed = list("Human", "Android")
 
 	hogan
 		name = "Hulk Hogan Mustache"
 		icon_state = "facial_hogan" //-Neek
+		species_allowed = list("Human", "Android")
 
 	vandyke
 		name = "Van Dyke Mustache"
 		icon_state = "facial_vandyke"
+		species_allowed = list("Human", "Android")
 
 	chaplin
 		name = "Square Mustache"
 		icon_state = "facial_chaplin"
+		species_allowed = list("Human", "Android")
 
 	selleck
 		name = "Selleck Mustache"
 		icon_state = "facial_selleck"
+		species_allowed = list("Human", "Android")
 
 	neckbeard
 		name = "Neckbeard"
 		icon_state = "facial_neckbeard"
+		species_allowed = list("Human", "Android")
 
 	fullbeard
 		name = "Full Beard"
 		icon_state = "facial_fullbeard"
+		species_allowed = list("Human", "Android")
 
 	longbeard
 		name = "Long Beard"
 		icon_state = "facial_longbeard"
+		species_allowed = list("Human", "Android")
 
 	vlongbeard
 		name = "Very Long Beard"
 		icon_state = "facial_wise"
+		species_allowed = list("Human", "Android")
 
 	elvis
 		name = "Elvis Sideburns"
 		icon_state = "facial_elvis"
-		species_allowed = list("Human","Unathi")
+		species_allowed = list("Human","Unathi", "Android")
 
 	abe
 		name = "Abraham Lincoln Beard"
 		icon_state = "facial_abe"
+		species_allowed = list("Human", "Android")
 
 	chinstrap
 		name = "Chinstrap"
 		icon_state = "facial_chin"
+		species_allowed = list("Human", "Android")
 
 	hip
 		name = "Hipster Beard"
 		icon_state = "facial_hip"
+		species_allowed = list("Human", "Android")
 
 	gt
 		name = "Goatee"
 		icon_state = "facial_gt"
+		species_allowed = list("Human", "Android")
 
 	jensen
 		name = "Adam Jensen Beard"
 		icon_state = "facial_jensen"
+		species_allowed = list("Human", "Android")
 
 	dwarf
 		name = "Dwarf Beard"
 		icon_state = "facial_dwarf"
+		species_allowed = list("Human", "Android")
 
 /*
 ///////////////////////////////////

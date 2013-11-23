@@ -951,75 +951,49 @@ datum
 				return
 */
 /////////////////////////////////////////////NEW METROID CORE REACTIONS/////////////////////////////////////////////
-/*
-//Grey
-		metroidspawn
-			name = "metroid Spawn"
-			id = "m_spawn"
-			result = null
-			required_reagents = list("plasma" = 5)
-			result_amount = 1
-			required_container = /obj/item/metroid_extract/grey
+
+//Type 1
+
+		metroidfrost
+			name = "Metroid Frost Oil"
+			id = "m_frostoil"
+			result = "frostoil"
+			required_reagents = list("sugar" = 5, "water" = 10)
+			result_amount = 15
+			required_container = /obj/item/metroid_core/t1
 			required_other = 1
-			on_reaction(var/datum/reagents/holder)
-				for(var/mob/O in viewers(get_turf_loc(holder.my_atom), null))
-					O.show_message(text("\red Infused with plasma, the core begins to quiver and grow, and soon a new baby metroid emerges from it!"), 1)
-				var/mob/living/carbon/metroid/S = new /mob/living/carbon/metroid
-				S.loc = get_turf_loc(holder.my_atom)
 
-
-		metroidmonkey
-			name = "metroid Monkey"
-			id = "m_monkey"
-			result = null
-			required_reagents = list("blood" = 5)
-			result_amount = 1
-			required_container = /obj/item/metroid_extract/grey
+		metroidcasp
+			name = "Metroid Capsaicin Oil"
+			id = "m_capsaicinoil"
+			result = "capsaicin"
+			required_reagents = list("plasma" = 5, "water" = 10)
+			result_amount = 15
+			required_container = /obj/item/metroid_core/t1
 			required_other = 1
-			on_reaction(var/datum/reagents/holder)
-				for(var/i = 1, i <= 3, i++)
-					var /obj/item/weapon/reagent_containers/food/snacks/monkeycube/M = new /obj/item/weapon/reagent_containers/food/snacks/monkeycube
-					M.loc = get_turf_loc(holder.my_atom)
 
-//Green
-		metroidmutate
-			name = "Mutation Toxin"
-			id = "mutationtoxin"
-			result = "mutationtoxin"
-			required_reagents = list("plasma" = 5)
-			result_amount = 1
+		metroidglycerol
+			name = "Metroid Glycerol Oil"
+			id = "m_glycerol"
+			result = "glycerol"
+			required_reagents = list("blood" = 5, "water" = 10)
+			result_amount = 15
+			required_container = /obj/item/metroid_core/t1
 			required_other = 1
-			required_container = /obj/item/metroid_extract/green
 
-//Metal
-		metroidmetal
-			name = "metroid Metal"
-			id = "m_metal"
-			result = null
-			required_reagents = list("plasma" = 5)
-			result_amount = 1
-			required_container = /obj/item/metroid_extract/metal
-			required_other = 1
-			on_reaction(var/datum/reagents/holder)
-				var/obj/item/stack/sheet/metal/M = new /obj/item/stack/sheet/metal
-				M.amount = 15
-				M.loc = get_turf_loc(holder.my_atom)
-				var/obj/item/stack/sheet/plasteel/P = new /obj/item/stack/sheet/plasteel
-				P.amount = 5
-				P.loc = get_turf_loc(holder.my_atom)
+//Type 2
 
-//Gold
 		metroidcrit
-			name = "metroid Crit"
+			name = "Metroid Crit"
 			id = "m_tele"
 			result = null
-			required_reagents = list("plasma" = 5)
+			required_reagents = list("plasma" = 5, "water" = 10)
 			result_amount = 1
-			required_container = /obj/item/metroid_extract/gold
+			required_container = /obj/item/metroid_core/t2
 			required_other = 1
 			on_reaction(var/datum/reagents/holder)
 
-				/*var/blocked = list(/mob/living/simple_animal/hostile,
+				var/blocked = list(/mob/living/simple_animal/hostile,
 					/mob/living/simple_animal/hostile/pirate,
 					/mob/living/simple_animal/hostile/pirate/ranged,
 					/mob/living/simple_animal/hostile/russian,
@@ -1051,18 +1025,76 @@ datum
 					C.loc = get_turf_loc(holder.my_atom)
 					if(prob(50))
 						for(var/j = 1, j <= rand(1, 3), j++)
-							step(C, pick(NORTH,SOUTH,EAST,WEST))*/
-				for(var/mob/O in viewers(get_turf_loc(holder.my_atom), null))
-					O.show_message(text("\red The metroid core fizzles disappointingly,"), 1)
+							step(C, pick(NORTH,SOUTH,EAST,WEST))
+//				for(var/mob/O in viewers(get_turf_loc(holder.my_atom), null))
+//					O.show_message(text("\red The metroid core fizzles disappointingly,"), 1)
 
-//Silver
+		metroidcritf
+			name = "Metroid Crit Friendly"
+			id = "m_telef"
+			result = null
+			required_reagents = list("sugar" = 5, "water" = 10)
+			result_amount = 1
+			required_container = /obj/item/metroid_core/t2
+			required_other = 1
+			on_reaction(var/datum/reagents/holder)
+
+				var/blocked = list(/mob/living/simple_animal/,
+					/mob/living/simple_animal/cat,
+					/mob/living/simple_animal/corgi,
+					/mob/living/simple_animal/crab,
+					/mob/living/simple_animal/lizard,
+					/mob/living/simple_animal/mouse,
+					/mob/living/simple_animal/mushroom,
+					/mob/living/simple_animal/tomato,
+					/mob/living/simple_animal/parrot,
+					/mob/living/simple_animal/hostile/retaliate/goat,
+					/mob/living/simple_animal/cow,
+					/mob/living/simple_animal/chick,
+					/mob/living/simple_animal/chicken
+					)//exclusion list for things you don't want the reaction to create.
+				var/list/critters = typesof(/mob/living/simple_animal/hostile) - blocked // list of possible hostile mobs
+
+				playsound(get_turf_loc(holder.my_atom), 'sound/effects/phasein.ogg', 100, 1)
+
+				for(var/mob/living/carbon/human/M in viewers(get_turf_loc(holder.my_atom), null))
+					if(M:eyecheck() <= 0)
+						flick("e_flash", M.flash)
+
+				for(var/i = 1, i <= 5, i++)
+					var/chosen = pick(critters)
+					var/mob/living/simple_animal/hostile/C = new chosen
+					C.faction = "metroidsummon"
+					C.loc = get_turf_loc(holder.my_atom)
+					if(prob(50))
+						for(var/j = 1, j <= rand(1, 3), j++)
+							step(C, pick(NORTH,SOUTH,EAST,WEST))
+//				for(var/mob/O in viewers(get_turf_loc(holder.my_atom), null))
+//					O.show_message(text("\red The metroid core fizzles disappointingly,"), 1)
+
+		metroidglow
+			name = "Metroid Glow"
+			id = "m_glow"
+			result = null
+			required_reagents = list("blood" = 5, "water" = 10)
+			result_amount = 1
+			required_container = /obj/item/metroid_core/t2
+			required_other = 1
+			on_reaction(var/datum/reagents/holder)
+				for(var/mob/O in viewers(get_turf_loc(holder.my_atom), null))
+					O.show_message(text("\red The metroid core begins to emit a soft light."), 1)
+				var/obj/item/metroid_core/t2/t2 = holder
+				t2.luminosity = 8
+
+//Type 3
+
 		metroidbork
-			name = "metroid Bork"
+			name = "Metroid Bork"
 			id = "m_tele2"
 			result = null
-			required_reagents = list("plasma" = 5)
+			required_reagents = list("sugar" = 5, "water" = 10)
 			result_amount = 1
-			required_container = /obj/item/metroid_extract/silver
+			required_container = /obj/item/metroid_core/t3
 			required_other = 1
 			on_reaction(var/datum/reagents/holder)
 
@@ -1084,17 +1116,52 @@ datum
 							for(var/j = 1, j <= rand(1, 3), j++)
 								step(B, pick(NORTH,SOUTH,EAST,WEST))
 
-
-//Blue
-		metroidfrost
-			name = "metroid Frost Oil"
-			id = "m_frostoil"
-			result = "frostoil"
-			required_reagents = list("plasma" = 5)
-			result_amount = 10
-			required_container = /obj/item/metroid_extract/blue
+		metroidbork2
+			name = "Metroid Bork"
+			id = "m_tele3"
+			result = null
+			required_reagents = list("blood" = 5, "water" = 10)
+			result_amount = 1
+			required_container = /obj/item/metroid_core/t3
 			required_other = 1
-//Dark Blue
+			on_reaction(var/datum/reagents/holder)
+
+				var/list/borks = typesof(/obj/item/weapon/reagent_containers/food/drinks) - /obj/item/weapon/reagent_containers/food/snacks
+				// BORK BORK BORK
+
+				playsound(get_turf_loc(holder.my_atom), 'sound/effects/phasein.ogg', 100, 1)
+
+				for(var/mob/living/carbon/human/M in viewers(get_turf_loc(holder.my_atom), null))
+					if(M:eyecheck() <= 0)
+						flick("e_flash", M.flash)
+
+				for(var/i = 1, i <= 4 + rand(1,2), i++)
+					var/chosen = pick(borks)
+					var/obj/B = new chosen
+					if(B)
+						B.loc = get_turf_loc(holder.my_atom)
+						if(prob(50))
+							for(var/j = 1, j <= rand(1, 3), j++)
+								step(B, pick(NORTH,SOUTH,EAST,WEST))
+
+		metroidmetal
+			name = "Metroid Metal"
+			id = "m_metal"
+			result = null
+			required_reagents = list("plasma" = 5, "water" = 10)
+			result_amount = 1
+			required_container = /obj/item/metroid_core/t3
+			required_other = 1
+			on_reaction(var/datum/reagents/holder)
+				var/obj/item/stack/sheet/metal/M = new /obj/item/stack/sheet/metal
+				M.amount = 15
+				M.loc = get_turf_loc(holder.my_atom)
+				var/obj/item/stack/sheet/plasteel/P = new /obj/item/stack/sheet/plasteel
+				P.amount = 5
+				P.loc = get_turf_loc(holder.my_atom)
+
+/* //No now//
+
 		metroidfreeze
 			name = "metroid Freeze"
 			id = "m_freeze"
@@ -1111,16 +1178,6 @@ datum
 				for(var/mob/living/M in range (get_turf_loc(holder.my_atom), 7))
 					M.bodytemperature -= 140
 					M << "\blue You feel a chill!"
-
-//Orange
-		metroidcasp
-			name = "metroid Capsaicin Oil"
-			id = "m_capsaicinoil"
-			result = "capsaicin"
-			required_reagents = list("blood" = 5)
-			result_amount = 10
-			required_container = /obj/item/metroid_extract/orange
-			required_other = 1
 
 		metroidfire
 			name = "metroid fire"
@@ -1145,7 +1202,7 @@ datum
 					target_tile.assume_air(napalm)
 					spawn (0) target_tile.hotspot_expose(700, 400)
 
-//Yellow
+
 		metroidoverload
 			name = "metroid EMP"
 			id = "m_emp"
@@ -1170,20 +1227,7 @@ datum
 				var/obj/item/weapon/cell/metroid/P = new /obj/item/weapon/cell/metroid
 				P.loc = get_turf_loc(holder.my_atom)
 
-		metroidglow
-			name = "metroid Glow"
-			id = "m_glow"
-			result = null
-			required_reagents = list("water" = 5)
-			result_amount = 1
-			required_container = /obj/item/metroid_extract/yellow
-			required_other = 1
-			on_reaction(var/datum/reagents/holder)
-				for(var/mob/O in viewers(get_turf_loc(holder.my_atom), null))
-					O.show_message(text("\red The metroid begins to emit a soft light."), 1)
-				var/obj/item/metroid_extract/yellow/Y = holder
-				Y.luminosity = 6
-//Purple
+
 
 		metroidpsteroid
 			name = "metroid Steroid"
@@ -1209,7 +1253,7 @@ datum
 			required_other = 1
 
 
-//Dark Purple
+
 		metroidplasma
 			name = "metroid Plasma"
 			id = "m_plasma"
@@ -1223,7 +1267,7 @@ datum
 				P.amount = 10
 				P.loc = get_turf_loc(holder.my_atom)
 
-//Red
+
 		metroidglycerol
 			name = "metroid Glycerol"
 			id = "m_glycerol"
@@ -1249,7 +1293,7 @@ datum
 					for(var/mob/O in viewers(get_turf_loc(holder.my_atom), null))
 						O.show_message(text("\red The [metroid] is driven into a frenzy!."), 1)
 
-//Pink
+
 		metroidppotion
 			name = "metroid Potion"
 			id = "m_potion"
@@ -1263,7 +1307,7 @@ datum
 				P.loc = get_turf_loc(holder.my_atom)
 
 
-//Black
+
 		metroidmutate2
 			name = "Advanced Mutation Toxin"
 			id = "mutationtoxin2"
@@ -1273,7 +1317,7 @@ datum
 			required_other = 1
 			required_container = /obj/item/metroid_extract/black
 
-//Oil
+
 		metroidexplosion
 			name = "metroid Explosion"
 			id = "m_explosion"
@@ -1287,7 +1331,7 @@ datum
 					O.show_message(text("\red The metroid extract begins to vibrate violently !"), 1)
 				sleep(50)
 				explosion(get_turf_loc(holder.my_atom), 1 ,3, 6)
-//Light Pink
+
 		metroidpotion2
 			name = "metroid Potion 2"
 			id = "m_potion2"
@@ -1299,7 +1343,7 @@ datum
 			on_reaction(var/datum/reagents/holder)
 				var/obj/item/weapon/metroidpotion2/P = new /obj/item/weapon/metroidpotion2
 				P.loc = get_turf_loc(holder.my_atom)
-//Adamantine
+
 		metroidgolem
 			name = "metroid Golem"
 			id = "m_golem"
@@ -1311,11 +1355,11 @@ datum
 			on_reaction(var/datum/reagents/holder)
 				var/obj/effect/golemrune/Z = new /obj/effect/golemrune
 				Z.loc = get_turf_loc(holder.my_atom)
-				Z.announce_to_ghosts()*/
-
+				Z.announce_to_ghosts()
+*/
 /////////////////////////////////FERN METROID CORE REACTIONS///////////////////////////////////
 
-
+/*
 		metroidpepper
 			name = "Metroid Condensedcapaicin"
 			id = "m_condensedcapaicin"
@@ -1586,7 +1630,7 @@ datum
 				return
 
 
-
+*/
 //////////////////////////////////////////FOOD MIXTURES////////////////////////////////////
 
 		tofu

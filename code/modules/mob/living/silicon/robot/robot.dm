@@ -236,9 +236,7 @@
 /mob/living/silicon/robot/proc/updatename(var/prefix as text)
 	if(prefix)
 		modtype = prefix
-	if(istype(mmi, /obj/item/device/mmi/posibrain))
-		braintype = "Android"
-	else
+	if(istype(mmi, /obj/item/device/mmi))
 		braintype = "Cyborg"
 
 	var/changed_name = ""

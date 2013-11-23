@@ -491,6 +491,12 @@
 					usr:inv3.icon_state = "inv3"
 					usr:module_active = null
 
+//		if("radar")
+//			usr:close_radar()
+
+//		if("radar closed")
+//			usr:start_radar()
+
 		if("Allow Walking")
 			if(gun_click_time > world.time - 30)	//give them 3 seconds between mode changes.
 				return

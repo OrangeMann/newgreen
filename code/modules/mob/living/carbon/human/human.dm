@@ -35,6 +35,11 @@
 	species = new /datum/species/diona(src)
 	..()
 
+/mob/living/carbon/human/android/New()
+	species = new /datum/species/android(src)
+	..()
+
+
 /mob/living/carbon/human/New()
 
 	if(!species)

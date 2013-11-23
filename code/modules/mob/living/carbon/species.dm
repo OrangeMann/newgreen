@@ -94,3 +94,15 @@
 	attack_verb = "slash"
 
 	flags = WHITELISTED | NO_EAT | NO_BREATHE | REQUIRE_LIGHT | NON_GENDERED | NO_SCAN | IS_PLANT
+
+/datum/species/android
+	name = "Android"
+	icobase = 'icons/mob/human_races/r_android.dmi'
+	deform = 'icons/mob/human_races/r_def_android.dmi'
+	language = "Android-Binary"
+	attack_verb = "cracks"
+	darksight = 8
+	burn_resist
+
+
+	flags = HAS_SKIN_TONE | HAS_LIPS | HAS_UNDERWEAR | NO_EAT | NO_BREATHE | NO_SCAN

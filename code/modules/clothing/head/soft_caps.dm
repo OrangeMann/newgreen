@@ -87,8 +87,8 @@
 	icon_state = "secsoft"
 	color = "sec"
 
-/obj/item/clothing/head/soft/sec/corp
-	name = "corporate security cap"
-	desc = "It's baseball hat in corpotate colours."
+/obj/item/clothing/head/soft/sec/swat
+	name = "SWAT security cap"
+	desc = "S.WAT."
 	icon_state = "corpsoft"
 	color = "corp"

@@ -51,6 +51,14 @@
 	key = "q"
 	flags = RESTRICTED
 
+/datum/language/android
+	name = "Android-Binary"
+	desc = "Synthesized voice of robots Category A."
+	speech_verb = "dictates"
+	colour = "vox"
+	key = "l"
+	flags = WHITELISTED
+
 /datum/language/human
 	name = "Sol Common"
 	desc = "A bastardized hybrid of informal English and elements of Mandarin Chinese; the common language of the Sol system."

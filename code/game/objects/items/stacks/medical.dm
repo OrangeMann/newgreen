@@ -149,6 +149,13 @@
 	icon_state = "ambrosiavulgaris"
 	heal_burn = 7
 
+/obj/item/stack/medical/bruise_pack/medical_craft
+	name = "roll of gauze"
+	singular_name = "gauze length"
+	desc = "Some gauze to wrap around bloody stumps."
+	icon_state = "brutepack"
+	heal_brute = 6
+
 /obj/item/stack/medical/advanced/bruise_pack
 	name = "advanced trauma kit"
 	singular_name = "advanced trauma kit"

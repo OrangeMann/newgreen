@@ -331,6 +331,18 @@ var/MAX_EXPLOSION_RANGE = 14
 #define SHOCKWAVE		19 	// attack a nearby tile and cause a massive shockwave, knocking most people on their asses (25%)
 #define ELECTRICITY		20 	// ability to shoot electric attacks (15%)
 
+// mob/var/list/augmentations
+
+	// Nanoaugmentations:
+#define SUPRSTR			21 	// super strength (hulk powers)
+#define RADAR			22 	// on-screen mob radar
+#define ELECTRICHANDS	23 	// electric hands
+#define ESWORDSYNTH		24 	// esword synthesizer
+#define REBREATHER		25 	// removes the need to breathe
+#define DERMALARMOR		26 	// 35% damage decrease
+#define REFLEXES		27 	// dodge 50% of projectiles
+#define NANOREGEN		28 	// regenerative nanobots, -3 all damage types per second
+
 	//2spooky
 #define SKELETON		29
 #define PLANT			30

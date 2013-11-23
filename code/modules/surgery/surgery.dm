@@ -35,7 +35,7 @@
 
 		if(disallowed_species)
 			for(var/species in disallowed_species)
-				if (target.dna.mutantrace == species)
+				if (target.dna.mutantrace == "Android")
 					return 0
 
 		return 1

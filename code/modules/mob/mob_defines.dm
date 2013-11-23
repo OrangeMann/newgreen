@@ -216,3 +216,6 @@
 	var/can_stand = 1 //Whether this mob have ability to stand
 
 	var/immune_to_ssd = 0
+
+	var/list/augmentations = list() //Carbon -- Doohl
+	//see: setup.dm for list of augmentations

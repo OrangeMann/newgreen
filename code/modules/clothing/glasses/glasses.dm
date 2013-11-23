@@ -10,6 +10,11 @@
 	//var/invisa_view = 0
 	var/prescription = 0
 
+/obj/item/clothing/glasses/attack_self(mob/user as mob)
+		user << "You rubbed your glasses!"
+		user.visible_message("\red [user] rubbed their glasses.")
+		return
+
 /obj/item/clothing/glasses/meson
 	name = "Optical Meson Scanner"
 	desc = "Used for seeing walls, floors, and stuff through anything."

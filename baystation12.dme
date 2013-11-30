@@ -575,7 +575,6 @@
 #include "code\game\objects\items\weapons\implants\implantchair.dm"
 #include "code\game\objects\items\weapons\implants\implanter.dm"
 #include "code\game\objects\items\weapons\implants\implantfreedom.dm"
-#include "code\game\objects\items\weapons\implants\implantnanoaug.dm"
 #include "code\game\objects\items\weapons\implants\implantpad.dm"
 #include "code\game\objects\items\weapons\implants\implantuplink.dm"
 #include "code\game\objects\items\weapons\melee\energy.dm"
@@ -689,6 +688,7 @@
 #include "code\modules\admin\create_turf.dm"
 #include "code\modules\admin\holder2.dm"
 #include "code\modules\admin\IsBanned.dm"
+#include "code\modules\admin\job_lock.dm"
 #include "code\modules\admin\NewBan.dm"
 #include "code\modules\admin\newbanjob.dm"
 #include "code\modules\admin\player_notes.dm"
@@ -1357,6 +1357,4 @@
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
 #include "maps\fernflower_1.0.dmm"
-#include "maps\RandomZLevels\stationCollision.dm"
-#include "maps\RandomZLevels\stationCollision.dmm"
 // END_INCLUDE

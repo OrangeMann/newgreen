@@ -2407,3 +2407,21 @@
 			if("list")
 				PlayerNotesPage(text2num(href_list["index"]))
 		return
+
+	if(href_list["job_lock"])
+		if(href_list["select"])
+			var/datum/job/J = locate(href_list["select"])
+			J.locked = !J.locked
+			job_lock()
+		if (href_list["lock"])
+			for(var/datum/job/J in job_master.occupations)
+				if(!J)	continue
+				J.locked = 1
+				job_lock()
+		if (href_list["unlock"])
+			for(var/datum/job/J in job_master.occupations)
+				if(!J)	continue
+				J.locked = 0
+				job_lock()
+		if (href_list["refresh"])
+			job_lock()

@@ -112,3 +112,30 @@ proc/sort_surgeries()
 	var/face	=	0
 	var/appendix =	0
 	var/ribcage =	0
+
+/obj/item/weapon/cautery/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+        if(istype(M,/mob/living/carbon/human/android/))
+                return
+        else
+                ..()
+/obj/item/weapon/retractor/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+        if(istype(M,/mob/living/carbon/human/android/))
+                return
+        else
+                ..()
+/obj/item/weapon/hemostat/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+        if(istype(M,/mob/living/carbon/human/android/))
+                return
+        else
+                ..()
+/obj/item/weapon/surgicaldrill/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+        if(istype(M,/mob/living/carbon/human/android/))
+                return
+        else
+                ..()
+/obj/item/weapon/scalpel/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+        if(istype(M,/mob/living/carbon/human/android/))
+                return
+        else
+                ..()
+

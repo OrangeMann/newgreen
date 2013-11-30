@@ -1071,6 +1071,17 @@ var/global/floorIsLava = 0
 	if(istype(H))
 		H.regenerate_icons()
 
+/client/proc/job_lock_panel()
+	set category = "Admin"
+	set name = "Job Lock"
+	set desc = "You can lock any main job. Only work on late join"
+
+	if (!holder)
+		src << "Only administrators may use this command."
+		return
+
+	src.holder.job_lock()
+
 //
 //
 //ALL DONE

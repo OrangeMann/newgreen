@@ -170,6 +170,12 @@
 				usr << "\blue There is an administrative lock on entering the game!"
 				return
 
+			var/datum/job/job = job_master.GetJob(href_list["SelectedJob"])
+			if (job.locked == 1)
+				usr << "\blue This job was locked by administrator!"
+				LateChoices() //Update window
+				return
+
 			if(!is_alien_whitelisted(src, client.prefs.species) && config.usealienwhitelist)
 				src << alert("You are currently not whitelisted to play [client.prefs.species].")
 				return 0
@@ -257,10 +263,13 @@
 				// Only players with the job assigned and AFK for less than 10 minutes count as active
 				for(var/mob/M in player_list) if(M.mind && M.client && M.mind.assigned_role == job.title && M.client.inactivity <= 10 * 60 * 10)
 					active++
-				dat += "<a href='byond://?src=\ref[src];SelectedJob=[job.title]'>[job.title] ([job.current_positions]) (Active: [active])</a><br>"
+				if(!job.locked)
+					dat += "<a href='byond://?src=\ref[src];SelectedJob=[job.title];JobLock=[job.locked]'>[job.title] ([job.current_positions]) (Active: [active])</a><br>"
+				else
+					dat += "[job.title] ([job.current_positions]) (Active: [active]) (LOCKED)<br>"
 
 		dat += "</center>"
-		src << browse(dat, "window=latechoices;size=300x640;can_close=1")
+		src << browse(dat, "window=latechoices;size=400x640;can_close=1")
 
 
 	proc/create_character()

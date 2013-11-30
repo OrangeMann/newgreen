@@ -149,8 +149,8 @@
 
 /turf/simulated/mineral/random
 	name = "Mineral deposit"
-	var/mineralAmtList = list("Uranium" = 5, "Iron" = 5, "Diamond" = 5, "Gold" = 5, "Silver" = 5, "Plasma" = 5/*, "Adamantine" = 5*/)
-	var/mineralSpawnChanceList = list("Uranium" = 5, "Iron" = 50, "Diamond" = 1, "Gold" = 5, "Silver" = 5, "Plasma" = 25/*, "Adamantine" =5*/)//Currently, Adamantine won't spawn as it has no uses. -Durandan
+	var/mineralAmtList = list("Uranium" = 5, "Iron" = 5, "Diamond" = 5, "Gold" = 5, "Silver" = 5, "Plasma" = 5,/*, "Adamantine" = 5*/ "Aluminum" = 5, "Triberium" = 5,)
+	var/mineralSpawnChanceList = list("Uranium" = 5, "Iron" = 50, "Diamond" = 1, "Gold" = 5, "Silver" = 5, "Plasma" = 25,/*, "Adamantine" =5*/ "Aluminum" = 50, "Triberium" = 8,)//Currently, Adamantine won't spawn as it has no uses. -Durandan
 	var/mineralChance = 10  //means 10% chance of this plot changing to a mineral deposit
 
 /turf/simulated/mineral/random/New()
@@ -165,8 +165,12 @@
 					M = new/turf/simulated/mineral/uranium(src)
 				if("Iron")
 					M = new/turf/simulated/mineral/iron(src)
+				if("Aluminum")
+					M = new/turf/simulated/mineral/aluminum(src)
 				if("Diamond")
 					M = new/turf/simulated/mineral/diamond(src)
+				if("Triberium")
+					M = new/turf/simulated/mineral/triberium(src)
 				if("Gold")
 					M = new/turf/simulated/mineral/gold(src)
 				if("Silver")
@@ -193,7 +197,7 @@
 
 /turf/simulated/mineral/random/high_chance
 	mineralChance = 25
-	mineralSpawnChanceList = list("Uranium" = 10, "Iron" = 30, "Diamond" = 2, "Gold" = 10, "Silver" = 10, "Plasma" = 25, "Archaeo" = 2)
+	mineralSpawnChanceList = list("Uranium" = 10, "Iron" = 30, "Diamond" = 2, "Gold" = 10, "Silver" = 10, "Plasma" = 25, "Archaeo" = 2, "Aluminum" = 30, "Triberium" = 6)
 
 /turf/simulated/mineral/random/Del()
 	return
@@ -215,6 +219,17 @@
 	mineralAmt = 5
 	spreadChance = 25
 	spread = 1
+
+
+/turf/simulated/mineral/aluminum
+	name = "Aluminum deposit"
+	icon_state = "rock_Aluminum"
+	mineralName = "Triberium"
+	mineralAmt = 5
+	spreadChance = 25
+	spread = 1
+
+
 
 
 /turf/simulated/mineral/diamond
@@ -260,6 +275,16 @@
 	mineralAmt = 3
 	spreadChance = 0
 	spread = 0
+
+
+/turf/simulated/mineral/triberium
+	name = "Triberium deposit"
+	icon_state = "rock_Triberium"
+	mineralName = "Triberium"
+	mineralAmt = 5
+	spreadChance = 10
+	spread = 1
+
 
 /*
 commented out in r5061, I left it because of the shroom thingies

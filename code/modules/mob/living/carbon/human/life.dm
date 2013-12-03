@@ -1015,6 +1015,63 @@
 
 		updatehealth()
 
+		handle_organs()
+			// take care of organ related updates, such as broken and missing limbs
+
+		var/leg_tally = 2
+		for(var/name in organs)
+			var/datum/organ/external/E = organs[name]
+			E.process()
+			if(E.status & ORGAN_ROBOT && prob(E.brute_dam + E.burn_dam))
+				if(E.name == "l_hand" || E.name == "l_arm")
+					if(hand && equipped())
+						drop_item()
+						emote("custom v drops what they were holding, their [E.display_name?"[E.display_name]":"[E]"] malfunctioning!")
+						var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
+						spark_system.set_up(5, 0, src)
+						spark_system.attach(src)
+						spark_system.start()
+						spawn(10)
+							del(spark_system)
+				else if(E.name == "r_hand" || E.name == "r_arm")
+					if(!hand && equipped())
+						drop_item()
+						emote("custom v drops what they were holding, their [E.display_name?"[E.display_name]":"[E]"] malfunctioning!")
+						var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
+						spark_system.set_up(5, 0, src)
+						spark_system.attach(src)
+						spark_system.start()
+						spawn(10)
+							del(spark_system)
+				else if(E.name == "l_leg" || E.name == "l_foot" \
+					|| E.name == "r_leg" || E.name == "r_foot" && !lying)
+					leg_tally--									// let it fail even if just foot&leg
+			if(E.status & ORGAN_BROKEN || E.status & ORGAN_DESTROYED)
+				if(E.name == "l_hand" || E.name == "l_arm")
+					if(hand && equipped())
+						if(E.status & ORGAN_SPLINTED && prob(10))
+							drop_item()
+							emote("scream")
+						else
+							drop_item()
+							emote("scream")
+				else if(E.name == "r_hand" || E.name == "r_arm")
+					if(!hand && equipped())
+						if(E.status & ORGAN_SPLINTED && prob(10))
+							drop_item()
+							emote("scream")
+						else
+							drop_item()
+							emote("scream")
+				else if(E.name == "l_leg" || E.name == "l_foot" \
+					|| E.name == "r_leg" || E.name == "r_foot" && !lying)
+					if(!(E.status & ORGAN_SPLINTED))
+						leg_tally--									// let it fail even if just foot&leg
+		// can't stand
+		if(leg_tally == 0 && !paralysis && !(lying || resting))
+			emote("scream")
+			emote("collapse")
+			paralysis = 10
 		return //TODO: DEFERRED
 
 	proc/handle_regular_status_updates()

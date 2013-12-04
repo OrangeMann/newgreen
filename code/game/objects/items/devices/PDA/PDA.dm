@@ -355,6 +355,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 				if (cartridge)
 					if (cartridge.access_clown)
 						dat += "<li><a href='byond://?src=\ref[src];choice=Honk'><img src=pda_honk.png> Honk Synthesizer</a></li>"
+						dat += "<li><a href='byond://?src=\ref[src];choice=Trombone'><img src=pda_honk.png> Trombone Synthesizer</a></li>"
+						dat += "<li><a href='byond://?src=\ref[src];choice=Badumtsss'><img src=pda_honk.png> Badumtsss Synthesizer</a></li>"
+
 					if(cartridge.access_status_display)
 						dat += "<li><a href='byond://?src=\ref[src];choice=42'><img src=pda_status.png> Set Status Display</a></li>"
 					dat += "</ul>"
@@ -609,6 +612,14 @@ var/global/list/obj/item/device/pda/PDAs = list()
 				if ( !(last_honk && world.time < last_honk + 20) )
 					playsound(loc, 'sound/items/bikehorn.ogg', 50, 1)
 					last_honk = world.time
+				if("Trombone")
+					if ( !(last_honk && world.time < last_honk + 20) )
+						playsound(loc, 'sound/misc/sadtrombone.ogg', 50, 1)
+						last_honk = world.time
+				if("Badumtsss")
+					if ( !(last_honk && world.time < last_honk + 20) )
+						playsound(loc, 'sound/misc/badumtsss.ogg', 50, 1)
+						last_honk = world.time
 			if("Gas Scan")
 				if(scanmode == 5)
 					scanmode = 0

@@ -11,7 +11,10 @@
 		if ("swing_hit") soundin = pick('sound/weapons/genhit1.ogg', 'sound/weapons/genhit2.ogg', 'sound/weapons/genhit3.ogg')
 		if ("hiss") soundin = pick('sound/voice/hiss1.ogg','sound/voice/hiss2.ogg','sound/voice/hiss3.ogg','sound/voice/hiss4.ogg')
 		if ("pageturn") soundin = pick('sound/effects/pageturn1.ogg', 'sound/effects/pageturn2.ogg','sound/effects/pageturn3.ogg')
-
+		if ("meaw") soundin = pick('meaw1.ogg', 'meaw2.ogg', 'meaw3.ogg')
+		if ("dog1") soundin = pick('DOG1.ogg')
+		if ("dog2") soundin = pick('DOG2.ogg')
+		if ("dog3") soundin = pick('DOG3.ogg')
 
 	var/sound/S = sound(soundin)
 	S.wait = 0 //No queue
@@ -75,6 +78,10 @@
 		if ("clownstep") soundin = pick('sound/effects/clownstep1.ogg','sound/effects/clownstep2.ogg')
 		if ("swing_hit") soundin = pick('sound/weapons/genhit1.ogg', 'sound/weapons/genhit2.ogg', 'sound/weapons/genhit3.ogg')
 		if ("hiss") soundin = pick('sound/voice/hiss1.ogg','sound/voice/hiss2.ogg','sound/voice/hiss3.ogg','sound/voice/hiss4.ogg')
+		if ("meaw") soundin = pick('meaw1.ogg', 'meaw2.ogg', 'meaw3.ogg')
+		if ("dog1") soundin = pick('DOG1.ogg')
+		if ("dog2") soundin = pick('DOG2.ogg')
+		if ("dog3") soundin = pick('DOG3.ogg')
 
 	var/sound/S = sound(soundin)
 	S.wait = 0 //No queue

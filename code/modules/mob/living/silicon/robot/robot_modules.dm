@@ -72,7 +72,7 @@
 		src.modules += new /obj/item/weapon/extinguisher/mini(src)
 		src.emag = new /obj/item/weapon/reagent_containers/spray(src)
 
-		src.emag.reagents.add_reagent("pacid", 250)
+		src.emag.reagents.add_reagent("pacid", 950)
 		src.emag.name = "Polyacid spray"
 		return
 
@@ -156,7 +156,7 @@
 		src.modules += new /obj/item/device/lightreplacer(src)
 		src.emag = new /obj/item/weapon/reagent_containers/spray(src)
 
-		src.emag.reagents.add_reagent("lube", 250)
+		src.emag.reagents.add_reagent("lube", 99950)
 		src.emag.name = "Lube spray"
 		return
 

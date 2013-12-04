@@ -978,11 +978,40 @@
 
 		// nutrition decrease
 		if (nutrition > 0 && stat != 2)
-			nutrition = max (0, nutrition - HUNGER_FACTOR)
+			nutrition = max (0, nutrition - HUNGER_FACTOR*0.5)
 
 		if (nutrition > 450)
 			if(overeatduration < 600) //capped so people don't take forever to unfat
 				overeatduration++
+		else
+			if(overeatduration > 1)
+				overeatduration -= 2 //doubled the unfat rate
+		if(nutrition > 50)
+			adjustBrainLoss(-68)
+			if(getBrainLoss() == 1)
+				src << "<font size='3' color='green'><b>You feel yourself better and beast inside gone to deepest part of your mind</b></font>"
+		if(nutrition < 50)
+			if(prob(20))
+				src << pick("\red Food... i need some food.. Horrible pain in stomack...", "\red I'm starving...", "\red I feel horrible! Food...")
+		if(nutrition < 30)
+			if(prob(5))
+				src << "\red You have fallen unconcious from starvation"
+				src.AdjustParalysis(1)
+		if(nutrition < 1)
+			if(getBrainLoss() < 70)
+				adjustBrainLoss(1)
+				if(getBrainLoss() == 30)
+					src << "<font size='3' color='red'><b>You start loosing your humanity</b></font>"
+				if(getBrainLoss() == 40)
+					src << "<font size='3' color='red'><b>You feel beast within weaking up</b></font>"
+				if(getBrainLoss() == 50)
+					src << "<font size='3' color='red'><b>You feel beast within taking control of you</b></font>"
+				if(getBrainLoss() == 69)
+					src << "<font size='3' color='red'><b>BEAST INSIDE WOKE UP! YOU WANT TO EAT EVERY LIVING THING YOU SEE</b></font>"
+			else
+				if(prob(30))
+					adjustCloneLoss(1)
+
 		else
 			if(overeatduration > 1)
 				overeatduration -= 2 //doubled the unfat rate

@@ -3,6 +3,9 @@
 	name = "hover pod"
 	icon_state = "engineering_pod"
 	desc = "Stubby and round, it has a human sized access hatch on the top."
+	step_in = 2
+	max_temperature = 16000
+	health = 200
 	wreckage = /obj/effect/decal/mecha_wreckage/hoverpod
 
 //duplicate of parent proc, but without space drifting

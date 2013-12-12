@@ -2,7 +2,6 @@
 /mob/living/simple_animal/walle
 	name = "droid"
 	desc = "Waste Allocation Load Lifter Earth-Class."
-	icon = 'mob.dmi'
 	icon_state = "walle"
 	icon_living = "walle"
 	icon_dead = "walle_dead"

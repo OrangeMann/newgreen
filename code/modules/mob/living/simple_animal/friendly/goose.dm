@@ -2,7 +2,6 @@
 	name = "Goose"
 	real_name = "goose"
 	desc = "It's goose."
-	icon = 'mob.dmi'
 	icon_state = "goose"
 	icon_living = "goose"
 	icon_dead = "goose_dead"

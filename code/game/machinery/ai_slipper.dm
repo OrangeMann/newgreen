@@ -1,7 +1,7 @@
 /obj/machinery/ai_slipper
 	name = "AI Liquid Dispenser"
-	icon = 'icons/obj/device.dmi'
-	icon_state = "motion3"
+	icon = 'icons/obj/dispenser_floor.dmi'
+	icon_state = "motion1"
 	layer = 3
 	anchored = 1.0
 	var/uses = 20
@@ -90,7 +90,7 @@
 			return
 	if (href_list["toggleOn"])
 		src.disabled = !src.disabled
-		icon_state = src.disabled? "motion0":"motion3"
+		icon_state = src.disabled? "motion0":"motion1"
 	if (href_list["toggleUse"])
 		if(cooldown_on || disabled)
 			return

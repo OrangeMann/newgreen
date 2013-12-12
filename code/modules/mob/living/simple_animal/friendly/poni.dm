@@ -2,7 +2,6 @@
 	name = "Pinky Cake"
 	real_name = "pinky cake"
 	desc = "Friendship is magick!"
-	icon = 'mob.dmi'
 	icon_state = "poni"
 	icon_living = "poni"
 	icon_dead = "poni_dead"

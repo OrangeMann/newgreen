@@ -105,3 +105,35 @@
 	icon_state = "owl"
 	can_breath = 0
 	can_eat = 1
+
+/obj/item/clothing/mask/gas/security/hos
+	name = "Head of security's mask"
+	desc = "Spec Ops time."
+	icon_state = "hosmask"
+	siemens_coefficient = 0.9
+	can_breath = 1
+	can_eat = 0
+
+/obj/item/clothing/mask/gas/security/warden
+	name = "Warden's mask"
+	desc = "Spec Ops time."
+	icon_state = "wardenmask"
+	siemens_coefficient = 0.9
+	can_breath = 1
+	can_eat = 0
+
+/obj/item/clothing/mask/gas/security/officer
+	name = "Security officer's mask"
+	desc = "Spec Ops time."
+	icon_state = "officermask"
+	siemens_coefficient = 0.9
+	can_breath = 1
+	can_eat = 0
+
+/obj/item/clothing/mask/gas/cheekibreeki
+	name = "Cheeki-Breeki"
+	desc = "ALOHA!"
+	icon_state = "cheekibreeki"
+	siemens_coefficient = 0.5
+	can_breath = 0
+	can_eat = 1

@@ -1,5 +1,6 @@
 //handles setting lastKnownIP and computer_id for use by the ban systems as well as checking for multikeying
 /mob/proc/update_Login_details()
+	lastkey = key
 	//Multikey checks and logging
 	lastKnownIP	= client.address
 	computer_id	= client.computer_id

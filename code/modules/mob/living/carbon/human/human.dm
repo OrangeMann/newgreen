@@ -35,11 +35,6 @@
 	species = new /datum/species/diona(src)
 	..()
 
-/mob/living/carbon/human/android/New()
-	species = new /datum/species/android(src)
-	..()
-
-
 /mob/living/carbon/human/New()
 
 	if(!species)
@@ -481,7 +476,6 @@
 /mob/living/carbon/human/proc/get_face_name()
 	var/datum/organ/external/head/head = get_organ("head")
 	if( !head || head.disfigured || (head.status & ORGAN_DESTROYED) || !real_name || (HUSK in mutations) )	//disfigured. use id-name if possible
-		emote("scream")
 		return "Unknown"
 	return real_name
 
@@ -970,7 +964,7 @@
 	if (isnull(target))
 		return
 
-	var/say = input ("What do you wish to say")
+	var/say = sanitize(input ("What do you wish to say"))
 	if(mRemotetalk in target.mutations)
 		target.show_message("\blue You hear [src.real_name]'s voice: [say]")
 	else

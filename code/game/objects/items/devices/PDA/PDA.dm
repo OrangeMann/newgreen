@@ -355,9 +355,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 				if (cartridge)
 					if (cartridge.access_clown)
 						dat += "<li><a href='byond://?src=\ref[src];choice=Honk'><img src=pda_honk.png> Honk Synthesizer</a></li>"
-						dat += "<li><a href='byond://?src=\ref[src];choice=Trombone'><img src=pda_honk.png> Trombone Synthesizer</a></li>"
-						dat += "<li><a href='byond://?src=\ref[src];choice=Badumtsss'><img src=pda_honk.png> Badumtsss Synthesizer</a></li>"
-
 					if(cartridge.access_status_display)
 						dat += "<li><a href='byond://?src=\ref[src];choice=42'><img src=pda_status.png> Set Status Display</a></li>"
 					dat += "</ul>"
@@ -612,14 +609,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 				if ( !(last_honk && world.time < last_honk + 20) )
 					playsound(loc, 'sound/items/bikehorn.ogg', 50, 1)
 					last_honk = world.time
-				if("Trombone")
-					if ( !(last_honk && world.time < last_honk + 20) )
-						playsound(loc, 'sound/misc/sadtrombone.ogg', 50, 1)
-						last_honk = world.time
-				if("Badumtsss")
-					if ( !(last_honk && world.time < last_honk + 20) )
-						playsound(loc, 'sound/misc/badumtsss.ogg', 50, 1)
-						last_honk = world.time
 			if("Gas Scan")
 				if(scanmode == 5)
 					scanmode = 0
@@ -629,7 +618,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 //MESSENGER/NOTE FUNCTIONS===================================
 
 			if ("Edit")
-				var/n = sanitize_uni(input(U, "Please enter message", name, notehtml) as message)
+				var/n = input(U, "Please enter message", name, notehtml) as message
 				if (in_range(src, U) && loc == U)
 					n = copytext(adminscrub(n), 1, MAX_MESSAGE_LEN)
 					if (mode == 1)
@@ -789,7 +778,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 /obj/item/device/pda/proc/create_message(var/mob/living/U = usr, var/obj/item/device/pda/P)
 
 	var/t = input(U, "Please enter message", name, null) as text
-	t = copytext(sanitize_uni(t), 1, MAX_MESSAGE_LEN)
+	t = copytext(t, 1, MAX_MESSAGE_LEN)
 	if (!t || !istype(P))
 		return
 	if (!in_range(src, U) && loc != U)
@@ -832,14 +821,14 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		if(useTC != 2) // Does our recepient have a broadcaster on their level?
 			U << "ERROR: Cannot reach recepient."
 			return
-		useMS.send_pda_message("[P.owner]","[owner]","[t]")
+		useMS.send_pda_message("[P.owner]","[owner]","[sanitize_uni(html_decode(t))]")
 
 		tnote += "<i><b>&rarr; To [P.owner]:</b></i><br>[sanitize_uni(html_decode(t))]<br>"
 		P.tnote += "<i><b>&larr; From <a href='byond://?src=\ref[P];choice=Message;target=\ref[src]'>[owner]</a> ([ownjob]):</b></i><br>[sanitize_uni(html_decode(t))]<br>"
 
 		// Give every ghost the ability to see all messages
 		for (var/mob/dead/observer/G in world)
-			G.show_message("<i>PDA message from <b>[src.owner]</b> to <b>[P:owner]</b>: [t]</i>")
+			G.show_message("<i>PDA message from <b>[src.owner]</b> to <b>[P:owner]</b>: [sanitize_uni(html_decode(t))]</i>")
 
 		if (prob(15)) //Give the AI a chance of intercepting the message
 			var/who = src.owner
@@ -848,7 +837,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			for(var/mob/living/silicon/ai/ai in mob_list)
 				// Allows other AIs to intercept the message but the AI won't intercept their own message.
 				if(ai.aiPDA != P && ai.aiPDA != src)
-					ai.show_message("<i>Intercepted message from <b>[who]</b>: [t]</i>")
+					ai.show_message("<i>Intercepted message from <b>[who]</b>: [sanitize_uni(html_decode(t))]</i>")
 
 		if (!P.silent)
 			playsound(P.loc, 'sound/machines/twobeep.ogg', 50, 1)
@@ -863,9 +852,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			L = get(P, /mob/living/silicon)
 
 		if(L)
-			L << "\icon[P] <b>Message from [src.owner] ([ownjob]), </b>\"[t]\" (<a href='byond://?src=\ref[P];choice=Message;skiprefresh=1;target=\ref[src]'>Reply</a>)"
+			L << "\icon[P] <b>Message from [src.owner] ([ownjob]), </b>\"[sanitize(html_decode(t))]\" (<a href='byond://?src=\ref[P];choice=Message;skiprefresh=1;target=\ref[src]'>Reply</a>)"
 
-		log_pda("[usr] (PDA: [src.name]) sent \"[t]\" to [P.name]")
+		log_pda("[usr] (PDA: [src.name]) sent \"[sanitize_uni(html_decode(t))]\" to [P.name]")
 		P.overlays.Cut()
 		P.overlays += image('icons/obj/pda.dmi', "pda-r")
 	else

@@ -231,6 +231,7 @@
 					if (ore_glass > 0)
 						ore_glass--;
 						new /obj/item/stack/sheet/glass(output.loc)
+						CONSOLE.updateDialog()
 					else
 						on = 0
 					continue
@@ -239,6 +240,7 @@
 						ore_glass--;
 						ore_iron--;
 						new /obj/item/stack/sheet/rglass(output.loc)
+						CONSOLE.updateDialog()
 					else
 						on = 0
 					continue
@@ -246,6 +248,7 @@
 					if (ore_gold > 0)
 						ore_gold--;
 						new /obj/item/stack/sheet/mineral/gold(output.loc)
+						CONSOLE.updateDialog()
 					else
 						on = 0
 					continue
@@ -253,6 +256,7 @@
 					if (ore_silver > 0)
 						ore_silver--;
 						new /obj/item/stack/sheet/mineral/silver(output.loc)
+						CONSOLE.updateDialog()
 					else
 						on = 0
 					continue
@@ -260,6 +264,7 @@
 					if (ore_diamond > 0)
 						ore_diamond--;
 						new /obj/item/stack/sheet/mineral/diamond(output.loc)
+						CONSOLE.updateDialog()
 					else
 						on = 0
 					continue
@@ -267,6 +272,7 @@
 					if (ore_plasma > 0)
 						ore_plasma--;
 						new /obj/item/stack/sheet/mineral/plasma(output.loc)
+						CONSOLE.updateDialog()
 					else
 						on = 0
 					continue
@@ -274,6 +280,7 @@
 					if (ore_uranium > 0)
 						ore_uranium--;
 						new /obj/item/stack/sheet/mineral/uranium(output.loc)
+						CONSOLE.updateDialog()
 					else
 						on = 0
 					continue
@@ -281,6 +288,7 @@
 					if (ore_iron > 0)
 						ore_iron--;
 						new /obj/item/stack/sheet/metal(output.loc)
+						CONSOLE.updateDialog()
 					else
 						on = 0
 					continue
@@ -289,6 +297,7 @@
 						ore_iron--;
 						ore_plasma--;
 						new /obj/item/stack/sheet/plasteel(output.loc)
+						CONSOLE.updateDialog()
 					else
 						on = 0
 					continue
@@ -296,6 +305,7 @@
 					if (ore_clown > 0)
 						ore_clown--;
 						new /obj/item/stack/sheet/mineral/clown(output.loc)
+						CONSOLE.updateDialog()
 					else
 						on = 0
 					continue

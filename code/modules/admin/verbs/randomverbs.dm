@@ -462,8 +462,8 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	if(!holder)
 		src << "Only administrators may use this command."
 		return
-	var/input = input(usr, "Please enter anything you want. Anything. Serious.", "What?", "") as message|null
-	var/customname = input(usr, "Pick a title for the report.", "Title") as text|null
+	var/input = sanitize(input(usr, "Please enter anything you want. Anything. Serious.", "What?", "") as message|null)
+	var/customname = sanitize(input(usr, "Pick a title for the report.", "Title") as text|null)
 	if(!input)
 		return
 	if(!customname)
@@ -475,7 +475,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 			P.info = input
 			P.update_icon()
 			C.messagetitle.Add("[command_name()] Update")
-			C.messagetext.Add(sanitize_uni(P.info))
+			C.messagetext.Add(P.info)
 
 	switch(alert("Should this be announced to the general population?",,"Yes","No"))
 		if("Yes")

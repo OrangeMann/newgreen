@@ -44,6 +44,11 @@
 				if(!(copytext(message, 1, 2) == "*" || (mind && mind.changeling && department_radio_keys[copytext(message, 1, 3)] != "changeling")))
 					message = pick("NEEIIGGGHHHH!", "NEEEIIIIGHH!", "NEIIIGGHH!", "HAAWWWWW!", "HAAAWWW!")
 
+		else if(istype(wear_mask, /obj/item/clothing/mask/gas/cheekibreeki))
+			if(copytext(message, 1, 2) != "*")
+				if(prob(15))
+					message = pick("Чики Брики","И в Дамки на!", "Иди своей дорогой, космонавт.", "Епта", "АЛОХА!", "Здарова!", "Ты shooter-то убери.")
+
 	if ((HULK in mutations) && health >= 25 && length(message))
 		if(copytext(message, 1, 2) != "*")
 			message = "[uppertext(message)]!!" //because I don't know how to code properly in getting vars from other files -Bro

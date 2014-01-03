@@ -144,3 +144,42 @@
    around simulating a removable magazine by adding the casings into the loaded list and spawning an empty magazine
    when the gun is out of rounds. Which means you can't eject magazines with rounds in them. The below is a very
    rough and poor attempt at making that happen. -Ausops */
+
+
+/obj/item/weapon/gun/projectile/automatic/m9n
+	name = "M9N"
+	desc = "You can grab like a metroid, run like a nuker, but you never be better than NT Captain."
+	icon_state = "m9n"
+	item_state = "c20r"
+	w_class = 3.0
+	max_shells = 40
+	caliber = "12mm"
+	origin_tech = "combat=5;materials=2"
+	ammo_type = "/obj/item/ammo_casing/a12mm"
+	fire_sound = 'sound/weapons/Gunshot_smg.ogg'
+
+
+	New()
+		..()
+		empty_mag = new /obj/item/ammo_magazine/a12mm/empty(src)
+		update_icon()
+		return
+
+
+	afterattack(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, flag)
+		..()
+		if(!loaded.len && empty_mag)
+			empty_mag.loc = get_turf(src.loc)
+			empty_mag = null
+			playsound(user, 'sound/weapons/smg_empty_alarm.ogg', 40, 1)
+			update_icon()
+		return
+
+
+	update_icon()
+		..()
+		if(empty_mag)
+			icon_state = "m9n-[round(loaded.len,6)]"
+		else
+			icon_state = "m9n"
+		return

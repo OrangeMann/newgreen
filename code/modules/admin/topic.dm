@@ -640,7 +640,7 @@
 					var/mins = input(usr,"How long (in minutes)?","Ban time",1440) as num|null
 					if(!mins)
 						return
-					var/reason = input(usr,"Reason?","Please State Reason","") as text|null
+					var/reason = sanitize(input(usr,"Reason?","Please State Reason","") as text|null)
 					if(!reason)
 						return
 
@@ -664,7 +664,7 @@
 					href_list["jobban2"] = 1 // lets it fall through and refresh
 					return 1
 				if("No")
-					var/reason = input(usr,"Reason?","Please State Reason","") as text|null
+					var/reason = sanitize(input(usr,"Reason?","Please State Reason","") as text|null)
 					if(reason)
 						var/msg
 						for(var/job in notbannedlist)
@@ -767,7 +767,7 @@
 				if(!mins)
 					return
 				if(mins >= 525600) mins = 525599
-				var/reason = input(usr,"Reason?","reason","Griefer") as text|null
+				var/reason = sanitize(input(usr,"Reason?","reason","Griefer") as text|null)
 				if(!reason)
 					return
 				AddBan(M.ckey, M.computer_id, reason, usr.ckey, 1, mins)
@@ -787,7 +787,7 @@
 				del(M.client)
 				//del(M)	// See no reason why to delete mob. Important stuff can be lost. And ban can be lifted before round ends.
 			if("No")
-				var/reason = input(usr,"Reason?","reason","Griefer") as text|null
+				var/reason = sanitize(input(usr,"Reason?","reason","Griefer") as text|null)
 				if(!reason)
 					return
 				switch(alert(usr,"IP ban?",,"Yes","No","Cancel"))

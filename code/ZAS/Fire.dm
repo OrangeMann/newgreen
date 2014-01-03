@@ -16,10 +16,10 @@ atom/proc/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed
 	return null
 
 
-turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
+turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0, atom/source=null)
 
 
-turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh)
+turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh, atom/source)
 	if(fire_protection > world.time-300)
 		return 0
 	if(locate(/obj/fire) in src)
@@ -37,6 +37,12 @@ turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh)
 		if(! (locate(/obj/fire) in src))
 
 			new /obj/fire(src,1000)
+
+			if (source)
+				if (source.fingerprintslast && istype(source,/obj/item))
+					message_admins("Tile ignited at ([x],[y],[z]) by [source] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>). Last touched by: <B>[source.fingerprintslast]</B>")
+				else
+					message_admins("Tile ignited at ([x],[y],[z]) by [source] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>)")
 
 		//active_hotspot.just_spawned = (current_cycle < air_master.current_cycle)
 		//remove just_spawned protection if no longer processing this cell

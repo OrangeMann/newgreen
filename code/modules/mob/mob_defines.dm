@@ -118,6 +118,7 @@
 	var/m_intent = "run"//Living
 	var/lastDblClick = 0
 	var/lastKnownIP = null
+	var/lastkey = null
 	var/obj/structure/stool/bed/buckled = null//Living
 	var/obj/item/l_hand = null//Living
 	var/obj/item/r_hand = null//Living
@@ -216,6 +217,3 @@
 	var/can_stand = 1 //Whether this mob have ability to stand
 
 	var/immune_to_ssd = 0
-
-	var/list/augmentations = list() //Carbon -- Doohl
-	//see: setup.dm for list of augmentations

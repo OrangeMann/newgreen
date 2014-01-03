@@ -168,7 +168,7 @@ Implant Specifics:<BR>"}
 		var/turf/t = get_turf(imp_in)
 
 		if(t)
-			t.hotspot_expose(3500,125)
+			t.hotspot_expose(3500,125, 0, src)
 
 	implanted(mob/source as mob)
 		phrase = input("Choose activation phrase:") as text

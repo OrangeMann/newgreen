@@ -78,3 +78,12 @@
 	if(ismob(loc))
 		loc:update_icons()
 	..()
+
+
+/obj/item/weapon/shield/riot/metal
+	name = "Metal shield"
+	desc = "A shield adept at blocking blunt objects from connecting with the torso of the shield wielder of metal."
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "metal"
+
+//Изменения уровня /b/lack - Macleod962

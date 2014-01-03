@@ -38,15 +38,23 @@ var/global/floorIsLava = 0
 		return
 
 	var/body = "<html><head><title>Options for [M.key]</title></head>"
-	body += "<body>Options panel for <b>[M]</b>"
+	body += "<body>Options panel for <b>[M]([M.real_name])</b>"
 	if(M.client)
 		body += " played by <b>[M.client]</b> "
 		body += "\[<A href='?src=\ref[src];editrights=show'>[M.client.holder ? M.client.holder.rank : "Player"]</A>\]"
+	else
+		body +="(last played by <b>[M.lastkey]</b>) "
 
 	if(istype(M, /mob/new_player))
 		body += " <B>Hasn't Entered Game</B> "
 	else
 		body += " \[<A href='?src=\ref[src];revive=\ref[M]'>Heal</A>\] "
+
+	if(M.mind)
+		body += "<br>"
+		body += "Role: <b>[M.mind.assigned_role? "[M.mind.assigned_role]":"None"]</b>"
+		body += "<br>"
+		body += "Special Role: <b>[M.mind.special_role? "[M.mind.special_role]":"None"]</b>"
 
 	body += {"
 		<br><br>\[
@@ -161,7 +169,7 @@ var/global/floorIsLava = 0
 		</body></html>
 	"}
 
-	usr << browse(body, "window=adminplayeropts;size=550x515")
+	usr << browse(body, "window=adminplayeropts;size=550x620")
 	feedback_add_details("admin_verb","SPP") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 
@@ -687,10 +695,11 @@ var/global/floorIsLava = 0
 	set desc="Announce your desires to the world"
 	if(!check_rights(0))	return
 
-	var/message = sanitize_uni(input("Global message to send:", "Admin Announce", null, null)  as message)
+	var/message = sanitize(input("Global message to send:", "Admin Announce", null, null)  as message)
 	if(message)
 		if(!check_rights(R_SERVER,0))
-			message = adminscrub(message,500)
+			//message = adminscrub(message,500)
+			message = trim(copytext(strip_html_simple(message), 1, MAX_MESSAGE_LEN))
 		world << "\blue <b>[usr.client.holder.fakekey ? "Administrator" : usr.key] Announces:</b>\n \t [message]"
 		log_admin("Announce: [key_name(usr)] : [message]")
 	feedback_add_details("admin_verb","A") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!

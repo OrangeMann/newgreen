@@ -117,7 +117,7 @@
 			explosion(ground_zero, -1, 0, 1, 2)
 		else
 			ground_zero.assume_air(air_contents)
-			ground_zero.hotspot_expose(1000, 125)
+			ground_zero.hotspot_expose(1000, 125, 0, src)
 
 	else if(air_contents.temperature > (T0C + 250))
 		strength = (fuel_moles/20)
@@ -128,7 +128,7 @@
 			explosion(ground_zero, -1, 0, 1, 2)
 		else
 			ground_zero.assume_air(air_contents)
-			ground_zero.hotspot_expose(1000, 125)
+			ground_zero.hotspot_expose(1000, 125, 0, src)
 
 	else if(air_contents.temperature > (T0C + 100))
 		strength = (fuel_moles/25)
@@ -137,11 +137,11 @@
 			explosion(ground_zero, -1, 0, round(strength,1), round(strength*3,1))
 		else
 			ground_zero.assume_air(air_contents)
-			ground_zero.hotspot_expose(1000, 125)
+			ground_zero.hotspot_expose(1000, 125, 0, src)
 
 	else
 		ground_zero.assume_air(air_contents)
-		ground_zero.hotspot_expose(1000, 125)
+		ground_zero.hotspot_expose(1000, 125, 0, src)
 
 	if(master)
 		del(master)

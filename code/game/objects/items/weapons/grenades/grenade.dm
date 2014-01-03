@@ -89,7 +89,7 @@
 //	playsound(loc, 'sound/items/Welder2.ogg', 25, 1)
 	var/turf/T = get_turf(src)
 	if(T)
-		T.hotspot_expose(700,125)
+		T.hotspot_expose(700,125, 0, src)
 
 
 /obj/item/weapon/grenade/attackby(obj/item/weapon/W as obj, mob/user as mob)

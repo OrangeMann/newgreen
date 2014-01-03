@@ -488,6 +488,10 @@
 	var/drained_hp = M.electrocute_act(shock_damage, source, siemens_coeff) //zzzzzzap!
 	var/drained_energy = drained_hp*20
 
+	M.attack_log += text("\[[time_stamp()]\] <font color='orange'> [M]([M.key]) was shocked at ([source.x],[source.y],[source.z]) by [source]</font>")
+	message_admins("[M]([M.key]) was shocked at ([source.x],[source.y],[source.z]) by [source] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[source.x];Y=[source.y];Z=[source.z]'>JMP</a>)")
+	log_attack("[M]([M.key]) was shocked at ([source.x],[source.y],[source.z]) by [source]")
+
 	if (source_area)
 		source_area.use_power(drained_energy/CELLRATE)
 	else if (istype(power_source,/datum/powernet))

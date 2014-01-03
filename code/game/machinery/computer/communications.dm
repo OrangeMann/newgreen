@@ -193,12 +193,12 @@
 				if(centcomm_message_cooldown)
 					usr << "Arrays recycling.  Please stand by."
 					return
-				var/input = sanitize_uni(stripped_input(usr, "Please choose a message to transmit to Centcomm via quantum entanglement.  Please be aware that this process is very expensive, and abuse will lead to... termination.  Transmission does not guarantee a response.", "To abort, send an empty message.", ""))
+				var/input = stripped_input(usr, "Please choose a message to transmit to Centcomm via quantum entanglement.  Please be aware that this process is very expensive, and abuse will lead to... termination.  Transmission does not guarantee a response.", "To abort, send an empty message.", "")
 				if(!input || !(usr in view(1,src)))
 					return
 				Centcomm_announce(input, usr)
 				usr << "Message transmitted."
-				log_say("[key_name(usr)] has made a Centcomm announcement: [input]")
+				log_say("[key_name(usr)] has made a Centcomm announcement: [sanitize(input)]")
 				centcomm_message_cooldown = 1
 				spawn(6000)//10 minute cooldown
 					centcomm_message_cooldown = 0
@@ -210,12 +210,12 @@
 				if(centcomm_message_cooldown)
 					usr << "Arrays recycling.  Please stand by."
 					return
-				var/input = sanitize_uni(stripped_input(usr, "Please choose a message to transmit to \[ABNORMAL ROUTING CORDINATES\] via quantum entanglement.  Please be aware that this process is very expensive, and abuse will lead to... termination. Transmission does not guarantee a response.", "To abort, send an empty message.", ""))
+				var/input = stripped_input(usr, "Please choose a message to transmit to \[ABNORMAL ROUTING CORDINATES\] via quantum entanglement.  Please be aware that this process is very expensive, and abuse will lead to... termination. Transmission does not guarantee a response.", "To abort, send an empty message.", "")
 				if(!input || !(usr in view(1,src)))
 					return
 				Syndicate_announce(input, usr)
 				usr << "Message transmitted."
-				log_say("[key_name(usr)] has made a Syndicate announcement: [input]")
+				log_say("[key_name(usr)] has made a Syndicate announcement: [sanitize(input)]")
 				centcomm_message_cooldown = 1
 				spawn(6000)//10 minute cooldown
 					centcomm_message_cooldown = 0

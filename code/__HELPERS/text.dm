@@ -66,7 +66,7 @@
 	return sanitize_simple(t,repl_chars)
 
 /proc/sanitize_uni(var/t,var/list/repl_chars = null)
-	return sanitize_simple(t,repl_chars)
+	return sanitize_simple_uni(t,repl_chars)
 
 //Runs sanitize and strip_html_simple
 //I believe strip_html_simple() is required to run first to prevent '<' from displaying as '&lt;' after sanitize() calls byond's html_encode()

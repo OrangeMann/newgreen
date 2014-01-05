@@ -1264,7 +1264,6 @@
 #include "code\modules\scripting\Scanner\Tokens.dm"
 #include "code\modules\security levels\keycard authentication.dm"
 #include "code\modules\security levels\security levels.dm"
-#include "code\modules\surgery\android_surgery.dm"
 #include "code\modules\surgery\appendix.dm"
 #include "code\modules\surgery\bones.dm"
 #include "code\modules\surgery\braincore.dm"

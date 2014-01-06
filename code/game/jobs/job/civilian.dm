@@ -308,6 +308,7 @@
 		else
 			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H.back), slot_in_backpack)
 			H.equip_to_slot_or_del(new /obj/item/weapon/storage/wallet/random(H.back), slot_in_backpack)
+		H.equip_to_slot_or_del(new /obj/item/key(H), slot_l_store)
 		return 1
 
 

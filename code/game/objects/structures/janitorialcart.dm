@@ -97,6 +97,10 @@
 	if(signs)
 		dat += "<a href='?src=\ref[src];sign=1'>[signs] sign\s</a><br>"
 
+	user << browse(dat, "window=janicart;size=400x500")
+	onclose(user, "janicart")
+	return
+
 
 /obj/structure/janitorialcart/Topic(href, href_list)
 	if(!in_range(src, usr))

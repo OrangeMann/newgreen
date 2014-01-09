@@ -500,8 +500,8 @@ proc/get_damage_icon_part(damage_state, body_part)
 			standing.icon	= 'icons/mob/uniform.dmi'
 
 		if(gender == FEMALE)//	FUCK IT MOTHERFUCKER --Jarlo
-			lying.icon		= 'icons/mob/uniform.dmi'
-			standing.icon	= 'icons/mob/uniform.dmi'
+			lying.icon		= 'icons/mob/uniform_f.dmi'
+			standing.icon	= 'icons/mob/uniform_f.dmi'
 
 		if(w_uniform.blood_DNA)
 			lying.overlays		+= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "uniformblood2")

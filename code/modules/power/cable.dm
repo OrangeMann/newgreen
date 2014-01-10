@@ -181,14 +181,14 @@
 	..()
 	src.amount = length
 	if (param_color)
-		color = param_color
+		item_color = param_color
 	pixel_x = rand(-2,2)
 	pixel_y = rand(-2,2)
 	updateicon()
 
 /obj/item/weapon/cable_coil/proc/updateicon()
-	if (!color)
-		color = pick("red", "yellow", "blue", "green")
+	if (!item_color)
+		item_color = pick("red", "yellow", "blue", "green")
 	if(amount == 1)
 		icon_state = "coil_[item_color]1"
 		name = "cable piece"

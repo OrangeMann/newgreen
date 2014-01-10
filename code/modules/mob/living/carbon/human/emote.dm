@@ -535,6 +535,7 @@
 				if (!muzzled)
 					message = "<B>[src]</B> screams!"
 					m_type = 2
+					call_sound_emote("scream")
 				else
 					message = "<B>[src]</B> makes a very loud noise."
 					m_type = 2
@@ -586,8 +587,7 @@
 /mob/living/carbon/human/proc/call_sound_emote(var/E)
 	switch(E)
 		if("scream")
-			for(var/mob/M in viewers(usr, null))
-				if (src.gender == "male")
-					M << sound(pick('sound/voice/Screams_Male_1.ogg', 'sound/voice/Screams_Male_2.ogg', 'sound/voice/Screams_Male_3.ogg'))
-				else
-					M << sound(pick('sound/voice/Screams_Woman_1.ogg', 'sound/voice/Screams_Woman_2.ogg', 'sound/voice/Screams_Woman_3.ogg'))
+			if (src.gender == "male")
+				playsound(src.loc, pick('sound/voice/Screams_Male_1.ogg', 'sound/voice/Screams_Male_2.ogg', 'sound/voice/Screams_Male_3.ogg'), 100, 1)
+			else
+				playsound(src.loc, pick('sound/voice/Screams_Woman_1.ogg', 'sound/voice/Screams_Woman_2.ogg', 'sound/voice/Screams_Woman_3.ogg'), 100, 1)

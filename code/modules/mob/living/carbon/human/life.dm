@@ -1048,8 +1048,9 @@
 			// take care of organ related updates, such as broken and missing limbs
 
 		var/leg_tally = 2
-		for(var/name in organs)
-			var/datum/organ/external/E = organs[name]
+		for(var/datum/organ/external/E in organs)
+			if(!E)
+				continue
 			E.process()
 			if(E.status & ORGAN_ROBOT && prob(E.brute_dam + E.burn_dam))
 				if(E.name == "l_hand" || E.name == "l_arm")

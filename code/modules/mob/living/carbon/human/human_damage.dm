@@ -224,7 +224,8 @@
 	updatehealth()
 
 	//Embedded projectile code.
-	if(!organ) return
+	if(!organ || !used_weapon) return
+	/*
 	if(istype(used_weapon,/obj/item/weapon))
 		var/obj/item/weapon/W = used_weapon  //Sharp objects will always embed if they do enough damage.
 		if( (damage > (10*W.w_class)) && ( (sharp && !ismob(W.loc)) || prob(damage/W.w_class) ) )
@@ -238,7 +239,6 @@
 
 	else
 		if(istype(used_weapon,/obj/item/projectile) && src.zone_sel.selecting == "chest" && usr:wear_suit.armor["bullet"] < 50) //We don't want to use the actual projectile item, so we spawn some shrapnel.
-		else
 			if(damagetype == BRUTE && prob(75))
 				var/obj/item/projectile/P = used_weapon
 				var/obj/item/weapon/shard/shrapnel/S = new()
@@ -248,4 +248,17 @@
 				organ.implants += S
 				visible_message("<span class='danger'>The projectile sticks in the wound!</span>")
 				S.add_blood(src)
-		return 1
+	*/
+
+	if(istype(used_weapon,/obj/item/projectile) && src.zone_sel.selecting == "chest" && usr:wear_suit.armor["bullet"] < 50) //We don't want to use the actual projectile item, so we spawn some shrapnel.
+		if(damagetype == BRUTE && prob(75))
+			var/obj/item/projectile/P = used_weapon
+			var/obj/item/weapon/shard/shrapnel/S = new()
+			S.name = "[P.name] shrapnel"
+			S.desc = "[S.desc] It looks like it was fired from [P.shot_from]."
+			S.loc = src
+			organ.implants += S
+			visible_message("<span class='danger'>The projectile sticks in the wound!</span>")
+			S.add_blood(src)
+
+	return 1

@@ -56,6 +56,10 @@ var/global/floorIsLava = 0
 		body += "<br>"
 		body += "Special Role: <b>[M.mind.special_role? "[M.mind.special_role]":"None"]</b>"
 
+	if(istype(M,/mob/living/silicon/robot) || istype(M,/mob/living/silicon/ai))
+		body += "<br>"
+		body += "<A href='?src=\ref[src];showlaws=\ref[M]'>Check Laws</font></a>"
+
 	body += {"
 		<br><br>\[
 		<a href='?_src_=vars;Vars=\ref[M]'>VV</a> -

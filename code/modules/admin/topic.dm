@@ -839,6 +839,17 @@
 
 		cmd_admin_mute(M, mute_type)
 
+	else if(href_list["showlaws"])
+		if(!check_rights(R_ADMIN))	return
+
+		var/mob/living/silicon/M = locate(href_list["showlaws"])
+		if(!ismob(M))	return
+		//if(!M.client)	return
+
+		if (M.laws)
+			usr << "<B>[M.name] laws:</B>"
+			M.laws.show_laws(usr)
+
 	else if(href_list["c_mode"])
 		if(!check_rights(R_ADMIN))	return
 

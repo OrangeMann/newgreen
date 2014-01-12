@@ -102,6 +102,11 @@
 		"\red <B>You feel a powerful shock course through your body!</B>", \
 		"\red You hear a heavy electrical crack." \
 	)
+
+	attack_log += text("\[[time_stamp()]\] <font color='orange'> [src]([src.key]) was shocked at ([source.x],[source.y],[source.z]) by [source]</font>")
+	message_admins("[src]([src.key]) was shocked at ([source.x],[source.y],[source.z]) by [source] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[source.x];Y=[source.y];Z=[source.z]'>JMP</a>)")
+	log_attack("[src]([src.key]) was shocked at ([source.x],[source.y],[source.z]) by [source]")
+
 //	if(src.stunned < shock_damage)	src.stunned = shock_damage
 	Stun(10)//This should work for now, more is really silly and makes you lay there forever
 //	if(src.weakened < 20*siemens_coeff)	src.weakened = 20*siemens_coeff

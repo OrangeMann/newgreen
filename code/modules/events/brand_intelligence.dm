@@ -9,7 +9,7 @@
 
 
 /datum/event/brand_intelligence/announce()
-	command_alert("Rampant brand intelligence has been detected aboard [station_name()], please stand-by.", "Machine Learning Alert")
+	command_alert("На борту станции [station_name()] зафиксирован интеллект неконтролируемого типа, ожидайте дальнейших сведений.", "Тревога: СамообучающиесЯ Машины")
 
 
 /datum/event/brand_intelligence/start()
@@ -42,13 +42,13 @@
 			infectedMachine.shoot_inventory = 1
 
 			if(IsMultiple(activeFor, 12))
-				originMachine.speak(pick("Try our aggressive new marketing strategies!", \
-										 "You should buy products to feed your lifestyle obession!", \
-										 "Consume!", \
-										 "Your money can buy happiness!", \
-										 "Engage direct marketing!", \
-										 "Advertising is legalized lying! But don't let that put you off our great deals!", \
-										 "You don't want to buy anything? Yeah, well I didn't want to buy your mom either."))
+				originMachine.speak(pick("Попробуйте наши новые агрессивные маркетинговые ходы!", \
+										 "Ты обЯзан покупать продукты, что бы баловать свою одержимость собственным стилем!", \
+										 "ПотреблЯйте!", \
+										 "На ваши деньги можно купить радость!", \
+										 "Активирую режим абсолютного маркетинга!", \
+										 "Реклама - это легальнаЯ ложь! Но не позволЯйте этому факту упускать наши отлтчные предложениЯ!", \
+										 "Ничего не хочешь покупать? Да ну? Тогда Я тоже не хочу покупать твою мамашу."))
 
 /datum/event/brand_intelligence/end()
 	for(var/obj/machinery/vending/infectedMachine in infectedVendingMachines)

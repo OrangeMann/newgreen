@@ -15,7 +15,7 @@
 
 /datum/event/alien_infestation/announce()
 	if(successSpawn)
-		command_alert("Unidentified lifesigns detected coming aboard [station_name()]. Secure any exterior access, including ducting and ventilation.", "Lifesign Alert")
+		command_alert("ќбнаружено присутствие неустановленных признаков жизни на борту станции [station_name()]. ”сильте безопасность всех доступов в отсеки извне, включая воздуховоды и вентиляцию.", "Ѕиологическая “ревога")
 		world << sound('sound/AI/aliens.ogg')
 
 

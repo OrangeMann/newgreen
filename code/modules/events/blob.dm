@@ -6,7 +6,7 @@
 
 
 /datum/event/blob/announce()
-	command_alert("Confirmed outbreak of level 7 biohazard aboard [station_name()]. All personnel must contain the outbreak.", "Biohazard Alert")
+	command_alert("ѕодтверждено появление биологической угрозы 7-ого уровня на борту станции [station_name()]. ¬есь персонал станции обязан участвовать в устранении опасности.", "Ѕиологическая “ревога")
 	world << sound('sound/AI/outbreak7.ogg')
 
 

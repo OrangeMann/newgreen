@@ -7,7 +7,7 @@ datum/event/organ_failure/setup()
 	severity = rand(1, 3)
 
 datum/event/organ_failure/announce()
-	command_alert("Confirmed outbreak of level [rand(3,7)] biohazard aboard [station_name()]. All personnel must contain the outbreak.", "Biohazard Alert")
+	command_alert("Подтверждено появление биологической угрозы [rand(3,7)] уровня на борту станции [station_name()]. Весь персонал станции обязан устранить опасность.", "Биологическая Тревога")
 	world << sound('sound/AI/outbreak5.ogg')
 
 datum/event/organ_failure/start()

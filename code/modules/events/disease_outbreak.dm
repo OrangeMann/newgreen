@@ -4,7 +4,7 @@
 
 
 /datum/event/disease_outbreak/announce()
-	command_alert("Confirmed outbreak of level 7 viral biohazard aboard [station_name()]. All personnel must contain the outbreak.", "Biohazard Alert")
+	command_alert("Подтверждено появление вирусной угрозы 7-ого уровня на борту станции [station_name()]. Весь персонал станции обязан устранить опасность.", "Биологическая Тревога")
 	world << sound('sound/AI/outbreak7.ogg')
 
 /datum/event/disease_outbreak/setup()

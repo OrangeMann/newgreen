@@ -57,7 +57,7 @@
 /datum/event/ionstorm/end()
 	spawn(rand(5000,8000))
 		if(prob(50))
-			command_alert("It has come to our attention that the station passed through an ion storm.  Please monitor all electronic equipment for malfunctions.", "Anomaly Alert")
+			command_alert("Получены сведения о том, что станция прошла через ионную бурю. Пожалуйста, проверьте все электронное оборудование на предмет сбоя.", "Аномальная Тревога")
 
 /*
 /proc/IonStorm(botEmagChance = 10)

@@ -25,12 +25,12 @@
 /datum/event/rogue_drone/announce()
 	var/msg
 	if(prob(33))
-		msg = "A combat drone wing operating out of the NMV Icarus has failed to return from a sweep of this sector, if any are sighted approach with caution."
+		msg = "Звено боевых дронов, отправленных корветом NMV Icarus не смогли вернуться с разведки вашего сектора. В случае обнаружение дронов действуйте с осторожностью."
 	else if(prob(50))
-		msg = "Contact has been lost with a combat drone wing operating out of the NMV Icarus. If any are sighted in the area, approach with caution."
+		msg = "Был потерян контакт со звеном боевых дронов корвета NMV Icarus. В случае обнаружение дронов действуйте с осторожностью."
 	else
-		msg = "Unidentified hackers have targetted a combat drone wing deployed from the NMV Icarus. If any are sighted in the area, approach with caution."
-	command_alert(msg, "Rogue drone alert")
+		msg = "Неизвестные хакеры взломали систему задач звена боевых дронов корвета NMV Icarus.В случае обнаружение дронов действуйте с осторожностью."
+	command_alert(msg, "Тревога: Враждебные Дроны")
 
 /datum/event/rogue_drone/tick()
 	return
@@ -48,6 +48,6 @@
 		num_recovered++
 
 	if(num_recovered > drones_list.len * 0.75)
-		command_alert("Icarus drone control reports the malfunctioning wing has been recovered safely.", "Rogue drone alert")
+		command_alert("Системы управления дронами корвета NMV Icarus докладывают, что неисправное звено было безопасно возвращено.", "Тревога: Враждебные Дроны")
 	else
-		command_alert("Icarus drone control registers disappointment at the loss of the drones, but the survivors have been recovered.", "Rogue drone alert")
+		command_alert("Системы управления дронами корвета NMV Icarus регистрируют потерю дронов, возвращенные единицы будут востановлены.", "Тревога: Враждебные Дроны")

@@ -92,7 +92,7 @@
 			turfs.Remove(T)
 			num--
 
-			
+
 			if(vermin == VERM_SPIDERS)
 				var/obj/effect/spider/spiderling/S = new(T)
 				S.amount_grown = -1
@@ -102,7 +102,7 @@
 
 
 /datum/event/infestation/announce()
-	command_alert("Bioscans indicate that [vermstring] have been breeding in [locstring]. Clear them out, before this starts to affect productivity.", "Vermin infestation")
+	command_alert("Биосканеры указывают на то, что [vermstring] размножаются в [locstring] отсеке. Уничтожьте их, пока это не начало влиять на продуктивность.", "Паразитическое Заражение")
 
 #undef LOC_KITCHEN
 #undef LOC_ATMOS

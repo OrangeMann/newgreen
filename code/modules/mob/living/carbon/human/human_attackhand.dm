@@ -27,9 +27,9 @@
 					M.attack_log += text("\[[time_stamp()]\] <font color='red'>Stungloved [src.name] ([src.ckey])</font>")
 					src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been stungloved by [M.name] ([M.ckey])</font>")
 
-					log_admin("ATTACK: [src] ([src.ckey]) stungloved [M] ([M.ckey]).")
-					message_admins("ATTACK: [src] ([src.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[src]'>JMP</A>) stungloved [M] ([M.ckey]).", 2)
-					log_attack("<font color='red'>[M.name] ([M.ckey]) stungloved [src.name] ([src.ckey])</font>")
+					//log_admin("ATTACK: [src] ([src.ckey]) stungloved [M] ([M.ckey]).")
+					message_admins("ATTACK: [src] ([src.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[src]'>JMP</A>) stungloved [M] ([M.ckey]).", 0)
+					log_attack("[src] ([src.ckey]) stungloved [M] ([M.ckey])")
 
 					var/armorblock = run_armor_check(M.zone_sel.selecting, "energy")
 					apply_effects(5,5,0,0,5,0,0,armorblock)
@@ -37,6 +37,8 @@
 				else
 					M << "\red Not enough charge! "
 					visible_message("\red <B>[src] has been touched with the stun gloves by [M]!</B>")
+					message_admins("ATTACK: [src] ([src.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[src]'>JMP</A>) was trying to stunglove [M] ([M.ckey]).", 0)
+					log_attack("[src] ([src.ckey]) was trying to stunglove [M] ([M.ckey])")
 				return
 
 		if(istype(M.gloves , /obj/item/clothing/gloves/boxing/hologlove))
@@ -108,6 +110,7 @@
 			M.attack_log += text("\[[time_stamp()]\] <font color='red'>[M.species.attack_verb]ed [src.name] ([src.ckey])</font>")
 			src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been [M.species.attack_verb]ed by [M.name] ([M.ckey])</font>")
 
+			message_admins("ATTACK: [M.name] ([M.ckey]) [M.species.attack_verb]ed [src.name] ([src.ckey])",0)
 			log_attack("[M.name] ([M.ckey]) [M.species.attack_verb]ed [src.name] ([src.ckey])")
 
 			var/damage = rand(0, 5)//BS12 EDIT
@@ -146,6 +149,7 @@
 			M.attack_log += text("\[[time_stamp()]\] <font color='red'>Disarmed [src.name] ([src.ckey])</font>")
 			src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been disarmed by [M.name] ([M.ckey])</font>")
 
+			message_admins("[M.name] ([M.ckey]) disarmed [src.name] ([src.ckey])",0)
 			log_attack("[M.name] ([M.ckey]) disarmed [src.name] ([src.ckey])")
 
 

@@ -7,7 +7,7 @@ datum
 			id = "tungsten"
 			description = "A chemical element, and a strong oxidising agent."
 			reagent_state = SOLID
-			color = "#808080"	// rgb: 128, 128, 128
+			reagent_color = "#808080"	// rgb: 128, 128, 128
 								//todo: make this silvery grey
 
 		lithiumsodiumtungstate
@@ -15,7 +15,7 @@ datum
 			id = "lithiumsodiumtungstate"
 			description = "A reducing agent for geological compounds."
 			reagent_state = LIQUID
-			color = "#808080"	// rgb: 128, 128, 128
+			reagent_color = "#808080"	// rgb: 128, 128, 128
 								//todo: make this silvery grey
 
 		ground_rock
@@ -23,7 +23,7 @@ datum
 			id = "ground_rock"
 			description = "A fine dust made of ground up rock."
 			reagent_state = SOLID
-			color = "#C81040" 	//rgb: 200, 16, 64
+			reagent_color = "#C81040" 	//rgb: 200, 16, 64
 								//todo: make this brown
 
 		density_separated_sample
@@ -31,7 +31,7 @@ datum
 			id = "density_separated_sample"
 			description = "A watery paste used in chemical analysis, there are some chunks floating in it."
 			reagent_state = LIQUID
-			color = "#C81040" 	//rgb: 200, 16, 64
+			reagent_color = "#C81040" 	//rgb: 200, 16, 64
 								//todo: make this browny-white
 
 		analysis_sample
@@ -39,7 +39,7 @@ datum
 			id = "analysis_sample"
 			description = "A watery paste used in chemical analysis."
 			reagent_state = LIQUID
-			color = "#C81040" 	//rgb: 200, 16, 64
+			reagent_color = "#C81040" 	//rgb: 200, 16, 64
 								//todo: make this white
 
 		chemical_waste
@@ -47,7 +47,7 @@ datum
 			id = "chemical_waste"
 			description = "A viscous, toxic liquid left over from many chemical processes."
 			reagent_state = LIQUID
-			color = "#C81040" 	//rgb: 200, 16, 64
+			reagent_color = "#C81040" 	//rgb: 200, 16, 64
 								//todo: make this fluoro/bright green
 
 datum

@@ -217,9 +217,9 @@
 	for(var/mob/M in mobs)
 		if(M.ckey)
 
-			var/color = "#e6e6e6"
+			var/bg_color = "#e6e6e6"
 			if(i%2 == 0)
-				color = "#f2f2f2"
+				bg_color = "#f2f2f2"
 			var/is_antagonist = is_special_character(M)
 
 			var/M_job = ""
@@ -288,7 +288,7 @@
 			dat += {"
 
 				<tr id='data[i]' name='[i]' onClick="addToLocked('item[i]','data[i]','notice_span[i]')">
-					<td align='center' bgcolor='[color]'>
+					<td align='center' bgcolor='[bg_color]'>
 						<span id='notice_span[i]'></span>
 						<a id='link[i]'
 						onmouseover='expand("item[i]","[M_job]","[M_name]","[M_rname]","--unused--","[M_key]","[M.lastKnownIP]",[is_antagonist],"\ref[M]")'

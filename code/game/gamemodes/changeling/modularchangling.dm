@@ -409,15 +409,15 @@ var/list/datum/power/changeling/powerinstances = list()
 			ownsthis = 1
 
 
-		var/color = "#e6e6e6"
+		var/bg_color = "#e6e6e6"
 		if(i%2 == 0)
-			color = "#f2f2f2"
+			bg_color = "#f2f2f2"
 
 
 		dat += {"
 
 			<tr id='data[i]' name='[i]' onClick="addToLocked('item[i]','data[i]','notice_span[i]')">
-				<td align='center' bgcolor='[color]'>
+				<td align='center' bgcolor='[bg_color]'>
 					<span id='notice_span[i]'></span>
 					<a id='link[i]'
 					onmouseover='expand("item[i]","[P.name]","[P.desc]","[P.helptext]","[P]",[ownsthis])'

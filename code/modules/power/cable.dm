@@ -297,7 +297,7 @@
 
 		var/obj/structure/cable/C = new(F)
 
-		C.cableColor(color)
+		C.cableColor(item_color)
 
 		C.d1 = 0
 		C.d2 = dirn
@@ -315,7 +315,7 @@
 		use(1)
 		if (C.shock(user, 50))
 			if (prob(50)) //fail
-				new/obj/item/weapon/cable_coil(C.loc, 1, C.color)
+				new/obj/item/weapon/cable_coil(C.loc, 1, C.cable_color)
 				del(C)
 		//src.laying = 1
 		//last = C

@@ -252,12 +252,12 @@ obj/machinery/atmospherics/pipe
 
 	simple/scrubbers
 		name="Scrubbers pipe"
-		color="red"
+		pipe_color="red"
 		icon_state = ""
 
 	simple/supply
 		name="Air supply pipe"
-		color="blue"
+		pipe_color="blue"
 		icon_state = ""
 
 	simple/supplymain
@@ -925,7 +925,7 @@ obj/machinery/atmospherics/pipe
 			overlays.Cut()
 			if(node1&&node2&&node3&&node4)
 				var/C = ""
-				switch(color)
+				switch(pipe_color)
 					if ("red") C = "-r"
 					if ("blue") C = "-b"
 					if ("cyan") C = "-c"
@@ -980,22 +980,22 @@ obj/machinery/atmospherics/pipe
 
 	manifold4w/scrubbers
 		name="Scrubbers pipe"
-		color="red"
+		pipe_color="red"
 		icon_state = ""
 
 	manifold4w/supply
 		name="Air supply pipe"
-		color="blue"
+		pipe_color="blue"
 		icon_state = ""
 
 	manifold4w/supplymain
 		name="Main air supply pipe"
-		color="purple"
+		pipe_color="purple"
 		icon_state = ""
 
 	manifold4w/general
 		name="Air supply pipe"
-		color="gray"
+		pipe_color="gray"
 		icon_state = ""
 
 	manifold4w/scrubbers/visible

@@ -9,7 +9,7 @@
 	siemens_coefficient = 0.9
 
 	dropped()
-		src.icon_state = "[color]soft"
+		src.icon_state = "[item_color]soft"
 		src.flipped=0
 		..()
 
@@ -20,10 +20,10 @@
 		if(usr.canmove && !usr.stat && !usr.restrained())
 			src.flipped = !src.flipped
 			if(src.flipped)
-				icon_state = "[color]soft_flipped"
+				icon_state = "[item_color]soft_flipped"
 				usr << "You flip the hat backwards."
 			else
-				icon_state = "[color]soft"
+				icon_state = "[item_color]soft"
 				usr << "You flip the hat back in normal position."
 			usr.update_inv_head()	//so our mob-overlays update
 

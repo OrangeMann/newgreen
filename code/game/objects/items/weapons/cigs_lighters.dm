@@ -338,9 +338,9 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 
 /obj/item/weapon/lighter/random
 	New()
-		var/color = pick("r","c","y","g")
-		icon_on = "lighter-[color]-on"
-		icon_off = "lighter-[color]"
+		var/item_color = pick("r","c","y","g")
+		icon_on = "lighter-[item_color]-on"
+		icon_off = "lighter-[item_color]"
 		icon_state = icon_off
 
 /obj/item/weapon/lighter/attack_self(mob/living/user)

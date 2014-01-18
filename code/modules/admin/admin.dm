@@ -4,9 +4,10 @@ var/global/floorIsLava = 0
 
 
 ////////////////////////////////
-/proc/message_admins(var/msg)
+/proc/message_admins(var/msg, var/log = 1)
 	msg = "<span class=\"admin\"><span class=\"prefix\">ADMIN LOG:</span> <span class=\"message\">[msg]</span></span>"
-	log_adminwarn(msg)
+	if (log)
+		log_adminwarn(msg)
 	for(var/client/C in admins)
 		if(R_ADMIN & C.holder.rights)
 			C << msg

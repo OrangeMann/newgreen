@@ -168,15 +168,15 @@ datum/reagent/paint
 	id = "paint_"
 	description = "Floor paint is used to color floor tiles."
 	reagent_state = 2
-	color = "#808080"
+	reagent_color = "#808080"
 
 	reaction_turf(var/turf/T, var/volume)
 		if(!istype(T) || istype(T, /turf/space))
 			return
-		var/ind = "[initial(T.icon)][color]"
+		var/ind = "[initial(T.icon)][reagent_color]"
 		if(!cached_icons[ind])
 			var/icon/overlay = new/icon(initial(T.icon))
-			overlay.Blend(color,ICON_MULTIPLY)
+			overlay.Blend(reagent_color,ICON_MULTIPLY)
 			overlay.SetIntensity(1.4)
 			T.icon = overlay
 			cached_icons[ind] = T.icon
@@ -187,36 +187,36 @@ datum/reagent/paint
 	red
 		name = "Red Paint"
 		id = "paint_red"
-		color = "#FF0000"
+		reagent_color = "#FF0000"
 
 	green
 		name = "Green Paint"
-		color = "#00FF00"
+		reagent_color = "#00FF00"
 		id = "paint_green"
 
 	blue
 		name = "Blue Paint"
-		color = "#0000FF"
+		reagent_color = "#0000FF"
 		id = "paint_blue"
 
 	yellow
 		name = "Yellow Paint"
-		color = "#FFFF00"
+		reagent_color = "#FFFF00"
 		id = "paint_yellow"
 
 	violet
 		name = "Violet Paint"
-		color = "#FF00FF"
+		reagent_color = "#FF00FF"
 		id = "paint_violet"
 
 	black
 		name = "Black Paint"
-		color = "#333333"
+		reagent_color = "#333333"
 		id = "paint_black"
 
 	white
 		name = "White Paint"
-		color = "#FFFFFF"
+		reagent_color = "#FFFFFF"
 		id = "paint_white"
 
 datum/reagent/paint_remover
@@ -224,7 +224,7 @@ datum/reagent/paint_remover
 	id = "paint_remover"
 	description = "Paint remover is used to remove floor paint from floor tiles."
 	reagent_state = 2
-	color = "#808080"
+	reagent_color = "#808080"
 
 	reaction_turf(var/turf/T, var/volume)
 		if(istype(T) && T.icon != initial(T.icon))

@@ -231,13 +231,11 @@
 		user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to attack [M.name] ([M.ckey])</font>")
 
 		//log_admin("ATTACK: [user] ([user.ckey]) attacked [M] ([M.ckey]) with [src].")
-		message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[user]'>JMP</A>) attacked [M] ([M.ckey]) with [src].", 0)
 		log_attack("[user.name] ([user.ckey]) used the [src.name] to attack [M.name] ([M.ckey])")
 	else
 		user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to attack [gender_text]</font>")
 
 		//log_admin("ATTACK: [user] ([user.ckey]) attacked [M] ([M.ckey]) with [src].")
-		message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[user]'>JMP</A>) attacked [gender_text] with [src].", 0)
 		log_attack("[user.name] ([user.ckey]) used the [src.name] to attack [gender_text]")
 
 

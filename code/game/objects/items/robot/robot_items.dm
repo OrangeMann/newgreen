@@ -10,12 +10,19 @@
 	icon_state = "shock"
 
 	attack(mob/M as mob, mob/living/silicon/robot/user as mob)
-		M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been attacked with [src.name] by [user.name] ([user.ckey])</font>")
-		user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to attack [M.name] ([M.ckey])</font>")
+		if (M != user)
+			M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been attacked with [src.name] by [user.name] ([user.ckey])</font>")
+			user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to attack [M.name] ([M.ckey])</font>")
 
-		log_admin("ATTACK: [user] ([user.ckey]) attacked [M] ([M.ckey]) with [src].")
-		message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[user]'>JMP</A>) attacked [M] ([M.ckey]) with [src].", 2)
-		log_attack(" <font color='red'>[user.name] ([user.ckey]) used the [src.name] to attack [M.name] ([M.ckey])</font>")
+			//log_admin("ATTACK: [user] ([user.ckey]) attacked [M] ([M.ckey]) with [src].")
+			message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[user]'>JMP</A>) attacked [M] ([M.ckey]) with [src].", 0)
+			log_attack("[user.name] ([user.ckey]) used the [src.name] to attack [M.name] ([M.ckey])")
+		else
+			user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to attack itself</font>")
+
+			//log_admin("ATTACK: [user] ([user.ckey]) attacked [M] ([M.ckey]) with [src].")
+			message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[user]'>JMP</A>) attacked itself with [src].", 0)
+			log_attack("[user.name] ([user.ckey]) used the [src.name] to attack itself")
 
 		user.cell.charge -= 30
 

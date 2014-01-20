@@ -82,6 +82,14 @@
 
 	log_attack("<font color='red'>[user.name] ([user.ckey]) attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>")
 */
+
+	//Some text don't want to display text macro "\himself"
+	var/gender_text =""
+	if (user.gender == MALE)
+		gender_text = "himself"
+	else //i.e. female
+		gender_text = "herself"
+
 	if (user.a_intent == "hurt")
 		if(!..()) return
 		playsound(src.loc, "swing_hit", 50, 1, -1)
@@ -89,19 +97,42 @@
 			M.stuttering = 8
 		M.Stun(8)
 		M.Weaken(8)
+		if(M != user)
+			M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been attacked with [src.name] by [user.name] ([user.ckey])</font>")
+			user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to attack [M.name] ([M.ckey])</font>")
+			message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[user]'>JMP</A>) attacked [M.name] ([M.ckey]) with [src].", 0)
+			log_attack("[user.name] ([user.ckey]) attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])")
+		else
+			user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to attack [gender_text]</font>")
+			message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[user]'>JMP</A>) attacked [gender_text] with [src].", 0)
+			log_attack("[user.name] ([user.ckey]) attacked [gender_text] with [src.name] (INTENT: [uppertext(user.a_intent)])")
 		for(var/mob/O in viewers(M))
-			if (O.client)	O.show_message("\red <B>[M] has been beaten with \the [src] by [user]!</B>", 1, "\red You hear someone fall", 2)
+			if (O.client)
+				if(M != user)
+					O.show_message("\red <B>[M] has been beaten with \the [src] by [user]!</B>", 1, "\red You hear someone fall", 2)
+				else
+					O.show_message("\red <B>[M] has been beaten with \the [src] by [gender_text]!</B>", 1, "\red You hear someone fall", 2)
 	else
 		playsound(src.loc, 'sound/weapons/Genhit.ogg', 50, 1, -1)
 		M.Stun(5)
 		M.Weaken(5)
-		M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been attacked with [src.name] by [user.name] ([user.ckey])</font>")
-		user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to attack [M.name] ([M.ckey])</font>")
-		log_attack("[user.name] ([user.ckey]) attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])")
+		if(M != user)
+			M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been attacked with [src.name] by [user.name] ([user.ckey])</font>")
+			user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to attack [M.name] ([M.ckey])</font>")
+			message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[user]'>JMP</A>) attacked [M.name] ([M.ckey]) with [src].", 0)
+			log_attack("[user.name] ([user.ckey]) attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])")
+		else
+			user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to attack [gender_text]</font>")
+			message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[user]'>JMP</A>) attacked [gender_text] with [src].", 0)
+			log_attack("[user.name] ([user.ckey]) attacked [gender_text] with [src.name] (INTENT: [uppertext(user.a_intent)])")
 		src.add_fingerprint(user)
 
 		for(var/mob/O in viewers(M))
-			if (O.client)	O.show_message("\red <B>[M] has been stunned with \the [src] by [user]!</B>", 1, "\red You hear someone fall", 2)
+			if (O.client)
+				if(M != user)
+					O.show_message("\red <B>[M] has been stunned with \the [src] by [user]!</B>", 1, "\red You hear someone fall", 2)
+				else
+					O.show_message("\red <B>[M] has been stunned with \the [src] by [gender_text]!</B>", 1, "\red You hear someone fall", 2)
 
 //Telescopic baton
 /obj/item/weapon/melee/telebaton

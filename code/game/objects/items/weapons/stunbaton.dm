@@ -58,21 +58,40 @@
 		..()
 		return
 
+	//Some text don't want to display text macro "\himself"
+	var/gender_text =""
+	if (user.gender == MALE)
+		gender_text = "himself"
+	else //i.e. female
+		gender_text = "herself"
+
 	if(user.a_intent == "hurt")
 		if(!..()) return
 		//H.apply_effect(5, WEAKEN, 0)
-		H.visible_message("<span class='danger'>[M] has been beaten with the [src] by [user]!</span>")
+		if(H != user)
+			H.visible_message("<span class='danger'>[M] has been beaten with the [src] by [user]!</span>")
 
-		user.attack_log += "\[[time_stamp()]\]<font color='red'> Beat [H.name] ([H.ckey]) with [src.name]</font>"
-		H.attack_log += "\[[time_stamp()]\]<font color='orange'> Beaten by [user.name] ([user.ckey]) with [src.name]</font>"
+			user.attack_log += "\[[time_stamp()]\]<font color='red'> Beat [H.name] ([H.ckey]) with [src.name]</font>"
+			H.attack_log += "\[[time_stamp()]\]<font color='orange'> Beaten by [user.name] ([user.ckey]) with [src.name]</font>"
 
-		log_admin("ATTACK: [user] ([user.ckey]) attacked [M] ([M.ckey]) with [src].")
-		message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[user]'>JMP</A>) attacked [M] ([M.ckey]) with [src].", 2)
-		log_attack("<font color='red'>[user.name] ([user.ckey]) attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>")
+			//log_admin("ATTACK: [user] ([user.ckey]) attacked [M] ([M.ckey]) with [src].")
+			message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[user]'>JMP</A>) attacked [M] ([M.ckey]) with [src].", 0)
+			log_attack("[user.name] ([user.ckey]) attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])")
+		else
+			user.visible_message("<span class='danger'>[user] has been beaten with the [src] by [gender_text]!</span>")
+
+			user.attack_log += "\[[time_stamp()]\]<font color='red'> Beat [H.name] ([H.ckey]) with [src.name]</font>"
+
+			//log_admin("ATTACK: [user] ([user.ckey]) attacked [M] ([M.ckey]) with [src].")
+			message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[user]'>JMP</A>) attacked [gender_text] with [src].", 0)
+			log_attack("[user.name] ([user.ckey]) attacked [gender_text] with [src.name] (INTENT: [uppertext(user.a_intent)])")
 
 		playsound(src.loc, "swing_hit", 50, 1, -1)
 	else if(!status)
-		H.visible_message("<span class='warning'>[M] has been prodded with the [src] by [user]. Luckily it was off.</span>")
+		if(H != user)
+			H.visible_message("<span class='warning'>[M] has been prodded with the [src] by [user]. Luckily it was off.</span>")
+		else
+			user.visible_message("<span class='warning'>[user] has been prodded with the [src] by [gender_text]. Luckily it was off.</span>")
 		return
 
 	if(status)
@@ -87,11 +106,19 @@
 				R.cell.use(50)
 		else
 			charges--
-		H.visible_message("<span class='danger'>[M] has been stunned with the [src] by [user]!</span>")
+		if(H != user)
+			H.visible_message("<span class='danger'>[M] has been stunned with the [src] by [user]!</span>")
 
-		user.attack_log += "\[[time_stamp()]\]<font color='red'> Stunned [H.name] ([H.ckey]) with [src.name]</font>"
-		H.attack_log += "\[[time_stamp()]\]<font color='orange'> Stunned by [user.name] ([user.ckey]) with [src.name]</font>"
-		log_attack("[user.name] ([user.ckey]) stunned [H.name] ([H.ckey]) with [src.name]")
+			user.attack_log += "\[[time_stamp()]\]<font color='red'> Stunned [H.name] ([H.ckey]) with [src.name]</font>"
+			H.attack_log += "\[[time_stamp()]\]<font color='orange'> Stunned by [user.name] ([user.ckey]) with [src.name]</font>"
+			message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[user]'>JMP</A>) stunned [H.name] ([H.ckey]) with [src].", 0)
+			log_attack("[user.name] ([user.ckey]) stunned [H.name] ([H.ckey]) with [src.name]")
+		else
+			user.visible_message("<span class='danger'>[user] has been stunned with the [src] by [gender_text]!</span>")
+
+			user.attack_log += "\[[time_stamp()]\]<font color='red'> Stunned [gender_text] with [src.name]</font>"
+			message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[user]'>JMP</A>) stunned [gender_text] with [src].", 0)
+			log_attack("[user.name] ([user.ckey]) stunned [gender_text] with [src.name]")
 
 		playsound(src.loc, 'sound/weapons/Egloves.ogg', 50, 1, -1)
 		if(charges < 1)

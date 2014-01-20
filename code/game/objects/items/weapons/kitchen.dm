@@ -219,12 +219,26 @@
 		user.Paralyse(2)
 		return
 
-	M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been attacked with [src.name] by [user.name] ([user.ckey])</font>")
-	user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to attack [M.name] ([M.ckey])</font>")
+	//Some text don't want to display text macro "\himself"
+	var/gender_text =""
+	if (user.gender == MALE)
+		gender_text = "himself"
+	else //i.e. female
+		gender_text = "herself"
 
-	log_admin("ATTACK: [user] ([user.ckey]) attacked [M] ([M.ckey]) with [src].")
-	message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[user]'>JMP</A>) attacked [M] ([M.ckey]) with [src].", 2)
-	log_attack("<font color='red'>[user.name] ([user.ckey]) used the [src.name] to attack [M.name] ([M.ckey])</font>")
+	if(M != user)
+		M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been attacked with [src.name] by [user.name] ([user.ckey])</font>")
+		user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to attack [M.name] ([M.ckey])</font>")
+
+		//log_admin("ATTACK: [user] ([user.ckey]) attacked [M] ([M.ckey]) with [src].")
+		message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[user]'>JMP</A>) attacked [M] ([M.ckey]) with [src].", 0)
+		log_attack("[user.name] ([user.ckey]) used the [src.name] to attack [M.name] ([M.ckey])")
+	else
+		user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to attack [gender_text]</font>")
+
+		//log_admin("ATTACK: [user] ([user.ckey]) attacked [M] ([M.ckey]) with [src].")
+		message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[user]'>JMP</A>) attacked [gender_text] with [src].", 0)
+		log_attack("[user.name] ([user.ckey]) used the [src.name] to attack [gender_text]")
 
 
 	var/t = user:zone_sel.selecting

@@ -177,13 +177,27 @@
 /obj/item/weapon/grown/deathnettle/attack(mob/living/carbon/M as mob, mob/user as mob)
 	if(!..()) return
 	if(istype(M, /mob/living))
-		M << "\red You are stunned by the powerful acid of the Deathnettle!"
-		M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Had the [src.name] used on them by [user.name] ([user.ckey])</font>")
-		user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] on [M.name] ([M.ckey])</font>")
+		//Some text don't want to display text macro "\himself"
+		var/gender_text =""
+		if (user.gender == MALE)
+			gender_text = "himself"
+		else //i.e. female
+			gender_text = "herself"
 
-		log_admin("ATTACK: [user] ([user.ckey]) attacked [M] ([M.ckey]) with [src].")
-		message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[user]'>JMP</A>) attacked [M] ([M.ckey]) with [src].", 2)
-		log_attack("<font color='red'> [user.name] ([user.ckey]) used the [src.name] on [M.name] ([M.ckey])</font>")
+		M << "\red You are stunned by the powerful acid of the Deathnettle!"
+		if(M != user)
+			M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Had the [src.name] used on them by [user.name] ([user.ckey])</font>")
+			user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] on [M.name] ([M.ckey])</font>")
+
+			//log_admin("ATTACK: [user] ([user.ckey]) attacked [M] ([M.ckey]) with [src].")
+			message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[user]'>JMP</A>) attacked [M] ([M.ckey]) with [src].", 0)
+			log_attack("[user.name] ([user.ckey]) used the [src.name] on [M.name] ([M.ckey])")
+		else
+			user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] on [gender_text]</font>")
+
+			//log_admin("ATTACK: [user] ([user.ckey]) attacked [M] ([M.ckey]) with [src].")
+			message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[user]'>JMP</A>) attacked [gender_text] with [src].", 0)
+			log_attack("[user.name] ([user.ckey]) used the [src.name] on [gender_text]")
 
 		playsound(loc, 'sound/weapons/bladeslice.ogg', 50, 1, -1)
 

@@ -16,6 +16,12 @@
 		visible_message("\red <B>[M] attempted to touch [src]!</B>")
 		return 0
 
+	//Some text don't want to display text macro "\himself"
+	var/gender_text =""
+	if (M.gender == MALE)
+		gender_text = "himself"
+	else //i.e. female
+		gender_text = "herself"
 
 	if(M.gloves && istype(M.gloves,/obj/item/clothing/gloves))
 		var/obj/item/clothing/gloves/G = M.gloves
@@ -23,30 +29,60 @@
 			if(M.a_intent == "hurt")//Stungloves. Any contact will stun the alien.
 				if(G.cell.charge >= 2500)
 					G.cell.charge -= 2500
-					visible_message("\red <B>[src] has been touched with the stun gloves by [M]!</B>")
-					M.attack_log += text("\[[time_stamp()]\] <font color='red'>Stungloved [src.name] ([src.ckey])</font>")
-					src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been stungloved by [M.name] ([M.ckey])</font>")
+					if(M != src)
+						visible_message("\red <B>[src] has been touched with the stun gloves by [M]!</B>")
+						M.attack_log += text("\[[time_stamp()]\] <font color='red'>Stungloved [src.name] ([src.ckey])</font>")
+						src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been stungloved by [M.name] ([M.ckey])</font>")
 
-					//log_admin("ATTACK: [src] ([src.ckey]) stungloved [M] ([M.ckey]).")
-					message_admins("ATTACK: [src] ([src.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[src]'>JMP</A>) stungloved [M] ([M.ckey]).", 0)
-					log_attack("[src] ([src.ckey]) stungloved [M] ([M.ckey])")
+						//log_admin("ATTACK: [src] ([src.ckey]) stungloved [M] ([M.ckey]).")
+						message_admins("ATTACK: [M] ([M.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[src]'>JMP</A>) stungloved [src] ([src.ckey]).", 0)
+						log_attack("[M] ([M.ckey]) stungloved [src] ([src.ckey])")
+					else
+						visible_message("\red <B>[src] has been touched with the stun gloves by \himself!</B>")
+						src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been stungloved by [gender_text]</font>")
+
+						//log_admin("ATTACK: [src] ([src.ckey]) stungloved [M] ([M.ckey]).")
+						message_admins("ATTACK: [src] ([src.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[src]'>JMP</A>) stungloved [gender_text].", 0)
+						log_attack("[src] ([src.ckey]) stungloved [gender_text]")
 
 					var/armorblock = run_armor_check(M.zone_sel.selecting, "energy")
 					apply_effects(5,5,0,0,5,0,0,armorblock)
 					return 1
 				else
 					M << "\red Not enough charge! "
-					visible_message("\red <B>[src] has been touched with the stun gloves by [M]!</B>")
-					message_admins("ATTACK: [src] ([src.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[src]'>JMP</A>) was trying to stunglove [M] ([M.ckey]).", 0)
-					log_attack("[src] ([src.ckey]) was trying to stunglove [M] ([M.ckey])")
+					if(M != src)
+						visible_message("\red <B>[src] has been touched with the stun gloves by [M]!</B>")
+						message_admins("ATTACK: [M] ([M.ckey](<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[src]'>JMP</A>) was trying to stunglove [src] ([src.ckey]).", 0)
+						log_attack("[M] ([M.ckey] was trying to stunglove [src] ([src.ckey])")
+					else
+						visible_message("\red <B>[src] has been touched with the stun gloves by \himself!</B>")
+						message_admins("ATTACK: [src] ([src.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[src]'>JMP</A>) was trying to stunglove [gender_text].", 0)
+						log_attack("[src] ([src.ckey]) was trying to stunglove [gender_text]")
 				return
 
 		if(istype(M.gloves , /obj/item/clothing/gloves/boxing/hologlove))
 
+			/*
+			if (M != src)
+				M.attack_log += text("\[[time_stamp()]\] <font color='red'>[M.species.attack_verb]ed [src.name] ([src.ckey])</font>")
+				src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been [M.species.attack_verb]ed by [M.name] ([M.ckey])</font>")
+
+				message_admins("ATTACK: [M.name] ([M.ckey])(<A HREF='?src=\ref[src];adminplayerobservejump=\ref[M]'>JMP</A>) [M.species.attack_verb]ed [src.name] ([src.ckey])",0)
+				log_attack("[M.name] ([M.ckey]) [M.species.attack_verb]ed [src.name] ([src.ckey])")
+			else
+				src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been [M.species.attack_verb]ed by [gender_text]</font>")
+
+				message_admins("ATTACK: [src.name] ([src.ckey])(<A HREF='?src=\ref[src];adminplayerobservejump=\ref[src]'>JMP</A>) [src.species.attack_verb]ed [gender_text]",0)
+				log_attack("[src.name] ([src.ckey]) [src.species.attack_verb]ed [gender_text]")
+			*/
+
 			var/damage = rand(0, 9)
 			if(!damage)
 				playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
-				visible_message("\red <B>[M] has attempted to punch [src]!</B>")
+				if(M != src)
+					visible_message("\red <B>[M] has attempted to punch [src]!</B>")
+				else
+					visible_message("\red <B>[src] has attempted to punch \himself!</B>")
 				return 0
 			var/datum/organ/external/affecting = get_organ(ran_zone(M.zone_sel.selecting))
 			var/armor_block = run_armor_check(affecting, "melee")
@@ -55,11 +91,17 @@
 
 			playsound(loc, "punch", 25, 1, -1)
 
-			visible_message("\red <B>[M] has punched [src]!</B>")
+			if(M != src)
+				visible_message("\red <B>[M] has punched [src]!</B>")
+			else
+				visible_message("\red <B>[src] has punched \himself!</B>")
 
 			apply_damage(damage, HALLOSS, affecting, armor_block)
 			if(damage >= 9)
-				visible_message("\red <B>[M] has weakened [src]!</B>")
+				if(M != src)
+					visible_message("\red <B>[M] has weakened [src]!</B>")
+				else
+					visible_message("\red <B>[src] has weakened \himself!</B>")
 				apply_effect(4, WEAKEN, armor_block)
 
 			return
@@ -107,11 +149,17 @@
 
 		if("hurt")
 
-			M.attack_log += text("\[[time_stamp()]\] <font color='red'>[M.species.attack_verb]ed [src.name] ([src.ckey])</font>")
-			src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been [M.species.attack_verb]ed by [M.name] ([M.ckey])</font>")
+			if (M != src)
+				M.attack_log += text("\[[time_stamp()]\] <font color='red'>[M.species.attack_verb]ed [src.name] ([src.ckey])</font>")
+				src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been [M.species.attack_verb]ed by [M.name] ([M.ckey])</font>")
 
-			message_admins("ATTACK: [M.name] ([M.ckey]) [M.species.attack_verb]ed [src.name] ([src.ckey])",0)
-			log_attack("[M.name] ([M.ckey]) [M.species.attack_verb]ed [src.name] ([src.ckey])")
+				message_admins("ATTACK: [M.name] ([M.ckey])(<A HREF='?src=\ref[src];adminplayerobservejump=\ref[M]'>JMP</A>) [M.species.attack_verb]ed [src.name] ([src.ckey])",0)
+				log_attack("[M.name] ([M.ckey]) [M.species.attack_verb]ed [src.name] ([src.ckey])")
+			else
+				src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been [M.species.attack_verb]ed by [gender_text]</font>")
+
+				message_admins("ATTACK: [src.name] ([src.ckey])(<A HREF='?src=\ref[src];adminplayerobservejump=\ref[src]'>JMP</A>) [src.species.attack_verb]ed [gender_text]",0)
+				log_attack("[src.name] ([src.ckey]) [src.species.attack_verb]ed [gender_text]")
 
 			var/damage = rand(0, 5)//BS12 EDIT
 			if(!damage)
@@ -120,7 +168,10 @@
 				else
 					playsound(loc, 'sound/weapons/slashmiss.ogg', 25, 1, -1)
 
-				visible_message("\red <B>[M] has attempted to [M.species.attack_verb] [src]!</B>")
+				if (M != src)
+					visible_message("\red <B>[M] has attempted to [M.species.attack_verb] [src]!</B>")
+				else
+					visible_message("\red <B>[src] has attempted to [src.species.attack_verb] \himself!</B>")
 				return 0
 
 
@@ -135,10 +186,16 @@
 			else
 				playsound(loc, 'sound/weapons/slice.ogg', 25, 1, -1)
 
-			visible_message("\red <B>[M] has [M.species.attack_verb]ed [src]!</B>")
+			if (M != src)
+				visible_message("\red <B>[M] has [M.species.attack_verb]ed [src]!</B>")
+			else
+				visible_message("\red <B>[src] has [src.species.attack_verb]ed \himself!</B>")
 			//Rearranged, so claws don't increase weaken chance.
 			if(damage >= 5 && prob(50))
-				visible_message("\red <B>[M] has weakened [src]!</B>")
+				if (M != src)
+					visible_message("\red <B>[M] has weakened [src]!</B>")
+				else
+					visible_message("\red <B>[src] has weakened \himself!</B>")
 				apply_effect(2, WEAKEN, armor_block)
 
 			if(M.species.attack_verb != "punch")	damage += 5
@@ -146,11 +203,17 @@
 
 
 		if("disarm")
-			M.attack_log += text("\[[time_stamp()]\] <font color='red'>Disarmed [src.name] ([src.ckey])</font>")
-			src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been disarmed by [M.name] ([M.ckey])</font>")
+			if (M != src)
+				M.attack_log += text("\[[time_stamp()]\] <font color='red'>Disarmed [src.name] ([src.ckey])</font>")
+				src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been disarmed by [M.name] ([M.ckey])</font>")
 
-			message_admins("[M.name] ([M.ckey]) disarmed [src.name] ([src.ckey])",0)
-			log_attack("[M.name] ([M.ckey]) disarmed [src.name] ([src.ckey])")
+				message_admins("[M.name] ([M.ckey])(<A HREF='?src=\ref[src];adminplayerobservejump=\ref[M]'>JMP</A>) disarmed [src.name] ([src.ckey])",0)
+				log_attack("[M.name] ([M.ckey]) disarmed [src.name] ([src.ckey])")
+			else
+				src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been disarmed by [gender_text]</font>")
+
+				message_admins("[src.name] ([src.ckey])(<A HREF='?src=\ref[src];adminplayerobservejump=\ref[src]'>JMP</A>) disarmed [gender_text]",0)
+				log_attack("[src.name] ([src.ckey]) disarmed [gender_text]")
 
 
 			if(w_uniform)
@@ -181,7 +244,10 @@
 			if (randn <= 25)
 				apply_effect(4, WEAKEN, run_armor_check(affecting, "melee"))
 				playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
-				visible_message("\red <B>[M] has pushed [src]!</B>")
+				if (M != src)
+					visible_message("\red <B>[M] has pushed [src]!</B>")
+				else
+					visible_message("\red <B>[src] has pushed \himself!</B>")
 				return
 
 			var/talked = 0	// BubbleWrap
@@ -189,7 +255,10 @@
 			if(randn <= 60)
 				//BubbleWrap: Disarming breaks a pull
 				if(pulling)
-					visible_message("\red <b>[M] has broken [src]'s grip on [pulling]!</B>")
+					if (M != src)
+						visible_message("\red <b>[M] has broken [src]'s grip on [pulling]!</B>")
+					else
+						visible_message("\red <b>[src] has broken \his grip on [pulling]!</B>")
 					talked = 1
 					stop_pulling()
 
@@ -197,14 +266,20 @@
 				if(istype(l_hand, /obj/item/weapon/grab))
 					var/obj/item/weapon/grab/lgrab = l_hand
 					if(lgrab.affecting)
-						visible_message("\red <b>[M] has broken [src]'s grip on [lgrab.affecting]!</B>")
+						if (M != src)
+							visible_message("\red <b>[M] has broken [src]'s grip on [lgrab.affecting]!</B>")
+						else
+							visible_message("\red <b>[src] has broken \his grip on [lgrab.affecting]!</B>")
 						talked = 1
 					spawn(1)
 						del(lgrab)
 				if(istype(r_hand, /obj/item/weapon/grab))
 					var/obj/item/weapon/grab/rgrab = r_hand
 					if(rgrab.affecting)
-						visible_message("\red <b>[M] has broken [src]'s grip on [rgrab.affecting]!</B>")
+						if (M != src)
+							visible_message("\red <b>[M] has broken [src]'s grip on [rgrab.affecting]!</B>")
+						else
+							visible_message("\red <b>[src] has broken \his grip on [rgrab.affecting]!</B>")
 						talked = 1
 					spawn(1)
 						del(rgrab)
@@ -212,13 +287,19 @@
 
 				if(!talked)	//BubbleWrap
 					drop_item()
-					visible_message("\red <B>[M] has disarmed [src]!</B>")
+					if (M != src)
+						visible_message("\red <B>[M] has disarmed [src]!</B>")
+					else
+						visible_message("\red <B>[src] has disarmed \himself!</B>")
 				playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 				return
 
 
 			playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
-			visible_message("\red <B>[M] attempted to disarm [src]!</B>")
+			if (M != src)
+				visible_message("\red <B>[M] attempted to disarm [src]!</B>")
+			else
+				visible_message("\red <B>[src] attempted to disarm \himself!</B>")
 	return
 
 /mob/living/carbon/human/proc/afterattack(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, inrange, params)

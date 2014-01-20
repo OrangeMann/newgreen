@@ -216,6 +216,13 @@
 
 	var/messagesource = M
 
+	//Some text don't want to display text macro "\himself"
+	var/gender_text =""
+	if (M.gender == MALE)
+		gender_text = "himself"
+	else //i.e. female
+		gender_text = "herself"
+
 	if (istype(M,/mob/living/carbon/brain))
 		messagesource = M:container
 	if (src.hitsound)
@@ -224,13 +231,17 @@
 	user.lastattacked = M
 	M.lastattacker = user
 
-	user.attack_log += "\[[time_stamp()]\]<font color='red'> Attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(src.damtype)])</font>"
-	M.attack_log += "\[[time_stamp()]\]<font color='orange'> Attacked by [user.name] ([user.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(src.damtype)])</font>"
+	if (M != user)
+		user.attack_log += "\[[time_stamp()]\]<font color='red'> Attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(src.damtype)])</font>"
+		M.attack_log += "\[[time_stamp()]\]<font color='orange'> Attacked by [user.name] ([user.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(src.damtype)])</font>"
 
-	log_admin("ATTACK: [user] ([user.ckey]) attacked [M] ([M.ckey]) with [src].")
-	message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[user]'>JMP</A>) attacked [M] ([M.ckey]) with [src].", 2)
-	log_attack("<font color='red'>[user.name] ([user.ckey]) attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(src.damtype)])</font>" )
+		message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?src=\ref[src];adminplayerobservejump=\ref[user]'>JMP</A>) attacked [M] ([M.ckey]) with [src].", 0)
+		log_attack("[user.name] ([user.ckey]) attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(src.damtype)])" )
+	else
+		user.attack_log += "\[[time_stamp()]\]<font color='red'> Attacked [gender_text] with [src.name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(src.damtype)])</font>"
 
+		message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?src=\ref[src];adminplayerobservejump=\ref[user]'>JMP</A>) attacked [gender_text] with [src].", 0)
+		log_attack("[user.name] ([user.ckey]) attacked [gender_text] with [src.name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(src.damtype)])" )
 
 	//spawn(1800)			// this wont work right
 	//	M.lastattacker = null
@@ -314,7 +325,10 @@
 
 		var/showname = "."
 		if(user)
-			showname = " by [user]."
+			if (M != user)
+				showname = " by [user]."
+			else
+				showname = " by [gender_text]."
 		if(!(user in viewers(M, null)))
 			showname = "."
 
@@ -326,7 +340,10 @@
 
 		if(!showname && user)
 			if(user.client)
-				user << "\red <B>You attack [M] with [src]. </B>"
+				if (M != user)
+					user << "\red <B>You attack [M] with [src]. </B>"
+				else
+					user << "\red <B>You attack yourself with [src]. </B>"
 
 
 
@@ -647,12 +664,26 @@
 		user << "\red You cannot locate any eyes on this creature!"
 		return
 
-	user.attack_log += "\[[time_stamp()]\]<font color='red'> Attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>"
-	M.attack_log += "\[[time_stamp()]\]<font color='orange'> Attacked by [user.name] ([user.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>"
+	//Some text don't want to display text macro "\himself"
+	var/gender_text =""
+	if (user.gender == MALE)
+		gender_text = "himself"
+	else //i.e. female
+		gender_text = "herself"
 
-	log_admin("ATTACK: [user] ([user.ckey]) attacked [M] ([M.ckey]) with [src].")
-	message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[user]'>JMP</A>) attacked [M] ([M.ckey]) with [src].", 2)
-	log_attack("<font color='red'> [user.name] ([user.ckey]) attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>")
+	if(M != user)
+		user.attack_log += "\[[time_stamp()]\]<font color='red'> Attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>"
+		M.attack_log += "\[[time_stamp()]\]<font color='orange'> Attacked by [user.name] ([user.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>"
+
+		//log_admin("ATTACK: [user] ([user.ckey]) attacked [M] ([M.ckey]) with [src].")
+		message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[user]'>JMP</A>) attacked [M] ([M.ckey]) with [src].", 0)
+		log_attack("[user.name] ([user.ckey]) attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])")
+	else
+		user.attack_log += "\[[time_stamp()]\]<font color='red'> Attacked [gender_text] with [src.name] (INTENT: [uppertext(user.a_intent)])</font>"
+
+		//log_admin("ATTACK: [user] ([user.ckey]) attacked [M] ([M.ckey]) with [src].")
+		message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[user]'>JMP</A>) attacked [gender_text] with [src].", 0)
+		log_attack("[user.name] ([user.ckey]) attacked [gender_text] with [src.name] (INTENT: [uppertext(user.a_intent)])")
 
 	src.add_fingerprint(user)
 	//if((CLUMSY in user.mutations) && prob(50))

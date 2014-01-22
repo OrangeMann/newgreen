@@ -235,12 +235,12 @@
 		user.attack_log += "\[[time_stamp()]\]<font color='red'> Attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(src.damtype)])</font>"
 		M.attack_log += "\[[time_stamp()]\]<font color='orange'> Attacked by [user.name] ([user.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(src.damtype)])</font>"
 
-		message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?src=\ref[src];adminplayerobservejump=\ref[user]'>JMP</A>) attacked [M] ([M.ckey]) with [src].", 0)
+		message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[user]'>JMP</A>) attacked [M] ([M.ckey]) with [src].", 0)
 		log_attack("[user.name] ([user.ckey]) attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(src.damtype)])" )
 	else
 		user.attack_log += "\[[time_stamp()]\]<font color='red'> Attacked [gender_text] with [src.name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(src.damtype)])</font>"
 
-		message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?src=\ref[src];adminplayerobservejump=\ref[user]'>JMP</A>) attacked [gender_text] with [src].", 0)
+		message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[user]'>JMP</A>) attacked [gender_text] with [src].", 0)
 		log_attack("[user.name] ([user.ckey]) attacked [gender_text] with [src.name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(src.damtype)])" )
 
 	//spawn(1800)			// this wont work right
@@ -676,13 +676,13 @@
 		M.attack_log += "\[[time_stamp()]\]<font color='orange'> Attacked by [user.name] ([user.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>"
 
 		//log_admin("ATTACK: [user] ([user.ckey]) attacked [M] ([M.ckey]) with [src].")
-		message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[user]'>JMP</A>) attacked [M] ([M.ckey]) with [src].", 0)
+		message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[user]'>JMP</A>) attacked [M] ([M.ckey]) with [src].", 0)
 		log_attack("[user.name] ([user.ckey]) attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])")
 	else
 		user.attack_log += "\[[time_stamp()]\]<font color='red'> Attacked [gender_text] with [src.name] (INTENT: [uppertext(user.a_intent)])</font>"
 
 		//log_admin("ATTACK: [user] ([user.ckey]) attacked [M] ([M.ckey]) with [src].")
-		message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[user]'>JMP</A>) attacked [gender_text] with [src].", 0)
+		message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[user]'>JMP</A>) attacked [gender_text] with [src].", 0)
 		log_attack("[user.name] ([user.ckey]) attacked [gender_text] with [src.name] (INTENT: [uppertext(user.a_intent)])")
 
 	src.add_fingerprint(user)

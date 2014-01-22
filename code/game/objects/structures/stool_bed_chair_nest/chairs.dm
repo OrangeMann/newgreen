@@ -108,7 +108,7 @@
 /obj/structure/stool/bed/chair/comfy/lime
 	icon_state = "comfychair_lime"
 
-/obj/structure/stool/bed/chair/office/Move()
+/obj/structure/stool/bed/chair/Move()
 	..()
 	if(buckled_mob)
 		buckled_mob.buckled = null //Temporary, so Move() succeeds.

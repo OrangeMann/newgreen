@@ -2436,3 +2436,17 @@
 				job_lock()
 		if (href_list["refresh"])
 			job_lock()
+
+	if(href_list["unbuckle_mob"])
+		var/mob/living/M = locate(href_list["unbuckle_mob"])
+		if (M)
+			M.unbuckle()
+
+	if(href_list["show_mob_attacklog"])
+		var/mob/M = locate(href_list["show_mob_attacklog"])
+		var/text = "No attack log"
+		if (M.attack_log)
+			text = ""
+			for(var/row in M.attack_log)
+				text += row + "<BR>"
+		usr << browse(text, "window=mob_attacklog;size=650x620")

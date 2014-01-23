@@ -380,3 +380,9 @@
 	if(update_metroids)
 		for(var/mob/living/carbon/metroid/M in view(1,src))
 			M.UpdateFeed(src)
+
+/mob/living/proc/unbuckle()
+	buckled = null
+	anchored = initial(anchored)
+	update_canmove()
+	return

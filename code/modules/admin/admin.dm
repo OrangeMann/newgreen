@@ -44,7 +44,8 @@ var/global/floorIsLava = 0
 		body += " played by <b>[M.client]</b> "
 		body += "\[<A href='?src=\ref[src];editrights=show'>[M.client.holder ? M.client.holder.rank : "Player"]</A>\]"
 	else
-		body +="(last played by <b>[M.lastkey]</b>) "
+		if (M.lastkey)
+			body +="(last played by <b>[M.lastkey]</b>) "
 
 	if(istype(M, /mob/new_player))
 		body += " <B>Hasn't Entered Game</B> "
@@ -87,6 +88,11 @@ var/global/floorIsLava = 0
 			<A href='?src=\ref[src];mute=\ref[M];mute_type=[MUTE_DEADCHAT]'><font color='[(muted & MUTE_DEADCHAT)?"red":"blue"]'>DEADCHAT</font></a>\]
 			(<A href='?src=\ref[src];mute=\ref[M];mute_type=[MUTE_ALL]'><font color='[(muted & MUTE_ALL)?"red":"blue"]'>toggle all</font></a>)
 		"}
+
+	body += {"<br><br>
+		<A href='?src=\ref[src];unbuckle_mob=\ref[M]'>Unbuckle</A> |
+		<A href='?src=\ref[src];show_mob_attacklog=\ref[M]'>Attack Log</A>
+	"}
 
 	body += {"<br><br>
 		<A href='?src=\ref[src];jumpto=\ref[M]'><b>Jump to</b></A> |
@@ -174,7 +180,7 @@ var/global/floorIsLava = 0
 		</body></html>
 	"}
 
-	usr << browse(body, "window=adminplayeropts;size=550x620")
+	usr << browse(body, "window=adminplayeropts;size=550x650")
 	feedback_add_details("admin_verb","SPP") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 

@@ -7,6 +7,7 @@
  *		Bombsuit Closet
  *		Hydrant
  *		First Aid
+ *		Indiana Shelter
  */
 
 /*
@@ -220,3 +221,16 @@
 		icon_state = icon_closed
 	else
 		icon_state = icon_opened
+
+/*
+ * Indiana Shelter
+ */
+
+/obj/structure/closet/indianashelter
+	desc = "It's a broken fridge."
+	name = "Broken Fridge"
+	icon_state = "indiana"
+	density = 0
+	anchored = 1
+	icon_closed = "indiana"
+	icon_opened = "indianaopen"

@@ -9,7 +9,7 @@
 	endWhen = rand(600,1200)
 
 /datum/event/carp_migration/announce()
-	command_alert("Обнаружены неизвестные биологические объекты вблизи [station_name()], ожидайте дальнейших сведений.", "Биологическая тревога")
+	command_alert("Обнаружены неизвестные биологические объекты вблизи [station_name()], ожидайте дальнейших сведений.", "Биологическа&#255; тревога")
 
 /datum/event/carp_migration/start()
 	for(var/obj/effect/landmark/C in landmarks_list)

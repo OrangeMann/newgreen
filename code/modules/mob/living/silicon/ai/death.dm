@@ -42,7 +42,7 @@
 		emergency_shuttle.incall(2)
 		log_game("All the AIs, comm consoles and boards are destroyed. Shuttle called.")
 		message_admins("All the AIs, comm consoles and boards are destroyed. Shuttle called.", 1)
-		captain_announce("The emergency shuttle has been called. It will arrive in [round(emergency_shuttle.timeleft()/60)] minutes.")
+		captain_announce("Вызван эвакуационный шаттл. Он прибудет на станцию через [round(emergency_shuttle.timeleft()/60)] минут.")
 		world << sound('sound/AI/shuttlecalled.ogg')
 
 	if(explosive)

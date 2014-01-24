@@ -5,7 +5,6 @@
 #define LOC_LIBRARY 4
 #define LOC_HYDRO 5
 #define LOC_VAULT 6
-#define LOC_CONSTR 7
 #define LOC_TECH 8
 #define LOC_ASSEMBLY 9
 
@@ -29,34 +28,31 @@
 	switch(location)
 		if(LOC_KITCHEN)
 			spawn_area_type = /area/crew_quarters/kitchen
-			locstring = "the kitchen"
+			locstring = "кухонном отсеке"
 		if(LOC_ATMOS)
 			spawn_area_type = /area/atmos
-			locstring = "atmospherics"
+			locstring = "атмосферном отсеке"
 		if(LOC_INCIN)
 			spawn_area_type = /area/maintenance/incinerator
-			locstring = "the incinerator"
+			locstring = "мусоросжигательном отсеке"
 		if(LOC_CHAPEL)
 			spawn_area_type = /area/chapel/main
-			locstring = "the chapel"
+			locstring = "церковном отсеке"
 		if(LOC_LIBRARY)
 			spawn_area_type = /area/library
-			locstring = "the library"
+			locstring = "библиотечном отсеке"
 		if(LOC_HYDRO)
 			spawn_area_type = /area/hydroponics
-			locstring = "hydroponics"
+			locstring = "ботаническом отсеке"
 		if(LOC_VAULT)
 			spawn_area_type = /area/security/nuke_storage
-			locstring = "the vault"
-		if(LOC_CONSTR)
-			spawn_area_type = /area/construction
-			locstring = "the construction area"
+			locstring = "отсеке хранилища"
 		if(LOC_TECH)
 			spawn_area_type = /area/storage/tech
-			locstring = "technical storage"
+			locstring = "техническом складе"
 		if(LOC_ASSEMBLY)
 			spawn_area_type = /area/assembly/assembly_line
-			locstring = "the unused assembly line"
+			locstring = "сборочном цеху"
 
 	//world << "looking for [spawn_area_type]"
 	for(var/areapath in typesof(spawn_area_type))
@@ -76,14 +72,14 @@
 		if(VERM_MICE)
 			spawn_types = list(/mob/living/simple_animal/mouse/gray, /mob/living/simple_animal/mouse/brown, /mob/living/simple_animal/mouse/white)
 			max_number = 12
-			vermstring = "mice"
+			vermstring = "мыши"
 		if(VERM_LIZARDS)
 			spawn_types = list(/mob/living/simple_animal/lizard)
 			max_number = 6
-			vermstring = "lizards"
+			vermstring = "ящерицы"
 		if(VERM_SPIDERS)
 			spawn_types = list(/obj/effect/spider/spiderling)
-			vermstring = "spiders"
+			vermstring = "пауки"
 
 	spawn(0)
 		var/num = rand(2,max_number)
@@ -102,7 +98,7 @@
 
 
 /datum/event/infestation/announce()
-	command_alert("Биосканеры указывают на то, что [vermstring] размножаются в [locstring] отсеке. Уничтожьте их, пока это не начало влиять на продуктивность.", "Паразитическое Заражение")
+	command_alert("Биосканеры указывают на то, что [vermstring] размножаются в [locstring]. Уничтожьте их, пока это не начало влиять на продуктивность.", "Паразитическое Заражение")
 
 #undef LOC_KITCHEN
 #undef LOC_ATMOS

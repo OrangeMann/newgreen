@@ -8,7 +8,7 @@ datum/event/viral_infection/setup()
 	severity = rand(1, 3)
 
 datum/event/viral_infection/announce()
-	command_alert("Confirmed outbreak of level five biohazard aboard [station_name()]. All personnel must contain the outbreak.", "Biohazard Alert")
+	command_alert("Подтверждено появление вирусной угрозы 5 уровня на борту станции [station_name()]. Весь персонал станции обязан устранить опасность.", "Биологическа&#255; Тревога")
 	world << sound('sound/AI/outbreak5.ogg')
 
 datum/event/viral_infection/start()

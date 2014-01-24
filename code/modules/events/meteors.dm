@@ -9,7 +9,7 @@
 	endWhen = rand(10,25) * 3
 
 /datum/event/meteor_wave/announce()
-	command_alert("Обнаружена группа астеройдов на траектории столкновения со станцией.", "Метеоритная Тревога")
+	command_alert("Обнаружена группа астеройдов на траектории столкновения со станцией.", "Метеоритна&#255; Тревога")
 	world << sound('sound/AI/meteors.ogg')
 
 /datum/event/meteor_wave/tick()
@@ -17,7 +17,7 @@
 		spawn_meteors(rand(2,5))
 
 /datum/event/meteor_wave/end()
-	command_alert("Станция успешно прошла поток астероидов.", "Метеоритная Тревога")
+	command_alert("Станция успешно прошла поток астероидов.", "Метеоритна&#255; Тревога")
 
 //
 /datum/event/meteor_shower
@@ -30,7 +30,7 @@
 	waves = rand(1,4)
 
 /datum/event/meteor_shower/announce()
-	command_alert("Станция вошла в поток астероидов.", "Метеоритная Тревога")
+	command_alert("Станция вошла в поток астероидов.", "Метеоритна&#255; Тревога")
 
 //meteor showers are lighter and more common,
 /datum/event/meteor_shower/tick()
@@ -44,4 +44,4 @@
 			endWhen = next_meteor + 1
 
 /datum/event/meteor_shower/end()
-	command_alert("Станция успешно прошла поток астероидов.", "Метеоритная Тревога")
+	command_alert("Станция успешно прошла поток астероидов.", "Метеоритна&#255; Тревога")

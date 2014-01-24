@@ -15,12 +15,34 @@
 
 	var/list/affecting	// the list of all items that will be moved this ptick
 	var/id = ""			// the control ID	- must match controller ID
+	var/verted = 1		// set to -1 to have the conveyour belt be inverted, so you can use the other corner icons
 
 /obj/machinery/conveyor/centcom_auto
 	id = "round_end_belt"
 
+
+// Auto conveyour is always on unless unpowered
+
+/obj/machinery/conveyor/auto/New(loc, newdir)
+	..(loc, newdir)
+	operating = 1
+	setmove()
+
+/obj/machinery/conveyor/auto/update()
+	if(stat & BROKEN)
+		icon_state = "conveyor-broken"
+		operating = 0
+		return
+	else if(!operable)
+		operating = 0
+	else if(stat & NOPOWER)
+		operating = 0
+	else
+		operating = 1
+	icon_state = "conveyor[operating * verted]"
+
 	// create a conveyor
-/obj/machinery/conveyor/New(loc, newdir, on = 0)
+/obj/machinery/conveyor/New(loc, newdir)
 	..(loc)
 	if(newdir)
 		dir = newdir
@@ -49,9 +71,10 @@
 		if(SOUTHWEST)
 			forwards = WEST
 			backwards = NORTH
-	if(on)
-		operating = 1
-		setmove()
+	if(verted == -1)
+		var/temp = forwards
+		forwards = backwards
+		backwards = temp
 
 /obj/machinery/conveyor/proc/setmove()
 	if(operating == 1)
@@ -69,7 +92,7 @@
 		operating = 0
 	if(stat & NOPOWER)
 		operating = 0
-	icon_state = "conveyor[operating]"
+	icon_state = "conveyor[operating * verted]"
 
 	// machine process
 	// move items to the target location
@@ -99,22 +122,8 @@
 	return
 
 // attack with hand, move pulled object onto conveyor
-/obj/machinery/conveyor/attack_hand(mob/user as mob)
-	if ((!( user.canmove ) || user.restrained() || !( user.pulling )))
-		return
-	if (user.pulling.anchored)
-		return
-	if ((user.pulling.loc != user.loc && get_dist(user, user.pulling) > 1))
-		return
-	if (ismob(user.pulling))
-		var/mob/M = user.pulling
-		M.stop_pulling()
-		step(user.pulling, get_dir(user.pulling.loc, src))
-		user.stop_pulling()
-	else
-		step(user.pulling, get_dir(user.pulling.loc, src))
-		user.stop_pulling()
-	return
+///obj/machinery/conveyor/attack_hand(mob/user as mob)
+//	user.Move_Pulled(src)
 
 
 // make the conveyor broken

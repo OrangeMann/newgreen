@@ -54,6 +54,10 @@
 	icon_state = "stamp-clown"
 	item_color = "clown"
 
+/obj/item/weapon/stamp/qm
+	name = "quartermaster's rubber stamp"
+	icon_state = "stamp-qm"
+	item_color = "qm"
 
 /obj/item/weapon/stamp/attack_paw(mob/user as mob)
 	return attack_hand(user)

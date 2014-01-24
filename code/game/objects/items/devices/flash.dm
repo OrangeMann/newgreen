@@ -34,13 +34,30 @@
 
 /obj/item/device/flash/attack(mob/living/M as mob, mob/user as mob)
 	if(!user || !M)	return	//sanity
-	M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been flashed (attempt) with [src.name]  by [user.name] ([user.ckey])</font>")
-	user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to flash [M.name] ([M.ckey])</font>")
 
+	//Some text don't want to display text macro "\himself"
+	var/gender_text =""
+	if (M.gender == MALE)
+		gender_text = "himself"
+	else //i.e. female
+		gender_text = "herself"
 
-	log_admin("ATTACK: [user] ([user.ckey]) flashed [M] ([M.ckey]) with [src].")
-	message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[user]'>JMP</A>) flashed [M] ([M.ckey]) with [src].", 2)
-	log_attack("<font color='red'>[user.name] ([user.ckey]) Used the [src.name] to flash [M.name] ([M.ckey])</font>")
+	var/victim = ""
+	var/victim_full = ""
+	if (M != user)
+		victim = "[M]"
+		victim_full = "[M.name] ([M.ckey])"
+	else
+		victim = "[gender_text]"
+		victim_full = "[gender_text]"
+
+	if (M != user)
+		M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been flashed (attempt) with [src.name]  by [user.name] ([user.ckey])</font>")
+	user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to flash [victim_full]</font>")
+
+	//log_admin("ATTACK: [user] ([user.ckey]) flashed [M] ([M.ckey]) with [src].")
+	message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[user]'>JMP</A>) flashed [victim_full] with [src].", 0)
+	log_attack("[user.name] ([user.ckey]) Used the [src.name] to flash [victim_full]")
 
 
 	if(!clown_check(user))	return
@@ -114,13 +131,13 @@
 		flick("flash2", src)
 		if(!issilicon(M))
 
-			user.visible_message("<span class='disarm'>[user] blinds [M] with the flash!</span>")
+			user.visible_message("<span class='disarm'>[user] blinds [victim] with the flash!</span>")
 		else
 
-			user.visible_message("<span class='notice'>[user] overloads [M]'s sensors with the flash!</span>")
+			user.visible_message("<span class='notice'>[user] overloads [victim]'s sensors with the flash!</span>")
 	else
 
-		user.visible_message("<span class='notice'>[user] fails to blind [M] with the flash!</span>")
+		user.visible_message("<span class='notice'>[user] fails to blind [victim] with the flash!</span>")
 
 	return
 

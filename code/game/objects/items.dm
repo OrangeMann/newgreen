@@ -17,6 +17,9 @@
 //	causeerrorheresoifixthis
 	var/obj/item/master = null
 
+	var/write_log = 1  //If 1 - logging attack message
+	var/show_atk_msg = 1 //If 1 - show attack message to every viewers
+
 	var/heat_protection = 0 //flags which determine which body parts are protected from heat. Use the HEAD, UPPER_TORSO, LOWER_TORSO, etc. flags. See setup.dm
 	var/cold_protection = 0 //flags which determine which body parts are protected from cold. Use the HEAD, UPPER_TORSO, LOWER_TORSO, etc. flags. See setup.dm
 	var/max_heat_protection_temperature //Set this variable to determine up to which temperature (IN KELVIN) the item protects against heat damage. Keep at null to disable protection. Only protects areas set by heat_protection flags
@@ -231,17 +234,18 @@
 	user.lastattacked = M
 	M.lastattacker = user
 
-	if (M != user)
-		user.attack_log += "\[[time_stamp()]\]<font color='red'> Attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(src.damtype)])</font>"
-		M.attack_log += "\[[time_stamp()]\]<font color='orange'> Attacked by [user.name] ([user.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(src.damtype)])</font>"
+	if (write_log)
+		if (M != user)
+			user.attack_log += "\[[time_stamp()]\]<font color='red'> Attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(src.damtype)])</font>"
+			M.attack_log += "\[[time_stamp()]\]<font color='orange'> Attacked by [user.name] ([user.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(src.damtype)])</font>"
 
-		message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[user]'>JMP</A>) attacked [M] ([M.ckey]) with [src].", 0)
-		log_attack("[user.name] ([user.ckey]) attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(src.damtype)])" )
-	else
-		user.attack_log += "\[[time_stamp()]\]<font color='red'> Attacked [gender_text] with [src.name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(src.damtype)])</font>"
+			message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[user]'>JMP</A>) attacked [M] ([M.ckey]) with [src].", 0)
+			log_attack("[user.name] ([user.ckey]) attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(src.damtype)])" )
+		else
+			user.attack_log += "\[[time_stamp()]\]<font color='red'> Attacked [gender_text] with [src.name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(src.damtype)])</font>"
 
-		message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[user]'>JMP</A>) attacked [gender_text] with [src].", 0)
-		log_attack("[user.name] ([user.ckey]) attacked [gender_text] with [src.name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(src.damtype)])" )
+			message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[user]'>JMP</A>) attacked [gender_text] with [src].", 0)
+			log_attack("[user.name] ([user.ckey]) attacked [gender_text] with [src.name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(src.damtype)])" )
 
 	//spawn(1800)			// this wont work right
 	//	M.lastattacker = null
@@ -322,7 +326,6 @@
 										step_away(metroid, user)
 								metroid.canmove = 1
 
-
 		var/showname = "."
 		if(user)
 			if (M != user)
@@ -332,11 +335,12 @@
 		if(!(user in viewers(M, null)))
 			showname = "."
 
-		for(var/mob/O in viewers(messagesource, null))
-			if(src.attack_verb.len)
-				O.show_message("\red <B>[M] has been [pick(src.attack_verb)] with [src][showname] </B>", 1)
-			else
-				O.show_message("\red <B>[M] has been attacked with [src][showname] </B>", 1)
+		if (show_atk_msg)
+			for(var/mob/O in viewers(messagesource, null))
+				if(src.attack_verb.len)
+					O.show_message("\red <B>[M] has been [pick(src.attack_verb)] with [src][showname] </B>", 1)
+				else
+					O.show_message("\red <B>[M] has been attacked with [src][showname] </B>", 1)
 
 		if(!showname && user)
 			if(user.client)

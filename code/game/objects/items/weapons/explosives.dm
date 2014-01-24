@@ -16,7 +16,9 @@
 	user << "Planting explosives..."
 	if(ismob(target))
 		user.attack_log += "\[[time_stamp()]\] <font color='red'> [user.real_name] tried planting [name] on [target:real_name] ([target:ckey])</font>"
-		msg_admin_attack("[user.real_name] ([user.ckey]) tried planting [name] on [target:real_name] ([target:ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
+		//msg_admin_attack("[user.real_name] ([user.ckey]) tried planting [name] on [target:real_name] ([target:ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
+		message_admins("ATTACK:[user.name] ([user.ckey]) tried planting [name] on [target.name] ([target:ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
+		log_attack("[user.name] ([user.ckey]) tried planting  [name] on [target.name] ([target:ckey])")
 		user.visible_message("\red [user.name] is trying to plant some kind of explosive on [target.name]!")
 
 	if(do_after(user, 50) && in_range(user, target))
@@ -29,9 +31,9 @@
 		if (ismob(target))
 			target:attack_log += "\[[time_stamp()]\]<font color='orange'> Had the [name] planted on them by [user.real_name] ([user.ckey])</font>"
 			user.visible_message("\red [user.name] finished planting an explosive on [target.name]!")
-			log_admin("ATTACK: [user] ([user.ckey]) planted [src] on [target] ([target:ckey]).")
-			message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[user]'>JMP</A>) planted [src] on [target] ([target:ckey]).", 2)
-			log_attack("<font color='red'> [user.real_name] ([user.ckey]) tried planting [name] on [target:real_name] ([target:ckey])</font>")
+			//log_admin("ATTACK: [user] ([user.ckey]) planted [src] on [target] ([target:ckey]).")
+			message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>) planted [src] on [target] ([target:ckey]).", 2)
+			log_attack("[user] ([user.ckey]) planted [name] on [target.name] ([target:ckey])")
 		target.overlays += image('icons/obj/assemblies.dmi', "plastic-explosive2")
 		user << "Bomb has been planted. Timer counting down from [timer]."
 		spawn(timer*10)

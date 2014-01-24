@@ -201,16 +201,17 @@ emp_act
 	else //i.e. female
 		gender_text = "herself"
 
-	if(I.attack_verb.len)
-		if(user != src)
-			visible_message("\red <B>[src] has been [pick(I.attack_verb)] in the [hit_area] with [I.name] by [user]!</B>")
+	if (I.show_atk_msg)
+		if(I.attack_verb.len)
+			if(user != src)
+				visible_message("\red <B>[src] has been [pick(I.attack_verb)] in the [hit_area] with [I.name] by [user]!</B>")
+			else
+				visible_message("\red <B>[src] has been [pick(I.attack_verb)] in the [hit_area] with [I.name] by [gender_text]!</B>")
 		else
-			visible_message("\red <B>[src] has been [pick(I.attack_verb)] in the [hit_area] with [I.name] by [gender_text]!</B>")
-	else
-		if(user != src)
-			visible_message("\red <B>[src] has been attacked in the [hit_area] with [I.name] by [user]!</B>")
-		else
-			visible_message("\red <B>[src] has been attacked in the [hit_area] with [I.name] by [gender_text]!</B>")
+			if(user != src)
+				visible_message("\red <B>[src] has been attacked in the [hit_area] with [I.name] by [user]!</B>")
+			else
+				visible_message("\red <B>[src] has been attacked in the [hit_area] with [I.name] by [gender_text]!</B>")
 
 	var/armor = run_armor_check(affecting, "melee", "Your armor has protected your [hit_area].", "Your armor has softened hit to your [hit_area].")
 	if(armor >= 2)	return 0

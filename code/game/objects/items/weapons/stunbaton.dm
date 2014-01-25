@@ -8,6 +8,8 @@
 	force = 10
 	throwforce = 7
 	w_class = 3
+	write_log = 0
+	show_atk_msg = 0
 	var/charges = 10
 	var/status = 0
 	var/mob/foundmob = "" //Used in throwing proc.
@@ -65,33 +67,23 @@
 	else //i.e. female
 		gender_text = "herself"
 
+	var/victim = ""
+	var/victim_full = ""
+	if (H != user)
+		victim = "[H]"
+		victim_full = "[H.name] ([H.ckey])"
+	else
+		victim = "[gender_text]"
+		victim_full = "[gender_text]"
+
+	var/beaten = 0
 	if(user.a_intent == "hurt")
 		if(!..()) return
 		//H.apply_effect(5, WEAKEN, 0)
-		if(H != user)
-			H.visible_message("<span class='danger'>[M] has been beaten with the [src] by [user]!</span>")
-
-			user.attack_log += "\[[time_stamp()]\]<font color='red'> Beat [H.name] ([H.ckey]) with [src.name]</font>"
-			H.attack_log += "\[[time_stamp()]\]<font color='orange'> Beaten by [user.name] ([user.ckey]) with [src.name]</font>"
-
-			//log_admin("ATTACK: [user] ([user.ckey]) attacked [M] ([M.ckey]) with [src].")
-			message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[user]'>JMP</A>) attacked [M] ([M.ckey]) with [src].", 0)
-			log_attack("[user.name] ([user.ckey]) attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])")
-		else
-			user.visible_message("<span class='danger'>[user] has been beaten with the [src] by [gender_text]!</span>")
-
-			user.attack_log += "\[[time_stamp()]\]<font color='red'> Beat [H.name] ([H.ckey]) with [src.name]</font>"
-
-			//log_admin("ATTACK: [user] ([user.ckey]) attacked [M] ([M.ckey]) with [src].")
-			message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[user]'>JMP</A>) attacked [gender_text] with [src].", 0)
-			log_attack("[user.name] ([user.ckey]) attacked [gender_text] with [src.name] (INTENT: [uppertext(user.a_intent)])")
-
+		beaten = 1
 		playsound(src.loc, "swing_hit", 50, 1, -1)
 	else if(!status)
-		if(H != user)
-			H.visible_message("<span class='warning'>[M] has been prodded with the [src] by [user]. Luckily it was off.</span>")
-		else
-			user.visible_message("<span class='warning'>[user] has been prodded with the [src] by [gender_text]. Luckily it was off.</span>")
+		H.visible_message("<span class='warning'>[M] has been prodded with the [src] by [victim]. Luckily it was off.</span>")
 		return
 
 	if(status)
@@ -106,24 +98,40 @@
 				R.cell.use(50)
 		else
 			charges--
-		if(H != user)
-			H.visible_message("<span class='danger'>[M] has been stunned with the [src] by [user]!</span>")
-
-			user.attack_log += "\[[time_stamp()]\]<font color='red'> Stunned [H.name] ([H.ckey]) with [src.name]</font>"
-			H.attack_log += "\[[time_stamp()]\]<font color='orange'> Stunned by [user.name] ([user.ckey]) with [src.name]</font>"
-			message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[user]'>JMP</A>) stunned [H.name] ([H.ckey]) with [src].", 0)
-			log_attack("[user.name] ([user.ckey]) stunned [H.name] ([H.ckey]) with [src.name]")
-		else
-			user.visible_message("<span class='danger'>[user] has been stunned with the [src] by [gender_text]!</span>")
-
-			user.attack_log += "\[[time_stamp()]\]<font color='red'> Stunned [gender_text] with [src.name]</font>"
-			message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[user]'>JMP</A>) stunned [gender_text] with [src].", 0)
-			log_attack("[user.name] ([user.ckey]) stunned [gender_text] with [src.name]")
 
 		playsound(src.loc, 'sound/weapons/Egloves.ogg', 50, 1, -1)
 		if(charges < 1)
 			status = 0
 			update_icon()
+
+	//Messages and logs
+	if (status || beaten)
+		var/atk_text = ""
+		var/atk_text_cap = ""
+		var/atk_text_cap_user = ""
+		if (beaten)
+			atk_text = "beaten"
+			atk_text_cap = "Beaten"
+			atk_text_cap_user = "Beat"
+			if (status)
+				atk_text = "beaten and stunned"
+				atk_text_cap = "Beaten and stunned"
+				atk_text_cap_user = "Beat and stunned"
+		else
+			atk_text = "stunned"
+			atk_text_cap = "Stunned"
+			atk_text_cap_user = "Stunned"
+
+		if(H != user)
+			H.visible_message("<span class='danger'>[M] has been [atk_text] with the [src] by [user]!</span>")
+		else
+			H.visible_message("<span class='danger'>[M] has been [atk_text] with the [src] by [gender_text]!</span>")
+
+		if(H != user)
+			H.attack_log += "\[[time_stamp()]\]<font color='orange'> [atk_text_cap] by [user] ([user.ckey]) with [src.name]</font>"
+		user.attack_log += "\[[time_stamp()]\]<font color='red'> [atk_text_cap_user] [victim_full] with [src.name]</font>"
+		message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[user]'>JMP</A>) [atk_text] [victim_full] with [src].", 0)
+		log_attack("[user.name] ([user.ckey]) [atk_text] [victim_full] with [src.name]")
 
 	add_fingerprint(user)
 

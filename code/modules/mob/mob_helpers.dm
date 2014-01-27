@@ -194,7 +194,7 @@ proc/hasorgans(A)
 				miss_chance = 50
 		miss_chance = max(miss_chance + miss_chance_mod, 0)
 		if(prob(miss_chance))
-			if(prob(70))
+			if(prob(30))
 				return null
 			else
 				var/t = rand(1, 10)

@@ -70,12 +70,12 @@
 			if(owner.getToxLoss() >= 60 && !owner.reagents.has_reagent("anti_toxin"))
 				//Healthy liver suffers on its own
 				if (src.damage < min_broken_damage)
-					src.damage += 0.2 * process_accuracy
+					src.damage += 0.1 * process_accuracy
 				//Damaged one shares the fun
 				else
 					var/victim = pick(owner.internal_organs)
 					var/datum/organ/internal/O = owner.internal_organs[victim]
-					O.damage += 0.2  * process_accuracy
+					O.damage += 0.1  * process_accuracy
 
 			//Detox can heal small amounts of damage
 			if (src.damage && src.damage < src.min_bruised_damage && owner.reagents.has_reagent("anti_toxin"))

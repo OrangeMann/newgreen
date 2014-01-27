@@ -88,7 +88,7 @@
 			if (!lying && world.timeofday - l_move_time < 15)
 				var/datum/organ/internal/I = pick(E.internal_organs)
 				custom_pain("You feel broken bones moving in your [E.display_name]!", 1)
-				I.take_damage(rand(3,5))
+				if(prob(20)) I.take_damage(1)
 
 		//Special effects for limbs.
 		if(E.name in list("l_hand","l_arm","r_hand","r_arm"))
@@ -102,9 +102,9 @@
 				if (broken||malfunction)
 					u_equip(c_hand)
 
-				if(broken)
+				if(broken && prob(10))
 					emote("me", 1, "screams in pain and drops what they were holding in their [E.display_name?"[E.display_name]":"[E]"]!")
-				if(malfunction)
+				if(malfunction && prob(10))
 					emote("me", 1, "drops what they were holding, their [E.display_name?"[E.display_name]":"[E]"] malfunctioning!")
 					var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
 					spark_system.set_up(5, 0, src)
@@ -118,10 +118,10 @@
 				leg_tally--			// let it fail even if just foot&leg
 
 	// standing is poor
-	if(leg_tally <= 0 && !paralysis && !(lying || resting) && prob(5))
+	if(leg_tally <= 0 && !paralysis && !(lying || resting) && prob(1))
 		emote("scream")
 		emote("collapse")
-		paralysis = 10
+		paralysis = 3
 
 	//Check arms and legs for existence
 	var/canstand_l = 1  //Can stand on left leg

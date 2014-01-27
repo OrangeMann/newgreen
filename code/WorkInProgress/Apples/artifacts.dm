@@ -15,9 +15,3 @@ obj/item/changestone/attack_hand(var/mob/user as mob)
 			H.dna.ready_dna(H)
 			H.update_body()
 	..()
-
-
-
-
-
-

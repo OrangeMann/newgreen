@@ -688,7 +688,7 @@
 /obj/machinery/vending/cola
 	name = "Robust Softdrinks"
 	desc = "A softdrink vendor provided by Robust Industries, LLC."
-	icon_state = "Cola_Machine"
+	icon_state = "soda"
 	product_slogans = "Robust Softdrinks: More robust than a toolbox to the head!"
 	product_ads = "Refreshing!;Hope you're thirsty!;Over 1 million drinks sold!;Thirsty? Why not cola?;Please, have a drink!;Drink up!;The best drinks in space."
 	products = list(/obj/item/weapon/reagent_containers/food/drinks/cola = 10,/obj/item/weapon/reagent_containers/food/drinks/space_mountain_wind = 10,
@@ -698,6 +698,28 @@
 //	prices = list(/obj/item/weapon/reagent_containers/food/drinks/cola = 20,/obj/item/weapon/reagent_containers/food/drinks/space_mountain_wind = 20,
 //					/obj/item/weapon/reagent_containers/food/drinks/dr_gibb = 20,/obj/item/weapon/reagent_containers/food/drinks/starkist = 20,
 //					/obj/item/weapon/reagent_containers/food/drinks/space_up = 20)
+
+/obj/machinery/vending/spaceup
+	name = "Robust Softdrinks"
+	desc = "A softdrink vendor provided by Robust Industries, LLC."
+	icon_state = "spaceup"
+	product_slogans = "Robust Softdrinks: More robust than a toolbox to the head!"
+	product_ads = "Refreshing!;Hope you're thirsty!;Over 1 million drinks sold!;Thirsty? Why not spaceup?;Please, have a drink!;Drink up!;The best drinks in space."
+	products = list(/obj/item/weapon/reagent_containers/food/drinks/cola = 10,/obj/item/weapon/reagent_containers/food/drinks/space_mountain_wind = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/dr_gibb = 10,/obj/item/weapon/reagent_containers/food/drinks/starkist = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/space_up = 10)
+	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/thirteenloko = 5)
+
+/obj/machinery/vending/spacewind
+	name = "Robust Softdrinks"
+	desc = "A softdrink vendor provided by Robust Industries, LLC."
+	icon_state = "spacewind"
+	product_slogans = "Robust Softdrinks: More robust than a toolbox to the head!"
+	product_ads = "Refreshing!;Hope you're thirsty!;Over 1 million drinks sold!;Thirsty? Why not spacewind?;Please, have a drink!;Drink up!;The best drinks in space."
+	products = list(/obj/item/weapon/reagent_containers/food/drinks/cola = 10,/obj/item/weapon/reagent_containers/food/drinks/space_mountain_wind = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/dr_gibb = 10,/obj/item/weapon/reagent_containers/food/drinks/starkist = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/space_up = 10)
+	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/thirteenloko = 5)
 
 //This one's from bay12
 /obj/machinery/vending/cart
@@ -727,8 +749,8 @@
 /obj/machinery/vending/medical
 	name = "NanoMed Plus"
 	desc = "Medical drug dispenser."
-	icon_state = "med"
-	icon_deny = "med-deny"
+	icon_state = "nanomedplus"
+	icon_deny = "nanomedplus-deny"
 	product_ads = "Go save some lives!;The best stuff for your medbay.;Only the finest tools.;Natural chemicals!;This stuff saves lives.;Don't you want some?;Ping!"
 	req_access_txt = "5"
 	products = list(/obj/item/weapon/reagent_containers/glass/bottle/antitoxin = 4,/obj/item/weapon/reagent_containers/glass/bottle/inaprovaline = 4,

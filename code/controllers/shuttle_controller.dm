@@ -283,7 +283,7 @@ datum/shuttle_controller/emergency_shuttle/process()
 
 				start_location.move_contents_to(end_location)
 				settimeleft(SHUTTLELEAVETIME)
-				captain_announce("Ёвакуационный шаттл состыковалс€ со станцией. ” вас есть [round(timeleft()/60,1)] минут на посадку.")
+				captain_announce("Ёвакуационный шаттл состыковалс€ со станцией. ” вас есть [round(timeleft()/60,1)] минуты на посадку.")
 				world << sound('sound/AI/shuttledock.ogg')
 
 				return 1
@@ -414,7 +414,7 @@ datum/shuttle_controller/emergency_shuttle/process()
 						if(!M.buckled)
 							M.Weaken(5)
 
-				captain_announce("Ёвакуционный шаттл успешно отстыковалс€. ќценочное врем€ пути -- [round(timeleft()/60,1)] минут.")
+				captain_announce("Ёвакуационный шаттл успешно отстыковалс€. ќценочное врем€ пути -- [round(timeleft()/60,1)] минут.")
 
 				return 1
 

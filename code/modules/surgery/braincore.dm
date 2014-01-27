@@ -256,13 +256,7 @@ mob/living/carbon/human
 
 
 		if(target.cores >= 0)
-			var/list/mctrand = list(/obj/item/metroid_core/t1      =1,
-						            /obj/item/metroid_core/t2      =3,
-						            /obj/item/metroid_core/t3      =3,
-						            /obj/item/metroid_core/t4      =2,
-						            /obj/item/metroid_core/t5      =1
-						            )
-			var/mctrandom = pickweight(mctrand)
+			var/mctrandom = pickweight(target.mctrand)
 			new mctrandom(target.loc)
 		if(target.cores <= 0)
 //			var/origstate = initial(target.icon_state)

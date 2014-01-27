@@ -263,18 +263,14 @@ datum
 
 							if(!C.required_other)
 								matching_other = 1
-
 							else
 								if(istype(my_atom, /obj/item/metroid_core))
 									var/obj/item/metroid_core/M = my_atom
 
-									if(M.POWERFLAG == C.required_other && M.Uses > 0) // added a limit to metroid cores -- Muskets requested this
+									if(M.uses > 0) // added a limit to metroid cores -- Muskets requested this
 										matching_other = 1
-								if(istype(my_atom, /obj/item/metroid_core))
-									var/obj/item/metroid_core/M = my_atom
-
-									if(M.Uses > 0) // added a limit to metroid cores -- Muskets requested this
-										matching_other = 1
+								else
+									matching_other = 1
 
 
 

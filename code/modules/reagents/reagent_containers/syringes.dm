@@ -103,11 +103,11 @@
 						user << "\red [target] is empty."
 						return
 
-//					if(!target.is_open_container() && !istype(target,/obj/structure/reagent_dispensers) && !istype(target,/obj/item/metroid_core))
-//						user << "\red You cannot directly remove reagents from this object."
-//						return
+					if(!target.is_open_container() && !istype(target,/obj/structure/reagent_dispensers) && !istype(target,/obj/item/metroid_core))
+						user << "\red You cannot directly remove reagents from this object."
+						return
 
-					var/trans = target.reagents.trans_to(src, amount_per_transfer_from_this) // transfer from, transfer to - who cares?
+					var/trans = target.reagents.trans_to(src, amount_per_transfer_from_this)
 
 					user << "\blue You fill the syringe with [trans] units of the solution."
 				if (reagents.total_volume >= reagents.maximum_volume)
@@ -127,10 +127,6 @@
 				if(target.reagents.total_volume >= target.reagents.maximum_volume)
 					user << "\red [target] is full."
 					return
-
-				if(istype(target, /obj/item/metroid_core))
-					var/obj/item/metroid_core/core = target
-					core.Flush = 30 // reset flush counter
 
 				if(ismob(target) && target != user)
 					var/time = 30 //Injecting through a hardsuit takes longer due to needing to find a port.

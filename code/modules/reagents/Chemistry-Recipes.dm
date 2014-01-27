@@ -951,7 +951,7 @@ datum
 				return
 */
 /////////////////////////////////////////////NEW METROID CORE REACTIONS/////////////////////////////////////////////
-
+/*
 //Type 1
 
 		metroidfrost
@@ -1356,17 +1356,17 @@ datum
 				var/obj/effect/golemrune/Z = new /obj/effect/golemrune
 				Z.loc = get_turf_loc(holder.my_atom)
 				Z.announce_to_ghosts()
-*/
+*/*/
 /////////////////////////////////FERN METROID CORE REACTIONS///////////////////////////////////
 
-/*
+		// Type 1
 		metroidpepper
 			name = "Metroid Condensedcapaicin"
 			id = "m_condensedcapaicin"
 			result = "condensedcapsaicin"
 			required_reagents = list("sugar" = 1)
 			result_amount = 1
-			required_container = /obj/item/metroid_core
+			required_container = /obj/item/metroid_core/t1
 			required_other = 1
 		metroidfrost
 			name = "Metroid Frost Oil"
@@ -1374,7 +1374,7 @@ datum
 			result = "frostoil"
 			required_reagents = list("water" = 1)
 			result_amount = 1
-			required_container = /obj/item/metroid_core
+			required_container = /obj/item/metroid_core/t1
 			required_other = 1
 		metroidglycerol
 			name = "Metroid Glycerol"
@@ -1382,16 +1382,17 @@ datum
 			result = "glycerol"
 			required_reagents = list("blood" = 1)
 			result_amount = 1
-			required_container = /obj/item/metroid_core
+			required_container = /obj/item/metroid_core/t1
 			required_other = 1
 
+		// Type 2
 		metroid_explosion
 			name = "Metroid Explosion"
 			id = "m_explosion"
 			result = null
 			required_reagents = list("blood" = 1)
 			result_amount = 2
-			required_container = /obj/item/metroid_core
+			required_container = /obj/item/metroid_core/t2
 			required_other = 2
 			on_reaction(var/datum/reagents/holder, var/created_volume)
 				var/location = get_turf(holder.my_atom)
@@ -1407,7 +1408,7 @@ datum
 			result = "metroid"
 			required_reagents = list("water" = 1)
 			result_amount = 1
-			required_container = /obj/item/metroid_core
+			required_container = /obj/item/metroid_core/t2
 			required_other = 2
 /*		metroidsynthi
 			name = "Metroid Synthetic Flesh"
@@ -1415,20 +1416,21 @@ datum
 			result = null
 			required_reagents = list("sugar" = 1)
 			result_amount = 1
-			required_container = /obj/item/metroid_core
+			required_container = /obj/item/metroid_core/t2
 			required_other = 2
 			on_reaction(var/datum/reagents/holder, var/created_volume)
 				var/location = get_turf(holder.my_atom)
 				new /obj/item/weapon/reagent_containers/food/snacks/sliceable/meat/syntiflesh(location)
 				return
 */
+		// Type 3
 		metroidenzyme
 			name = "Metroid Enzyme"
 			id = "m_enzyme"
 			result = "enzyme"
 			required_reagents = list("blood" = 1, "water" = 1)
 			result_amount = 2
-			required_container = /obj/item/metroid_core
+			required_container = /obj/item/metroid_core/t3
 			required_other = 3
 		metroidplasma
 			name = "Metroid Plasma"
@@ -1436,7 +1438,7 @@ datum
 			result = "plasma"
 			required_reagents = list("sugar" = 1, "blood" = 2)
 			result_amount = 2
-			required_container = /obj/item/metroid_core
+			required_container = /obj/item/metroid_core/t3
 			required_other = 3
 		metroidvirus
 			name = "Metroid Virus"
@@ -1444,7 +1446,7 @@ datum
 			result = null
 			required_reagents = list("sugar" = 1, "acid" = 1)
 			result_amount = 2
-			required_container = /obj/item/metroid_core
+			required_container = /obj/item/metroid_core/t3
 			required_other = 3
 			on_reaction(var/datum/reagents/holder, var/created_volume)
 				holder.clear_reagents()
@@ -1462,6 +1464,7 @@ datum
 
 				return
 
+		// Type 4
 		metroidteleport
 			name = "Metroid Teleport"
 			id = "m_tele"
@@ -1469,10 +1472,10 @@ datum
 			required_reagents = list("pacid" = 2, "mutagen" = 2)
 			required_catalysts = list("plasma" = 1)
 			result_amount = 1
-			required_container = /obj/item/metroid_core
+			required_container = /obj/item/metroid_core/t4
 			required_other = 4
 			on_reaction(var/datum/reagents/holder, var/created_volume)
-
+				holder.clear_reagents()
 				// Calculate new position (searches through beacons in world)
 				var/obj/item/device/radio/beacon/chosen
 				var/list/possible = list()
@@ -1499,12 +1502,15 @@ datum
 					var/y_distance = TO.y - FROM.y
 					var/x_distance = TO.x - FROM.x
 					for (var/atom/movable/A in range(2, FROM )) // iterate thru list of mobs in the area
-						if(istype(A, /obj/item/device/radio/beacon)) continue // don't teleport beacons because that's just insanely stupid
-						if( A.anchored && !istype(A, /mob/dead/observer) ) continue // don't teleport anchored things (computers, tables, windows, grilles, etc) because this causes problems!
+						if(istype(A, /obj/item/device/radio/beacon))
+							continue // don't teleport beacons because that's just insanely stupid
+						if( A.anchored && !istype(A, /mob/dead/observer) )
+							continue // don't teleport anchored things (computers, tables, windows, grilles, etc) because this causes problems!
 						// do teleport ghosts however because hell why not
 
 						var/turf/newloc = locate(A.x + x_distance, A.y + y_distance, TO.z) // calculate the new place
-						if(!A.Move(newloc)) // if the atom, for some reason, can't move, FORCE them to move! :) We try Move() first to invoke any movement-related checks the atom needs to perform after moving
+						if(!A.Move(newloc)) // if the atom, for some reason, can't move, FORCE them to move! :)
+											// We try Move() first to invoke any movement-related checks the atom needs to perform after moving
 							A.loc = locate(A.x + x_distance, A.y + y_distance, TO.z)
 
 						spawn()
@@ -1528,11 +1534,31 @@ datum
 			required_reagents = list("acid" = 1, "blood" = 1)
 			required_catalysts = list("plasma" = 1, "mutagen" = 1)
 			result_amount = 1
-			required_container = /obj/item/metroid_core
+			required_container = /obj/item/metroid_core/t4
 			required_other = 4
 			on_reaction(var/datum/reagents/holder, var/created_volume)
+				holder.clear_reagents()
+				var/blocked = list(/mob/living/simple_animal/,
+					/mob/living/simple_animal/hostile/alien/queen/large,
+					/mob/living/simple_animal/sculpture,
+					/mob/living/simple_animal/space_worm,
+					/mob/living/simple_animal/space_worm/head,
+					/mob/living/simple_animal/r2d3,
+					/mob/living/simple_animal/construct,
+					/mob/living/simple_animal/hostile/retaliate,
+					/mob/living/simple_animal/hostile/hivebot/tele,
+					/mob/living/simple_animal/hostile/mimic,
+					/mob/living/simple_animal/hostile/mimic/copy,
+					/mob/living/simple_animal/hostile/tree,
+					/mob/living/simple_animal/hostile/retaliate,
+					/mob/living/simple_animal/hostile/tribesman,
+					/mob/living/simple_animal/poni,
+					/mob/living/simple_animal/vox,
+					/mob/living/simple_animal/bee,
+					)// exclusion list for things you don't want the reaction to create.
+					//  must include all broken animals, all base types and all badminous shit
 
-				var/list/critters = typesof(/obj/effect/critter) - /obj/effect/critter // list of possible critters
+				var/list/critters = typesof(/mob/living/simple_animal) - blocked // list of possible critters
 
 				playsound(get_turf(holder.my_atom), 'phasein.ogg', 100, 1)
 
@@ -1542,7 +1568,7 @@ datum
 
 				for(var/i = 1, i <= created_volume, i++)
 					var/chosen = pick(critters)
-					var/obj/effect/critter/C = new chosen
+					var/mob/living/simple_animal/C = new chosen
 					C.loc = get_turf(holder.my_atom)
 					if(prob(50))
 						for(var/j = 1, j <= rand(1, 3), j++)
@@ -1554,10 +1580,10 @@ datum
 			result = null
 			required_reagents = list("sugar" = 1, "water" = 1)
 			result_amount = 2
-			required_container = /obj/item/metroid_core
+			required_container = /obj/item/metroid_core/t4
 			required_other = 4
 			on_reaction(var/datum/reagents/holder, var/created_volume)
-
+				holder.clear_reagents()
 				var/list/borks = typesof(/mob/living/simple_animal/hostile/bear) - /mob/living/simple_animal/hostile/bear
 				// BORK BORK BORK
 
@@ -1577,34 +1603,35 @@ datum
 								step(B, pick(NORTH,SOUTH,EAST,WEST))
 
 
-
+		// Type 5
 		metroidchloral
 			name = "Metroid Chloral"
 			id = "m_bunch"
 			result = "chloralhydrate"
 			required_reagents = list("blood" = 1, "water" = 2)
 			result_amount = 2
-			required_container = /obj/item/metroid_core
+			required_container = /obj/item/metroid_core/t5
 			required_other = 5
-/*		metroidretro
+		metroidretro
 			name = "Metroid Retro"
 			id = "m_xeno"
 			result = null
 			required_reagents = list("sugar" = 1)
 			result_amount = 1
-			required_container = /obj/item/metroid_core
+			required_container = /obj/item/metroid_core/t5
 			required_other = 5
 			on_reaction(var/datum/reagents/holder, var/created_volume)
+				holder.clear_reagents()
 				var/datum/disease/F = new /datum/disease/dna_retrovirus(0)
 				var/list/data = list("viruses"= list(F))
-				holder.add_reagent("blood", 20, data)*/
+				holder.add_reagent("blood", 20, data)
 		metroidfoam
 			name = "Metroid Foam"
 			id = "m_foam"
 			result = null
 			required_reagents = list("acid" = 1)
 			result_amount = 2
-			required_container = /obj/item/metroid_core
+			required_container = /obj/item/metroid_core/t5
 			required_other = 5
 
 			on_reaction(var/datum/reagents/holder, var/created_volume)
@@ -1630,7 +1657,7 @@ datum
 				return
 
 
-*/
+
 //////////////////////////////////////////FOOD MIXTURES////////////////////////////////////
 
 		tofu

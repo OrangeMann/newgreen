@@ -1,4 +1,4 @@
-/obj/item/weapon/gun/verb/toggle_firerate()
+/*obj/item/weapon/gun/verb/toggle_firerate()
 	set name = "Toggle Firerate"
 	set category = "Object"
 	firerate = !firerate
@@ -38,8 +38,8 @@
 		for(var/mob/living/M in target)
 			if(M)
 				M.NotTargeted(src) //Untargeting people.
-		del(target)
-
+		del(target)*/
+/*
 //Compute how to fire.....
 /obj/item/weapon/gun/proc/PreFire(atom/A as mob|obj|turf|area, mob/living/user as mob|obj, params)
 	//Lets not spam it.
@@ -67,10 +67,10 @@
 			usr.visible_message("\red <b>[usr] turns \the [src] on [M]!</b>")
 		else
 			usr.visible_message("\red <b>[usr] aims \a [src] at [M]!</b>")
-		M.Targeted(src)
+		M.Targeted(src)*/
 
 //HE MOVED, SHOOT HIM!
-/obj/item/weapon/gun/proc/TargetActed(var/mob/living/T)
+/*obj/item/weapon/gun/proc/TargetActed(var/mob/living/T)
 	var/mob/living/M = loc
 	if(M == T) return
 	if(!istype(M)) return
@@ -94,7 +94,7 @@
 	usr.dir = get_cardinal_dir(src, T)
 
 	if (!firerate) // If firerate is set to lower aim after one shot, untarget the target
-		T.NotTargeted(src)
+		T.NotTargeted(src)*/
 
 //Yay, math!
 
@@ -145,7 +145,7 @@ mob/var
 	last_target_click = -5
 	target_locked = null
 
-mob/living/proc/Targeted(var/obj/item/weapon/gun/I) //Self explanitory.
+/*mob/living/proc/Targeted(var/obj/item/weapon/gun/I) //Self explanitory.
 	if(!I.target)
 		I.target = list(src)
 	else if(I.automatic && I.target.len < 5) //Automatic weapon, they can hold down a room.
@@ -237,8 +237,8 @@ mob/living/Move()
 		if(G.target)
 			for(var/mob/living/M in G.target)
 				if(M && !(M in view(src)))
-					M.NotTargeted(G)
-
+					M.NotTargeted(G)*/
+/*
 //If you move out of range, it isn't going to still stay locked on you any more.
 client/var
 	target_can_move = 0
@@ -381,3 +381,4 @@ client/verb/AllowTargetClick()
 					M << "Your character may now <b>use items</b> at the discretion of their targeter."
 				else
 					M << "\red <b>Your character will now be shot if they use items.</b>"
+*/

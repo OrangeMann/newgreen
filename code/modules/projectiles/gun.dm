@@ -4,6 +4,7 @@
 	icon = 'icons/obj/gun.dmi'
 	icon_state = "detective"
 	item_state = "gun"
+	var/caliber = ""
 	flags =  FPRINT | TABLEPASS | CONDUCT |  USEDELAY
 	slot_flags = SLOT_BELT
 	m_amt = 2000
@@ -17,7 +18,6 @@
 
 	var/fire_sound = 'sound/weapons/Gunshot.ogg'
 	var/obj/item/projectile/in_chamber = null
-	var/caliber = ""
 	var/silenced = 0
 	var/recoil = 0
 	var/ejectshell = 1
@@ -30,7 +30,7 @@
 	var/tmp/told_cant_shoot = 0 //So that it doesn't spam them with the fact they cannot hit them.
 	var/firerate = 1 	// 0 for one bullet after tarrget moves and aim is lowered,
 						//1 for keep shooting until aim is lowered
-	var/fire_delay = 6
+	var/fire_delay = 3
 	var/last_fired = 0
 
 	proc/ready_to_fire()
@@ -40,7 +40,7 @@
 		else
 			return 0
 
-	proc/load_into_chamber()
+	proc/process_chambered()
 		return 0
 
 	proc/special_check(var/mob/M) //Placeholder for any special checks, like detective's revolver.
@@ -53,10 +53,10 @@
 /obj/item/weapon/gun/afterattack(atom/A as mob|obj|turf|area, mob/living/user as mob|obj, flag, params)
 	if(flag)	return //we're placing gun on a table or in backpack
 	if(istype(target, /obj/machinery/recharger) && istype(src, /obj/item/weapon/gun/energy))	return//Shouldnt flag take care of this?
-	if(user && user.client && user.client.gun_mode && !(A in target))
-		PreFire(A,user,params) //They're using the new gun system, locate what they're aiming at.
-	else
-		Fire(A,user,params) //Otherwise, fire normally.
+//	if(user && user.client && user.client.gun_mode && !(A in target))
+//		PreFire(A,user,params) //They're using the new gun system, locate what they're aiming at.
+//	else
+	Fire(A,user,params) //Otherwise, fire normally.
 
 /obj/item/weapon/gun/proc/isHandgun()
 	return 1
@@ -101,7 +101,7 @@
 			user << "<span class='warning'>[src] is not ready to fire again!"
 		return
 
-	if(!load_into_chamber()) //CHECK
+	if(!process_chambered()) //CHECK
 		return click_empty(user)
 
 	if(!in_chamber)
@@ -158,7 +158,7 @@
 		user.update_inv_r_hand()
 
 /obj/item/weapon/gun/proc/can_fire()
-	return load_into_chamber()
+	return process_chambered()
 
 /obj/item/weapon/gun/proc/can_hit(var/mob/living/target as mob, var/mob/living/user as mob)
 	return in_chamber.check_fire(target,user)
@@ -180,7 +180,7 @@
 			M.visible_message("\blue [user] decided life was worth living")
 			mouthshoot = 0
 			return
-		if (load_into_chamber())
+		if (process_chambered())
 			user.visible_message("<span class = 'warning'>[user] pulls the trigger.</span>")
 			if(silenced)
 				playsound(user, fire_sound, 10, 1)
@@ -188,8 +188,8 @@
 				playsound(user, fire_sound, 50, 1)
 			in_chamber.on_hit(M)
 			if (!in_chamber.nodamage)
-				user.apply_damage(in_chamber.damage*2.5, in_chamber.damage_type, "head", used_weapon = "Point blank shot in the mouth with \a [in_chamber]")
-				user.death()
+				user.apply_damage(in_chamber.damage*3, in_chamber.damage_type, "head", used_weapon = "Point blank shot in the mouth with \a [in_chamber]")
+				//user.death()
 			else
 				user << "<span class = 'notice'>Ow...</span>"
 				user.apply_effect(110,AGONY,0)
@@ -207,11 +207,11 @@
 			mouthshoot = 0
 			return
 
-	if (load_into_chamber())
+	if (process_chambered())
 		//Point blank shooting if on harm intent or target we were targeting.
 		if(user.a_intent == "hurt")
 			user.visible_message("\red <b> \The [user] fires \the [src] point blank at [M]!</b>")
-			in_chamber.damage *= 1.3
+			in_chamber.damage *= 1.75
 			Fire(M,user)
 			return
 		else if(target && M in target)

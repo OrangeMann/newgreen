@@ -77,9 +77,6 @@
 		create_reagents(50)
 
 	on_hit(var/atom/target, var/blocked = 0)
-		if(!..())
-			return 0
-
 		if(istype(target, /mob/living/carbon))
 			var/mob/living/carbon/M = target
 			reagents.trans_to(M, reagents.total_volume)

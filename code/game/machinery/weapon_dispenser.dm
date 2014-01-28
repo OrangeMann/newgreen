@@ -51,7 +51,7 @@
 	<HR>
 	Ammo:<BR>
 	<A href='?src=\ref[src];make_ammo=/obj/item/ammo_magazine/beretta'>Magazine (9x19)</A><BR>
-	<A href='?src=\ref[src];make_ammo=/obj/item/ammo_magazine/a357/SW'>Ammo box (.357) Special</A><BR>
+	<A href='?src=\ref[src];make_ammo=/obj/item/ammo_magazine/box/a357/SW'>Ammo box (.357) Special</A><BR>
 	"}
 
 	user << browse("<HEAD><TITLE>Weapon Dispenser Choise Panel</TITLE></HEAD><TT>[dat]</TT>", "window=weapon_dispenser")

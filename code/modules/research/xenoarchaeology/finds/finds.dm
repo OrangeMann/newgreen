@@ -78,6 +78,12 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Archaeological finds
 
+/obj/item/weapon/archaeological_find/revolver
+	find_type = 27
+
+/obj/item/weapon/archaeological_find/egun
+	find_type = 26
+
 /obj/item/weapon/archaeological_find
 	name = "object"
 	icon = 'icons/obj/xenoarchaeology.dmi'
@@ -324,7 +330,7 @@
 		if(26)
 			//energy gun
 			var/spawn_type = pick(\
-			/obj/item/weapon/gun/energy/laser/practice;100,\
+			/obj/item/weapon/gun/energy/laser/practice;25,\
 			/obj/item/weapon/gun/energy/laser;75,\
 			/obj/item/weapon/gun/energy/xray;50,\
 			/obj/item/weapon/gun/energy/laser/captain;25,\
@@ -333,14 +339,15 @@
 			new_item = new_gun
 			new_item.icon_state = "egun[rand(1,6)]"
 
-			//5% chance to explode when first fired
-			//10% chance to have an unchargeable cell
-			//15% chance to gain a random amount of starting energy, otherwise start with an empty cell
+			// 5% chance to explode when first fired
+			// 10% chance to have an unchargeable cell with some charge
+			// 15% chance to gain a random amount of starting energy, otherwise start with an empty cell
 			if(prob(5))
 				new_gun.power_supply.rigged = 1
 			if(prob(10))
 				new_gun.power_supply.maxcharge = 0
-			if(prob(15))
+				new_gun.power_supply.charge = rand(0, new_gun.power_supply.maxcharge)
+			else if(prob(15))
 				new_gun.power_supply.charge = rand(0, new_gun.power_supply.maxcharge)
 			else
 				new_gun.power_supply.charge = 0
@@ -348,37 +355,47 @@
 			item_type = "gun"
 		if(27)
 			//revolver
-			var/obj/item/weapon/gun/projectile/new_gun = new /obj/item/weapon/gun/projectile(src.loc)
+			var/obj/item/weapon/gun/projectile/revolver/new_gun = new /obj/item/weapon/gun/projectile/revolver(src.loc)
 			new_item = new_gun
-			new_item.icon_state = "gun[rand(1,4)]"
 			new_item.icon = 'icons/obj/xenoarchaeology.dmi'
+			new_item.icon_state = "gun[rand(1,4)]"
 
-			//33% chance to be able to reload the gun with human ammunition
-			if(prob(66))
-				new_gun.caliber = "999"
+			var/list/ammo_types = list(
+			/obj/item/ammo_casing/a357 = 10,
+			/obj/item/ammo_casing/a50 = 12,
+			/obj/item/ammo_casing/a418 = 12,
+			/obj/item/ammo_casing/a75 = 6,
+			/obj/item/ammo_casing/a666 = 12,
+			/obj/item/ammo_casing/c38 = 12,
+			/obj/item/ammo_casing/c38/e = 12,
+			/obj/item/ammo_casing/c9mm = 12,
+			/obj/item/ammo_casing/c9mm/extra = 12,
+			/obj/item/ammo_casing/c45 = 12,
+			/obj/item/ammo_casing/a12mm = 8,
+			/obj/item/ammo_casing/shotgun = 4,
+			/obj/item/ammo_casing/shotgun/beanbag = 4,
+			/obj/item/ammo_casing/shotgun/stunshell = 4,
+			/obj/item/ammo_casing/shotgun/dartpreloaded/metalfoam = 4,
+			/obj/item/ammo_casing/a762 = 12,
+			)
+			var/ammo_type = pick(ammo_types)
+			var/shells = rand(3, ammo_types[ammo_type])
+			var/obj/item/ammo_magazine/internal/cylinder/cylinder = new_gun.magazine
 
-			//33% chance to fill it with a random amount of bullets
-			new_gun.max_shells = rand(1,12)
-			if(prob(33))
-				var/num_bullets = rand(1,new_gun.max_shells)
-				if(num_bullets < new_gun.loaded.len)
-					new_gun.loaded.Cut()
-					for(var/i = 1, i <= num_bullets, i++)
-						var/A = text2path(new_gun.ammo_type)
-						new_gun.loaded += new A(new_gun)
-				else
-					for(var/obj/item/I in new_gun)
-						if(new_gun.loaded.len > num_bullets)
-							if(I in new_gun.loaded)
-								new_gun.loaded.Remove(I)
-								I.loc = null
-						else
-							break
-			else
-				for(var/obj/item/I in new_gun)
-					if(I in new_gun.loaded)
-						new_gun.loaded.Remove(I)
-						I.loc = null
+			var/obj/item/ammo_casing/ammo = new ammo_type()
+
+			cylinder.max_ammo = shells
+			cylinder.cylinders = shells
+			cylinder.caliber = ammo.caliber
+
+			while(cylinder.get_round())
+				del(cylinder.get_round())
+			cylinder.check_cylinders()
+			cylinder.give_round(ammo)
+
+			for(var/i = 1, i <= rand(1, shells), i++)
+				ammo = new ammo_type()
+				cylinder.give_round(ammo)
 
 			item_type = "gun"
 		if(28)
@@ -505,7 +522,7 @@
 		desc += engravings
 
 	if(apply_prefix)
-		name = "[pick("Strange","Ancient","Alien","")] [item_type]"
+		name = "[pick("strange ","ancient ","alien ","")][item_type]"
 	else
 		name = item_type
 

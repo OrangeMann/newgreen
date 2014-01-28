@@ -900,22 +900,21 @@
 	desc = "A stun baton used for incapacitating targets; there seems to be a bunch of tally marks set into the handle."
 
 ///// Deckard .44 - Callum Leamas - Roaper
-/obj/item/weapon/gun/projectile/detective/fluff/callum_leamas
+/obj/item/weapon/gun/projectile/revolver/detective/fluff/callum_leamas
 	name = "Deckard .44"
 	desc = "A custom built revolver, based off the semi-popular Detective Special model."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "leamas-empty"
 
-/obj/item/weapon/gun/projectile/detective/fluff/callum_leamas/update_icon()
+/obj/item/weapon/gun/projectile/revolver/detective/fluff/callum_leamas/update_icon()
 
 	..()
-	if(loaded.len)
+	if(magazine.ammo_count(0))
 		icon_state = "leamas-loaded"
 	else
 		icon_state = "leamas-empty"
 
-/obj/item/weapon/gun/projectile/attackby(var/obj/item/A as obj, mob/user as mob)
-
-	if(istype(A, /obj/item/ammo_magazine))
+/obj/item/weapon/gun/projectile/revolver/detective/fluff/callum_leamas/attackby(var/obj/item/A as obj, mob/user as mob)
+	if(istype(A, /obj/item/ammo_magazine) || istype(A, /obj/item/ammo_casing))
 		flick("leamas-reloading",src)
 	..()

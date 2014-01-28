@@ -667,7 +667,7 @@ Auto Patrol: []"},
 
 	if((src.idcheck) || (isnull(perp:wear_id)) || (istype(perp:wear_id.GetID(), /obj/item/weapon/card/id/syndicate)))
 
-		if((istype(perp.l_hand, /obj/item/weapon/gun) && !istype(perp.l_hand, /obj/item/weapon/gun/projectile/shotgun)) || istype(perp.l_hand, /obj/item/weapon/melee/baton))
+		if((istype(perp.l_hand, /obj/item/weapon/gun) && !istype(perp.l_hand, /obj/item/weapon/gun/projectile/revolver/doublebarrel)) || istype(perp.l_hand, /obj/item/weapon/melee/baton))
 			if(!istype(perp.l_hand, /obj/item/weapon/gun/energy/laser/bluetag) \
 			&& !istype(perp.l_hand, /obj/item/weapon/gun/energy/laser/redtag) \
 			&& !istype(perp.l_hand, /obj/item/weapon/gun/energy/laser/practice))

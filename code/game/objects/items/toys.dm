@@ -128,7 +128,7 @@
 	g_amt = 10
 	m_amt = 10
 	attack_verb = list("struck", "pistol whipped", "hit", "bashed")
-	var/bullets = 7.0
+	var/bullets = 7
 
 	examine()
 		set src in usr
@@ -182,7 +182,7 @@
 	flags = FPRINT | TABLEPASS| CONDUCT
 	w_class = 1.0
 	g_amt = 10
-	m_amt = 10
+	m_amt = 20
 	var/amount_left = 7.0
 
 	update_icon()

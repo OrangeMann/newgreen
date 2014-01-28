@@ -98,7 +98,7 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 		randomItems.Add("/obj/item/device/radio/beacon/syndicate") //Singularity Beacon
 
 	if(uses > 5)
-		randomItems.Add("/obj/item/weapon/gun/projectile") //Revolver
+		randomItems.Add("/obj/item/weapon/gun/projectile/revolver") //Revolver
 
 	if(uses > 4)
 		randomItems.Add("/obj/item/weapon/gun/energy/crossbow") //Energy Crossbow
@@ -126,12 +126,12 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 		var/list/usrItems = usr.get_contents() //Checks to see if the user has a revolver before giving ammo
 		var/hasRevolver = 0
 		for(var/obj/I in usrItems) //Only add revolver ammo if the user has a gun that can shoot it
-			if(istype(I,/obj/item/weapon/gun/projectile))
+			if(istype(I,/obj/item/weapon/gun/projectile/revolver))
 				hasRevolver = 1
 
-		if(hasRevolver) randomItems.Add("/obj/item/ammo_magazine/a357") //Revolver ammo
+		if(hasRevolver) randomItems.Add("/obj/item/ammo_magazine/box/a357") //Revolver ammo
 */
-		randomItems.Add("/obj/item/ammo_magazine/a357") //Revolver ammo
+		randomItems.Add("/obj/item/ammo_magazine/box/a357") //Revolver ammo
 		randomItems.Add("/obj/item/clothing/shoes/syndigaloshes") //No-Slip Syndicate Shoes
 		randomItems.Add("/obj/item/weapon/plastique") //C4
 
@@ -152,7 +152,7 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 				uses -= 10
 			if("/obj/item/weapon/aiModule/syndicate" , "/obj/item/device/radio/beacon/syndicate")
 				uses -= 7
-			if("/obj/item/weapon/gun/projectile")
+			if("/obj/item/weapon/gun/projectile/revolver")
 				uses -= 6
 			if("/obj/item/weapon/gun/energy/crossbow" , "/obj/item/device/powersink")
 				uses -= 5
@@ -162,7 +162,7 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 			"/obj/item/weapon/card/emag" , "/obj/item/weapon/storage/box/syndie_kit/space" , "/obj/item/device/encryptionkey/binary" , \
 			"/obj/item/weapon/storage/box/syndie_kit/imp_freedom" , "/obj/item/clothing/glasses/thermal/syndi")
 				uses -= 3
-			if("/obj/item/ammo_magazine/a357" , "/obj/item/clothing/shoes/syndigaloshes" , "/obj/item/weapon/plastique", "/obj/item/weapon/card/id/syndicate")
+			if("/obj/item/ammo_magazine/box/a357" , "/obj/item/clothing/shoes/syndigaloshes" , "/obj/item/weapon/plastique", "/obj/item/weapon/card/id/syndicate")
 				uses -= 2
 			if("/obj/item/weapon/soap/syndie" , "/obj/item/weapon/storage/toolbox/syndicate")
 				uses -= 1
@@ -186,7 +186,7 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 			feedback_add_details("traitor_uplink_items_bought","AI")
 		if("/obj/item/device/radio/beacon/syndicate")
 			feedback_add_details("traitor_uplink_items_bought","SB")
-		if("/obj/item/weapon/gun/projectile")
+		if("/obj/item/weapon/gun/projectile/revolver")
 			feedback_add_details("traitor_uplink_items_bought","RE")
 		if("/obj/item/weapon/gun/energy/crossbow")
 			feedback_add_details("traitor_uplink_items_bought","XB")
@@ -218,7 +218,7 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 			feedback_add_details("traitor_uplink_items_bought","FI")
 		if("/obj/item/clothing/glasses/thermal/syndi")
 			feedback_add_details("traitor_uplink_items_bought","TM")
-		if("/obj/item/ammo_magazine/a357")
+		if("/obj/item/ammo_magazine/box/a357")
 			feedback_add_details("traitor_uplink_items_bought","RA")
 		if("/obj/item/clothing/shoes/syndigaloshes")
 			feedback_add_details("traitor_uplink_items_bought","SH")

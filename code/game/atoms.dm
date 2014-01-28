@@ -104,6 +104,7 @@
 	return
 
 /atom/proc/bullet_act(var/obj/item/projectile/Proj)
+	Proj.on_hit(src)
 	return 0
 
 /atom/proc/in_contents_of(container)//can take class or object instance as argument

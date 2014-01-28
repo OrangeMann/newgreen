@@ -24,7 +24,7 @@ RCD
 	var/matter = 0
 	var/working = 0
 	var/mode = 1
-	var/canRwall = 0
+	var/canRwall = 1
 	var/disabled = 0
 
 

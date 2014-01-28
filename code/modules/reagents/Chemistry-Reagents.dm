@@ -1510,12 +1510,11 @@ datum
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
 				M:drowsyness = max(M:drowsyness-5, 0)
-				M.AdjustParalysis(-1)
-				M.AdjustStunned(-1)
-				M.AdjustWeakened(-1)
-				if(prob(60))	M.adjustToxLoss(1)
-				if(volume > REAGENTS_OVERDOSE)
-					M:adjustToxLoss(1)
+				M.AdjustParalysis(-4)
+				M.AdjustStunned(-4)
+				M.AdjustWeakened(-4)
+				// Recover from stun 5 times faster
+				if(prob(40))	M.adjustToxLoss(1)
 				..()
 				return
 

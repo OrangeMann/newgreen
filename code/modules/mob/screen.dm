@@ -497,7 +497,7 @@
 //		if("radar closed")
 //			usr:start_radar()
 
-		if("Allow Walking")
+/*		if("Allow Walking")
 			if(gun_click_time > world.time - 30)	//give them 3 seconds between mode changes.
 				return
 			if(!istype(usr.equipped(),/obj/item/weapon/gun))
@@ -553,7 +553,7 @@
 			gun_click_time = world.time
 
 		if("Toggle Gun Mode")
-			usr.client.ToggleGunMode()
+			usr.client.ToggleGunMode()*/
 
 		else
 			DblClick()

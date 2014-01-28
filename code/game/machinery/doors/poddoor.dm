@@ -41,6 +41,7 @@
 	sleep(10)
 	src.density = 0
 	update_nearby_tiles()
+	playsound(src.loc, 'sound/machines/poddoor.ogg', 30, 1)
 
 	if(operating == 1) //emag again
 		src.operating = 0
@@ -58,6 +59,7 @@
 	src.density = 1
 	src.SetOpacity(initial(opacity))
 	update_nearby_tiles()
+	playsound(src.loc, 'sound/machines/poddoor2.ogg', 30, 1)
 
 	sleep(10)
 	src.operating = 0

@@ -1573,7 +1573,6 @@ datum/design/health_hud
 	build_type = PROTOLATHE
 	materials = list("$metal" = 50, "$glass" = 150)
 	build_path = /obj/item/clothing/glasses/sunglasses/sechud
-	locked = 1
 
 /////////////////////////////////////////
 //////////////Borg Upgrades//////////////

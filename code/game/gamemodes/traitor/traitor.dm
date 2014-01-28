@@ -93,12 +93,12 @@
 			traitor.objectives += block_objective
 
 	else
-		var/missions_amount = rand(3,6)
+		var/missions_amount = rand(3,5)
 		var/hijack = 0
 
-		if(prob(10))
+		if(prob(5))
 			hijack = 1
-			missions_amount = rand(1,2)
+			missions_amount = 1
 
 		for(missions_amount, missions_amount>0, missions_amount--)
 			switch(rand(1,100))

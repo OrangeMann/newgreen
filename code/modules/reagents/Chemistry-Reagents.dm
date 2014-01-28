@@ -1341,8 +1341,6 @@ datum
 				if(!data) data = 1
 				data++
 				M:heal_organ_damage(0,1)
-				if(volume > REAGENTS_OVERDOSE)
-					M:adjustToxLoss(1)
 //				if(data >= 125)
 //					M:adjustToxLoss(0.1)
 				..()
@@ -1362,8 +1360,6 @@ datum
 				if(!data) data = 1
 				data++
 				M:heal_organ_damage(0,3)
-				if(volume > REAGENTS_OVERDOSE)
-					M:adjustToxLoss(1)
 //				if(data >= 125)
 //					M:adjustToxLoss(0.2)
 				..()
@@ -1385,8 +1381,6 @@ datum
 				M:adjustOxyLoss(-2)
 				if(holder.has_reagent("lexorin"))
 					holder.remove_reagent("lexorin", 2)
-				if(volume > REAGENTS_OVERDOSE)
-					M:adjustToxLoss(1)
 //				if(data >= 125)
 //					M:adjustToxLoss(0.2)
 				..()
@@ -1408,8 +1402,6 @@ datum
 				M:oxyloss = 0
 				if(holder.has_reagent("lexorin"))
 					holder.remove_reagent("lexorin", 2)
-				if(volume > REAGENTS_OVERDOSE)
-					M:adjustToxLoss(1)
 //				if(data >= 50)
 //					M:adjustToxLoss(0.2)
 				..()
@@ -1534,8 +1526,6 @@ datum
 				if(prob(80)) M:adjustBrainLoss(1)
 				if(prob(50)) M:drowsyness = max(M:drowsyness, 3)
 				if(prob(10)) M:emote("drool")
-				if(volume > REAGENTS_OVERDOSE)
-					M:adjustToxLoss(1)
 //				if(data >= 50)
 //					M:adjustToxLoss(0.4)
 				..()
@@ -1551,8 +1541,6 @@ datum
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
 				M:radiation = max(M:radiation-3,0)
-				if(volume > REAGENTS_OVERDOSE)
-					M:adjustToxLoss(1)
 //				if(data >= 50)
 //					M:adjustToxLoss(0.2)
 				..()
@@ -1575,9 +1563,6 @@ datum
 				M:adjustToxLoss(-1)
 				if(prob(15))
 					M.take_organ_damage(1, 0)
-				..()
-				if(volume > REAGENTS_OVERDOSE)
-					M:adjustToxLoss(1)
 //				if(data >= 50)
 //					M:adjustToxLoss(0.3)
 				return
@@ -1593,8 +1578,6 @@ datum
 				if(!M) M = holder.my_atom
 				M:adjustBrainLoss(-3)
 				M:adjustToxLoss(0.1)
-				if(volume > REAGENTS_OVERDOSE)
-					M:adjustToxLoss(1)
 				..()
 				return
 
@@ -1613,8 +1596,6 @@ datum
 				M:eye_blind = max(M:eye_blind-5 , 0)
 				M:disabilities &= ~1
 				M:eye_stat = max(M:eye_stat-5, 0)
-				if(volume > REAGENTS_OVERDOSE)
-					M:adjustToxLoss(1)
 //				if(data >= 100)
 //					M:adjustToxLoss(0.2)
 				..()
@@ -1633,8 +1614,6 @@ datum
 				if(!data) data = 1
 				data++
 				M:heal_organ_damage(2,0)
-				if(volume > REAGENTS_OVERDOSE)
-					M:adjustToxLoss(1)
 //				if(data >= 125)
 //					M:adjustToxLoss(0.2)
 				..()
@@ -1654,8 +1633,6 @@ datum
 				data++
 				if(prob(5)) M:emote(pick("twitch","blink_r","shiver"))
 				holder.remove_reagent(src.id, 0.2)
-				if(volume > REAGENTS_OVERDOSE)
-					M:adjustToxLoss(1)
 //				if(data >= 50)
 //					M:adjustToxLoss(0.2)
 				..()
@@ -1708,8 +1685,6 @@ datum
 				if(!data) data = 1
 				data++
 				holder.remove_reagent(src.id, 0.1)
-				if(volume > REAGENTS_OVERDOSE)
-					M:adjustToxLoss(1)
 //				if(data >= 100)
 //					M:adjustToxLoss(0.1)
 				return
@@ -2924,8 +2899,6 @@ datum
 					if(!data) data = 1
 					data++
 					M:hallucination += 5
-					if(volume > REAGENTS_OVERDOSE)
-						M:adjustToxLoss(1)
 					..()
 					return
 
@@ -2944,8 +2917,6 @@ datum
 				on_mob_life(var/mob/living/M as mob)
 					..()
 					M.dizziness +=5
-					if(volume > REAGENTS_OVERDOSE)
-						M:adjustToxLoss(1)
 					return
 
 			vodka

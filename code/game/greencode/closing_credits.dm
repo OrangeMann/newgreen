@@ -16,7 +16,7 @@
     <marquee behavior="up" bgcolor="black" direction="up" height="800" loop="1" width="1000" scrollamount="2">"}
 
 	var/title=pick("War Of ", "The One In ", "Explosion In ", "The Lord Of The ", "Smell Of ", "Captain Of ", "Alien In ", "Robust ", "[random_player] In ", "Head Of ", "Traitor In ", "Nar-Sie In ", "Dwarf In ", "Wizard Of ", "Wizard In ")
-	title+=pick("Kitchen", "Brig", "Clown", "Mine", "Toilet", "Coffe", "Toolbox", "Asshole", "Tunnel", "Singularity", "Toxins", "Derelict")
+	title+=pick("Kitchen", "Brig", "Clown", "Mine", "Toilet", "Coffee", "Toolbox", "Asshole", "Tunnel", "Singularity", "Toxins", "Derelict")
 	dat += "<center><h1>"
 	dat+=title
 	dat+="</h1></center><br><br><center><h3> CAST </h3></center><br>"

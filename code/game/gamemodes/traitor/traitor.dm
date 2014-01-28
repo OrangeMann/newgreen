@@ -93,9 +93,16 @@
 			traitor.objectives += block_objective
 
 	else
-		for (var/missions_amount = rand(3,8), missions_amount>0, missions_amount--)
+		var/missions_amount = rand(3,6)
+		var/hijack = 0
+
+		if(prob(10))
+			hijack = 1
+			missions_amount = rand(1,2)
+
+		for(missions_amount, missions_amount>0, missions_amount--)
 			switch(rand(1,100))
-				if(1 to 42)
+				if(1 to 30)
 					var/datum/objective/assassinate/kill_objective = new
 					kill_objective.owner = traitor
 					kill_objective.find_target()
@@ -105,7 +112,7 @@
 //					brig_objective.owner = traitor
 //					brig_objective.find_target()
 //					traitor.objectives += brig_objective
-				if(43 to 66)
+				if(31 to 41)
 					var/datum/objective/harm/harm_objective = new
 					harm_objective.owner = traitor
 					harm_objective.find_target()
@@ -115,18 +122,17 @@
 					steal_objective.owner = traitor
 					steal_objective.find_target()
 					traitor.objectives += steal_objective
-		switch(rand(1,100))
-			if(1 to 100)
-				if (!(locate(/datum/objective/escape) in traitor.objectives))
-					var/datum/objective/escape/escape_objective = new
-					escape_objective.owner = traitor
-					traitor.objectives += escape_objective
 
-			else
-				if (!(locate(/datum/objective/hijack) in traitor.objectives))
-					var/datum/objective/hijack/hijack_objective = new
-					hijack_objective.owner = traitor
-					traitor.objectives += hijack_objective
+		if(hijack)
+			if (!(locate(/datum/objective/hijack) in traitor.objectives))
+				var/datum/objective/hijack/hijack_objective = new
+				hijack_objective.owner = traitor
+				traitor.objectives += hijack_objective
+		else
+			if (!(locate(/datum/objective/escape) in traitor.objectives))
+				var/datum/objective/escape/escape_objective = new
+				escape_objective.owner = traitor
+				traitor.objectives += escape_objective
 	return
 
 

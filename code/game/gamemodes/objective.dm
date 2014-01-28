@@ -59,6 +59,8 @@ datum/objective/assassinate
 			if(target.current.stat == DEAD || issilicon(target.current) || isbrain(target.current) || target.current.z > 6 || !target.current.ckey) //Borgs/brains/AIs count as dead for traitor objectives. --NeoFite
 				return 1
 			return 0
+		else if(!target)
+			return 1
 		return 1
 
 
@@ -475,6 +477,8 @@ datum/objective/harm
 			var/datum/organ/external/head/head = H.get_organ("head")
 			if(head.disfigured)
 				return 1
+		else if(!target)
+			return 1
 		return 0
 
 

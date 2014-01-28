@@ -188,6 +188,15 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	return ..()
 
 
+///////////
+// JOINT //
+///////////
+/obj/item/clothing/mask/cigarette/weed
+	name = "joint"
+	desc = "420 smoke weed errday."
+	smoketime = 250
+	chem_volume = 50
+// See paper for creation
 
 ////////////
 // CIGARS //

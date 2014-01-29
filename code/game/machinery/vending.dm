@@ -760,6 +760,18 @@
 					/obj/item/stack/medical/advanced/bruise_pack = 3, /obj/item/stack/medical/advanced/ointment = 3, /obj/item/stack/medical/splint = 2)
 	contraband = list(/obj/item/weapon/reagent_containers/pill/tox = 3,/obj/item/weapon/reagent_containers/pill/stox = 4,/obj/item/weapon/reagent_containers/pill/antitox = 6)
 
+/obj/machinery/vending/bloodomate
+	name = "Blood'o'mate"
+	desc = "Blood dispenser."
+	icon_state = "bloodomate"
+	product_ads = "Go save some lives!; The best syntetic blood for your medbay.; Only the finest donors.; Viruses-free!; Need blood?; Red and liquid!"
+	req_access_txt = "5"
+	products = list(/obj/item/weapon/reagent_containers/blood/APlus = 4,/obj/item/weapon/reagent_containers/blood/AMinus = 4,
+					/obj/item/weapon/reagent_containers/blood/BPlus = 4,/obj/item/weapon/reagent_containers/blood/BMinus = 4,
+					/obj/item/weapon/reagent_containers/blood/OPlus = 4,/obj/item/weapon/reagent_containers/blood/OMinus = 4,
+					/obj/item/weapon/reagent_containers/blood/empty = 2)
+	contraband = list(/obj/item/weapon/syntiflesh = 5)
+
 
 //This one's from bay12
 /obj/machinery/vending/plasmaresearch

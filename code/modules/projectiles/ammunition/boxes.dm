@@ -75,7 +75,7 @@
 
 	update_icon()
 		icon_state = "[initial(icon_state)]-0"
-		overlays = list()
+		overlays.Cut()
 		var/i = 0
 		for(var/obj/item/ammo_casing/shotgun/AC in stored_ammo)
 			i++

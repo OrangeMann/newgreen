@@ -31,7 +31,7 @@
 	if(recentpump)	return
 	pump()
 	recentpump = 1
-	spawn(10)
+	spawn(5)
 		recentpump = 0
 	return
 

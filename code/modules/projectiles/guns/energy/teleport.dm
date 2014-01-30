@@ -44,31 +44,31 @@
 		failchance = 100 - T.reliability
 
 	if(target == null)
-		var/list/turfs = list(	)
-		for(var/turf/T in orange(10, src))
-			if(T.x>world.maxx-4 || T.x<4)	continue	//putting them at the edge is dumb
-			if(T.y>world.maxy-4 || T.y<4)	continue
+		var/list/turfs = list()
+		for(var/turf/T in orange(10, get_turf(src)) )
+			if(T.x>(world.maxx-4) || T.x<4)	continue	//putting them at the edge is dumb
+			if(T.y>(world.maxy-4) || T.y<4)	continue
 			turfs += T
-		if(turfs)
+		if(turfs.len)
 			target = pick(turfs)
+
 	if(!target)
 		del(src)
 		return
-	spawn(0)
-		if(A)
-			var/turf/T = get_turf(A)
-			for(var/atom/movable/M in T)
-				if(istype(M, /obj/effect)) //sparks don't teleport
-					continue
-				if (M.anchored)
-					continue
-				if (istype(M, /atom/movable))
-					var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-					s.set_up(5, 1, M)
-					s.start()
-					if(prob(failchance)) //oh dear a problem, put em in deep space
-						do_teleport(M, locate(rand(5, world.maxx - 5), rand(5, world.maxy -5), pick(3,4,5)), 0)
-					else
-						do_teleport(M, target, 1)
-		del(src)
-	return	..()
+
+	if(A)
+		var/turf/T = get_turf(A)
+		for(var/atom/movable/M in T)
+			if(istype(M, /obj/effect)) //sparks don't teleport
+				continue
+			if (M.anchored)
+				continue
+			if (istype(M, /atom/movable))
+				var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+				s.set_up(5, 1, M)
+				s.start()
+				if(prob(failchance)) //oh dear a problem, put em in deep space
+					do_teleport(M, locate(rand(5, world.maxx - 5), rand(5, world.maxy -5), pick(3,4,5)), 0)
+				else
+					do_teleport(M, target, 1)
+	del(src)

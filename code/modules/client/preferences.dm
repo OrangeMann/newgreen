@@ -54,7 +54,7 @@ datum/preferences
 	var/b_type = "A+"					//blood type (not-chooseable)
 	var/underwear = 1					//underwear type
 	var/backbag = 2						//backpack type
-	var/h_style = "Bald"				//Hair type
+	var/h_style = "Short Hair"			//Hair type
 	var/r_hair = 0						//Hair color
 	var/g_hair = 0						//Hair color
 	var/b_hair = 0						//Hair color
@@ -255,8 +255,8 @@ datum/preferences
 		dat += "<br><table><tr><td><b>Body</b> "
 		dat += "(<a href='?_src_=prefs;preference=all;task=random'>&reg;</A>)"
 		dat += "<br>"
-		dat += "Species: <a href='byond://?src=\ref[user];preference=species;task=input'>[species]</a><br>"
-		dat += "Secondary Language:<br><a href='byond://?src=\ref[user];preference=language;task=input'>[language]</a><br>"
+		//dat += "Species: <a href='byond://?src=\ref[user];preference=species;task=input'>[species]</a><br>"
+		//dat += "Secondary Language:<br><a href='byond://?src=\ref[user];preference=language;task=input'>[language]</a><br>"
 		dat += "Blood Type: <a href='byond://?src=\ref[user];preference=b_type;task=input'>[b_type]</a><br>"
 		dat += "Skin Tone: <a href='?_src_=prefs;preference=s_tone;task=input'>[-s_tone + 35]/220<br></a>"
 		//dat += "Skin pattern: <a href='byond://?src=\ref[user];preference=skin_style;task=input'>Adjust</a><br>"

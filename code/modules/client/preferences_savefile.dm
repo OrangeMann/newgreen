@@ -102,7 +102,7 @@
 	S["name_is_always_random"] >> be_random_name
 	S["gender"]				>> gender
 	S["age"]				>> age
-	S["species"]			>> species
+	//S["species"]			>> species // NO!
 	S["language"]			>> language
 
 	//colors to be consolidated into hex strings (requires some work with dna code)

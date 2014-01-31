@@ -36,6 +36,9 @@
 		return 1
 	return 0
 
+/obj/machinery/smartfridge/chemistry/virology
+	name = "smart virus storage"
+	desc = "A refrigerated storage unit for volatile sample storage."
 
 /obj/machinery/smartfridge/seeds
 	name = "\improper MegaSeed Servitor"

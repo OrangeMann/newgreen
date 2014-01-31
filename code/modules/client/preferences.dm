@@ -119,7 +119,7 @@ datum/preferences
 			if(load_preferences())
 				if(load_character())
 					return
-	gender = pick(MALE, FEMALE)
+	//gender = pick(MALE, FEMALE)
 	real_name = random_name(gender)
 
 /datum/preferences

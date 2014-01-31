@@ -728,8 +728,8 @@
 			return //fuck this precision
 		switch(bodytemperature)
 			if(-INFINITY to 260.15) //260.15 is 310.15 - 50, the temperature where you start to feel effects.
-				if(nutrition >= 2) //If we are very, very cold we'll use up quite a bit of nutriment to heat us up.
-					nutrition -= 2
+				if(nutrition >= 0.2) //If we are very, very cold we'll use up quite a bit of nutriment to heat us up.
+					nutrition -= 0.2
 				var/recovery_amt = max((body_temperature_difference / BODYTEMP_AUTORECOVERY_DIVISOR), BODYTEMP_AUTORECOVERY_MINIMUM)
 //				log_debug("Cold. Difference = [body_temperature_difference]. Recovering [recovery_amt]")
 				bodytemperature += recovery_amt
@@ -986,18 +986,21 @@
 		else
 			if(overeatduration > 1)
 				overeatduration -= 2 //doubled the unfat rate
-		if(nutrition > 50)
+
+		// Начало злоебучего кода голода. Подсветка синтаксиса даже выделяет его коричневым!
+		/*if(nutrition > 50)
 			adjustBrainLoss(-68)
 			if(getBrainLoss() == 1)
-				src << "<font size='3' color='green'><b>You feel yourself better and beast inside gone to deepest part of your mind</b></font>"
+				src << "<font size='3' color='green'><b>You feel yourself better and beast inside gone to deepest part of your mind</b></font>"*/
 		if(nutrition < 50)
 			if(prob(20))
 				src << pick("\red Food... i need some food.. Horrible pain in stomack...", "\red I'm starving...", "\red I feel horrible! Food...")
+
 		if(nutrition < 30)
 			if(prob(5))
 				src << "\red You have fallen unconcious from starvation"
 				src.AdjustParalysis(1)
-		if(nutrition < 1)
+/*		if(nutrition < 1)
 			if(getBrainLoss() < 70)
 				adjustBrainLoss(1)
 				if(getBrainLoss() == 30)
@@ -1010,9 +1013,10 @@
 					src << "<font size='3' color='red'><b>BEAST INSIDE WOKE UP! YOU WANT TO EAT EVERY LIVING THING YOU SEE</b></font>"
 			else
 				if(prob(30))
-					adjustCloneLoss(1)
+					adjustCloneLoss(1)*/
+		// Конец злоебучего кода голода.
 
-		else
+		if(nutrition > 1)
 			if(overeatduration > 1)
 				overeatduration -= 2 //doubled the unfat rate
 

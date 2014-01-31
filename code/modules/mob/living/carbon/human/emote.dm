@@ -303,6 +303,7 @@
 				if (!muzzled)
 					message = "<B>[src]</B> laughs."
 					m_type = 2
+					call_sound_emote("laugh")
 				else
 					message = "<B>[src]</B> makes a noise."
 					m_type = 2

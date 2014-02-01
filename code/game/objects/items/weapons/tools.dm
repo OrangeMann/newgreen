@@ -244,18 +244,30 @@
 
 
 /obj/item/weapon/weldingtool/afterattack(obj/O as obj, mob/user as mob)
-	if (istype(O, /obj/structure/reagent_dispensers/fueltank) && get_dist(src,O) <= 1 && !src.welding)
-		O.reagents.trans_to(src, max_fuel)
-		user << "\blue Welder refueled"
-		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
-		return
-	else if (istype(O, /obj/structure/reagent_dispensers/fueltank) && get_dist(src,O) <= 1 && src.welding)
-		message_admins("[key_name_admin(user)] triggered a fueltank explosion.")
-		log_game("[key_name(user)] triggered a fueltank explosion.")
-		user << "\red That was stupid of you."
+	if(istype(O, /obj/structure/reagent_dispensers/fueltank) && get_dist(src,O) <= 1)
 		var/obj/structure/reagent_dispensers/fueltank/tank = O
-		tank.explode()
+		if (!src.welding)
+			tank.reagents.trans_to(src, max_fuel)
+			user << "\blue Welder refueled"
+			playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
+		else
+			message_admins("[key_name_admin(user)] triggered a fueltank explosion.")
+			log_game("[key_name(user)] triggered a fueltank explosion.")
+			user << "\red That was stupid of you."
+			tank.explode()
 		return
+
+	if(istype(O, /obj/item/weapon/reagent_containers/backpack/weld) && get_dist(src,O) <= 1)
+		var/obj/item/weapon/reagent_containers/backpack/weld/tank = O
+		if (!src.welding)
+			tank.reagents.trans_to(src, max_fuel)
+			user << "\blue Welder refueled"
+			playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
+		else
+			tank.explode(user)
+		return
+
+
 	if (src.welding)
 		remove_fuel(1)
 		var/turf/location = get_turf(user)

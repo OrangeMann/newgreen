@@ -13,24 +13,15 @@
 	desc = "A heavy-duty portable welding fuel carrier."
 	icon_state = "welderpack"
 
-/obj/item/weapon/reagent_containers/weldpack/New()
+/obj/item/weapon/reagent_containers/backpack/weld/New()
 	..()
 	reagents.add_reagent("fuel", volume)
 
-/obj/item/weapon/reagent_containers/weldpack/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/weldingtool))
-		var/obj/item/weapon/weldingtool/T = W
-		if(T.welding)
-			message_admins("[key_name_admin(user)] triggered a welding kit explosion.")
-			log_game("[key_name(user)] triggered a welding kit explosion.")
-			user << "\red That was stupid of you."
-			explosion(get_turf(src),-1,0,2)
-			if(src)
-				del(src)
-			return
-		else
-			src.reagents.trans_to(W, T.max_fuel)
-			user << "\blue Welder refilled!"
-			playsound(src.loc, 'refill.ogg', 50, 1, -6)
-			return
-	..()
+/obj/item/weapon/reagent_containers/backpack/weld/proc/explode(var/mob/user)
+	if(istype(user))
+		message_admins("[key_name_admin(user)] triggered a welding kit explosion.")
+		log_game("[key_name(user)] triggered a welding kit explosion.")
+		user << "\red That was stupid of you."
+	explosion(get_turf(src),-1,0,2)
+	if(src)
+		del(src)

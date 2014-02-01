@@ -77,6 +77,9 @@ obj/var/contaminated = 0
 /mob/living/carbon/human/pl_effects()
 	//Handles all the bad things plasma can do.
 
+	if(wear_suit && (wear_suit.flags & PLASMAGUARD))
+		return // Никаких больше протекающих РИГов
+
 	//Contamination
 	if(vsc.plc.CLOTH_CONTAMINATION) contaminate()
 

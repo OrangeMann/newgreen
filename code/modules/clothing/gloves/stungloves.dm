@@ -9,7 +9,6 @@
 			if(C.amount >= 2)
 				C.use(2)
 				wired = 1
-				siemens_coefficient = 3.0
 				user << "<span class='notice'>You wrap some wires around [src].</span>"
 				update_icon()
 			else
@@ -39,7 +38,6 @@
 			return
 		if(wired) //wires disappear into the void because fuck that shit
 			wired = 0
-			siemens_coefficient = initial(siemens_coefficient)
 			user << "<span class='notice'>You cut the wires away from [src].</span>"
 			update_icon()
 		..()

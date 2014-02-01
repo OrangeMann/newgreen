@@ -545,7 +545,7 @@
 					if(!disable_warning)
 						usr << "The [name] is too big to attach."
 					return 0
-				if( istype(src, /obj/item/device/pda) || istype(src, /obj/item/weapon/pen) || is_type_in_list(src, H.wear_suit.allowed) )
+				if((istype(H.wear_suit, /obj/item/clothing/suit/space) && (slot_flags & SLOT_BELT)) || is_type_in_list(src, H.wear_suit.allowed) )
 					return 1
 				return 0
 			if(slot_handcuffed)

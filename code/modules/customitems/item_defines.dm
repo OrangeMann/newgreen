@@ -115,7 +115,7 @@
 	icon_state = "fancypen"
 
 /obj/item/weapon/pen/fluff/eugene_bissegger_1 //metamorp: eugene bisseger
-	name = "Gilded Pen"
+	name = "golden pen"
 	desc = "A golden pen that is gilded with a meager amount of gold material. The word 'NanoTrasen' is etched on the clip of the pen."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "eugene_pen"
@@ -199,16 +199,16 @@
 	icon_off = "bluezippo"
 
 /obj/item/weapon/lighter/zippo/fluff/michael_guess_1 //Dragor23: Michael Guess
-	name = "engraved lighter"
-	desc = "A golden lighter, engraved with some ornaments and a G."
+	name = "golden zippo"
+	desc = "A golden zippo lighter."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "guessip"
 	icon_on = "guessipon"
 	icon_off = "guessip"
 
 /obj/item/weapon/lighter/zippo/fluff/riley_rohtin_1 //rawrtaicho: Riley Rohtin
-	name = "Riley's black zippo"
-	desc = "A black zippo lighter, which holds some form of sentimental value."
+	name = "black zippo"
+	desc = "A black zippo lighter."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "blackzippo"
 	icon_on = "blackzippoon"
@@ -231,7 +231,7 @@
 	icon_off = "gonzozippo"
 
 /obj/item/weapon/lighter/zippo/fluff/naples_1 //naples: Russell Vierson
-	name = "Engraved zippo"
+	name = "engraved zippo"
 	desc = "A intricately engraved Zippo lighter."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "engravedzippo"
@@ -277,7 +277,6 @@
 	pictures_left = 30
 
 /obj/item/weapon/id_wallet/fluff/reese_mackenzie  //Reese MacKenzie - ThoseDernSquirrels
-
 	name = "ID wallet"
 	desc = "A wallet made of black leather, holding an ID and a gold badge that reads 'NT.' The ID has a small picture of a man, with the caption Reese James MacKenzie, with other pieces of information to the right of the picture."
 	icon = 'icons/obj/custom_items.dmi'
@@ -313,7 +312,7 @@
 
 /obj/item/weapon/reagent_containers/glass/beaker/fluff/eleanor_stone //Rkf45: Eleanor Stone
 	name = "teapot"
-	desc = "An elegant teapot. The engraving on the bottom reads 'ENS'"
+	desc = "An elegant teapot."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "eleanorstone"
 	item_state = "eleanorstone"
@@ -346,10 +345,10 @@
 		reagents.add_reagent("ethanol", 5)
 
 /obj/item/clothing/mask/fluff/electriccig //CubeJackal: Barry Sharke
-	name = "Electronic cigarette"
+	name = "electronic cigarette"
 	desc = "An electronic cigarette. Most of the relief of a real cigarette with none of the side effects. Often used by smokers who are trying to quit the habit."
-	icon = 'icons/obj/custom_items.dmi'
-	icon_state = "cigon"
+	icon = 'icons/obj/clothing/masks.dmi'
+	icon_state = "cigoff"
 	throw_speed = 0.5
 	item_state = "ciglit"
 	w_class = 1
@@ -432,8 +431,7 @@
 	item_state = "wolfflight"
 
 /obj/item/weapon/crowbar/fluff/zelda_creedy_1 //daaneesh: Zelda Creedy
-	name = "Zelda's Crowbar"
-	desc = "A pink crow bar that has an engraving that reads, 'To Zelda. Love always, Dawn'"
+	name = "pink crowbar"
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "zeldacrowbar"
 	item_state = "crowbar"

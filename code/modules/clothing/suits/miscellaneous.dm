@@ -349,3 +349,26 @@
 	icon_state = "swim_red"
 	item_color = "swim_red"
 	siemens_coefficient = 1
+
+/obj/item/clothing/suit/teletube
+	name = "little chaos suit"
+	desc = "Prototype theatrical costume for Little Chaos, the sweetest person Nanotrasen."
+	icon_state = "teletube"
+	item_state = "teletube"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS|HANDS|HEAD
+	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
+	siemens_coefficient = 1
+
+/obj/item/clothing/suit/med_kimono
+	name = "medical kimono"
+	desc = "traditional asian kimono"
+	icon_state = "med_kimono"
+	item_state = "med_kimono"
+	flags = FPRINT | TABLEPASS
+
+/obj/item/clothing/suit/sci_kimono
+	name = "science kimono"
+	desc = "traditional asian kimono"
+	icon_state = "sci_kimono"
+	item_state = "sci_kimono"
+	flags = FPRINT | TABLEPASS

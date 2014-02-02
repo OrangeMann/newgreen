@@ -24,11 +24,12 @@
 
 /obj/item/weapon/storage/backpack/holding
 	name = "Bag of Holding"
-	desc = "A backpack that opens into a localized pocket of Blue Space."
+	desc = "A backpack that opens into a localized pocket of bluespace."
 	origin_tech = "bluespace=4"
 	icon_state = "holdingpack"
 	max_w_class = 4
-	max_combined_w_class = 28
+	storage_slots = 21
+	max_combined_w_class = 63
 
 	New()
 		..()
@@ -38,22 +39,22 @@
 		if(crit_fail)
 			user << "\red The Bluespace generator isn't working."
 			return
-		if(istype(W, /obj/item/weapon/storage/backpack/holding) && !W.crit_fail)
+		/*if(istype(W, /obj/item/weapon/storage/backpack/holding) && !W.crit_fail)
 			user << "\red The Bluespace interfaces of the two devices conflict and malfunction."
 			del(W)
-			return
-			/* //BoH+BoH=Singularity, commented out.
+			return*/
+		//BoH+BoH=Singularity
 		if(istype(W, /obj/item/weapon/storage/backpack/holding) && !W.crit_fail)
 			investigate_log("has become a singularity. Caused by [user.key]","singulo")
-			user << "\red The Bluespace interfaces of the two devices catastrophically malfunction!"
+			user << "\red The bluespace interfaces of the two devices catastrophically malfunction!"
 			del(W)
-			var/obj/machinery/singularity/singulo = new /obj/machinery/singularity (get_turf(src))
+			var/obj/machinery/singularity/singulo = new /obj/machinery/singularity(get_turf(src))
 			singulo.energy = 300 //should make it a bit bigger~
 			message_admins("[key_name_admin(user)] detonated a bag of holding")
 			log_game("[key_name(user)] detonated a bag of holding")
 			del(src)
 			return
-			*/
+
 		..()
 
 	proc/failcheck(mob/user as mob)
@@ -74,7 +75,7 @@
 	icon_state = "giftbag0"
 	item_state = "giftbag"
 	w_class = 4.0
-	storage_slots = 20
+	storage_slots = 21
 	max_w_class = 3
 	max_combined_w_class = 400 // can store a ton of shit!
 

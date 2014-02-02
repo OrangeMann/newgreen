@@ -1302,14 +1302,36 @@ datum/design/mmi_radio
 	category = "Misc"
 
 datum/design/synthetic_flash
-	name = "Synthetic Flash"
+	name = "Flash"
 	desc = "When a problem arises, SCIENCE is the solution."
 	id = "sflash"
 	req_tech = list("magnets" = 3, "combat" = 2)
 	build_type = MECHFAB
 	materials = list("$metal" = 750, "$glass" = 750)
 	reliability_base = 76
-	build_path = /obj/item/device/flash/synthetic
+	build_path = /obj/item/device/flash
+	category = "Misc"
+
+/datum/design/bluespacebeaker
+	name = "bluespace beaker"
+	desc = "A bluespace beaker, powered by experimental bluespace technology and Element Cuban combined with the Compound Pete. Can hold up to 300 units."
+	id = "bluespacebeaker"
+	req_tech = list("bluespace" = 2, "materials" = 6)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 3000, "$plasma" = 3000, "$diamond" = 500)
+	reliability_base = 76
+	build_path = /obj/item/weapon/reagent_containers/glass/beaker/bluespace
+	category = "Misc"
+
+/datum/design/noreactbeaker
+	name = "cryostasis beaker"
+	desc = "A cryostasis beaker that allows for chemical storage without reactions. Can hold up to 50 units."
+	id = "splitbeaker"
+	req_tech = list("materials" = 2)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 3000)
+	reliability_base = 76
+	build_path = /obj/item/weapon/reagent_containers/glass/beaker/noreact
 	category = "Misc"
 
 datum/design/nanopaste

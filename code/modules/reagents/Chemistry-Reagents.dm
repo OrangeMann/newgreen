@@ -481,7 +481,7 @@ datum
 						M.SetParalysis(0)
 						M.dizziness = 0
 						M.drowsyness = 0
-						M.intoxicated = 0
+						M.slurring = 0
 						M.confused = 0
 						M.jitteriness = 0
 				..()
@@ -1480,7 +1480,7 @@ datum
 				M.silent = 0
 				M.dizziness = 0
 				M.drowsyness = 0
-				M.intoxicated = 0
+				M.slurring = 0
 				M.confused = 0
 				M.sleeping = 0
 				M.jitteriness = 0
@@ -1812,8 +1812,8 @@ datum
 				M.make_dizzy(5)
 				M.jitteriness = max(M.jitteriness-5,0)
 				if(data >= 25)
-					if (!M.intoxicated) M.intoxicated = 1
-					M.intoxicated += 4
+					if (!M.slurring) M.slurring = 1
+					M.slurring += 4
 				if(data >= 40 && prob(33))
 					if (!M.confused) M.confused = 1
 					M.confused += 3
@@ -1864,7 +1864,7 @@ datum
 				if(!M) M = holder.my_atom
 				M.dizziness = 0
 				M.drowsyness = 0
-				M.intoxicated = 0
+				M.slurring = 0
 				M.confused = 0
 				..()
 				return
@@ -2172,17 +2172,17 @@ datum
 				if(!data) data = 1
 				switch(data)
 					if(1 to 5)
-						if (!M.intoxicated) M.intoxicated = 1
+						if (!M.slurring) M.slurring = 1
 						M.make_dizzy(5)
 						if(prob(10)) M.emote(pick("twitch","giggle"))
 					if(5 to 10)
-						if (!M.intoxicated) M.intoxicated = 1
+						if (!M.slurring) M.slurring = 1
 						M.make_jittery(10)
 						M.make_dizzy(10)
 						M.druggy = max(M.druggy, 35)
 						if(prob(20)) M.emote(pick("twitch","giggle"))
 					if (10 to INFINITY)
-						if (!M.intoxicated) M.intoxicated = 1
+						if (!M.slurring) M.slurring = 1
 						M.make_jittery(20)
 						M.make_dizzy(20)
 						M.druggy = max(M.druggy, 40)
@@ -2766,17 +2766,17 @@ datum
 				if(!data) data = 1
 				switch(data)
 					if(1 to 5)
-						if (!M.intoxicated) M.intoxicated = 1
+						if (!M.slurring) M.slurring = 1
 						M.make_dizzy(10)
 						if(prob(10)) M.emote(pick("twitch","giggle"))
 					if(5 to 10)
-						if (!M.intoxicated) M.intoxicated = 1
+						if (!M.slurring) M.slurring = 1
 						M.make_jittery(20)
 						M.make_dizzy(20)
 						M.druggy = max(M.druggy, 45)
 						if(prob(20)) M.emote(pick("twitch","giggle"))
 					if (10 to INFINITY)
-						if (!M.intoxicated) M.intoxicated = 1
+						if (!M.slurring) M.slurring = 1
 						M.make_jittery(40)
 						M.make_dizzy(40)
 						M.druggy = max(M.druggy, 60)
@@ -3481,8 +3481,8 @@ datum
 					data++
 					M.dizziness +=10
 					if(data >= 55 && data <115)
-						if (!M.intoxicated) M.intoxicated = 1
-						M.intoxicated += 10
+						if (!M.slurring) M.slurring = 1
+						M.slurring += 10
 					else if(data >= 115 && prob(33))
 						M.confused = max(M.confused+15,15)
 					..()

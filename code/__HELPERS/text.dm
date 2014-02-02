@@ -372,7 +372,7 @@ proc/checkhtml(var/t)
 
 
 // For drunken speak, etc
-proc/Intoxicated(phrase) // using cp1251!
+proc/slurring(phrase) // using cp1251!
 	phrase = html_decode(phrase)
 	var/index = findtext(phrase, "ÿ")
 	while(index)
@@ -381,11 +381,12 @@ proc/Intoxicated(phrase) // using cp1251!
 	var
 		leng=lentext(phrase)
 		counter=lentext(phrase)
-		newphrase="";newletter=""
+		newphrase=""
+		newletter=""
 
 	while(counter>=1)
 		newletter=copytext(phrase,(leng-counter)+1,(leng-counter)+2)
-		if(rand(1,3)==3)
+		if(prob(33))
 			if(lowertext(newletter)=="o")	newletter="u"
 			if(lowertext(newletter)=="s")	newletter="ch"
 			if(lowertext(newletter)=="a")	newletter="ah"
@@ -397,7 +398,8 @@ proc/Intoxicated(phrase) // using cp1251!
 			if(9,10)	newletter="<b>[newletter]</b>"
 			if(11,12)	newletter="<big>[newletter]</big>"
 			if(13)	newletter="<small>[newletter]</small>"
-		newphrase+="[newletter]";counter-=1
+		newphrase+="[newletter]"
+		counter-=1
 	return newphrase
 
 proc/NewStutter(phrase,stunned)

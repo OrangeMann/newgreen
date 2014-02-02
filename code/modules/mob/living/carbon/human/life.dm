@@ -1223,8 +1223,8 @@
 			if (src.slurring)
 				slurring = max(slurring-1, 0)
 
-			if(intoxicated)
-				intoxicated = max(intoxicated-1,0)
+			if(slurring)
+				slurring = max(slurring-1,0)
 
 			if(silent)
 				silent = max(silent-1, 0)

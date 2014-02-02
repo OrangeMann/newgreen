@@ -74,7 +74,6 @@ var/list/department_radio_keys = list(
 		if(dongle.translate_hive) return 1
 
 /mob/living/say(var/message)
-
 	/*
 		Formatting and sanitizing.
 	*/
@@ -169,8 +168,8 @@ var/list/department_radio_keys = list(
 	if (!message)
 		return
 
-	if(intoxicated)
-		message = Intoxicated(message)
+	if(slurring)
+		message = slurring(message)
 
 	if(stuttering)
 		message = NewStutter(message, stuttering)

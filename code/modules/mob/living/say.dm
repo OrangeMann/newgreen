@@ -86,31 +86,31 @@ var/list/department_radio_keys = list(
 		Sanity checking and speech failure.
 	*/
 
-	if (!message)
-		return
+	if(!message)
+		return 0
 
 	if(silent)
-		return
+		return 0
 
 	if (stat == 2) // Dead.
 		return say_dead(message)
 	else if (stat) // Unconcious.
-		return
+		return 0
 
 	if (src.client)
 		if(client.prefs.muted & MUTE_IC)
 			src << "\red You cannot speak in IC (muted)."
-			return
+			return 0
 		if (src.client.handle_spam_prevention(message,MUTE_IC))
-			return
+			return 0
 
 	// Mute disability
 	if (sdisabilities & MUTE)
-		return
+		return 0
 
 	// Muzzled.
 	if (istype(wear_mask, /obj/item/clothing/mask/muzzle))
-		return
+		return 0
 
 	// Emotes.
 	if (copytext(message, 1, 2) == "*" && !stat)
@@ -169,8 +169,11 @@ var/list/department_radio_keys = list(
 	if (!message)
 		return
 
-	if (stuttering)
-		message = stutter(message)
+	if(intoxicated)
+		message = Intoxicated(message)
+
+	if(stuttering)
+		message = NewStutter(message, stuttering)
 
 	var/list/obj/item/used_radios = new
 	var/is_speaking_radio = 0

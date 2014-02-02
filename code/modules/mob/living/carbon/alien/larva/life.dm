@@ -283,6 +283,9 @@ FUCK YOU MORE FAT CODE -Hawk*/
 			if(stuttering)
 				stuttering = max(stuttering-1, 0)
 
+			if(intoxicated)
+				intoxicated = max(intoxicated-1,0)
+
 			if(silent)
 				silent = max(silent-1, 0)
 

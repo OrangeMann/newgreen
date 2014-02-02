@@ -17,7 +17,7 @@
 		return
 
 	New()
-		var/datum/reagents/R = new/datum/reagents(1000)
+		var/datum/reagents/R = new/datum/reagents(3000)
 		reagents = R
 		R.my_atom = src
 		if (!possible_transfer_amounts)
@@ -78,17 +78,23 @@
 	desc = "A watertank"
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "watertank"
-	amount_per_transfer_from_this = 10
 	New()
 		..()
 		reagents.add_reagent("water",1000)
+
+/obj/structure/reagent_dispensers/watertank/hv
+	name = "high-volume watertank"
+	desc = "A large watertank"
+	icon_state = "hvwatertank"
+	New()
+		..()
+		reagents.add_reagent("water",2000)
 
 /obj/structure/reagent_dispensers/fueltank
 	name = "fueltank"
 	desc = "A fueltank"
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "weldtank"
-	amount_per_transfer_from_this = 10
 	var/modded = 0
 	var/obj/item/device/assembly_holder/rig = null
 	New()
@@ -99,7 +105,7 @@
 		set src in view()
 		..()
 		if (!(usr in view(2)) && usr!=src.loc) return
-		if (modded)
+		if(modded)
 			usr << "\red Fuel faucet is wrenched open, leaking the fuel!"
 		if(rig)
 			usr << "<span class='notice'>There is some kind of device rigged to the tank."
@@ -164,6 +170,15 @@
 		if(src)
 			del(src)
 
+
+/obj/structure/reagent_dispensers/fueltank/hv
+	name = "high-volume fueltank"
+	desc = "A large fueltank"
+	icon_state = "hvweldtank"
+	New()
+		..()
+		reagents.add_reagent("fuel",1000)
+
 /obj/structure/reagent_dispensers/peppertank
 	name = "Pepper Spray Refiller"
 	desc = "Refill pepper spray canisters."
@@ -195,7 +210,6 @@
 	desc = "A beer keg"
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "beertankTEMP"
-	amount_per_transfer_from_this = 10
 	New()
 		..()
 		reagents.add_reagent("beer",1000)
@@ -209,9 +223,11 @@
 	desc = "A dispenser of virus food."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "virusfoodtank"
-	amount_per_transfer_from_this = 10
 	anchored = 1
 
 	New()
 		..()
 		reagents.add_reagent("virusfood", 1000)
+
+proc/is_reagent_dispenser(var/obj/O)
+	return (istype(O, /obj/structure/reagent_dispensers) || istype(O, /obj/item/weapon/reagent_containers/backpack))

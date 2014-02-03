@@ -6,6 +6,8 @@
 	icon_state = "tube"
 	origin_tech = "materials=4;engineering=3"
 	amount = 10
+	m_amt = 500
+	g_amt = 500
 
 
 /obj/item/stack/nanopaste/attack(mob/living/M as mob, mob/user as mob)

@@ -403,10 +403,10 @@ mob/living/carbon/human/airflow_hit(atom/A)
 	apply_damage(b_loss/4, BRUTE, "groin", blocked, 0, "Airflow")
 
 	if(airflow_speed > 10)
-		paralysis += round(airflow_speed * vsc.airflow_stun)
+		paralysis += round(airflow_speed * vsc.airflow_stun/2)
 		stunned = max(stunned,paralysis + 3)
 	else
-		stunned += round(airflow_speed * vsc.airflow_stun/2)
+		stunned += round(airflow_speed * vsc.airflow_stun/3)
 	. = ..()
 
 zone/proc/movables()

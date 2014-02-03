@@ -219,7 +219,7 @@
 	supervisors = "the head of personnel"
 	selection_color = "#dddddd"
 	access = list(access_clown, access_theatre, access_maint_tunnels)
-	minimal_access = list(access_clown, access_theatre)
+	minimal_access = list(access_maint_tunnels, access_clown, access_theatre)
 
 
 	equip(var/mob/living/carbon/human/H)
@@ -251,7 +251,7 @@
 	supervisors = "the head of personnel"
 	selection_color = "#dddddd"
 	access = list(access_mime, access_theatre, access_maint_tunnels)
-	minimal_access = list(access_mime, access_theatre)
+	minimal_access = list(access_maint_tunnels, access_mime, access_theatre)
 
 
 	equip(var/mob/living/carbon/human/H)

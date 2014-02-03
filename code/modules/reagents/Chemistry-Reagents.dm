@@ -437,8 +437,6 @@ datum
 			reagent_state = LIQUID
 			reagent_color = "#E895CC" // rgb: 232, 149, 204
 
-			custom_metabolism = 0.1
-
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
 				if(!data) data = 1

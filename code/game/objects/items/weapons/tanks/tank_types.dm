@@ -134,7 +134,7 @@
 	w_class = 2.0
 	force = 4.0
 	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
-	volume = 2 //Tiny. Real life equivalents only have 21 breaths of oxygen in them. They're EMERGENCY tanks anyway -errorage (dangercon 2011)
+	volume = 4
 
 
 	New()
@@ -162,6 +162,10 @@
 	name = "double emergency oxygen tank"
 	icon_state = "emergency_double"
 	volume = 10
+
+/obj/item/weapon/tank/emergency_oxygen/double/engi
+	icon_state = "emergency_double_engi"
+	volume = 14
 
 /*
  * Nitrogen

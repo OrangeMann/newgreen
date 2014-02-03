@@ -20,7 +20,7 @@
 			usr << "You disable the mag-pulse traction system."
 		else
 			src.flags |= NOSLIP
-			src.slowdown = 2
+			src.slowdown = 0
 			src.magpulse = 1
 			icon_state = "magboots1"
 			usr << "You enable the mag-pulse traction system."

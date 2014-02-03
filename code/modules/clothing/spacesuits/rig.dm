@@ -92,6 +92,7 @@
 	name = "advanced hardsuit"
 	desc = "An advanced suit that protects against hazardous, low pressure environments. Shines with a high polish."
 	item_state = "ce_hardsuit"
+	slowdown = 0
 
 
 //Mining rig

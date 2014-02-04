@@ -18,70 +18,6 @@
 	throw_range = 20
 	force = 0
 
-
-/*
- * Balloons
- */
-/obj/item/toy/balloon
-	name = "water balloon"
-	desc = "A translucent balloon. There's nothing in it."
-	icon = 'icons/obj/toy.dmi'
-	icon_state = "waterballoon-e"
-	item_state = "balloon-empty"
-
-/obj/item/toy/balloon/New()
-	var/datum/reagents/R = new/datum/reagents(10)
-	reagents = R
-	R.my_atom = src
-
-/obj/item/toy/balloon/attack(mob/living/carbon/human/M as mob, mob/user as mob)
-	return
-
-/obj/item/toy/balloon/afterattack(atom/A as mob|obj, mob/user as mob)
-	if (istype(A, /obj/structure/reagent_dispensers/watertank) && get_dist(src,A) <= 1)
-		A.reagents.trans_to(src, 10)
-		user << "\blue You fill the balloon with the contents of [A]."
-		src.desc = "A translucent balloon with some form of liquid sloshing around in it."
-		src.update_icon()
-	return
-
-/obj/item/toy/balloon/attackby(obj/O as obj, mob/user as mob)
-	if(istype(O, /obj/item/weapon/reagent_containers/glass))
-		if(O.reagents)
-			if(O.reagents.total_volume < 1)
-				user << "The [O] is empty."
-			else if(O.reagents.total_volume >= 1)
-				if(O.reagents.has_reagent("pacid", 1))
-					user << "The acid chews through the balloon!"
-					O.reagents.reaction(user)
-					del(src)
-				else
-					src.desc = "A translucent balloon with some form of liquid sloshing around in it."
-					user << "\blue You fill the balloon with the contents of [O]."
-					O.reagents.trans_to(src, 10)
-	src.update_icon()
-	return
-
-/obj/item/toy/balloon/throw_impact(atom/hit_atom)
-	if(src.reagents.total_volume >= 1)
-		src.visible_message("\red The [src] bursts!","You hear a pop and a splash.")
-		src.reagents.reaction(get_turf(hit_atom))
-		for(var/atom/A in get_turf(hit_atom))
-			src.reagents.reaction(A)
-		src.icon_state = "burst"
-		spawn(5)
-			if(src)
-				del(src)
-	return
-
-/obj/item/toy/balloon/update_icon()
-	if(src.reagents.total_volume >= 1)
-		icon_state = "waterballoon"
-		item_state = "balloon"
-	else
-		icon_state = "waterballoon-e"
-		item_state = "balloon-empty"
-
 /obj/item/toy/syndicateballoon
 	name = "syndicate balloon"
 	desc = "There is a tag on the back that reads \"FUK NT!11!\"."
@@ -95,14 +31,11 @@
 	w_class = 4.0
 
 /*
- * Fake telebeacon
+ * Telebeacon
  */
-/obj/item/toy/blink
+/obj/item/device/radio/beacon/blink
 	name = "electronic blink toy game"
 	desc = "Blink.  Blink.  Blink. Ages 8 and up."
-	icon = 'icons/obj/radio.dmi'
-	icon_state = "beacon"
-	item_state = "signaler"
 
 /*
  * Fake singularity
@@ -408,77 +341,6 @@
 			del(src)
 
 /*
- * Water flower
- */
-/obj/item/toy/waterflower
-	name = "Water Flower"
-	desc = "A seemingly innocent sunflower...with a twist."
-	icon = 'icons/obj/harvest.dmi'
-	icon_state = "sunflower"
-	item_state = "sunflower"
-	var/empty = 0
-	flags =  USEDELAY
-
-/obj/item/toy/waterflower/New()
-	var/datum/reagents/R = new/datum/reagents(10)
-	reagents = R
-	R.my_atom = src
-	R.add_reagent("water", 10)
-
-/obj/item/toy/waterflower/attack(mob/living/carbon/human/M as mob, mob/user as mob)
-	return
-
-/obj/item/toy/waterflower/afterattack(atom/A as mob|obj, mob/user as mob)
-
-	if (istype(A, /obj/item/weapon/storage/backpack ))
-		return
-
-	else if (locate (/obj/structure/table, src.loc))
-		return
-
-	else if (istype(A, /obj/structure/reagent_dispensers/watertank) && get_dist(src,A) <= 1)
-		A.reagents.trans_to(src, 10)
-		user << "\blue You refill your flower!"
-		return
-
-	else if (src.reagents.total_volume < 1)
-		src.empty = 1
-		user << "\blue Your flower has run dry!"
-		return
-
-	else
-		src.empty = 0
-
-
-		var/obj/effect/decal/D = new/obj/effect/decal/(get_turf(src))
-		D.name = "water"
-		D.icon = 'icons/obj/chemical.dmi'
-		D.icon_state = "chempuff"
-		D.create_reagents(5)
-		src.reagents.trans_to(D, 1)
-		playsound(src.loc, 'sound/effects/spray3.ogg', 50, 1, -6)
-
-		spawn(0)
-			for(var/i=0, i<1, i++)
-				step_towards(D,A)
-				D.reagents.reaction(get_turf(D))
-				for(var/atom/T in get_turf(D))
-					D.reagents.reaction(T)
-					if(ismob(T) && T:client)
-						T:client << "\red [user] has sprayed you with water!"
-				sleep(4)
-			del(D)
-
-		return
-
-/obj/item/toy/waterflower/examine()
-        set src in usr
-        usr << text("\icon[] [] units of water left!", src, src.reagents.total_volume)
-        ..()
-        return
-
-
-/*
  * Mech prizes
  */
 /obj/item/toy/prize
@@ -575,3 +437,66 @@
 	desc = "At some point in the life cycle of the Animus Phoenix dies and is reborn again."
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "zlofenix"
+
+
+/*
+ * Toy C4
+ */
+/obj/item/toy/c4
+	name = "toy bomb"
+	icon = 'icons/obj/assemblies.dmi'
+	icon_state = "plastic-explosive0"
+	item_state = "plasticx"
+	flags = FPRINT | USEDELAY
+	w_class = 2
+	var/timer = 10
+	var/atom/target = null
+	var/overlayicon
+
+/obj/item/toy/c4/attack_self(mob/user as mob)
+	var/newtime = input(usr, "Please set the timer.", "Timer", 10) as num
+	if(user.get_active_hand() == src)
+		newtime = Clamp(newtime, 10, 600)
+		timer = newtime
+		user << "Timer set for [timer] seconds."
+
+/obj/item/toy/c4/afterattack(atom/target as obj|turf, mob/user as mob, flag)
+	if(!flag)
+		return
+	if (istype(target, /turf/unsimulated) || istype(target, /turf/simulated/shuttle) || istype(target, /obj/item/weapon/storage))
+		return
+	user << "Planting explosives..."
+	if(ismob(target))
+		user.visible_message("\red [user.name] is trying to plant some kind of toy on [target.name]!")
+
+	if(do_after(user, 50) && in_range(user, target))
+		user.drop_item()
+		src.target = target
+		loc = null
+
+		if (ismob(target))
+			user.visible_message("\red [user.name] finished planting a toy on [target.name]!")
+
+		overlayicon = image('icons/obj/assemblies.dmi', "plastic-explosive2")
+		target.overlays += overlayicon
+		user << "Toy has been planted. Timer counting down from [timer]."
+		spawn(timer*10)
+			explode(get_turf(target))
+
+/obj/item/toy/c4/proc/explode(var/turf/location)
+	if(!target)
+		target = src
+
+	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+	s.set_up(2, 0, location)
+	s.start()
+	new /obj/effect/decal/cleanable/ash(location)
+	location.visible_message("\red The [src.name] explodes!","\red You hear a snap!")
+	playsound(src, 'sound/effects/snap.ogg', 50, 1)
+
+	if(target)
+		target.overlays -= overlayicon
+	del(src)
+
+/obj/item/toy/c4/attack(mob/M as mob, mob/user as mob)
+	return

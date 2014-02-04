@@ -290,7 +290,7 @@
 	can_hold = list("/obj/item/weapon/reagent_containers/food/snacks/monkeycube")
 	New()
 		..()
-		for(var/i = 1; i <= 5; i++)
+		for(var/i = 1; i <= storage_slots; i++)
 			new /obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped(src)
 /obj/item/weapon/storage/box/farwacubes
 	name = "farwa cube box"
@@ -301,7 +301,7 @@
 	can_hold = list("/obj/item/weapon/reagent_containers/food/snacks/monkeycube/farwa")
 	New()
 		..()
-		for(var/i = 1; i <= 5; i++)
+		for(var/i = 1; i <= storage_slots; i++)
 			new /obj/item/weapon/reagent_containers/food/snacks/monkeycube/farwa/wrapped(src)
 
 /obj/item/weapon/storage/box/stokcubes
@@ -313,7 +313,7 @@
 	can_hold = list("/obj/item/weapon/reagent_containers/food/snacks/monkeycube/stok")
 	New()
 		..()
-		for(var/i = 1; i <= 5; i++)
+		for(var/i = 1; i <= storage_slots; i++)
 			new /obj/item/weapon/reagent_containers/food/snacks/monkeycube/stok/wrapped(src)
 
 /obj/item/weapon/storage/box/neaeracubes
@@ -325,7 +325,7 @@
 	can_hold = list("/obj/item/weapon/reagent_containers/food/snacks/monkeycube/stok")
 	New()
 		..()
-		for(var/i = 1; i <= 5; i++)
+		for(var/i = 1; i <= storage_slots; i++)
 			new /obj/item/weapon/reagent_containers/food/snacks/monkeycube/neaera/wrapped(src)
 
 /obj/item/weapon/storage/box/ids
@@ -387,6 +387,7 @@
 		new /obj/item/device/assembly/mousetrap( src )
 		new /obj/item/device/assembly/mousetrap( src )
 		new /obj/item/device/assembly/mousetrap( src )
+		new /obj/item/device/assembly/mousetrap( src )
 
 /obj/item/weapon/storage/box/pillbottles
 	name = "box of pill bottles"
@@ -402,18 +403,29 @@
 		new /obj/item/weapon/storage/pill_bottle( src )
 		new /obj/item/weapon/storage/pill_bottle( src )
 
-
-/obj/item/weapon/storage/box/snappops
-	name = "snap pop box"
-	desc = "Eight wrappers of fun! Ages 8 and up. Not suitable for children."
+/obj/item/weapon/storage/box/toy
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "spbox"
 	storage_slots = 8
-	can_hold = list("/obj/item/toy/snappop")
+
+/obj/item/weapon/storage/box/toy/snappops
+	name = "snap pop box"
+	desc = "Eight wrappers of fun! Ages 8 and up. Not suitable for children."
+	can_hold = list(/obj/item/toy/snappop)
 	New()
 		..()
 		for(var/i=1; i <= storage_slots; i++)
 			new /obj/item/toy/snappop(src)
+
+/obj/item/weapon/storage/box/toy/waterballoons
+	name = "water ballons box"
+	desc = "Eight ballons of fun! Ages 8 and up. Not suitable for children."
+	can_hold = list(/obj/item/weapon/reagent_containers/glass/balloon)
+	New()
+		..()
+		for(var/i=1; i <= storage_slots; i++)
+			new /obj/item/weapon/reagent_containers/glass/balloon(src)
+
 
 /obj/item/weapon/storage/box/matches
 	name = "matchbox"

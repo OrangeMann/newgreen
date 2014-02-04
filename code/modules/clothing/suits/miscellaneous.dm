@@ -120,7 +120,18 @@
 	flags = FPRINT | TABLEPASS
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank/emergency_oxygen,/obj/item/toy)
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
+	var/helmet = /obj/item/clothing/head/syndicatefake
 
+	New()
+		..()
+		new helmet(src.loc)
+
+/obj/item/clothing/suit/syndicatefake/rig
+	name = "red hardsuit replica"
+	desc = "A plastic replica of the syndicate hardsuit, you'll look just like a real murderous syndicate agent in this! This is a toy, it is not made for use in space!"
+	icon_state = "rig-syndi"
+	item_state = "syndie_hardsuit"
+	helmet = /obj/item/clothing/head/syndicatefake/rig
 
 /obj/item/clothing/suit/hastur
 	name = "Hastur's Robes"

@@ -1,10 +1,11 @@
 /obj/machinery/computer/arcade
 	name = "arcade machine"
-	desc = "Does not support Pin ball."
+	desc = "Arcade machine. Does not support Pinball."
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "arcade"
-	circuit = "/obj/item/weapon/circuitboard/arcade"
-	var/enemy_name = "Space Villian"
+	circuit = "/obj/item/weapon/circuitboard/computer/arcade"
+
+	var/enemy_name = "Space Villain"
 	var/temp = "Winners Don't Use Spacedrugs" //Temporary message, for attack messages, etc
 	var/player_hp = 30 //Player health/attack points
 	var/player_mp = 10
@@ -12,44 +13,36 @@
 	var/enemy_mp = 20
 	var/gameover = 0
 	var/blocked = 0 //Player cannot attack/heal while set
-	var/list/prizes = list(	/obj/item/weapon/storage/box/snappops			= 2,
-							/obj/item/toy/blink								= 2,
-							/obj/item/clothing/under/syndicate/tacticool	= 2,
-							/obj/item/toy/sword								= 2,
-							/obj/item/toy/gun								= 2,
-							/obj/item/toy/crossbow							= 2,
-							/obj/item/clothing/suit/syndicatefake			= 2,
-							/obj/item/weapon/storage/fancy/crayons			= 2,
-							/obj/item/toy/spinningtoy						= 2,
-							/obj/item/toy/prize/ripley						= 1,
-							/obj/item/toy/prize/fireripley					= 1,
-							/obj/item/toy/prize/deathripley					= 1,
-							/obj/item/toy/prize/gygax						= 1,
-							/obj/item/toy/prize/durand						= 1,
-							/obj/item/toy/prize/honk						= 1,
-							/obj/item/toy/prize/marauder					= 1,
-							/obj/item/toy/prize/seraph						= 1,
-							/obj/item/toy/prize/mauler						= 1,
-							/obj/item/toy/prize/odysseus					= 1,
-							/obj/item/toy/prize/phazon						= 1
-							)
 
-/obj/machinery/computer/arcade
-	var/turtle = 0
+	var/list/stealmsg = list("steals")
+	var/list/attackmsg = list("attacks")
+
+	var/honked = 0
+
+	var/list/prizes = list(	/obj/item/weapon/storage/box/toy/snappops				= 2,
+							/obj/item/weapon/storage/box/toy/waterballoons			= 2,
+							/obj/item/toy/c4										= 2,
+							/obj/item/device/radio/beacon/blink						= 2,
+							/obj/item/clothing/under/syndicate						= 2,
+							/obj/item/toy/sword										= 2,
+							/obj/item/toy/gun										= 2,
+							/obj/item/toy/crossbow									= 2,
+							/obj/item/clothing/suit/syndicatefake					= 5, //vends all types, see vend_prize()
+							/obj/item/weapon/storage/backpack/toy					= 2,
+							/obj/item/weapon/storage/fancy/crayons					= 2,
+							/obj/item/toy/spinningtoy								= 2,
+							/obj/item/toy/prize										= 6, //vends all types except base, see vend_prize()
+							/obj/item/weapon/storage/backpack/toy 					= 2,
+							/obj/item/weapon/reagent_containers/spray/waterflower	= 2,
+							)
 
 /obj/machinery/computer/arcade/New()
 	..()
-	var/name_action
-	var/name_part1
-	var/name_part2
+	enemy_name = pick("the Automatic ", "Farmer ", "Lord ", "Professor ", "the Evil ", "the Dread King ", "the Space ", "Lord ")
+	enemy_name += pick("Melonoid", "Murdertron", "Sorcerer", "Ruin", "Jeff", "Ectoplasm", "Crushulon", "Coder")
 
-	name_action = pick("Defeat ", "Annihilate ", "Save ", "Strike ", "Stop ", "Destroy ", "Robust ", "Romance ", "Pwn ", "Own ")
-
-	name_part1 = pick("the Automatic ", "Farmer ", "Lord ", "Professor ", "the Cuban ", "the Evil ", "the Dread King ", "the Space ", "Lord ", "the Great ", "Duke ", "General ")
-	name_part2 = pick("Melonoid", "Murdertron", "Sorcerer", "Ruin", "Jeff", "Ectoplasm", "Crushulon", "Uhangoid", "Vhakoid", "Peteoid", "metroid", "Griefer", "ERPer", "Lizard Man", "Unicorn")
-
-	src.enemy_name = replacetext((name_part1 + name_part2), "the ", "")
-	src.name = (name_action + name_part1 + name_part2)
+	name = pick("Defeat ", "Annihilate ", "Save ", "Strike ", "Stop ", "Destroy ", "Robust ", "Romance ") + enemy_name
+	enemy_name = replacetext(enemy_name, "the ", "")
 
 
 /obj/machinery/computer/arcade/attack_ai(mob/user as mob)
@@ -63,10 +56,10 @@
 		return
 	user.set_machine(src)
 	var/dat = "<a href='byond://?src=\ref[src];close=1'>Close</a>"
-	dat += "<center><h4>[src.enemy_name]</h4></center>"
+	dat += "<center><h4>[enemy_name]</h4></center>"
 
-	dat += "<br><center><h3>[src.temp]</h3></center>"
-	dat += "<br><center>Health: [src.player_hp] | Magic: [src.player_mp] | Enemy Health: [src.enemy_hp]</center>"
+	dat += "<br><center><h3>[temp]</h3></center>"
+	dat += "<br><center>Health: [player_hp] | Magic: [player_mp] | Enemy Health: [enemy_hp]</center>"
 
 	if (src.gameover)
 		dat += "<center><b><a href='byond://?src=\ref[src];newgame=1'>New Game</a>"
@@ -85,14 +78,12 @@
 	if(..())
 		return
 
-	if (!src.blocked && !src.gameover)
+	if (!src.blocked)
 		if (href_list["attack"])
 			src.blocked = 1
 			var/attackamt = rand(2,6)
 			src.temp = "You attack for [attackamt] damage!"
 			src.updateUsrDialog()
-			if(turtle > 0)
-				turtle--
 
 			sleep(10)
 			src.enemy_hp -= attackamt
@@ -104,7 +95,6 @@
 			var/healamt = rand(6,8)
 			src.temp = "You use [pointamt] magic to heal for [healamt] damage!"
 			src.updateUsrDialog()
-			turtle++
 
 			sleep(10)
 			src.player_mp -= pointamt
@@ -118,159 +108,173 @@
 			var/chargeamt = rand(4,7)
 			src.temp = "You regain [chargeamt] points"
 			src.player_mp += chargeamt
-			if(turtle > 0)
-				turtle--
 
 			src.updateUsrDialog()
 			sleep(10)
 			src.arcade_action()
 
 	if (href_list["close"])
-		usr.unset_machine()
+		usr.machine = null
 		usr << browse(null, "window=arcade")
 
-	else if (href_list["newgame"]) //Reset everything
-		temp = "New Round"
-		player_hp = 30
-		player_mp = 10
-		enemy_hp = 45
-		enemy_mp = 20
-		gameover = 0
-		turtle = 0
-
-		if(emagged)
-			src.New()
-			emagged = 0
+	else if (href_list["newgame"])
+		reset()
 
 	src.add_fingerprint(usr)
 	src.updateUsrDialog()
 	return
 
 /obj/machinery/computer/arcade/proc/arcade_action()
-	if ((src.enemy_mp <= 0) || (src.enemy_hp <= 0))
-		if(!gameover)
-			src.gameover = 1
-			src.temp = "[src.enemy_name] has fallen! Rejoice!"
+	if (enemy_mp <= 0 || enemy_hp <= 0)
+		gameover = 1
+		temp = "[src.enemy_name] has fallen! Rejoice!"
 
-			if(emagged)
-				feedback_inc("arcade_win_emagged")
-				new /obj/effect/spawner/newbomb/timer/syndicate(src.loc)
-				new /obj/item/clothing/head/collectable/petehat(src.loc)
-				message_admins("[key_name_admin(usr)] has outbombed Cuban Pete and been awarded a bomb.")
-				log_game("[key_name_admin(usr)] has outbombed Cuban Pete and been awarded a bomb.")
-				src.New()
-				emagged = 0
-			else if(!contents.len)
-				feedback_inc("arcade_win_normal")
-				var/prizeselect = pickweight(prizes)
-				new prizeselect(src.loc)
+		if(honked) // PRIZES PRIZES PRIZES!
+			vend_prize(rand(2,6))
+		vend_prize()
 
-				if(istype(prizeselect, /obj/item/toy/gun)) //Ammo comes with the gun
-					new /obj/item/toy/ammo/gun(src.loc)
-
-				else if(istype(prizeselect, /obj/item/clothing/suit/syndicatefake)) //Helmet is part of the suit
-					new	/obj/item/clothing/head/syndicatefake(src.loc)
-
-			else
-				feedback_inc("arcade_win_normal")
-				var/atom/movable/prize = pick(contents)
-				prize.loc = src.loc
-
-	else if (emagged && (turtle >= 4))
-		var/boomamt = rand(5,10)
-		src.temp = "[src.enemy_name] throws a bomb, exploding you for [boomamt] damage!"
-		src.player_hp -= boomamt
-
-	else if ((src.enemy_mp <= 5) && (prob(70)))
+	else if (enemy_mp <= 5 && prob(70))
 		var/stealamt = rand(2,3)
-		src.temp = "[src.enemy_name] steals [stealamt] of your power!"
-		src.player_mp -= stealamt
-		src.updateUsrDialog()
+		temp = "[enemy_name] [pick(stealmsg)] [stealamt] of your power!"
+		player_mp -= stealamt
+		updateUsrDialog()
 
-		if (src.player_mp <= 0)
-			src.gameover = 1
+		if (player_mp <= 0)
+			gameover = 1
 			sleep(10)
-			src.temp = "You have been drained! GAME OVER"
-			if(emagged)
-				feedback_inc("arcade_loss_mana_emagged")
-				usr.gib()
-			else
-				feedback_inc("arcade_loss_mana_normal")
+			temp = "You have been drained! GAME OVER"
 
-	else if ((src.enemy_hp <= 10) && (src.enemy_mp > 4))
-		src.temp = "[src.enemy_name] heals for 4 health!"
-		src.enemy_hp += 4
-		src.enemy_mp -= 4
+			if(honked)
+				temp = "You have been permabrigged! GAME OVER"
+			else if(emagged)
+				temp = "CHICK CHICKY BOOM CHICK CHICKY BOOM"
+				sleep(10)
+				explode()
+
+	else if (enemy_hp <= 10 && enemy_mp > 4)
+		temp = "[enemy_name] heals for 4 health!"
+		enemy_hp += 4
+		enemy_mp -= 4
 
 	else
-		var/attackamt = rand(3,6)
-		src.temp = "[src.enemy_name] attacks for [attackamt] damage!"
-		src.player_hp -= attackamt
+		var/attackamt = rand(3,6) + emagged*rand(1,2)
+		temp = "[enemy_name] [pick(attackmsg)] for [attackamt] damage!"
+		player_hp -= attackamt
 
-	if ((src.player_mp <= 0) || (src.player_hp <= 0))
-		src.gameover = 1
-		src.temp = "You have been crushed! GAME OVER"
-		if(emagged)
-			feedback_inc("arcade_loss_hp_emagged")
-			usr.gib()
-		else
-			feedback_inc("arcade_loss_hp_normal")
+	if (player_mp < 0 || player_hp <= 0)
+		gameover = 1
+		sleep(10)
+		temp = "You have been crushed! GAME OVER"
 
-	src.blocked = 0
+		if(honked)
+			temp = "You have been beaten! GAME OVER"
+		else if(emagged)
+			explode()
+
+	blocked = 0
 	return
 
+/obj/machinery/computer/arcade/proc/vend_prize(var/prize_amount=0)
+	if(prize_amount)
+		for(prize_amount; prize_amount > 0; prize_amount--)
+			vend_prize()
+			sleep(5)
+		return
+
+	var/prize = pickweight(prizes)
+
+	if(emagged)
+		prize = /obj/effect/spawner/newbomb/timer
+		new /obj/item/clothing/head/collectable/petehat(src.loc)
+		message_admins("[key_name_admin(usr)] has outbombed Cuban Pete and been awarded a bomb.")
+
+	else if(prize == /obj/item/toy/prize)
+		prize = pick(typesof(/obj/item/toy/prize) - /obj/item/toy/prize)
+
+	else if(prize == /obj/item/toy/gun) //Ammo comes with the gun
+		new /obj/item/toy/ammo/gun(src.loc)
+
+	else if(prize == /obj/item/clothing/suit/syndicatefake) //Helmet is part of the suit
+		prize = pick(typesof(/obj/item/clothing/suit/syndicatefake))
+
+	new prize(src.loc)
+
+	if(emagged || honked)
+		reset()
+
+/obj/machinery/computer/arcade/proc/reset() //Reset everything
+	if(emagged || honked)
+		src.New()
+		stealmsg = list("steals")
+		attackmsg = list("attacks")
+	emagged = 0
+	honked = 0
+	temp = "New Round"
+	player_hp = 30
+	player_mp = 10
+	enemy_hp = 45
+	enemy_mp = 20
+	gameover = 0
+	blocked = 0
+
+/obj/machinery/computer/arcade/proc/explode() //Cuban Pete WINS!
+	explosion(get_turf(src), 1, 2, 3) //BOOM
+	del(src)
+
+/obj/machinery/computer/arcade/power_change()
+	if(stat & BROKEN)
+		icon_state = "arcadeb"
+	else
+		if( powered() )
+			icon_state = initial(icon_state)
+			stat &= ~NOPOWER
+		else
+			spawn(rand(0, 15))
+				src.icon_state = "arcade0"
+				stat |= NOPOWER
 
 /obj/machinery/computer/arcade/attackby(I as obj, user as mob)
-	if(istype(I, /obj/item/weapon/card/emag) && !emagged)
-		temp = "If you die in the game, you die for real!"
-		player_hp = 30
-		player_mp = 10
-		enemy_hp = 45
-		enemy_mp = 20
-		gameover = 0
-		blocked = 0
+	if(!emagged && !honked)
+		if(istype(I, /obj/item/weapon/card/emag))
+			reset()
+			emagged = 1
 
-		emagged = 1
+			temp = "If you die in the game, you die for real!"
+			enemy_name = "Cuban Pete"
+			name = "Outbomb Cuban Pete"
+			attackmsg = list("throws a bomb, exploding you", "attacks")
 
-		enemy_name = "Cuban Pete"
-		name = "Outbomb Cuban Pete"
+			src.updateUsrDialog()
+			return
+		if(istype(I, /obj/item/weapon/bikehorn))
+			reset()
+			honked = 1
 
+			temp = "HONK!"
+			enemy_name = "Lord Shitcuriton"
+			name = "Beat the Lord Shitcuriton"
+			stealmsg = list("cuffs","stuns","brigs")
+			attackmsg = list("beats you")
 
-		src.updateUsrDialog()
-	else if(istype(I, /obj/item/weapon/screwdriver))
-		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
-		if(do_after(user, 20))
-			var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
-			var/obj/item/weapon/circuitboard/arcade/M = new /obj/item/weapon/circuitboard/arcade( A )
-			for (var/obj/C in src)
-				C.loc = src.loc
-			A.circuit = M
-			A.anchored = 1
+			src.updateUsrDialog()
+			return
+	..()
 
-			if (src.stat & BROKEN)
-				user << "\blue The broken glass falls out."
-				new /obj/item/weapon/shard( src.loc )
-				A.state = 3
-				A.icon_state = "3"
-			else
-				user << "\blue You disconnect the monitor."
-				A.state = 4
-				A.icon_state = "4"
-
-			del(src)
 /obj/machinery/computer/arcade/emp_act(severity)
 	if(stat & (NOPOWER|BROKEN))
 		..(severity)
 		return
-	var/empprize = null
-	var/num_of_prizes = 0
+
+	if(emagged && prob(90/severity))
+		explode()
+		return
+
 	switch(severity)
 		if(1)
-			num_of_prizes = rand(1,4)
+			vend_prize(rand(2,4))
 		if(2)
-			num_of_prizes = rand(0,2)
-	for(num_of_prizes; num_of_prizes > 0; num_of_prizes--)
-		empprize = pickweight(prizes)
-		new empprize(src.loc)
+			vend_prize(rand(1,2))
+		if(3)
+			vend_prize(rand(0,1))
 
 	..(severity)

@@ -6,11 +6,11 @@
 
 	pressure_resistance = ONE_ATMOSPHERE*5
 
-	force = 5.0
+	force = 12.0
 	throwforce = 10.0
 	throw_speed = 1
 	throw_range = 4
-
+	origin_tech = "combat=1" // BALLON COMBAT
 	var/datum/gas_mixture/air_contents = null
 	var/distribute_pressure = ONE_ATMOSPHERE
 	var/integrity = 3

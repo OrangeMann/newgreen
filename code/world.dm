@@ -72,6 +72,8 @@
 
 	src.update_status()
 
+	load_donators()
+
 	. = ..()
 
 	sleep_offline = 1

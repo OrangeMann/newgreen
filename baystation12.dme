@@ -1157,6 +1157,7 @@
 #include "code\modules\reagents\reagent_containers\robodropper.dm"
 #include "code\modules\reagents\reagent_containers\spray.dm"
 #include "code\modules\reagents\reagent_containers\syringes.dm"
+#include "code\modules\reagents\reagent_containers\waterballon.dm"
 #include "code\modules\reagents\reagent_containers\weldpack.dm"
 #include "code\modules\reagents\reagent_containers\food\condiment.dm"
 #include "code\modules\reagents\reagent_containers\food\drinks.dm"

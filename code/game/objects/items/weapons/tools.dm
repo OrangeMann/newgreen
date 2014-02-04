@@ -209,19 +209,10 @@
 	switch(welding)
 		//If off
 		if(0)
-			if(src.icon_state != "welder") //Check that the sprite is correct, if it isnt, it means toggle() was not called
-				src.force = 3
-				src.damtype = "brute"
-				src.icon_state = "welder"
-				src.welding = 0
 			processing_objects.Remove(src)
 			return
 		//Welders left on now use up fuel, but lets not have them run out quite that fast
 		if(1)
-			if(src.icon_state != "welder1") //Check that the sprite is correct, if it isnt, it means toggle() was not called
-				src.force = 15
-				src.damtype = "fire"
-				src.icon_state = "welder1"
 			if(prob(5))
 				remove_fuel(1)
 
@@ -267,7 +258,6 @@
 			tank.explode(user)
 		return
 
-
 	if (src.welding)
 		remove_fuel(1)
 		var/turf/location = get_turf(user)
@@ -311,21 +301,16 @@
 	if(temp_welding > 0)
 		if (remove_fuel(1))
 			usr << "\blue The [src] switches on."
-			src.force = 15
-			src.damtype = "fire"
-			src.icon_state = "welder1"
+			src.welding = 1
 			processing_objects.Add(src)
 		else
 			usr << "\blue Need more fuel!"
 			src.welding = 0
-			return
 	//Otherwise
 	else
 		usr << "\blue The [src] switches off."
-		src.force = 3
-		src.damtype = "brute"
-		src.icon_state = "welder"
 		src.welding = 0
+	update_icon()
 
 //Turns off the welder if there is no more fuel (does this really need to be its own proc?)
 /obj/item/weapon/weldingtool/proc/check_fuel()
@@ -334,7 +319,6 @@
 		return 0
 	return 1
 
-
 //Toggles the welder off and on
 /obj/item/weapon/weldingtool/proc/toggle(var/message = 0)
 	if(!status)	return
@@ -342,23 +326,20 @@
 	if (src.welding)
 		if (remove_fuel(1))
 			usr << "\blue You switch the [src] on."
-			src.force = 15
-			src.damtype = "fire"
-			src.icon_state = "welder1"
+			update_icon()
 			processing_objects.Add(src)
 		else
 			usr << "\blue Need more fuel!"
 			src.welding = 0
+			update_icon()
 			return
 	else
 		if(!message)
 			usr << "\blue You switch the [src] off."
 		else
 			usr << "\blue The [src] shuts off!"
-		src.force = 3
-		src.damtype = "brute"
-		src.icon_state = "welder"
 		src.welding = 0
+		update_icon()
 
 //Decides whether or not to damage a player's eyes based on what they're wearing as protection
 //Note: This should probably be moved to mob
@@ -394,16 +375,39 @@
 			user.disabilities &= ~NEARSIGHTED
 	return
 
+/obj/item/weapon/weldingtool/update_icon()
+	if(welding)
+		icon_state = initial(icon_state) + "1"
+		force = 15
+		damtype = "fire"
+	else
+		icon_state = initial(icon_state)
+		force = 3
+		damtype = "brute"
 
 /obj/item/weapon/weldingtool/largetank
-	name = "Industrial Welding Tool"
+	name = "industrial welding tool"
 	max_fuel = 40
 	m_amt = 70
 	g_amt = 60
+	icon_state = "indwelder"
+	item_state = "welder"
 	origin_tech = "engineering=2"
 
+/obj/item/weapon/weldingtool/mini
+	name = "emergency welding tool"
+	icon_state = "miniwelder"
+	item_state = "welder"
+	w_class = 1
+	max_fuel = 12
+	m_amt = 20
+	g_amt = 5
+
+/obj/item/weapon/weldingtool/mini/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	return
+
 /obj/item/weapon/weldingtool/hugetank
-	name = "Upgraded Welding Tool"
+	name = "upgraded welding tool"
 	max_fuel = 80
 	w_class = 3.0
 	m_amt = 70
@@ -411,7 +415,7 @@
 	origin_tech = "engineering=3"
 
 /obj/item/weapon/weldingtool/experimental
-	name = "Experimental Welding Tool"
+	name = "experimental welding tool"
 	max_fuel = 40
 	w_class = 3.0
 	m_amt = 70

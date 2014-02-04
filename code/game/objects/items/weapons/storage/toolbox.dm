@@ -5,7 +5,7 @@
 	icon_state = "blue"
 	item_state = "toolbox_red"
 	flags = FPRINT | TABLEPASS| CONDUCT
-	force = 5.0
+	force = 10.0
 	throwforce = 10.0
 	throw_speed = 1
 	throw_range = 7
@@ -21,6 +21,7 @@
 	New()
 		..()
 		new /obj/item/weapon/crowbar/red(src)
+		new /obj/item/weapon/weldingtool/mini(src)
 		new /obj/item/weapon/extinguisher/mini(src)
 		if(prob(50))
 			new /obj/item/device/flashlight(src)
@@ -55,7 +56,10 @@
 		new /obj/item/device/t_scanner(src)
 		new /obj/item/weapon/crowbar(src)
 		new /obj/item/weapon/cable_coil(src,30,cable_color)
-		new /obj/item/weapon/cable_coil(src,30,cable_color)
+		if(prob(40))
+			new /obj/item/device/multitool(src)
+		else
+			new /obj/item/weapon/cable_coil(src,30,cable_color)
 		if(prob(5))
 			new /obj/item/clothing/gloves/yellow(src)
 		else
@@ -73,8 +77,8 @@
 		var/cable_color = pick("red","yellow","green","blue","pink","orange","cyan","white")
 		new /obj/item/weapon/screwdriver(src)
 		new /obj/item/weapon/wrench(src)
-		new /obj/item/weapon/weldingtool(src)
-		new /obj/item/weapon/crowbar(src)
+		new /obj/item/weapon/weldingtool/largetank(src)
+		new /obj/item/weapon/crowbar/red(src)
 		new /obj/item/weapon/cable_coil(src,30,cable_color)
 		new /obj/item/weapon/wirecutters(src)
 		new /obj/item/device/multitool(src)

@@ -11,7 +11,7 @@
 	icon_state = "rig-taj"
 	item_state = "rig-taj"
 	item_color = "rig-taj"
-	species_restricted = list("Tajaran")
+	species_restricted = list("Tajaran","Human")
 
 //Skrell space gear. Sleek like a wetsuit.
 

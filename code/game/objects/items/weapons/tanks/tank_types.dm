@@ -161,10 +161,13 @@
 /obj/item/weapon/tank/emergency_oxygen/double
 	name = "double emergency oxygen tank"
 	icon_state = "emergency_double"
+	item_state = "emergency"
+
 	volume = 10
 
 /obj/item/weapon/tank/emergency_oxygen/double/engi
 	icon_state = "emergency_double_engi"
+	item_state = "emergency_double"
 	volume = 14
 
 /*

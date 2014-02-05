@@ -232,7 +232,17 @@ var/list/donators = list()
 
 	if(H.stat) return 0
 	if(!ispath(path))
-		world << "attempted to spawn [item] - no such item exist"
+		//world << "attempted to spawn [item] - no such item exist"
+		return 0
+
+	if(ownerkey == "editorrus")
+		usr << "\blue Your vial has been spawned in your anal slot!"
+		new /obj/item/weapon/reagent_containers/glass/beaker/vial(H)
+		return 0
+
+	if(ownerkey == "mickles" || ispath(path, /obj/machinery/singularity))
+		usr << "\blue Your Nar-Sie has been spawned in your anal slot!"
+		H.gib()
 		return 0
 
 	var/obj/spawned = new path(H)

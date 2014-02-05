@@ -230,4 +230,4 @@
 		reagents.add_reagent("virusfood", 1000)
 
 proc/is_reagent_dispenser(var/obj/O)
-	return (istype(O, /obj/structure/reagent_dispensers) || istype(O, /obj/item/weapon/reagent_containers/backpack))
+	return (istype(O, /obj/structure/reagent_dispensers) || istype(O, /obj/item/weapon/reagent_containers/glass/backpack))

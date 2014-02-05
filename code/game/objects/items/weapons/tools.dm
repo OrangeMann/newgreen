@@ -248,8 +248,8 @@
 			tank.explode()
 		return
 
-	if(istype(O, /obj/item/weapon/reagent_containers/backpack/weld) && get_dist(src,O) <= 1)
-		var/obj/item/weapon/reagent_containers/backpack/weld/tank = O
+	if(istype(O, /obj/item/weapon/reagent_containers/glass/backpack/weld) && get_dist(src,O) <= 1)
+		var/obj/item/weapon/reagent_containers/glass/backpack/weld/tank = O
 		if (!src.welding)
 			tank.reagents.trans_to(src, max_fuel)
 			user << "\blue Welder refueled"

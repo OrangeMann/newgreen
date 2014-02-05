@@ -63,7 +63,7 @@
 		return
 
 	afterattack(obj/target, mob/user , flag)
-		if(istype(target, /obj/structure/reagent_dispensers)) //A dispenser. Transfer FROM it TO us.
+		if(is_reagent_dispenser(target)) //A dispenser. Transfer FROM it TO us.
 
 			if(!target.reagents.total_volume)
 				user << "\red [target] is empty."

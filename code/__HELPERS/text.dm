@@ -460,3 +460,6 @@ proc/Ellipsis(original_msg, chance = 25)
 	new_msg = dd_list2text(new_words," ")
 
 	return new_msg
+
+/proc/format_text(text)
+	return replacetext(replacetext(text,"\proper ",""),"\improper ","")

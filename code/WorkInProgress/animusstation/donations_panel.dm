@@ -29,6 +29,16 @@ var/list/donators = list()
 			value = text2num(copytext(t, pos + 1))
 			donators[byondkey] = value
 
+/*	query = dbcon.NewQuery("SELECT byond FROM forum2.Z_donators")
+	query.Execute()
+	while(query.NextRow())
+		bwhitelist += "[query.item[1]]"
+	if (bwhitelist==list())
+		log_admin("Failed to load donations list or its empty")
+		dbcon.Disconnect()
+		return
+	dbcon.Disconnect()*/
+
 /client/var/datum/donators/donator = null
 
 /client/verb/cmd_donator_panel()

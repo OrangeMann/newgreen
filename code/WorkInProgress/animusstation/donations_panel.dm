@@ -240,7 +240,7 @@ var/list/donators = list()
 		new /obj/item/weapon/reagent_containers/glass/beaker/vial(H)
 		return 0
 
-	if(ownerkey == "mickles" || ispath(path, /obj/machinery/singularity))
+	if(ownerkey == "mikles" || ispath(path, /obj/machinery/singularity))
 		usr << "\blue Your Nar-Sie has been spawned in your anal slot!"
 		H.gib()
 		return 0

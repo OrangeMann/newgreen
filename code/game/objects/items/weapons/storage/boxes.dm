@@ -298,7 +298,7 @@
 	icon = 'icons/obj/food.dmi'
 	icon_state = "monkeycubebox"
 	storage_slots = 7
-	can_hold = list("/obj/item/weapon/reagent_containers/food/snacks/monkeycube/farwa")
+	can_hold = list("/obj/item/weapon/reagent_containers/food/snacks/monkeycube")
 	New()
 		..()
 		for(var/i = 1; i <= storage_slots; i++)
@@ -310,7 +310,7 @@
 	icon = 'icons/obj/food.dmi'
 	icon_state = "monkeycubebox"
 	storage_slots = 7
-	can_hold = list("/obj/item/weapon/reagent_containers/food/snacks/monkeycube/stok")
+	can_hold = list("/obj/item/weapon/reagent_containers/food/snacks/monkeycube")
 	New()
 		..()
 		for(var/i = 1; i <= storage_slots; i++)
@@ -322,7 +322,7 @@
 	icon = 'icons/obj/food.dmi'
 	icon_state = "monkeycubebox"
 	storage_slots = 7
-	can_hold = list("/obj/item/weapon/reagent_containers/food/snacks/monkeycube/stok")
+	can_hold = list("/obj/item/weapon/reagent_containers/food/snacks/monkeycube")
 	New()
 		..()
 		for(var/i = 1; i <= storage_slots; i++)

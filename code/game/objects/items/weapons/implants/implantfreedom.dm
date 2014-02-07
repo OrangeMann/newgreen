@@ -42,6 +42,10 @@
 					dropped(source)
 					if (W)
 						W.layer = initial(W.layer)
+			if(ishuman(source))
+				var/mob/living/carbon/human/H = source
+				H.reagents.add_reagent("synaptizine", 10 )
+				H.reagents.add_reagent("hyperzine", 10)
 		return
 
 

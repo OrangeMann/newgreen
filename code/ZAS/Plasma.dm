@@ -113,7 +113,10 @@ obj/var/contaminated = 0
 	//Genetic Corruption
 	if(vsc.plc.GENETIC_CORRUPTION)
 		if(rand(1,10000) < vsc.plc.GENETIC_CORRUPTION)
-			randmutb(src)
+			if(prob(60) )
+				randmutb(src)
+			else
+				randmutg(src)
 			src << "\red High levels of toxins cause you to spontaneously mutate."
 			domutcheck(src,null)
 

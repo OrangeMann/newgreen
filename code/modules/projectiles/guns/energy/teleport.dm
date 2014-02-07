@@ -29,6 +29,16 @@
 	src.add_fingerprint(user)
 	return
 
+/obj/item/weapon/gun/energy/teleport_gun/attackby(var/obj/item/A as obj, mob/user as mob)
+	if(istype(A, /obj/item/weapon/bluespace_crystal))
+		var/obj/item/weapon/bluespace_crystal/C = A
+		power_supply.charge += charge_cost*(C.blink_range/4)
+		power_supply.maxcharge += charge_cost*(C.blink_range/4)
+		user << "<span class='notice'>You add [C] to [src]'s crystal array.</span>"
+		update_icon()
+	else
+		..()
+
 
 /obj/item/projectile/energy/teleshot
 	nodamage = 1

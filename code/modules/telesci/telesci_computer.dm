@@ -42,7 +42,7 @@
 	..()
 	link_telepad()
 	for(var/i = 1; i <= starting_crystals; i++)
-		crystals += new /obj/item/bluespace_crystal/artificial(null) // starting crystals
+		crystals += new /obj/item/weapon/bluespace_crystal/artificial(null) // starting crystals
 	power = power_options[1]
 
 /obj/machinery/computer/telescience/proc/link_telepad()
@@ -60,7 +60,7 @@
 			stat &= ~NOPOWER
 
 /obj/machinery/computer/telescience/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/bluespace_crystal))
+	if(istype(W, /obj/item/weapon/bluespace_crystal))
 		if(crystals.len >= power_options.len)
 			user << "<span class='warning'>There are not enough crystal slots.</span>"
 			return

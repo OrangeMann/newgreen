@@ -1444,7 +1444,7 @@ datum
 			name = "Metroid Virus"
 			id = "m_virus"
 			result = null
-			required_reagents = list("sugar" = 1, "acid" = 1)
+			required_reagents = list("sugar" = 1, "sacid" = 1)
 			result_amount = 2
 			required_container = /obj/item/metroid_core/t3
 			required_other = 3
@@ -1531,13 +1531,12 @@ datum
 			name = "Metroid Crit"
 			id = "m_tele"
 			result = null
-			required_reagents = list("acid" = 1, "blood" = 1)
+			required_reagents = list("sacid" = 1, "blood" = 1)
 			required_catalysts = list("plasma" = 1, "mutagen" = 1)
 			result_amount = 1
 			required_container = /obj/item/metroid_core/t4
 			required_other = 4
 			on_reaction(var/datum/reagents/holder, var/created_volume)
-				holder.clear_reagents()
 				var/blocked = list(/mob/living/simple_animal/,
 					/mob/living/simple_animal/hostile/alien/queen/large,
 					/mob/living/simple_animal/sculpture,
@@ -1629,7 +1628,7 @@ datum
 			name = "Metroid Foam"
 			id = "m_foam"
 			result = null
-			required_reagents = list("acid" = 1)
+			required_reagents = list("sacid" = 1)
 			result_amount = 2
 			required_container = /obj/item/metroid_core/t5
 			required_other = 5

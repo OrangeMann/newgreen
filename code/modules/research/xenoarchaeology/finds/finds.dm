@@ -93,7 +93,7 @@
 /obj/item/weapon/archaeological_find/New(loc, var/new_item_type)
 	if(new_item_type)
 		find_type = new_item_type
-	else
+	else if(!find_type)
 		find_type = rand(1,34)	//update this when you add new find types
 
 	var/item_type = "object"
@@ -119,7 +119,11 @@
 	switch(find_type)
 		if(1)
 			item_type = "bowl"
-			new_item = new /obj/item/weapon/reagent_containers/glass(src.loc)
+			if(prob(20))
+				var/t = pick(typesof(/obj/item/metroid_core))
+				new_item = new t(src.loc)
+			else
+				new_item = new /obj/item/weapon/reagent_containers/glass(src.loc)
 			new_item.icon = 'icons/obj/xenoarchaeology.dmi'
 			new_item.icon_state = "bowl"
 			apply_image_decorations = 1
@@ -127,7 +131,11 @@
 				additional_desc = "There appear to be [pick("dark","faintly glowing","pungent","bright")] [pick("red","purple","green","blue")] stains inside."
 		if(2)
 			item_type = "urn"
-			new_item = new /obj/item/weapon/reagent_containers/glass(src.loc)
+			if(prob(20))
+				var/t = pick(typesof(/obj/item/metroid_core))
+				new_item = new t(src.loc)
+			else
+				new_item = new /obj/item/weapon/reagent_containers/glass(src.loc)
 			new_item.icon = 'icons/obj/xenoarchaeology.dmi'
 			new_item.icon_state = "urn"
 			apply_image_decorations = 1
@@ -290,7 +298,10 @@
 			var/list/possible_spawns = list(/obj/item/clothing/head/culthood,
 			/obj/item/clothing/head/magus,
 			/obj/item/clothing/head/culthood/alt,
-			/obj/item/clothing/head/helmet/space/cult)
+			/obj/item/clothing/head/helmet/space/cult,
+			/obj/item/clothing/suit/magusred,
+			/obj/item/clothing/suit/cultrobes/alt,
+			/obj/item/clothing/suit/space/cult)
 
 			var/new_type = pick(possible_spawns)
 			new_item = new new_type(src.loc)

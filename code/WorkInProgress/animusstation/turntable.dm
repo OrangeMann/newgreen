@@ -81,7 +81,9 @@ proc/add_turntable_soundtracks()
 	return
 
 /obj/machinery/party/turntable/Topic(href, href_list)
-	..()
+	if(..())
+		return
+
 	if(href_list["on"])
 		if(src.playing == 0)
 			//world << "Should be working..."
@@ -151,9 +153,6 @@ proc/add_turntable_soundtracks()
 	icon_state = "laserred1"
 	anchored = 1
 	layer = 4
-
-/obj/item/lasermachine/New()
-	..()
 
 /obj/machinery/party/lasermachine/proc/turnon()
 	var/wall = 0

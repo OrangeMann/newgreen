@@ -237,9 +237,6 @@
 		var/mob/living/carbon/human/H = M
 		var/datum/organ/external/affecting = H.get_organ(user.zone_sel.selecting)
 		var/limb = affecting.display_name
-		if(!((affecting.name == "l_arm") || (affecting.name == "r_arm") || (affecting.name == "l_leg") || (affecting.name == "r_leg")))
-			user << "\red You can't apply a splint there!"
-			return
 		if(affecting.status & ORGAN_SPLINTED)
 			user << "\red [M]'s [limb] is already splinted!"
 			return

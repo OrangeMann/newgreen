@@ -67,3 +67,39 @@
 	f_name = "K"
 	name = "you wa Yuuhi Yarou"
 	path = 'Kyou_wa_Yuuhi_Yarou.ogg'
+
+
+/datum/turntable_soundtrack/aazimarmelody
+	f_name = "T"
+	name = "he Sceleton in the Closet"
+	path = 'The_sceleton_in_the_closet.ogg'
+
+/datum/turntable_soundtrack/sadwalk
+	f_name = "S"
+	name = "ad Walk"
+	path = 'sad_walk.ogg'
+
+/datum/turntable_soundtrack/onebadman
+	f_name = "O"
+	name = "ne Bad Man"
+	path = 'One_bad_man.ogg'
+
+/datum/turntable_soundtrack/ysseven
+	f_name = "C"
+	name = "hildren in the Shadows"
+	path = 'Children_in_the_shadows.ogg'
+
+/datum/turntable_soundtrack/portal
+	f_name = "S"
+	name = "till Alive"
+	path = 'Still_alive.ogg'
+
+/datum/turntable_soundtrack/assistant
+	f_name = "W"
+	name = "izards assistant"
+	path = 'Wizards_assistant.ogg'
+
+/datum/turntable_soundtrack/huey
+	f_name = "D"
+	name = "ont you Just Know"
+	path = 'Dont_you_just_know.ogg'

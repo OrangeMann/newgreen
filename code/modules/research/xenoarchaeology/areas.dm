@@ -23,6 +23,14 @@
 	name = "Research Outpost Maintenance"
 	icon_state = "maintcentral"
 
+/area/research_outpost/telesci
+	name = "Teleportation Laboratory"
+	icon_state = "iso1"
+
+/area/research_outpost/temp
+	name = "Thermal Chamber"
+	icon_state = "iso2"
+
 /area/research_outpost/iso1
 	name = "Isolation Cell"
 	icon_state = "iso1"

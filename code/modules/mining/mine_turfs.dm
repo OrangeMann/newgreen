@@ -149,8 +149,8 @@
 
 /turf/simulated/mineral/random
 	name = "Mineral deposit"
-	var/mineralAmtList = list("Uranium" = 5, "Iron" = 5, "Diamond" = 5, "Gold" = 5, "Silver" = 5, "Plasma" = 5,/*, "Adamantine" = 5*/ "Aluminum" = 5, "Triberium" = 5,)
-	var/mineralSpawnChanceList = list("Uranium" = 5, "Iron" = 50, "Diamond" = 1, "Gold" = 5, "Silver" = 5, "Plasma" = 25,/*, "Adamantine" =5*/ "Aluminum" = 50, "Triberium" = 8,)//Currently, Adamantine won't spawn as it has no uses. -Durandan
+	var/mineralAmtList = list("Uranium" = 5, "Iron" = 5, "Diamond" = 5, "Gold" = 5, "Silver" = 5, "Plasma" = 5,/*, "Adamantine" = 5 "Aluminum" = 5, "Triberium" = 5,*/)
+	var/mineralSpawnChanceList = list("Uranium" = 5, "Iron" = 50, "Diamond" = 1, "Gold" = 5, "Silver" = 5, "Plasma" = 25,/*, "Adamantine" =5 "Aluminum" = 50, "Triberium" = 8,*/)//Currently, Adamantine won't spawn as it has no uses. -Durandan
 	var/mineralChance = 10  //means 10% chance of this plot changing to a mineral deposit
 
 /turf/simulated/mineral/random/New()
@@ -165,12 +165,12 @@
 					M = new/turf/simulated/mineral/uranium(src)
 				if("Iron")
 					M = new/turf/simulated/mineral/iron(src)
-				if("Aluminum")
-					M = new/turf/simulated/mineral/aluminum(src)
+				//if("Aluminum")
+				//	M = new/turf/simulated/mineral/aluminum(src)
 				if("Diamond")
 					M = new/turf/simulated/mineral/diamond(src)
-				if("Triberium")
-					M = new/turf/simulated/mineral/triberium(src)
+				//if("Triberium")
+				//	M = new/turf/simulated/mineral/triberium(src)
 				if("Gold")
 					M = new/turf/simulated/mineral/gold(src)
 				if("Silver")
@@ -204,7 +204,8 @@
 
 /turf/simulated/mineral/uranium
 	name = "Uranium deposit"
-	icon_state = "rock_Uranium"
+	icon_state = "rock_Triberium"
+	//icon_state = "rock_Uranium"
 	mineralName = "Uranium"
 	mineralAmt = 5
 	spreadChance = 10

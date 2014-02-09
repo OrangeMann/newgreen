@@ -50,7 +50,6 @@
 
 
 /obj/item/weapon/storage/proc/return_inv()
-
 	var/list/L = list(  )
 
 	L += src.contents
@@ -91,7 +90,6 @@
 	return
 
 /obj/item/weapon/storage/proc/close(mob/user as mob)
-
 	src.hide_from(user)
 	user.s_active = null
 	return
@@ -151,7 +149,6 @@
 
 //This proc determins the size of the inventory to be displayed. Please touch it only if you know what you're doing.
 /obj/item/weapon/storage/proc/orient2hud(mob/user as mob)
-
 	var/adjusted_contents = contents.len
 
 	//Numbered contents display
@@ -193,9 +190,14 @@
 	if(can_hold.len)
 		var/ok = 0
 		for(var/A in can_hold)
-			if(istype(W, text2path(A) ))
-				ok = 1
-				break
+			if(istext(A))
+				if(istype(W, text2path(A)))
+					ok = 1
+					break
+			else
+				if(istype(W, A))
+					ok = 1
+					break
 		if(!ok)
 			if(!stop_messages)
 				usr << "<span class='notice'>[src] cannot hold [W].</span>"

@@ -17,12 +17,11 @@
 	new /obj/item/clothing/under/syndicate(src)
 	new /obj/item/clothing/head/helmet/space/rig/syndi(src)
 	new /obj/item/clothing/suit/space/rig/syndi(src)
-	new /obj/item/weapon/crowbar/red(src)
-	new /obj/item/weapon/cell/high(src)
 	new /obj/item/weapon/card/id/syndicate(src)
 	new /obj/item/device/multitool(src)
 	new /obj/item/weapon/shield/energy(src)
 	new /obj/item/clothing/shoes/magboots(src)
+	new /obj/item/weapon/storage/belt/syndie(src)
 
 
 /obj/structure/closet/syndicate/nuclear
@@ -53,7 +52,7 @@
 	U.hidden_uplink.uses = 40
 	return
 
-/obj/structure/closet/syndicate/resources/
+/obj/structure/closet/syndicate/resources
 	desc = "An old, dusty locker."
 
 	New()
@@ -66,7 +65,7 @@
 
 		sleep(2)
 
-		var/pickednum = rand(1, 50)
+		var/pickednum = rand(1, 60)
 
 		//Sad trombone
 		if(pickednum == 1)
@@ -107,7 +106,7 @@
 			new /obj/item/stack/sheet/mineral/diamond(src, rand(rare_min, rare_max))
 
 		//Jetpack (You hit the jackpot!)
-		if(pickednum == 50)
+		if(pickednum >= 50)
 			new /obj/item/weapon/tank/jetpack/carbondioxide(src)
 
 		return

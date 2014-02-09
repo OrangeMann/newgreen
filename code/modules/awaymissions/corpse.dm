@@ -97,6 +97,7 @@
 	corpsemask = /obj/item/clothing/mask/gas
 	corpsehelmet = /obj/item/clothing/head/helmet/swat
 	corpseback = /obj/item/weapon/storage/backpack
+	corpsebelt = /obj/item/weapon/storage/belt/syndie
 	corpseid = 1
 	corpseidjob = "Operative"
 	corpseidaccess = "Syndicate"
@@ -114,6 +115,7 @@
 	corpsehelmet = /obj/item/clothing/head/helmet/space/rig/syndi
 	corpseback = /obj/item/weapon/tank/jetpack/oxygen
 	corpsepocket1 = /obj/item/weapon/tank/emergency_oxygen
+	corpsebelt = /obj/item/weapon/storage/belt/syndie
 	corpseid = 1
 	corpseidjob = "Operative"
 	corpseidaccess = "Syndicate"

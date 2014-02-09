@@ -409,8 +409,6 @@ commented out in r5061, I left it because of the shroom thingies
 					B = new(src)
 					if(artifact_find)
 						B.artifact_find = artifact_find
-				else if(artifact_find && src.excavation_level + P.excavation_amount >= 100)
-					artifact_debris(1)
 
 				gets_drilled(B ? 0 : 1)
 				return

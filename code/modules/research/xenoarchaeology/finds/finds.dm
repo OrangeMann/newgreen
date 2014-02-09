@@ -208,8 +208,12 @@
 			new_item = new /obj/item/weapon/storage/box(src.loc)
 			new_item.icon = 'icons/obj/xenoarchaeology.dmi'
 			new_item.icon_state = "box"
+			new_item.w_class = 2
 			if(prob(30))
 				apply_image_decorations = 1
+			if(prob(30))
+				new_item.w_class = 1
+
 		if(12)
 			item_type = "[pick("cylinder","tank","chamber")]"
 			if(prob(25))
@@ -290,7 +294,8 @@
 		if(19)
 			apply_prefix = 0
 			new_item = new /obj/item/weapon/claymore(src.loc)
-			new_item.force = 10
+			if(prob(70))
+				new_item.force = 10
 			item_type = new_item.name
 		if(20)
 			//arcane clothing
@@ -336,7 +341,9 @@
 		if(25)
 			apply_prefix = 0
 			new_item = new /obj/item/weapon/katana(src.loc)
-			new_item.force = 10
+			new_item.force -= 15
+			if(prob(70))
+				new_item.force = 10
 			item_type = new_item.name
 		if(26)
 			//energy gun

@@ -9,10 +9,9 @@
 	caliber = ".12"
 	max_ammo = 4
 
-/obj/item/ammo_magazine/internal/shotcom
+/obj/item/ammo_magazine/internal/shot/com
 	name = "combat shotgun internal magazine"
 	ammo_type = /obj/item/ammo_casing/shotgun
-	caliber = ".12"
 	max_ammo = 8
 
 /obj/item/ammo_magazine/internal/cylinder
@@ -63,8 +62,6 @@
 
 /obj/item/ammo_magazine/internal/cylinder/rus357
 	name = "russian revolver cylinder"
-	ammo_type = /obj/item/ammo_casing/a357
-	caliber = ".357"
 	cylinders = 6
 	max_ammo = 1
 

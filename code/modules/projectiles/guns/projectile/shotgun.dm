@@ -59,7 +59,7 @@
 	name = "combat shotgun"
 	icon_state = "cshotgun"
 	origin_tech = "combat=5;materials=2"
-	mag_type = /obj/item/ammo_magazine/internal/shotcom
+	mag_type = /obj/item/ammo_magazine/internal/shot/com
 	w_class = 5
 
 

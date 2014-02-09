@@ -111,7 +111,7 @@
 /obj/item/weapon/gun/projectile/revolver/detective/attackby(var/obj/item/A as obj, mob/user as mob)
 	..()
 	if(istype(A, /obj/item/weapon/screwdriver))
-		if(magazine.caliber == "38")
+		if(magazine.caliber == ".38")
 			user << "<span class='notice'>You begin to reinforce the barrel of [src].</span>"
 			if(magazine.ammo_count())
 				afterattack(user, user)	//you know the drill
@@ -121,7 +121,7 @@
 				if(magazine.ammo_count())
 					user << "<span class='notice'>You can't modify it!</span>"
 					return
-				magazine.caliber = "357"
+				magazine.caliber = ".357"
 				desc = "The barrel and chamber assembly seems to have been modified."
 				user << "<span class='warning'>You reinforce the barrel of [src]! Now it will fire .357 rounds.</span>"
 		else
@@ -134,7 +134,7 @@
 				if(magazine.ammo_count())
 					user << "<span class='notice'>You can't modify it!</span>"
 					return
-				magazine.caliber = "38"
+				magazine.caliber = ".38"
 				desc = initial(desc)
 				user << "<span class='warning'>You remove the modifications on [src]! Now it will fire .38 rounds.</span>"
 

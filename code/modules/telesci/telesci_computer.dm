@@ -291,5 +291,5 @@
 /obj/machinery/computer/telescience/proc/recalibrate()
 	teles_left = rand(50, 70)
 	//angle_off = rand(-25, 25)
-	power_off = rand(-2, 2)
+	power_off = rand(-4, 0)
 	rotation_off = rand(-10, 10)

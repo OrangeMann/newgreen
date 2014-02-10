@@ -8,6 +8,13 @@
 	item_state = "centhat"
 	siemens_coefficient = 0.9
 
+/obj/item/clothing/head/nazicap
+	name = "nazist cap"
+	desc = "Be Emperror of Station! Fight for racial purity!"
+	icon_state = "nazi"
+	item_state = "nazi"
+	flags = FPRINT|TABLEPASS|HEADCOVERSEYES|HEADCOVERSMOUTH|BLOCKHAIR
+
 /obj/item/clothing/head/hairflower
 	name = "hair flower pin"
 	icon_state = "hairflower"

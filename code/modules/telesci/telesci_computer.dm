@@ -71,9 +71,6 @@
 	else
 		..()
 
-/obj/machinery/computer/telescience/attack_ai(mob/user)
-	src.attack_hand(user)
-
 /obj/machinery/computer/telescience/attack_hand(mob/user)
 	if(..())
 		return
@@ -81,26 +78,21 @@
 
 /obj/machinery/computer/telescience/interact(mob/user)
 
-	var/t = "<div class='statusDisplay'>[temp_msg]</div><BR>"
-	t += "<A href='?src=\ref[src];setrotation=1'>Set Bearing</A>"
-	t += "<div class='statusDisplay'>[rotation]°</div>"
-	t += "<A href='?src=\ref[src];setangle=1'>Set Elevation</A>"
-	t += "<div class='statusDisplay'>[angle]°</div>"
-	t += "<span class='linkOn'>Set Power</span>"
-	t += "<div class='statusDisplay'>"
+	var/t = "<div class='statusDisplay'>[temp_msg]</div>"
+	t += "<BR><A href='?src=\ref[src];setrotation=1'>Bearing: [rotation]°</A>"
+	t += "<BR><A href='?src=\ref[src];setangle=1'>Elevation: [angle]°</A>"
+	t += "<BR>Power:"
 
 	for(var/i = 1; i <= power_options.len; i++)
 		if(crystals.len < i)
-			t += "<span class='linkOff'>[power_options[i]]</span>"
+			t += "[power_options[i]] "
 			continue
 		if(power == power_options[i])
-			t += "<span class='linkOn'>[power_options[i]]</span>"
+			t += "\[[power_options[i]]\] "
 			continue
-		t += "<A href='?src=\ref[src];setpower=[i]'>[power_options[i]]</A>"
+		t += "<A href='?src=\ref[src];setpower=[i]'>[power_options[i]]</A> "
 
-	t += "</div>"
-	t += "<A href='?src=\ref[src];setz=1'>Set Sector</A>"
-	t += "<div class='statusDisplay'>[z_co ? z_co : "NULL"]</div>"
+	t += "<A href='?src=\ref[src];setz=1'>Sector: [z_co ? z_co : "NULL"]</A>"
 
 	t += "<BR><A href='?src=\ref[src];send=1'>Send</A>"
 	t += " <A href='?src=\ref[src];receive=1'>Receive</A>"
@@ -134,7 +126,6 @@
 	return
 
 /obj/machinery/computer/telescience/proc/doteleport(mob/user)
-
 	if(teleport_cooldown > world.time)
 		temp_msg = "Telepad is recharging power.<BR>Please wait [round((teleport_cooldown - world.time) / 10)] seconds."
 		return
@@ -202,7 +193,7 @@
 				dest = target
 
 			flick("pad-beam", telepad)
-			playsound(telepad.loc, 'sound/weapons/emitter2.ogg', 25, 1, extrarange = 3, falloff = 5)
+			playsound(telepad.loc, 'sound/weapons/emitter2.ogg', 25, 1, 3, 5)
 			for(var/atom/movable/ROI in source)
 				// if is anchored, don't let through
 				if(ROI.anchored)
@@ -295,10 +286,10 @@
 		eject()
 		temp_msg = "NOTICE:<BR>Bluespace crystals ejected."
 
-	updateDialog()
+	interact(usr)
 
 /obj/machinery/computer/telescience/proc/recalibrate()
-	teles_left = rand(30, 40)
+	teles_left = rand(50, 70)
 	//angle_off = rand(-25, 25)
-	power_off = rand(-4, 0)
+	power_off = rand(-2, 2)
 	rotation_off = rand(-10, 10)

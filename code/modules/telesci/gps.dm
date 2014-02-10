@@ -46,6 +46,8 @@ var/list/GPS_list = list()
 			else
 				t += "<BR>[tracked_gpstag]: [format_text(gps_area.name)] ([pos.x], [pos.y], [pos.z])"
 
+		t += "<BR><A href='?src=\ref[src];refresh=1'>Refresh</A> "
+
 	user << browse("<TITLE>GPS</TITLE><HR>[t]", "window=GPS;size=600x450")
 	onclose(user, "GPS")
 
@@ -57,7 +59,8 @@ var/list/GPS_list = list()
 		if(src.loc == usr)
 			gpstag = a
 			name = "global positioning system ([gpstag])"
-			attack_self(usr)
+
+	attack_self(usr)
 
 /obj/item/device/gps/science
 	icon_state = "gps-s"

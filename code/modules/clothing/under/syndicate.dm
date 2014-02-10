@@ -18,5 +18,3 @@
 	item_state = "bl_suit"
 	item_color = "tactifool"
 	siemens_coefficient = 1
-
-

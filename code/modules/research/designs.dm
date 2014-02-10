@@ -1607,6 +1607,19 @@ datum/design/health_hud
 	build_path = /obj/item/clothing/glasses/sunglasses/sechud
 
 /////////////////////////////////////////
+//////////// Armor / Suits //////////////
+/////////////////////////////////////////
+
+/datum/design/laserproof
+	name = "Ablative Armor Vest"
+	desc = "A vest that excels in protecting the wearer against energy projectiles."
+	id = "laserproof"
+	req_tech = list("combat" = 3, "materials" = 4, "powerstorage" = 3, "magnets" = 2)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 15000, "$glass" = 5000, "$silver" = 100, "$diamond" = 100)
+	build_path = /obj/item/clothing/suit/armor/laserproof
+
+/////////////////////////////////////////
 //////////////Borg Upgrades//////////////
 /////////////////////////////////////////
 datum/design/borg_syndicate_module

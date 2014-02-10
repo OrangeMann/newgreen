@@ -783,7 +783,6 @@ obj/machinery/atmospherics/pipe
 		icon_state = ""
 
 	manifold/general
-		name="Air supply pipe"
 		pipe_color="gray"
 		icon_state = ""
 

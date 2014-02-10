@@ -21,10 +21,9 @@
 	armor = list(melee = 50, bullet = 15, laser = 50, energy = 10, bomb = 25, bio = 0, rad = 0)
 
 /obj/item/clothing/suit/armor/vest/security
-	name = "security armor"
+	name = "armor"
 	desc = "An armored vest that protects against some damage. This one has NanoTrasen corporate badge."
 	icon_state = "armorsec"
-	item_state = "armor"
 
 /obj/item/clothing/suit/armor/vest/warden
 	name = "Warden's jacket"
@@ -62,6 +61,7 @@
 	blood_overlay_type = "armor"
 	armor = list(melee = 10, bullet = 10, laser = 80, energy = 50, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0
+	origin_tech = "combat=3,materials=5,powerstorage=3,magnets=2"
 
 /obj/item/clothing/suit/armor/swat
 	name = "swat suit"

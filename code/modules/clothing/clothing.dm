@@ -140,20 +140,20 @@ BLIND     // can't see anything
 //Note: Everything in modules/clothing/spacesuits should have the entire suit grouped together.
 //      Meaning the the suit is defined directly after the corrisponding helmet. Just like below!
 /obj/item/clothing/head/helmet/space
-	name = "Space helmet"
+	name = "space helmet"
 	icon_state = "space"
 	desc = "A special helmet designed for work in a hazardous, low-pressure environment."
 	flags = FPRINT | TABLEPASS | HEADCOVERSEYES | BLOCKHAIR | HEADCOVERSMOUTH | STOPSPRESSUREDMAGE
 	item_state = "space"
 	permeability_coefficient = 0.01
-	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 100, rad = 50)
+	armor = list(melee = 10, bullet = 5, laser = 10,energy = 40, bomb = 10, bio = 100, rad = 40)
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
 	cold_protection = HEAD
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECITON_TEMPERATURE
 	siemens_coefficient = 0.9
 
 /obj/item/clothing/suit/space
-	name = "Space suit"
+	name = "space suit"
 	desc = "A suit that protects against low pressure environments. Has a big 13 on the back."
 	icon_state = "space"
 	item_state = "s_suit"
@@ -162,9 +162,9 @@ BLIND     // can't see anything
 	permeability_coefficient = 0.02
 	flags = FPRINT | TABLEPASS | STOPSPRESSUREDMAGE | PLASMAGUARD
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
-	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank/emergency_oxygen)
-	slowdown = 3
-	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 100, rad = 50)
+	allowed = list(/obj/item/weapon/tank)
+	slowdown = 2
+	armor = list(melee = 10, bullet = 5, laser = 10,energy = 40, bomb = 10, bio = 100, rad = 40)
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECITON_TEMPERATURE
@@ -181,7 +181,7 @@ BLIND     // can't see anything
 	slot_flags = SLOT_ICLOTHING
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	var/has_sensor = 1//For the crew computer 2 = unable to change mode
-	var/sensor_mode = 0
+	var/sensor_mode = 1
 		/*
 		1 = Report living/dead
 		2 = Report detailed damages
@@ -189,6 +189,11 @@ BLIND     // can't see anything
 		*/
 	var/obj/item/clothing/tie/hastie = null
 	var/displays_id = 1
+
+/obj/item/clothing/under/New()
+	..()
+	if(prob(20))
+		sensor_mode = 0
 
 /obj/item/clothing/under/attackby(obj/item/I, mob/user)
 	if(!hastie && istype(I, /obj/item/clothing/tie))

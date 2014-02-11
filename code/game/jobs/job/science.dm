@@ -9,11 +9,11 @@
 	selection_color = "#ffddff"
 	idtype = /obj/item/weapon/card/id/silver
 	req_admin_notify = 1
-	access = list(access_rd, access_heads, access_tox, access_genetics, access_morgue,
+	access = list(access_rd, access_heads, access_tox, access_genetics, access_morgue, access_external_airlocks,
 			            access_tox_storage, access_teleporter, access_sec_doors, access_maint_tunnels,
 			            access_research, access_robotics, access_xenobiology, access_ai_upload,
 			            access_RC_announce, access_keycard_auth, access_tcomsat, access_gateway, access_xenoarch)
-	minimal_access = list(access_rd, access_heads, access_tox, access_genetics, access_morgue,
+	minimal_access = list(access_rd, access_heads, access_tox, access_genetics, access_morgue, access_external_airlocks,
 			            access_tox_storage, access_teleporter, access_sec_doors, access_maint_tunnels,
 			            access_research, access_robotics, access_xenobiology, access_ai_upload,
 			            access_RC_announce, access_keycard_auth, access_tcomsat, access_gateway, access_xenoarch)
@@ -46,7 +46,8 @@
 	spawn_positions = 4
 	supervisors = "the research director"
 	selection_color = "#ffeeff"
-	access = list(access_robotics, access_tox, access_tox_storage, access_research, access_xenobiology, access_xenoarch, access_xenobiology)
+	access = list(access_robotics, access_tox, access_tox_storage, access_research, access_xenobiology,
+				access_xenoarch, access_external_airlocks, access_xenobiology)
 	minimal_access = list(access_tox, access_tox_storage, access_research, access_xenoarch, access_xenobiology)
 	alt_titles = list("Xenoarcheologist", "Anomalist", "Plasma Researcher", "Xenobiologist")
 

@@ -1583,7 +1583,7 @@ datum
 			required_other = 4
 			on_reaction(var/datum/reagents/holder, var/created_volume)
 				holder.clear_reagents()
-				var/list/borks = typesof(/mob/living/simple_animal/hostile/bear) - /mob/living/simple_animal/hostile/bear
+				var/list/borks = typesof(/obj/item/weapon/reagent_containers/food/snacks) - /obj/item/weapon/reagent_containers/food/snacks
 				// BORK BORK BORK
 
 				playsound(get_turf(holder.my_atom), 'phasein.ogg', 100, 1)

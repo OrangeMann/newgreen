@@ -96,6 +96,7 @@
 					prob(1);/obj/item/weapon/packageWrap,\
 					prob(2);/obj/random/bomb_supply,\
 					prob(1);/obj/item/weapon/extinguisher,\
+					prob(1);/obj/item/device/gps,\
 					prob(1);/obj/item/clothing/gloves/fyellow,\
 					prob(3);/obj/item/weapon/cable_coil,\
 					prob(2);/obj/random/toolbox,\

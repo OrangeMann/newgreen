@@ -94,7 +94,7 @@
 		new /obj/item/device/flashlight/lantern(src)
 		new /obj/item/device/depth_scanner(src)
 		new /obj/item/device/core_sampler(src)
-		new /obj/item/device/gps(src)
+		new /obj/item/device/gps/archeology(src)
 		new /obj/item/device/beacon_locator(src)
 		new /obj/item/device/radio/beacon(src)
 		new /obj/item/clothing/glasses/meson(src)

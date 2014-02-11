@@ -20,7 +20,7 @@
 
 	// Based on the power used
 	var/teleport_cooldown = 0
-	var/list/power_options = list(5, 10, 20, 25, 30, 40, 50, 80, 100) // every index requires a bluespace crystal
+	var/list/power_options = list(5, 10, 20, 25, 30, 40, 50, 80, 100, 150) // every index requires a bluespace crystal
 	var/teleporting = 0
 	var/starting_crystals = 3
 	var/list/crystals = list()
@@ -42,7 +42,7 @@
 	..()
 	link_telepad()
 	for(var/i = 1; i <= starting_crystals; i++)
-		crystals += new /obj/item/weapon/bluespace_crystal/artificial(null) // starting crystals
+		crystals += new /obj/item/weapon/bluespace_crystal(null) // starting crystals
 	power = power_options[1]
 
 /obj/machinery/computer/telescience/proc/link_telepad()
@@ -168,7 +168,7 @@
 			teles_left -= 1
 
 			// use a lot of power
-			use_power(power * 10)
+			use_power(power * 20)
 
 			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 			s.set_up(5, 1, get_turf(telepad))
@@ -257,11 +257,8 @@
 		angle = Clamp(round(new_angle, 0.1), 1, 9999)
 
 	if(href_list["setpower"])
-		var/index = href_list["setpower"]
-		index = text2num(index)
-		if(index != null && power_options[index])
-			if(crystals.len >= index)
-				power = power_options[index]
+		var/index = text2num(href_list["setpower"])
+		power = power_options[index]
 
 	if(href_list["setz"])
 		var/new_z = input("Please input desired sector.", name, z_co) as num
@@ -292,4 +289,4 @@
 	teles_left = rand(50, 70)
 	//angle_off = rand(-25, 25)
 	power_off = rand(-4, 0)
-	rotation_off = rand(-10, 10)
+	rotation_off = rand(-25, 25)

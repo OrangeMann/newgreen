@@ -66,13 +66,19 @@
 
 
 /obj/item/mecha_parts/mecha_tracking
-	name = "Exosuit tracking beacon"
+	name = "exosuit tracking beacon"
 	desc = "Device used to transmit exosuit data."
 	icon = 'icons/obj/device.dmi'
 	icon_state = "motion2"
 	origin_tech = "programming=2;magnets=2"
 	construction_time = 50
 	construction_cost = list("metal"=500)
+	var/obj/item/device/gps/mech/gps
+	w_class = 2
+
+	New()
+		..()
+		gps = new(src)
 
 	proc/get_mecha_info()
 		if(!in_mecha())

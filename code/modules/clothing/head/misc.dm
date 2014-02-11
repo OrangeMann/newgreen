@@ -14,6 +14,14 @@
 	icon_state = "nazi"
 	item_state = "nazi"
 	flags = FPRINT|TABLEPASS|HEADCOVERSEYES|HEADCOVERSMOUTH|BLOCKHAIR
+	flags_inv = HIDEEARS|HIDEEYES|HIDEFACE
+
+/obj/item/clothing/head/kkc
+	name = "Ku Klux Klan mask"
+	desc = "Fight for racial purity! Kill station Chaplain and burn heretics!"
+	icon_state = "kkc"
+	item_state = "kkc"
+	flags = FPRINT|TABLEPASS|HEADCOVERSEYES|HEADCOVERSMOUTH|BLOCKHAIR
 
 /obj/item/clothing/head/hairflower
 	name = "hair flower pin"

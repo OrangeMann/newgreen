@@ -126,6 +126,8 @@
 		for(var/obj/O in get_turf(owned_scanner))
 			if(O.invisibility)
 				continue
+			if(O.anchored)
+				continue
 			if(!istype(O, /obj/machinery/artifact) && !istype(O, /obj/machinery/artifact_scanpad))
 				mundane++
 				break

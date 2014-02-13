@@ -163,7 +163,7 @@
 		var/brute_was = picked.brute_dam
 		var/burn_was = picked.burn_dam
 
-		update |= picked.take_damage(brute,burn,sharp,used_weapon)
+		update |= picked.take_damage(brute/(pick(2,3,1)),burn/(pick(2,3,1)),sharp,used_weapon)
 		brute	-= (picked.brute_dam - brute_was)
 		burn	-= (picked.burn_dam - burn_was)
 

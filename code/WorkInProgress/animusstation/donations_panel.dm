@@ -230,10 +230,11 @@ var/list/donators = list()
 		usr << "\red You must be a human to use this."
 		return 0
 
-	if(H.stat) return 0
 	if(!ispath(path))
 		//world << "attempted to spawn [item] - no such item exist"
 		return 0
+
+	if(H.stat) return 0
 
 	if(ownerkey == "editorrus")
 		usr << "\blue Your vial has been spawned in your anal slot!"

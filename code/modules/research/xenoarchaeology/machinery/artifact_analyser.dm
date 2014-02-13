@@ -97,6 +97,8 @@
 					continue
 				if(O.invisibility)
 					continue
+				if(O.anchored)
+					continue
 				if(istype(scanned_object, /obj/machinery/artifact))
 					var/obj/machinery/artifact/A = scanned_object
 					if(A.being_used)

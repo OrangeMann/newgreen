@@ -4,40 +4,15 @@ var/list/donators = list()
 	if(donators.len)
 		return
 
-	var/text = file2text("config/donators.txt")
-
-	if(!text)
-		donators["null"] = 50
+	establish_db_connection()
+	if(!dbcon.IsConnected())
+		world.log << "Failed to connect to database in load_donators()."
+		diary << "Failed to connect to database in load_donators()."
 		return
-
-	var/list/CL = dd_text2list(text, "\n")
-
-	for (var/t in CL)
-		if(!t)
-			continue
-		if(length(t) == 0)
-			continue
-		if(copytext(t, 1, 2) == "#")
-			continue
-
-		var/pos = findtext(t, " ")
-		var/byondkey = null
-		var/value = null
-
-		if (pos)
-			byondkey = lowertext(copytext(t, 1, pos))
-			value = text2num(copytext(t, pos + 1))
-			donators[byondkey] = value
-
-/*	query = dbcon.NewQuery("SELECT byond FROM forum2.Z_donators")
+	var/DBQuery/query = dbcon.NewQuery("SELECT byond,sum FROM forum2.Z_donators")
 	query.Execute()
 	while(query.NextRow())
-		bwhitelist += "[query.item[1]]"
-	if (bwhitelist==list())
-		log_admin("Failed to load donations list or its empty")
-		dbcon.Disconnect()
-		return
-	dbcon.Disconnect()*/
+		donators[query.item[1]] = round(query.item[2])
 
 /client/var/datum/donators/donator = null
 

@@ -383,3 +383,14 @@
 	icon_state = "sci_kimono"
 	item_state = "sci_kimono"
 	flags = FPRINT | TABLEPASS
+
+/obj/item/clothing/suit/bearcoat
+	name = "Bear coat"
+	desc = "Baggy and comfortable! Can be combined with bear hood!"
+	icon_state = "bearcoat"
+	item_state = "bearcoat"
+	flags = FPRINT | TABLEPASS
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS|HANDS
+	flags_inv = HIDEJUMPSUIT|HIDESUITSTORAGE
+	slowdown = 1
+	siemens_coefficient = 1.0

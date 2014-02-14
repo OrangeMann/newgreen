@@ -264,3 +264,12 @@
 	flags = FPRINT | TABLEPASS | BLOCKHAIR
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
 	siemens_coefficient = 2.0
+
+/obj/item/clothing/head/bearhat
+	name = "Bear hood"
+	desc = "A large, bear-like hood. Very warm!"
+	icon_state = "bearhat"
+	flags = FPRINT | TABLEPASS | HEADCOVERSEYES | HEADCOVERSMOUTH | BLOCKHAIR
+	item_state="bearhat"
+	flags_inv = 0
+

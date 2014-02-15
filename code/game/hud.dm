@@ -177,12 +177,17 @@ var/datum/global_hud/global_hud = new()
 /datum/hud_special
 	var/datum/hud/myhud
 	var/list/locations = list()
+	var/list/hideable = list()
 
-/datum/hud_special/proc/hidden_inventory_update()
-	return 0
+	New(var/datum/hud/owner)
+		myhud = owner
 
-/datum/hud_special/New(var/datum/hud/owner)
-	myhud = owner
+	proc/hidden_inventory_update()
+		return 0
+
+	proc/persistant_inventory_update()
+		return 0
+
 
 /datum/hud
 	var/mob/mymob
@@ -250,14 +255,14 @@ var/datum/global_hud/global_hud = new()
 
 		var/mob/living/carbon/human/H = mymob
 		if(inventory_shown && hud_shown)
-			if(H.shoes)		H.shoes.screen_loc = ui_shoes
-			if(H.gloves)	H.gloves.screen_loc = ui_gloves
-			if(H.ears)		H.ears.screen_loc = ui_ears
-			if(H.glasses)	H.glasses.screen_loc = ui_glasses
-			if(H.w_uniform)	H.w_uniform.screen_loc = ui_iclothing
-			if(H.wear_suit)	H.wear_suit.screen_loc = ui_oclothing
-			if(H.wear_mask)	H.wear_mask.screen_loc = ui_mask
-			if(H.head)		H.head.screen_loc = ui_head
+			if(H.shoes)		H.shoes.screen_loc = get_slot_loc("shoes")
+			if(H.gloves)	H.gloves.screen_loc = get_slot_loc("gloves")
+			if(H.ears)		H.ears.screen_loc = get_slot_loc("ears")
+			if(H.glasses)	H.glasses.screen_loc = get_slot_loc("glasses")
+			if(H.w_uniform)	H.w_uniform.screen_loc = get_slot_loc("iclothing")
+			if(H.wear_suit)	H.wear_suit.screen_loc = get_slot_loc("oclothing")
+			if(H.wear_mask)	H.wear_mask.screen_loc = get_slot_loc("mask")
+			if(H.head)		H.head.screen_loc = get_slot_loc("head")
 		else
 			if(H.shoes)		H.shoes.screen_loc = null
 			if(H.gloves)	H.gloves.screen_loc = null
@@ -271,6 +276,9 @@ var/datum/global_hud/global_hud = new()
 /datum/hud/proc/persistant_inventory_update()
 	if(!mymob) return
 	if(ishuman(mymob))
+		if(special && special.persistant_inventory_update(mymob))
+			return
+
 		var/mob/living/carbon/human/H = mymob
 		if(hud_shown)
 			if(H.s_store)	H.s_store.screen_loc = get_slot_loc("sstore1")

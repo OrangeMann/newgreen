@@ -49,6 +49,11 @@
 	"oxygen" = "14:28,11:23",
 	"pressure" = "14:28,10:21")
 
+	hideable = list(
+	"inventory2" =1, "shoes" = 1,
+	"head" = 1, "gloves" = 1,
+	"ears" = 1, "glasses" = 1)
+
 	hidden_inventory_update()
 		if(ishuman(myhud.mymob))
 			var/mob/living/carbon/human/H = myhud.mymob
@@ -159,7 +164,10 @@
 	inv_box.icon_state = "center"
 	inv_box.screen_loc = special.locations["iclothing"]
 	inv_box.layer = 19
-	src.adding += inv_box
+	if(special.hideable["iclothing"])
+		src.other += inv_box
+	else
+		src.adding += inv_box
 
 	inv_box = new /obj/screen/inventory()
 	inv_box.name = "o_clothing"
@@ -169,7 +177,10 @@
 	inv_box.icon_state = "equip"
 	inv_box.screen_loc = special.locations["oclothing"]
 	inv_box.layer = 19
-	src.adding += inv_box
+	if(special.hideable["oclothing"])
+		src.other += inv_box
+	else
+		src.adding += inv_box
 
 	inv_box = new /obj/screen/inventory()
 	inv_box.name = "r_hand"
@@ -223,7 +234,10 @@
 	inv_box.screen_loc = special.locations["id"]
 	inv_box.slot_id = slot_wear_id
 	inv_box.layer = 19
-	src.adding += inv_box
+	if(special.hideable["id"])
+		src.other += inv_box
+	else
+		src.adding += inv_box
 
 	inv_box = new /obj/screen/inventory()
 	inv_box.name = "mask"
@@ -233,7 +247,10 @@
 	inv_box.screen_loc = special.locations["mask"]
 	inv_box.slot_id = slot_wear_mask
 	inv_box.layer = 19
-	src.adding += inv_box
+	if(special.hideable["mask"])
+		src.other += inv_box
+	else
+		src.adding += inv_box
 
 	inv_box = new /obj/screen/inventory()
 	inv_box.name = "back"
@@ -243,7 +260,10 @@
 	inv_box.screen_loc = special.locations["back"]
 	inv_box.slot_id = slot_back
 	inv_box.layer = 19
-	src.adding += inv_box
+	if(special.hideable["back"])
+		src.other += inv_box
+	else
+		src.adding += inv_box
 
 	inv_box = new /obj/screen/inventory()
 	inv_box.name = "storage1"
@@ -252,7 +272,10 @@
 	inv_box.screen_loc = special.locations["storage1"]
 	inv_box.slot_id = slot_l_store
 	inv_box.layer = 19
-	src.adding += inv_box
+	if(special.hideable["storage1"])
+		src.other += inv_box
+	else
+		src.adding += inv_box
 
 	inv_box = new /obj/screen/inventory()
 	inv_box.name = "storage2"
@@ -262,7 +285,10 @@
 	inv_box.screen_loc = special.locations["storage2"]
 	inv_box.slot_id = slot_r_store
 	inv_box.layer = 19
-	src.adding += inv_box
+	if(special.hideable["storage2"])
+		src.other += inv_box
+	else
+		src.adding += inv_box
 
 	inv_box = new /obj/screen/inventory()
 	inv_box.name = "suit storage"
@@ -272,7 +298,10 @@
 	inv_box.screen_loc = special.locations["sstore1"]
 	inv_box.slot_id = slot_s_store
 	inv_box.layer = 19
-	src.adding += inv_box
+	if(special.hideable["sstore1"])
+		src.other += inv_box
+	else
+		src.adding += inv_box
 
 	using = new /obj/screen()
 	using.name = "resist"
@@ -288,7 +317,10 @@
 	using.icon_state = "other"
 	using.screen_loc = special.locations["inventory"]
 	using.layer = 18
-	src.adding += using
+	if(special.hideable["inventory"])
+		src.other += using
+	else
+		src.adding += using
 
 	using = new /obj/screen()
 	using.name = "equip"
@@ -304,7 +336,10 @@
 	using.icon_state = "other"
 	using.screen_loc = special.locations["inventory2"]
 	using.layer = 20
-	src.other += using
+	if(special.hideable["inventory2"])
+		src.other += using
+	else
+		src.adding += using
 
 	inv_box = new /obj/screen/inventory()
 	inv_box.name = "gloves"
@@ -313,7 +348,10 @@
 	inv_box.screen_loc = special.locations["gloves"]
 	inv_box.slot_id = slot_gloves
 	inv_box.layer = 19
-	src.other += inv_box
+	if(special.hideable["gloves"])
+		src.other += inv_box
+	else
+		src.adding += inv_box
 
 	inv_box = new /obj/screen/inventory()
 	inv_box.name = "eyes"
@@ -322,7 +360,10 @@
 	inv_box.screen_loc = special.locations["glasses"]
 	inv_box.slot_id = slot_glasses
 	inv_box.layer = 19
-	src.other += inv_box
+	if(special.hideable["glasses"])
+		src.other += inv_box
+	else
+		src.adding += inv_box
 
 	inv_box = new /obj/screen/inventory()
 	inv_box.name = "ears"
@@ -331,7 +372,10 @@
 	inv_box.screen_loc = special.locations["ears"]
 	inv_box.slot_id = slot_ears
 	inv_box.layer = 19
-	src.other += inv_box
+	if(special.hideable["ears"])
+		src.other += inv_box
+	else
+		src.adding += inv_box
 
 	inv_box = new /obj/screen/inventory()
 	inv_box.name = "head"
@@ -340,7 +384,10 @@
 	inv_box.screen_loc = special.locations["head"]
 	inv_box.slot_id = slot_head
 	inv_box.layer = 19
-	src.other += inv_box
+	if(special.hideable["head"])
+		src.other += inv_box
+	else
+		src.adding += inv_box
 
 	inv_box = new /obj/screen/inventory()
 	inv_box.name = "shoes"
@@ -349,7 +396,10 @@
 	inv_box.screen_loc = special.locations["shoes"]
 	inv_box.slot_id = slot_shoes
 	inv_box.layer = 19
-	src.other += inv_box
+	if(special.hideable["shoes"])
+		src.other += inv_box
+	else
+		src.adding += inv_box
 
 	inv_box = new /obj/screen/inventory()
 	inv_box.name = "belt"
@@ -358,7 +408,10 @@
 	inv_box.screen_loc = special.locations["belt"]
 	inv_box.slot_id = slot_belt
 	inv_box.layer = 19
-	src.adding += inv_box
+	if(special.hideable["belt"])
+		src.other += inv_box
+	else
+		src.adding += inv_box
 
 	mymob.throw_icon = new /obj/screen()
 	mymob.throw_icon.icon = uistyle
@@ -460,6 +513,7 @@
 		using.icon = uistyle
 		using.screen_loc = special.locations["filler"]
 		using.layer = 17
+		using.dir = EAST
 		src.adding += using
 
 	if(special.locations["filler2"])

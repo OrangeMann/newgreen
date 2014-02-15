@@ -8,6 +8,7 @@ var/list/donators = list()
 	if(!dbcon.IsConnected())
 		world.log << "Failed to connect to database in load_donators()."
 		diary << "Failed to connect to database in load_donators()."
+		donators["fail"] = 1
 		return
 	var/DBQuery/query = dbcon.NewQuery("SELECT byond,sum FROM forum2.Z_donators")
 	query.Execute()

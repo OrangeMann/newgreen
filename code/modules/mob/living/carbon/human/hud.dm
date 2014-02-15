@@ -1,5 +1,4 @@
 /datum/hud/proc/human_hud(var/ui_style='icons/mob/screen1_old.dmi')
-
 	src.adding = list()
 	src.other = list()
 	src.hotkeybuttons = list() //These can be disabled for hotkey usersx
@@ -371,146 +370,16 @@
 
 	mymob.pain = new /obj/screen( null )
 
-/*
-	mymob.hands = new /obj/screen( null )
-	mymob.hands.icon = ui_style
-	mymob.hands.icon_state = "hand"
-	mymob.hands.name = "hand"
-	mymob.hands.screen_loc = ui_hand
-	mymob.hands.dir = NORTH
-
-	mymob.sleep = new /obj/screen( null )
-	mymob.sleep.icon = ui_style
-	mymob.sleep.icon_state = "sleep0"
-	mymob.sleep.name = "sleep"
-	mymob.sleep.screen_loc = ui_sleep
-
-	mymob.rest = new /obj/screen( null )
-	mymob.rest.icon = ui_style
-	mymob.rest.icon_state = "rest0"
-	mymob.rest.name = "rest"
-	mymob.rest.screen_loc = ui_rest
-*/
-
-	/*/Monkey blockers
-
-	using = new /obj/screen( src )
-	using.name = "blocked"
-	using.icon_state = "blocked"
-	using.screen_loc = ui_ears
-	using.layer = 20
-	src.mon_blo += using
-
-	using = new /obj/screen( src )
-	using.name = "blocked"
-	using.icon_state = "blocked"
-	using.screen_loc = ui_belt
-	using.layer = 20
-	src.mon_blo += using
-
-	using = new /obj/screen( src )
-	using.name = "blocked"
-	using.icon_state = "blocked"
-	using.screen_loc = ui_shoes
-	using.layer = 20
-	src.mon_blo += using
-
-	using = new /obj/screen( src )
-	using.name = "blocked"
-	using.icon_state = "blocked"
-	using.screen_loc = ui_storage2
-	using.layer = 20
-	src.mon_blo += using
-
-	using = new /obj/screen( src )
-	using.name = "blocked"
-	using.icon_state = "blocked"
-	using.screen_loc = ui_glasses
-	using.layer = 20
-	src.mon_blo += using
-
-	using = new /obj/screen( src )
-	using.name = "blocked"
-	using.icon_state = "blocked"
-	using.screen_loc = ui_gloves
-	using.layer = 20
-	src.mon_blo += using
-
-	using = new /obj/screen( src )
-	using.name = "blocked"
-	using.icon_state = "blocked"
-	using.screen_loc = ui_storage1
-	using.layer = 20
-	src.mon_blo += using
-
-	using = new /obj/screen( src )
-	using.name = "blocked"
-	using.icon_state = "blocked"
-	using.screen_loc = ui_headset
-	using.layer = 20
-	src.mon_blo += using
-
-	using = new /obj/screen( src )
-	using.name = "blocked"
-	using.icon_state = "blocked"
-	using.screen_loc = ui_oclothing
-	using.layer = 20
-	src.mon_blo += using
-
-	using = new /obj/screen( src )
-	using.name = "blocked"
-	using.icon_state = "blocked"
-	using.screen_loc = ui_iclothing
-	using.layer = 20
-	src.mon_blo += using
-
-	using = new /obj/screen( src )
-	using.name = "blocked"
-	using.icon_state = "blocked"
-	using.screen_loc = ui_id
-	using.layer = 20
-	src.mon_blo += using
-
-	using = new /obj/screen( src )
-	using.name = "blocked"
-	using.icon_state = "blocked"
-	using.screen_loc = ui_head
-	using.layer = 20
-	src.mon_blo += using
-//Monkey blockers
-*/
-
 	mymob.zone_sel = new /obj/screen/zone_sel( null )
 	mymob.zone_sel.icon = ui_style
 	mymob.zone_sel.overlays.Cut()
 	mymob.zone_sel.overlays += image('icons/mob/zone_sel.dmi', "[mymob.zone_sel.selecting]")
 
-	//Handle the gun settings buttons
-/*	mymob.gun_setting_icon = new /obj/screen/gun/mode(null)
-	if (mymob.client)
-		if (mymob.client.gun_mode) // If in aim mode, correct the sprite
-			mymob.gun_setting_icon.dir = 2
-	for(var/obj/item/weapon/gun/G in mymob) // If targeting someone, display other buttons
-		if (G.target)
-			mymob.item_use_icon = new /obj/screen/gun/item(null)
-			if (mymob.client.target_can_click)
-				mymob.item_use_icon.dir = 1
-			src.adding += mymob.item_use_icon
-			mymob.gun_move_icon = new /obj/screen/gun/move(null)
-			if (mymob.client.target_can_move)
-				mymob.gun_move_icon.dir = 1
-				mymob.gun_run_icon = new /obj/screen/gun/run(null)
-				if (mymob.client.target_can_run)
-					mymob.gun_run_icon.dir = 1
-				src.adding += mymob.gun_run_icon
-			src.adding += mymob.gun_move_icon*/
-
-
 	mymob.client.screen = null
 
 	mymob.client.screen += list( mymob.throw_icon, mymob.zone_sel, mymob.oxygen, mymob.pressure, mymob.toxin, mymob.bodytemp, mymob.internals, mymob.fire, mymob.healths, mymob.nutrition_icon, mymob.pullin, mymob.blind, mymob.flash, mymob.damageoverlay) //, mymob.hands, mymob.rest, mymob.sleep) //, mymob.mach )
 	mymob.client.screen += src.adding + src.hotkeybuttons
-	inventory_shown = 0;
+	inventory_shown = 0
 
 	return
 
@@ -565,3 +434,5 @@
 			num++
 
 	src.client.screen += src.hud_used.item_action_list
+
+/datum/

@@ -523,6 +523,10 @@ proc/process_ghost_teleport_locs()
 	name = "\improper Prison Station"
 	icon_state = "brig"
 
+/area/prison/wing
+	name = "\improper Prison Wing"
+	icon_state = "brig"
+
 /area/prison/arrival_airlock
 	name = "\improper Prison Station Airlock"
 	icon_state = "green"

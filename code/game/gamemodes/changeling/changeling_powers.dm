@@ -159,6 +159,9 @@
 
 	T.death(0)
 	T.Drain()
+	if(prob(changeling.absorbedcount*3 - 3))
+		T.make_changeling()
+		T << "\red <FONT size = 3>You are now a changeling!</FONT>"
 	return 1
 
 

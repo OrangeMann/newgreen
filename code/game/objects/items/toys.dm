@@ -444,6 +444,7 @@
  */
 /obj/item/toy/c4
 	name = "toy bomb"
+	desc = "A plastic model of a plastic explosive, as seen in action movies. Boom!"
 	icon = 'icons/obj/assemblies.dmi'
 	icon_state = "plastic-explosive0"
 	item_state = "plasticx"
@@ -467,7 +468,7 @@
 		return
 	user << "Planting explosives..."
 	if(ismob(target))
-		user.visible_message("\red [user.name] is trying to plant some kind of toy on [target.name]!")
+		user.visible_message("\red [user.name] is trying to plant some kind of device on [target.name]!")
 
 	if(do_after(user, 50) && in_range(user, target))
 		user.drop_item()
@@ -475,7 +476,7 @@
 		loc = null
 
 		if (ismob(target))
-			user.visible_message("\red [user.name] finished planting a toy on [target.name]!")
+			user.visible_message("\red [user.name] finished planting a device on [target.name]!")
 
 		overlayicon = image('icons/obj/assemblies.dmi', "plastic-explosive2")
 		target.overlays += overlayicon

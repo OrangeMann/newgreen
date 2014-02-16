@@ -924,6 +924,7 @@
 #include "code\modules\mob\living\carbon\brain\MMI.dm"
 #include "code\modules\mob\living\carbon\brain\posibrain.dm"
 #include "code\modules\mob\living\carbon\brain\say.dm"
+#include "code\modules\mob\living\carbon\human\custom_hud.dm"
 #include "code\modules\mob\living\carbon\human\death.dm"
 #include "code\modules\mob\living\carbon\human\emote.dm"
 #include "code\modules\mob\living\carbon\human\examine.dm"

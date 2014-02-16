@@ -67,6 +67,8 @@
 		var/obj/item/I = user.get_active_hand()
 		if(I)
 			master.attackby(I, user)
+		else
+			master.attack_hand(user)
 
 /obj/screen/zone_sel
 	name = "Damage Zone"
@@ -74,7 +76,7 @@
 	icon_state = "zone_sel"
 	var/selecting = "chest"
 	screen_loc = ui_zonesel
-
+/*
 /obj/screen/gun
 	name = "gun"
 	icon = 0
@@ -102,7 +104,7 @@
 		icon_state = 0
 		screen_loc = ui_gun_select
 		//dir = 1
-
+*/
 
 /obj/screen/zone_sel/MouseDown(location, control,params)
 	// Changes because of 4.0

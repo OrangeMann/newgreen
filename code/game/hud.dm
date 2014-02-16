@@ -46,10 +46,10 @@
 #define ui_borg_panel "14:28,2:7"
 
 //Gun buttons
-#define ui_gun1 "13:26,3:7"
+/*#define ui_gun1 "13:26,3:7"
 #define ui_gun2 "14:28, 4:7"
 #define ui_gun3 "13:26,4:7"
-#define ui_gun_select "14:28,3:7"
+#define ui_gun_select "14:28,3:7"*/
 
 //Upper-middle right (damage indicators)
 #define ui_toxin "14:28,13:27"
@@ -174,11 +174,20 @@ var/datum/global_hud/global_hud = new()
 			O.layer = 17
 			O.mouse_opacity = 0
 
+/datum/hud_special
+	var/datum/hud/myhud
+	var/list/locations = list()
+	var/list/hideable = list()
 
-/datum/hud/var/obj/screen/grab_intent
-/datum/hud/var/obj/screen/hurt_intent
-/datum/hud/var/obj/screen/disarm_intent
-/datum/hud/var/obj/screen/help_intent
+	New(var/datum/hud/owner)
+		myhud = owner
+
+	proc/hidden_inventory_update()
+		return 0
+
+	proc/persistant_inventory_update()
+		return 0
+
 
 /datum/hud
 	var/mob/mymob
@@ -199,27 +208,61 @@ var/datum/global_hud/global_hud = new()
 
 	var/list/obj/screen/item_action/item_action_list //Used for the item action ui buttons.
 
+	var/obj/screen/grab_intent
+	var/obj/screen/hurt_intent
+	var/obj/screen/disarm_intent
+	var/obj/screen/help_intent
 
-datum/hud/New(mob/owner)
+	var/datum/hud_special/special
+
+/datum/hud/New(mob/owner)
 	mymob = owner
 	instantiate()
 	..()
 	return
 
+/datum/hud/proc/get_slot_loc(var/slot)
+	if(special && special.locations[slot])
+		return special.locations[slot]
+
+	switch(slot)
+		if("mask") return ui_mask
+		if("oclothing") return ui_oclothing
+		if("iclothing") return ui_iclothing
+
+		if("sstore1") return ui_sstore1
+		if("id") return ui_id
+		if("belt") return ui_belt
+		if("back") return ui_back
+
+		if("rhand") return ui_rhand
+		if("lhand") return ui_lhand
+
+		if("storage1") return ui_storage1
+		if("storage2") return ui_storage2
+
+		if("shoes") return ui_shoes
+		if("head") return ui_head
+		if("gloves") return ui_gloves
+		if("ears") return ui_ears
+		if("glasses") return ui_glasses
 
 /datum/hud/proc/hidden_inventory_update()
 	if(!mymob) return
 	if(ishuman(mymob))
+		if(special && special.hidden_inventory_update(mymob))
+			return
+
 		var/mob/living/carbon/human/H = mymob
 		if(inventory_shown && hud_shown)
-			if(H.shoes)		H.shoes.screen_loc = ui_shoes
-			if(H.gloves)	H.gloves.screen_loc = ui_gloves
-			if(H.ears)		H.ears.screen_loc = ui_ears
-			if(H.glasses)	H.glasses.screen_loc = ui_glasses
-			if(H.w_uniform)	H.w_uniform.screen_loc = ui_iclothing
-			if(H.wear_suit)	H.wear_suit.screen_loc = ui_oclothing
-			if(H.wear_mask)	H.wear_mask.screen_loc = ui_mask
-			if(H.head)		H.head.screen_loc = ui_head
+			if(H.shoes)		H.shoes.screen_loc = get_slot_loc("shoes")
+			if(H.gloves)	H.gloves.screen_loc = get_slot_loc("gloves")
+			if(H.ears)		H.ears.screen_loc = get_slot_loc("ears")
+			if(H.glasses)	H.glasses.screen_loc = get_slot_loc("glasses")
+			if(H.w_uniform)	H.w_uniform.screen_loc = get_slot_loc("iclothing")
+			if(H.wear_suit)	H.wear_suit.screen_loc = get_slot_loc("oclothing")
+			if(H.wear_mask)	H.wear_mask.screen_loc = get_slot_loc("mask")
+			if(H.head)		H.head.screen_loc = get_slot_loc("head")
 		else
 			if(H.shoes)		H.shoes.screen_loc = null
 			if(H.gloves)	H.gloves.screen_loc = null
@@ -233,14 +276,17 @@ datum/hud/New(mob/owner)
 /datum/hud/proc/persistant_inventory_update()
 	if(!mymob) return
 	if(ishuman(mymob))
+		if(special && special.persistant_inventory_update(mymob))
+			return
+
 		var/mob/living/carbon/human/H = mymob
 		if(hud_shown)
-			if(H.s_store)	H.s_store.screen_loc = ui_sstore1
-			if(H.wear_id)	H.wear_id.screen_loc = ui_id
-			if(H.belt)		H.belt.screen_loc = ui_belt
-			if(H.back)		H.back.screen_loc = ui_back
-			if(H.l_store)	H.l_store.screen_loc = ui_storage1
-			if(H.r_store)	H.r_store.screen_loc = ui_storage2
+			if(H.s_store)	H.s_store.screen_loc = get_slot_loc("sstore1")
+			if(H.wear_id)	H.wear_id.screen_loc = get_slot_loc("id")
+			if(H.belt)		H.belt.screen_loc = get_slot_loc("belt")
+			if(H.back)		H.back.screen_loc = get_slot_loc("back")
+			if(H.l_store)	H.l_store.screen_loc = get_slot_loc("storage1")
+			if(H.r_store)	H.r_store.screen_loc = get_slot_loc("storage2")
 		else
 			if(H.s_store)	H.s_store.screen_loc = null
 			if(H.wear_id)	H.wear_id.screen_loc = null
@@ -255,9 +301,11 @@ datum/hud/New(mob/owner)
 	if(!mymob.client) return 0
 	var/ui_style = ui_style2icon(mymob.client.prefs.UI_style)
 
-
 	if(ishuman(mymob))
-		human_hud(ui_style) // Pass the player the UI style chosen in preferences
+		if(get_special_uistyle(mymob.client.prefs.UI_style))
+			custom_hud(ui_style, )
+		else
+			human_hud(ui_style) // Pass the player the UI style chosen in preferences
 
 /*		spawn()
 			if((RADAR in mymob.augmentations) && mymob.radar_open)

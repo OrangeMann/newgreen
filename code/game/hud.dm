@@ -247,6 +247,8 @@ var/datum/global_hud/global_hud = new()
 		if("ears") return ui_ears
 		if("glasses") return ui_glasses
 
+		if("acti") return ui_acti
+
 /datum/hud/proc/hidden_inventory_update()
 	if(!mymob) return
 	if(ishuman(mymob))

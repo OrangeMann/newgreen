@@ -1327,6 +1327,7 @@
 			if(!druggy)		see_invisible = SEE_INVISIBLE_LEVEL_TWO
 			if(healths)		healths.icon_state = "health7"	//DEAD healthmeter
 		else
+			see_in_dark = 2
 			sight &= ~(SEE_TURFS|SEE_MOBS|SEE_OBJS)
 			if(dna)
 				switch(dna.mutantrace)
@@ -1362,7 +1363,7 @@
 							O.assess_targets(target_list, src)
 						if(!druggy)		see_invisible = SEE_INVISIBLE_LIVING
 					if(1)
-						see_in_dark = 5
+						see_in_dark = 6
 						if(!druggy)		see_invisible = SEE_INVISIBLE_LIVING
 					if(2)
 						sight |= SEE_MOBS

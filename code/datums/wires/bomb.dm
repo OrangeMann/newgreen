@@ -37,7 +37,7 @@ var/const/WIRE_ACTIVATE = 16	// Will start a bombs timer if pulsed, will hint if
 				P.loc.visible_message("\red \icon[holder] You hear the bomb start ticking!")
 				P.active = 1
 				P.update_icon()
-				processing_items.Add(P)
+				processing_objects.Add(P)
 			else
 				P.loc.visible_message("\blue \icon[holder] The bomb seems to hesitate for a moment.")
 				P.timer += 5

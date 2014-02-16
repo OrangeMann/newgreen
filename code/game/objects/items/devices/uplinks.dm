@@ -154,7 +154,7 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 				uses -= 7
 			if("/obj/item/weapon/gun/projectile/revolver")
 				uses -= 6
-			if("/obj/item/weapon/gun/energy/crossbow" , "/obj/item/device/powersink")
+			if("/obj/item/weapon/gun/energy/crossbow" , "/obj/item/device/powersink" , "/obj/item/weapon/storage/box/syndie_kit/chameleon")
 				uses -= 5
 			if("/obj/item/weapon/melee/energy/sword" , "/obj/item/clothing/mask/gas/voice" , "/obj/item/device/chameleon")
 				uses -= 4
@@ -228,6 +228,8 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 			feedback_add_details("traitor_uplink_items_bought","SP")
 		if("/obj/item/weapon/storage/toolbox/syndicate")
 			feedback_add_details("traitor_uplink_items_bought","ST")
+		if("/obj/item/weapon/storage/box/syndie_kit/chameleon")
+			feedback_add_details("traitor_uplink_items_bought","CH")
 
 /obj/item/device/uplink/Topic(href, href_list)
 

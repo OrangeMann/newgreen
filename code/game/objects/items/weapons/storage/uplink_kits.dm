@@ -116,3 +116,12 @@
 	new /obj/item/clothing/suit/space/syndicate(src)
 	new /obj/item/clothing/head/helmet/space/syndicate(src)
 	return
+
+/obj/item/weapon/storage/box/syndie_kit/chameleon/New()
+	..()
+	new /obj/item/clothing/under/chameleon(src)
+	new /obj/item/clothing/head/chameleon(src)
+	new /obj/item/clothing/suit/chameleon(src)
+	new /obj/item/clothing/shoes/chameleon(src)
+	new /obj/item/weapon/storage/backpack/chameleon(src)
+	return

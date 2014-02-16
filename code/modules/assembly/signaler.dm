@@ -15,6 +15,7 @@
 	var/frequency = 1457
 	var/delay = 0
 	var/airlock_wire = null
+	var/datum/wires/connected = null
 	var/datum/radio_frequency/radio_connection
 	var/deadman = 0
 
@@ -125,6 +126,8 @@
 			A.pulse(src.airlock_wire)
 		else if(holder)
 			holder.process_activation(src, 1, 0)
+		else if(src.connected && src.wires)
+			connected.Pulse(src)
 		else
 			..(radio)
 		return 1

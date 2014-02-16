@@ -55,13 +55,6 @@
 		attacher = user
 	return
 
-
-/obj/item/device/transfer_valve/HasProximity(atom/movable/AM as mob|obj)
-	if(!attached_device)	return
-	attached_device.HasProximity(AM)
-	return
-
-
 /obj/item/device/transfer_valve/attack_self(mob/user as mob)
 	user.set_machine(src)
 	var/dat = {"<B> Valve properties: </B>
@@ -195,3 +188,20 @@
 // eventually maybe have it update icon to show state (timer, prox etc.) like old bombs
 /obj/item/device/transfer_valve/proc/c_state()
 	return
+
+
+/obj/item/device/transfer_valve/HasProximity(atom/movable/AM as mob|obj)
+	if(attached_device)
+		attached_device.HasProximity(AM)
+
+/obj/item/device/transfer_valve/HasEntered(atom/movable/AM as mob|obj) //for mousetraps
+	if(attached_device)
+		attached_device.HasEntered(AM)
+
+/obj/item/device/transfer_valve/on_found(mob/finder as mob) //for mousetraps
+	if(attached_device)
+		return attached_device.on_found(finder)
+
+/obj/item/device/transfer_valve/hear_talk(mob/living/M, msg)
+	if(attached_device)
+		attached_device.hear_talk(M, msg)

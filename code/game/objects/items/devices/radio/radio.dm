@@ -354,6 +354,9 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 			for(var/obj/machinery/telecomms/allinone/R in telecomms_list)
 				R.receive_signal(signal)
 
+			for(var/obj/O in radio_listeners)
+				O.hear_talk(M, message, 0, "", frequency)
+
 			// Receiving code can be located in Telecommunications.dm
 			return
 
@@ -401,6 +404,8 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 		for(var/obj/machinery/telecomms/receiver/R in telecomms_list)
 			R.receive_signal(signal)
 
+		for(var/obj/O in radio_listeners)
+			O.hear_talk(M, message, 0, "", frequency)
 
 		sleep(rand(10,25)) // wait a little...
 
@@ -461,6 +466,9 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 		for (var/obj/item/device/radio/R in connection.devices["[RADIO_CHAT]"]) // Modified for security headset code -- TLE
 			//if(R.accept_rad(src, message))
 			receive |= R.send_hear(display_freq, 0)
+
+		for(var/obj/O in radio_listeners)
+			O.hear_talk(M, message, 0, "", frequency)
 
 		//world << "DEBUG: receive.len=[receive.len]"
 		var/list/heard_masked = list() // masked name or no real name

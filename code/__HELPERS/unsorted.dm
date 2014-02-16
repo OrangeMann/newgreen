@@ -1434,3 +1434,13 @@ var/list/WALLITEMS = list(
 				if(O.pixel_x == 0 && O.pixel_y == 0)
 					return 1
 	return 0
+
+
+
+// Returns the atom sitting on the turf.
+// For example, using this on a disk, which is in a bag, on a mob, will return the mob because it's on the turf.
+/proc/get_atom_on_turf(var/atom/movable/M)
+	var/atom/loc = M
+	while(loc && loc.loc && !istype(loc.loc, /turf/))
+		loc = loc.loc
+	return loc

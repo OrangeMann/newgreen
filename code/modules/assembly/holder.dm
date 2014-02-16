@@ -103,7 +103,6 @@
 		if(special_assembly)
 			special_assembly.HasProximity(AM)
 
-
 	HasEntered(atom/movable/AM as mob|obj)
 		if(a_left)
 			a_left.HasEntered(AM)
@@ -112,16 +111,26 @@
 		if(special_assembly)
 			special_assembly.HasEntered(AM)
 
+	hear_talk(mob/living/M, msg)
+		if(a_left)
+			a_left.hear_talk(M, msg)
+		if(a_right)
+			a_right.hear_talk(M, msg)
+		if(special_assembly)
+			special_assembly.hear_talk(M, msg)
+
 
 	on_found(mob/finder as mob)
-		if(a_left)
-			a_left.on_found(finder)
-		if(a_right)
-			a_right.on_found(finder)
-		if(special_assembly)
-			if(istype(special_assembly, /obj/item))
-				var/obj/item/S = special_assembly
-				S.on_found(finder)
+		var/found = 0
+		if(a_left && a_left.on_found(finder))
+			found = 1
+		if(a_right && a_right.on_found(finder))
+			found = 1
+		if(istype(special_assembly, /obj/item))
+			var/obj/item/S = special_assembly
+			if(S.on_found(finder))
+				found = 1
+		return found
 
 
 	Move()

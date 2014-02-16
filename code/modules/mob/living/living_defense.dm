@@ -48,7 +48,7 @@
 
 	if(istype(equipped(),/obj/item/device/assembly/signaler))
 		var/obj/item/device/assembly/signaler/signaler = equipped()
-		if(signaler.deadman && prob(80))
+		if(signaler.deadman && prob(90))
 			src.visible_message("\red [src] triggers their deadman's switch!")
 			signaler.signal()
 

@@ -1555,7 +1555,7 @@ datum/design/mesons
 //////////////Blue Space/////////////////
 /////////////////////////////////////////
 
-datum/design/beacon
+/datum/design/beacon
 	name = "Tracking Beacon"
 	desc = "A blue space tracking beacon."
 	id = "beacon"
@@ -1564,7 +1564,7 @@ datum/design/beacon
 	materials = list ("$metal" = 20, "$glass" = 10)
 	build_path = /obj/item/device/radio/beacon
 
-datum/design/bag_holding
+/datum/design/bag_holding
 	name = "Bag of Holding"
 	desc = "A backpack that opens into a localized pocket of Blue Space."
 	id = "bag_holding"
@@ -1574,7 +1574,7 @@ datum/design/bag_holding
 	reliability_base = 80
 	build_path = /obj/item/weapon/storage/backpack/holding
 
-datum/design/bluespace_crystal
+/datum/design/bluespace_crystal
 	name = "Artificial Bluespace Crystal"
 	desc = "A small blue crystal with mystical properties."
 	id = "bluespace_crystal"
@@ -1584,11 +1584,19 @@ datum/design/bluespace_crystal
 	reliability = 100
 	build_path = /obj/item/weapon/bluespace_crystal/artificial
 
+/datum/design/telepad_remote
+	name = "Telepad Remote Control"
+	id = "telepadremote"
+	req_tech = list("bluespace" = 1, "materials" = 2, "engineering" = 3)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 50, "$glass" = 150, "$plasma" = 150)
+	build_path = /obj/item/device/telepadremote
+
 /////////////////////////////////////////
 /////////////////HUDs////////////////////
 /////////////////////////////////////////
 
-datum/design/health_hud
+/datum/design/health_hud
 	name = "Health Scanner HUD"
 	desc = "A heads-up display that scans the humans in view and provides accurate data about their health status."
 	id = "health_hud"
@@ -1616,13 +1624,13 @@ datum/design/health_hud
 	id = "laserproof"
 	req_tech = list("combat" = 3, "materials" = 4, "powerstorage" = 3, "magnets" = 2)
 	build_type = PROTOLATHE
-	materials = list("$metal" = 15000, "$glass" = 5000, "$silver" = 100, "$diamond" = 100)
+	materials = list("$metal" = 8000, "$glass" = 4000, "$silver" = 100, "$diamond" = 100)
 	build_path = /obj/item/clothing/suit/armor/laserproof
 
 /////////////////////////////////////////
 //////////////Borg Upgrades//////////////
 /////////////////////////////////////////
-datum/design/borg_syndicate_module
+/datum/design/borg_syndicate_module
 	name = "Borg Illegal Weapons Upgrade"
 	desc = "Allows for the construction of illegal upgrades for cyborgs"
 	id = "borg_syndicate_module"

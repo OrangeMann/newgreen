@@ -68,6 +68,10 @@
 		crystals += W
 		W.loc = null
 		user.visible_message("<span class='notice'>[user] inserts [W] into \the [src]'s crystal slot.</span>")
+	if(istype(W, /obj/item/device/telepadremote) && telepad)
+		var/obj/item/device/telepadremote/R = W
+		R.linked = src
+		user << "\blue Telepad linked!"
 	else
 		..()
 
@@ -77,7 +81,6 @@
 	interact(user)
 
 /obj/machinery/computer/telescience/interact(mob/user)
-
 	var/t = "<div class='statusDisplay'>[temp_msg]</div>"
 	t += "<BR><A href='?src=\ref[src];setrotation=1'>Bearing: [rotation]°</A>"
 	t += "<BR><A href='?src=\ref[src];setangle=1'>Elevation: [angle]°</A>"
@@ -135,7 +138,6 @@
 		return
 
 	if(telepad)
-
 		var/truePower = Clamp(power + power_off, 1, 1000)
 		var/trueRotation = rotation + rotation_off
 		var/trueAngle = Clamp(angle, 1, 90)
@@ -241,7 +243,7 @@
 	power = 0
 
 /obj/machinery/computer/telescience/Topic(href, href_list)
-	if(..())
+	if(..() && !(locate(/obj/item/device/telepadremote) in usr))
 		return
 	if(href_list["setrotation"])
 		var/new_rot = input("Please input desired bearing in degrees.", name, rotation) as num
@@ -252,7 +254,7 @@
 
 	if(href_list["setangle"])
 		var/new_angle = input("Please input desired elevation in degrees.", name, angle) as num
-		if(..())
+		if(..() && !(locate(/obj/item/device/telepadremote) in usr))
 			return
 		angle = Clamp(round(new_angle, 0.1), 1, 9999)
 
@@ -262,7 +264,7 @@
 
 	if(href_list["setz"])
 		var/new_z = input("Please input desired sector.", name, z_co) as num
-		if(..())
+		if(..() && !(locate(/obj/item/device/telepadremote) in usr))
 			return
 		z_co = Clamp(round(new_z), 1, 10)
 
@@ -280,6 +282,8 @@
 		temp_msg = "NOTICE:<BR>Calibration successful."
 
 	if(href_list["eject"])
+		if(..())
+			return
 		eject()
 		temp_msg = "NOTICE:<BR>Bluespace crystals ejected."
 

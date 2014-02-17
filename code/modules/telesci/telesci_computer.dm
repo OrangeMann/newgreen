@@ -247,7 +247,7 @@
 		return
 	if(href_list["setrotation"])
 		var/new_rot = input("Please input desired bearing in degrees.", name, rotation) as num
-		if(..()) // Check after we input a value, as they could've moved after they entered something
+		if(..() && !(locate(/obj/item/device/telepadremote) in usr)) // Check after we input a value, as they could've moved after they entered something
 			return
 		rotation = Clamp(new_rot, -900, 900)
 		rotation = round(rotation, 0.01)

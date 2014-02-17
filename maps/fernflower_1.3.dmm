@@ -1113,7 +1113,7 @@
 "avu" = (/obj/structure/cable/yellow{icon_state = "2-4"},/turf/simulated/floor,/area/crew_quarters/sleep)
 "avv" = (/obj/structure/stool{pixel_y = 8},/obj/structure/cable/yellow{icon_state = "4-8"},/turf/simulated/floor,/area/crew_quarters/sleep)
 "avw" = (/obj/machinery/atmospherics/pipe/simple/supply/hidden,/obj/structure/table,/obj/structure/cable/yellow{icon_state = "4-8"},/turf/simulated/floor,/area/crew_quarters/sleep)
-"avx" = (/obj/structure/table,/obj/structure/cable/yellow{icon_state = "4-8"},/turf/simulated/floor,/area/crew_quarters/sleep)
+"avx" = (/obj/structure/table,/obj/structure/cable/yellow{icon_state = "4-8"},/obj/item/cotton,/obj/item/cotton,/obj/item/cotton,/obj/item/cotton,/obj/item/cotton,/turf/simulated/floor,/area/crew_quarters/sleep)
 "avy" = (/obj/item/weapon/coin/silver,/obj/structure/table,/obj/structure/cable/yellow{icon_state = "4-8"},/turf/simulated/floor,/area/crew_quarters/sleep)
 "avz" = (/obj/structure/cable/yellow{icon_state = "4-8"},/turf/simulated/floor,/area/crew_quarters/sleep)
 "avA" = (/obj/machinery/door/firedoor/border_only{layer = 2.6},/obj/machinery/door/airlock/glass{name = "Fitness"},/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,/obj/structure/cable/yellow{icon_state = "4-8"},/turf/simulated/floor,/area/crew_quarters/sleep)

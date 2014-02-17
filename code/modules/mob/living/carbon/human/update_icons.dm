@@ -757,6 +757,9 @@ proc/get_damage_icon_part(damage_state, body_part)
 		if(gender == FEMALE)
 			overlays_lying[BACK_LAYER]		= image("icon" = 'icons/mob/back_f.dmi', "icon_state" = "[back.icon_state]2")
 			overlays_standing[BACK_LAYER]	= image("icon" = 'icons/mob/back_f.dmi', "icon_state" = "[back.icon_state]")
+	else
+		overlays_lying[BACK_LAYER]		= null
+		overlays_standing[BACK_LAYER]	= null
 	if(update_icons)   update_icons()
 
 /mob/living/carbon/human/update_hud()	//TODO: do away with this if possible

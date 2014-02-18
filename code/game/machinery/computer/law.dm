@@ -51,6 +51,13 @@
 			usr << "[src.current.name] selected for law changes."
 		return
 
+/obj/machinery/computer/aiupload/newscreen
+	name = "Cyborg Upload"
+	desc = "Used to upload laws to Cyborgs."
+	icon_state = "aimainframe"
+	circuit = "/obj/item/weapon/circuitboard/aiupload"
+
+
 
 
 /obj/machinery/computer/borgupload
@@ -83,3 +90,9 @@
 		else
 			usr << "[src.current.name] selected for law changes."
 		return
+
+/obj/machinery/computer/borgupload/newscreen
+	name = "Cyborg Upload"
+	desc = "Used to upload laws to Cyborgs."
+	icon_state = "left"
+	circuit = "/obj/item/weapon/circuitboard/borgupload"

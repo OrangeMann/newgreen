@@ -67,6 +67,8 @@
 		var/obj/item/I = user.get_active_hand()
 		if(I)
 			master.attackby(I, user)
+		else
+			master.attack_hand(user)
 
 /obj/screen/zone_sel
 	name = "Damage Zone"
@@ -74,7 +76,7 @@
 	icon_state = "zone_sel"
 	var/selecting = "chest"
 	screen_loc = ui_zonesel
-
+/*
 /obj/screen/gun
 	name = "gun"
 	icon = 0
@@ -102,7 +104,7 @@
 		icon_state = 0
 		screen_loc = ui_gun_select
 		//dir = 1
-
+*/
 
 /obj/screen/zone_sel/MouseDown(location, control,params)
 	// Changes because of 4.0
@@ -373,25 +375,25 @@
 							return
 						else
 							if (ishuman(usr) && istype(usr:s_store, /obj/item/weapon/tank))
-								usr << "\blue You are now running on internals from the [usr:s_store] on your [usr:wear_suit]."
+								usr << "\blue You are now running on internals from [usr:s_store] on your [usr:wear_suit]."
 								usr.internal = usr:s_store
 							else if (ishuman(usr) && istype(usr:belt, /obj/item/weapon/tank))
-								usr << "\blue You are now running on internals from the [usr:belt] on your belt."
+								usr << "\blue You are now running on internals from [usr:belt] on your belt."
 								usr.internal = usr:belt
 							else if (istype(usr:l_store, /obj/item/weapon/tank))
-								usr << "\blue You are now running on internals from the [usr:l_store] in your left pocket."
+								usr << "\blue You are now running on internals from [usr:l_store] in your left pocket."
 								usr.internal = usr:l_store
 							else if (istype(usr:r_store, /obj/item/weapon/tank))
-								usr << "\blue You are now running on internals from the [usr:r_store] in your right pocket."
+								usr << "\blue You are now running on internals from [usr:r_store] in your right pocket."
 								usr.internal = usr:r_store
 							else if (istype(usr.back, /obj/item/weapon/tank))
-								usr << "\blue You are now running on internals from the [usr.back] on your back."
+								usr << "\blue You are now running on internals from [usr.back] on your back."
 								usr.internal = usr.back
 							else if (istype(usr.l_hand, /obj/item/weapon/tank))
-								usr << "\blue You are now running on internals from the [usr.l_hand] on your left hand."
+								usr << "\blue You are now running on internals from [usr.l_hand] on your left hand."
 								usr.internal = usr.l_hand
 							else if (istype(usr.r_hand, /obj/item/weapon/tank))
-								usr << "\blue You are now running on internals from the [usr.r_hand] on your right hand."
+								usr << "\blue You are now running on internals from [usr.r_hand] on your right hand."
 								usr.internal = usr.r_hand
 							if (usr.internal)
 								//for(var/mob/M in viewers(usr, 1))

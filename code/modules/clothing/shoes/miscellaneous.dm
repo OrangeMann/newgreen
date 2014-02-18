@@ -126,3 +126,9 @@
 	name = "laceup shoes"
 	desc = "The height of fashion, and they're pre-polished!"
 	icon_state = "laceups"
+
+/obj/item/clothing/shoes/bearboots
+	desc = "A pair of furry, brown boots"
+	name = "Bear boots"
+	icon_state = "bearboots"
+	item_state = "bearboots"

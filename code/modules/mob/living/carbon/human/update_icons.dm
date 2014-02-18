@@ -488,7 +488,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 
 /mob/living/carbon/human/update_inv_w_uniform(var/update_icons=1)
 	if(w_uniform && istype(w_uniform, /obj/item/clothing/under) )
-		w_uniform.screen_loc = ui_iclothing
+		w_uniform.screen_loc = hud_used.get_slot_loc("iclothing")
 		var/t_color = w_uniform.item_color
 		if(!t_color)		t_color = icon_state
 		var/image/lying		= image("icon_state" = "[t_color]_l")
@@ -532,95 +532,62 @@ proc/get_damage_icon_part(damage_state, body_part)
 	if(update_icons)   update_icons()
 
 /mob/living/carbon/human/update_inv_wear_id(var/update_icons=1)
-	if(gender == MALE)
-		if(wear_id)
-			wear_id.screen_loc = ui_id	//TODO
-			if(w_uniform && w_uniform:displays_id)
+	if(wear_id && w_uniform)
+		wear_id.screen_loc = hud_used.get_slot_loc("id")
+		if(w_uniform:displays_id)
+			if(gender == MALE)
 				overlays_lying[ID_LAYER]	= image("icon" = 'icons/mob/mob.dmi', "icon_state" = "id2")
 				overlays_standing[ID_LAYER]	= image("icon" = 'icons/mob/mob.dmi', "icon_state" = "id")
-			else
-				overlays_lying[ID_LAYER]	= null
-				overlays_standing[ID_LAYER]	= null
-		else
-			overlays_lying[ID_LAYER]	= null
-			overlays_standing[ID_LAYER]	= null
-		if(update_icons)   update_icons()
 
-	if(gender == FEMALE)
-		if(wear_id)
-			wear_id.screen_loc = ui_id	//TODO
-			if(w_uniform && w_uniform:displays_id)
+			if(gender == FEMALE)
 				overlays_lying[ID_LAYER]	= image("icon" = 'icons/mob/mob_f.dmi', "icon_state" = "id2")
 				overlays_standing[ID_LAYER]	= image("icon" = 'icons/mob/mob_f.dmi', "icon_state" = "id")
-			else
-				overlays_lying[ID_LAYER]	= null
-				overlays_standing[ID_LAYER]	= null
-		else
-			overlays_lying[ID_LAYER]	= null
-			overlays_standing[ID_LAYER]	= null
-		if(update_icons)   update_icons()
+	else
+		overlays_lying[ID_LAYER]	= null
+		overlays_standing[ID_LAYER]	= null
+
+	if(update_icons)   update_icons()
 
 /mob/living/carbon/human/update_inv_gloves(var/update_icons=1)
-	if(gender == MALE)
-		if(gloves)
-			var/t_state = gloves.item_state
-			if(!t_state)	t_state = gloves.icon_state
-			var/image/lying		= image("icon" = 'icons/mob/hands.dmi', "icon_state" = "[t_state]2")
-			var/image/standing	= image("icon" = 'icons/mob/hands.dmi', "icon_state" = "[t_state]")
-			if(gloves.blood_DNA)
-				lying.overlays		+= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "bloodyhands2")
-				standing.overlays	+= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "bloodyhands")
-			gloves.screen_loc = ui_gloves
-			overlays_lying[GLOVES_LAYER]	= lying
-			overlays_standing[GLOVES_LAYER]	= standing
-		else
-			if(blood_DNA)
-				overlays_lying[GLOVES_LAYER]	= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "bloodyhands2")
-				overlays_standing[GLOVES_LAYER]	= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "bloodyhands")
-			else
-				overlays_lying[GLOVES_LAYER]	= null
-				overlays_standing[GLOVES_LAYER]	= null
-		if(update_icons)   update_icons()
+	if(gloves)
+		var/t_state = gloves.item_state
+		if(!t_state)	t_state = gloves.icon_state
+		var/image/lying		= image("icon" = 'icons/mob/hands.dmi', "icon_state" = "[t_state]2")
+		var/image/standing	= image("icon" = 'icons/mob/hands.dmi', "icon_state" = "[t_state]")
 
-	if(gender == FEMALE)
-		if(gloves)
-			var/t_state = gloves.item_state
-			if(!t_state)	t_state = gloves.icon_state
-			var/image/lying		= image("icon" = 'icons/mob/hands_f.dmi', "icon_state" = "[t_state]2")
-			var/image/standing	= image("icon" = 'icons/mob/hands_f.dmi', "icon_state" = "[t_state]")
-			if(gloves.blood_DNA)
-				lying.overlays		+= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "bloodyhands2")
-				standing.overlays	+= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "bloodyhands")
-			gloves.screen_loc = ui_gloves
-			overlays_lying[GLOVES_LAYER]	= lying
-			overlays_standing[GLOVES_LAYER]	= standing
+		if(gender == FEMALE)
+			lying		= image("icon" = 'icons/mob/hands_f.dmi', "icon_state" = "[t_state]2")
+			standing	= image("icon" = 'icons/mob/hands_f.dmi', "icon_state" = "[t_state]")
+
+		if(gloves.blood_DNA)
+			lying.overlays		+= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "bloodyhands2")
+			standing.overlays	+= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "bloodyhands")
+		gloves.screen_loc = hud_used.get_slot_loc("gloves")
+		overlays_lying[GLOVES_LAYER]	= lying
+		overlays_standing[GLOVES_LAYER]	= standing
+	else
+		if(blood_DNA)
+			overlays_lying[GLOVES_LAYER]	= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "bloodyhands2")
+			overlays_standing[GLOVES_LAYER]	= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "bloodyhands")
 		else
-			if(blood_DNA)
-				overlays_lying[GLOVES_LAYER]	= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "bloodyhands2")
-				overlays_standing[GLOVES_LAYER]	= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "bloodyhands")
-			else
-				overlays_lying[GLOVES_LAYER]	= null
-				overlays_standing[GLOVES_LAYER]	= null
-		if(update_icons)   update_icons()
+			overlays_lying[GLOVES_LAYER]	= null
+			overlays_standing[GLOVES_LAYER]	= null
+	if(update_icons)   update_icons()
 
 /mob/living/carbon/human/update_inv_glasses(var/update_icons=1)
-	if(gender == MALE)
-		if(glasses)
+	if(glasses)
+		if(gender == MALE)
 			overlays_lying[GLASSES_LAYER]		= image("icon" = 'icons/mob/eyes.dmi', "icon_state" = "[glasses.icon_state]2")
 			overlays_standing[GLASSES_LAYER]	= image("icon" = 'icons/mob/eyes.dmi', "icon_state" = "[glasses.icon_state]")
-		else
-			overlays_lying[GLASSES_LAYER]		= null
-			overlays_standing[GLASSES_LAYER]	= null
-		if(update_icons)   update_icons()
 
-	if(gender == FEMALE)
-		if(glasses)
+		if(gender == FEMALE)
 			overlays_lying[GLASSES_LAYER]		= image("icon" = 'icons/mob/eyes_f.dmi', "icon_state" = "[glasses.icon_state]2")
 			overlays_standing[GLASSES_LAYER]	= image("icon" = 'icons/mob/eyes_f.dmi', "icon_state" = "[glasses.icon_state]")
-		else
-			overlays_lying[GLASSES_LAYER]		= null
-			overlays_standing[GLASSES_LAYER]	= null
-		if(update_icons)   update_icons()
+	else
+		overlays_lying[GLASSES_LAYER]		= null
+		overlays_standing[GLASSES_LAYER]	= null
+
+	if(update_icons)   update_icons()
 
 /mob/living/carbon/human/update_inv_ears(var/update_icons=1)
 	if(gender == MALE)
@@ -676,7 +643,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 		if(!t_state)	t_state = s_store.icon_state
 		overlays_lying[SUIT_STORE_LAYER]	= image("icon" = 'icons/mob/belt_mirror.dmi', "icon_state" = "[t_state]2")
 		overlays_standing[SUIT_STORE_LAYER]	= image("icon" = 'icons/mob/belt_mirror.dmi', "icon_state" = "[t_state]")
-		s_store.screen_loc = ui_sstore1		//TODO
+		s_store.screen_loc = hud_used.get_slot_loc("sstore1")
 	else
 		overlays_lying[SUIT_STORE_LAYER]	= null
 		overlays_standing[SUIT_STORE_LAYER]	= null
@@ -685,7 +652,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 
 /mob/living/carbon/human/update_inv_head(var/update_icons=1)
 	if(head)
-		head.screen_loc = ui_head		//TODO
+		head.screen_loc = hud_used.get_slot_loc("head")
 		var/image/lying
 		var/image/standing
 		if(istype(head,/obj/item/clothing/head/kitty))
@@ -702,101 +669,70 @@ proc/get_damage_icon_part(damage_state, body_part)
 	else
 		overlays_lying[HEAD_LAYER]		= null
 		overlays_standing[HEAD_LAYER]	= null
+
 	if(update_icons)   update_icons()
 
 /mob/living/carbon/human/update_inv_belt(var/update_icons=1)
-	if(gender == MALE)
-		if(belt)
-			belt.screen_loc = ui_belt	//TODO
-			var/t_state = belt.item_state
-			if(!t_state)	t_state = belt.icon_state
+	if(belt)
+		belt.screen_loc = hud_used.get_slot_loc("belt")
+		var/t_state = belt.item_state
+		if(!t_state)	t_state = belt.icon_state
+
+		if(gender == MALE)
 			overlays_lying[BELT_LAYER]		= image("icon" = 'icons/mob/belt.dmi', "icon_state" = "[t_state]2")
 			overlays_standing[BELT_LAYER]	= image("icon" = 'icons/mob/belt.dmi', "icon_state" = "[t_state]")
-		else
-			overlays_lying[BELT_LAYER]		= null
-			overlays_standing[BELT_LAYER]	= null
-		if(update_icons)   update_icons()
-
-	if(gender == FEMALE)
-		if(belt)
-			belt.screen_loc = ui_belt	//TODO
-			var/t_state = belt.item_state
-			if(!t_state)	t_state = belt.icon_state
+		if(gender == FEMALE)
 			overlays_lying[BELT_LAYER]		= image("icon" = 'icons/mob/belt_f.dmi', "icon_state" = "[t_state]2")
 			overlays_standing[BELT_LAYER]	= image("icon" = 'icons/mob/belt_f.dmi', "icon_state" = "[t_state]")
-		else
-			overlays_lying[BELT_LAYER]		= null
-			overlays_standing[BELT_LAYER]	= null
-		if(update_icons)   update_icons()
+	else
+		overlays_lying[BELT_LAYER]		= null
+		overlays_standing[BELT_LAYER]	= null
+
+	if(update_icons)   update_icons()
 
 /mob/living/carbon/human/update_inv_wear_suit(var/update_icons=1)
-	if(gender == MALE)
-		if( wear_suit && istype(wear_suit, /obj/item/clothing/suit) )	//TODO check this
-			wear_suit.screen_loc = ui_oclothing	//TODO
-			var/image/lying		= image("icon" = 'icons/mob/suit.dmi', "icon_state" = "[wear_suit.icon_state]2")
-			var/image/standing	= image("icon" = 'icons/mob/suit.dmi', "icon_state" = "[wear_suit.icon_state]")
+	if( wear_suit && istype(wear_suit, /obj/item/clothing/suit) )	//TODO check this
+		wear_suit.screen_loc = hud_used.get_slot_loc("oclothing")
+		var/image/lying		= image("icon" = 'icons/mob/suit.dmi', "icon_state" = "[wear_suit.icon_state]2")
+		var/image/standing	= image("icon" = 'icons/mob/suit.dmi', "icon_state" = "[wear_suit.icon_state]")
 
-			if( istype(wear_suit, /obj/item/clothing/suit/straight_jacket) )
-				drop_from_inventory(handcuffed)
-				drop_l_hand()
-				drop_r_hand()
+		if(gender == FEMALE)
+			lying		= image("icon" = 'icons/mob/suit_f.dmi', "icon_state" = "[wear_suit.icon_state]2")
+			standing	= image("icon" = 'icons/mob/suit_f.dmi', "icon_state" = "[wear_suit.icon_state]")
 
-			if(wear_suit.blood_DNA)
-				var/obj/item/clothing/suit/S = wear_suit
-				lying.overlays		+= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "[S.blood_overlay_type]blood2")
-				standing.overlays	+= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "[S.blood_overlay_type]blood")
+		if( istype(wear_suit, /obj/item/clothing/suit/straight_jacket) )
+			drop_from_inventory(handcuffed)
+			drop_l_hand()
+			drop_r_hand()
 
-			overlays_lying[SUIT_LAYER]		= lying
-			overlays_standing[SUIT_LAYER]	= standing
+		if(wear_suit.blood_DNA)
+			var/obj/item/clothing/suit/S = wear_suit
+			lying.overlays		+= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "[S.blood_overlay_type]blood2")
+			standing.overlays	+= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "[S.blood_overlay_type]blood")
 
-			update_tail_showing(0)
+		overlays_lying[SUIT_LAYER]		= lying
+		overlays_standing[SUIT_LAYER]	= standing
 
-		else
-			overlays_lying[SUIT_LAYER]		= null
-			overlays_standing[SUIT_LAYER]	= null
+		update_tail_showing(0)
 
-			update_tail_showing(0)
+	else
+		overlays_lying[SUIT_LAYER]		= null
+		overlays_standing[SUIT_LAYER]	= null
 
-		if(update_icons)   update_icons()
+		update_tail_showing(0)
 
-	if(gender == FEMALE)
-		if( wear_suit && istype(wear_suit, /obj/item/clothing/suit) )	//TODO check this
-			wear_suit.screen_loc = ui_oclothing	//TODO
-			var/image/lying		= image("icon" = 'icons/mob/suit_f.dmi', "icon_state" = "[wear_suit.icon_state]2")
-			var/image/standing	= image("icon" = 'icons/mob/suit_f.dmi', "icon_state" = "[wear_suit.icon_state]")
+	if(update_icons)   update_icons()
 
-			if( istype(wear_suit, /obj/item/clothing/suit/straight_jacket) )
-				drop_from_inventory(handcuffed)
-				drop_l_hand()
-				drop_r_hand()
-
-			if(wear_suit.blood_DNA)
-				var/obj/item/clothing/suit/S = wear_suit
-				lying.overlays		+= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "[S.blood_overlay_type]blood2")
-				standing.overlays	+= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "[S.blood_overlay_type]blood")
-
-			overlays_lying[SUIT_LAYER]		= lying
-			overlays_standing[SUIT_LAYER]	= standing
-
-			update_tail_showing(0)
-
-		else
-			overlays_lying[SUIT_LAYER]		= null
-			overlays_standing[SUIT_LAYER]	= null
-
-			update_tail_showing(0)
-
-		if(update_icons)   update_icons()
 
 /mob/living/carbon/human/update_inv_pockets(var/update_icons=1)
-	if(l_store)			l_store.screen_loc = ui_storage1	//TODO
-	if(r_store)			r_store.screen_loc = ui_storage2	//TODO
+	if(l_store)			l_store.screen_loc = hud_used.get_slot_loc("storage1")
+	if(r_store)			r_store.screen_loc = hud_used.get_slot_loc("storage2")
 	if(update_icons)	update_icons()
 
 
 /mob/living/carbon/human/update_inv_wear_mask(var/update_icons=1)
 	if( wear_mask && ( istype(wear_mask, /obj/item/clothing/mask) || istype(wear_mask, /obj/item/clothing/tie) ) )
-		wear_mask.screen_loc = ui_mask	//TODO
+		wear_mask.screen_loc = hud_used.get_slot_loc("mask")
 		var/image/lying		= image("icon" = 'icons/mob/mask.dmi', "icon_state" = "[wear_mask.icon_state]2")
 		var/image/standing	= image("icon" = 'icons/mob/mask.dmi', "icon_state" = "[wear_mask.icon_state]")
 		if( !istype(wear_mask, /obj/item/clothing/mask/cigarette) && wear_mask.blood_DNA )
@@ -811,25 +747,20 @@ proc/get_damage_icon_part(damage_state, body_part)
 
 
 /mob/living/carbon/human/update_inv_back(var/update_icons=1)
-	if(gender == MALE)
-		if(back)
-			back.screen_loc = ui_back	//TODO
+	if(back)
+		back.screen_loc = hud_used.get_slot_loc("back")
+
+		if(gender == MALE)
 			overlays_lying[BACK_LAYER]		= image("icon" = 'icons/mob/back.dmi', "icon_state" = "[back.icon_state]2")
 			overlays_standing[BACK_LAYER]	= image("icon" = 'icons/mob/back.dmi', "icon_state" = "[back.icon_state]")
-		else
-			overlays_lying[BACK_LAYER]		= null
-			overlays_standing[BACK_LAYER]	= null
-		if(update_icons)   update_icons()
 
-	if(gender == FEMALE)
-		if(back)
-			back.screen_loc = ui_back	//TODO
+		if(gender == FEMALE)
 			overlays_lying[BACK_LAYER]		= image("icon" = 'icons/mob/back_f.dmi', "icon_state" = "[back.icon_state]2")
 			overlays_standing[BACK_LAYER]	= image("icon" = 'icons/mob/back_f.dmi', "icon_state" = "[back.icon_state]")
-		else
-			overlays_lying[BACK_LAYER]		= null
-			overlays_standing[BACK_LAYER]	= null
-		if(update_icons)   update_icons()
+	else
+		overlays_lying[BACK_LAYER]		= null
+		overlays_standing[BACK_LAYER]	= null
+	if(update_icons)   update_icons()
 
 /mob/living/carbon/human/update_hud()	//TODO: do away with this if possible
 	if(client)
@@ -895,7 +826,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 
 /mob/living/carbon/human/update_inv_r_hand(var/update_icons=1)
 	if(r_hand)
-		r_hand.screen_loc = ui_rhand	//TODO
+		r_hand.screen_loc = hud_used.get_slot_loc("rhand")
 		var/t_state = r_hand.item_state
 		if(!t_state)	t_state = r_hand.icon_state
 		overlays_standing[R_HAND_LAYER] = image("icon" = 'icons/mob/items_righthand.dmi', "icon_state" = "[t_state]")
@@ -907,7 +838,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 
 /mob/living/carbon/human/update_inv_l_hand(var/update_icons=1)
 	if(l_hand)
-		l_hand.screen_loc = ui_lhand	//TODO
+		l_hand.screen_loc = hud_used.get_slot_loc("lhand")
 		var/t_state = l_hand.item_state
 		if(!t_state)	t_state = l_hand.icon_state
 		overlays_standing[L_HAND_LAYER] = image("icon" = 'icons/mob/items_lefthand.dmi', "icon_state" = "[t_state]")

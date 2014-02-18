@@ -71,7 +71,19 @@
 
 /obj/item/device/onetankbomb/HasProximity(atom/movable/AM as mob|obj)
 	if(bombassembly)
-		bombassembly.HasProximity(AM)
+		return bombassembly.HasProximity(AM)
+
+/obj/item/device/onetankbomb/HasEntered(atom/movable/AM as mob|obj) //for mousetraps
+	if(bombassembly)
+		return bombassembly.HasEntered(AM)
+
+/obj/item/device/onetankbomb/on_found(mob/finder as mob) //for mousetraps
+	if(bombassembly)
+		return bombassembly.on_found(finder)
+
+/obj/item/device/onetankbomb/hear_talk(mob/living/M, msg)
+	if(bombassembly)
+		bombassembly.hear_talk(M, msg)
 
 // ---------- Procs below are for tanks that are used exclusively in 1-tank bombs ----------
 

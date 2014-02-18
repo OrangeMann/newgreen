@@ -184,7 +184,7 @@
 
 
 /obj/item/weapon/storage/backpack/toy
-	name = "toy backpack"
+	name = "space backpack"
 	icon = 'icons/obj/tank.dmi'
 	desc = "You can look like a real spessman with it! Now with blinking lights!"
 	icon_state = "jetpack-on"

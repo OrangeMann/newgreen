@@ -186,7 +186,7 @@ obj/machinery/atmospherics/pipe
 		update_icon()
 			if(node1&&node2)
 				var/C = ""
-				switch(color)
+				switch(pipe_color)
 					if ("red") C = "-r"
 					if ("blue") C = "-b"
 					if ("cyan") C = "-c"
@@ -251,12 +251,12 @@ obj/machinery/atmospherics/pipe
 			return null
 
 	simple/scrubbers
-		name="Scrubbers pipe"
+		name="scrubbers pipe"
 		pipe_color="red"
 		icon_state = ""
 
 	simple/supply
-		name="Air supply pipe"
+		name="air supply pipe"
 		pipe_color="blue"
 		icon_state = ""
 

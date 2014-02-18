@@ -37,6 +37,7 @@
 /obj/item/weapon/melee/energy/sword:4:Energy Sword;
 /obj/item/weapon/storage/box/syndicate:10:Syndicate Bundle;
 /obj/item/weapon/storage/box/emps:3:5 EMP Grenades;
+/obj/item/device/syndicatebomb:6:Syndicate Bomb;
 Whitespace:Seperator;
 Stealthy and Inconspicuous Weapons;
 /obj/item/weapon/pen/paralysis:3:Paralysis Pen;
@@ -44,7 +45,7 @@ Stealthy and Inconspicuous Weapons;
 /obj/item/weapon/cartridge/syndicate:3:Detomatix PDA Cartridge;
 Whitespace:Seperator;
 Stealth and Camouflage Items;
-/obj/item/clothing/under/chameleon:3:Chameleon Jumpsuit;
+/obj/item/weapon/storage/box/syndie_kit/chameleon:7:Chameleon Kit;
 /obj/item/clothing/shoes/syndigaloshes:2:No-Slip Syndicate Shoes;
 /obj/item/weapon/card/id/syndicate:2:Agent ID card;
 /obj/item/clothing/mask/gas/voice:4:Voice Changer;
@@ -68,7 +69,8 @@ Implants;
 /obj/item/weapon/storage/box/syndie_kit/imp_freedom:3:Freedom Implant;
 /obj/item/weapon/storage/box/syndie_kit/imp_uplink:10:Uplink Implant (Contains 5 Telecrystals);
 /obj/item/weapon/storage/box/syndie_kit/imp_explosive:6:Explosive Implant (DANGER!);
-/obj/item/weapon/storage/box/syndie_kit/imp_compress:4:Compressed Matter Implant;Whitespace:Seperator;
+/obj/item/weapon/storage/box/syndie_kit/imp_compress:4:Compressed Matter Implant;
+Whitespace:Seperator;
 (Pointless) Badassery;
 /obj/item/toy/syndicateballoon:10:For showing that You Are The BOSS (Useless Balloon);"}
 

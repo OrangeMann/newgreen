@@ -70,7 +70,7 @@ var/list/GPS_tags_amt = list()
 
 		t += "<BR><A href='?src=\ref[src];refresh=1'>Refresh</A> "
 
-	user << browse("<TITLE>RPS</TITLE><HR>[t]", "window=GPS;size=600x350")
+	user << browse("<TITLE>RPS</TITLE><HR>[t]", "window=GPS;size=400x550")
 	onclose(user, "GPS")
 
 /obj/item/device/gps/Topic(href, href_list)

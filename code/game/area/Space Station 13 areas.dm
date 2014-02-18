@@ -523,6 +523,10 @@ proc/process_ghost_teleport_locs()
 	name = "\improper Prison Station"
 	icon_state = "brig"
 
+/area/prison/wing
+	name = "\improper Prison Wing"
+	icon_state = "brig"
+
 /area/prison/arrival_airlock
 	name = "\improper Prison Station Airlock"
 	icon_state = "green"
@@ -971,6 +975,21 @@ proc/process_ghost_teleport_locs()
 		name = "\improper Aft Port Solar Array"
 		icon_state = "panelsP"
 
+/area/catwalks
+	name = "\improper Catwalks"
+	icon_state = "yellow"
+	requires_power = 0
+	luminosity = 1
+	lighting_use_dynamic = 0
+
+/area/catwalks/south_catwalks
+	name = "\improper South Catwalks"
+	icon_state = "yellow"
+
+/area/catwalks/north_catwalks
+	name = "\improper North Catwalks"
+	icon_state = "yellow"
+
 /area/maintenance/auxsolarport
 	name = "Fore Port Solar Maintenance"
 	icon_state = "SolarcontrolA"
@@ -986,7 +1005,6 @@ proc/process_ghost_teleport_locs()
 /area/maintenance/auxsolarstarboard
 	name = "Fore Starboard Solar Maintenance"
 	icon_state = "SolarcontrolA"
-
 
 /area/assembly/chargebay
 	name = "\improper Mech Bay"

@@ -398,7 +398,7 @@ It's fairly easy to fix if dealing with single letters but not so much with comp
 					src.client.screen += src.hud_used.hotkeybuttons
 
 
-				src.hud_used.action_intent.screen_loc = ui_acti //Restore intent selection to the original position
+				src.hud_used.action_intent.screen_loc = src.hud_used.get_slot_loc("acti") //Restore intent selection to the original position
 				src.client.screen += src.zone_sel				//This one is a special snowflake
 
 			hud_used.hidden_inventory_update()

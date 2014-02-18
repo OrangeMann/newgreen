@@ -18,10 +18,10 @@
 	name = "n The Mood"
 	path = 'GlennMiller-InTheMood.ogg'
 
-/datum/turntable_soundtrack/soviet
-	f_name = "S"
-	name = "oviet Theme"
-	path = 'soviet_anthem.ogg'
+/datum/turntable_soundtrack/disco
+	f_name = "D"
+	name = "isco Bloodbath"
+	path = 'discobloodbath.ogg'
 
 /datum/turntable_soundtrack/jessie
 	f_name = "T"
@@ -71,7 +71,7 @@
 
 /datum/turntable_soundtrack/aazimarmelody
 	f_name = "T"
-	name = "he Sceleton in the Closet"
+	name = "he Skeleton in the Closet"
 	path = 'The_sceleton_in_the_closet.ogg'
 
 /datum/turntable_soundtrack/sadwalk

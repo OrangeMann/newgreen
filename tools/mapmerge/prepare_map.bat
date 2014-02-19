@@ -1,4 +1,4 @@
-set MAPFILE=tgstation.2.1.2.dmm
+set MAPFILE=fernflower_1.3.dmm
 
 cd ../../maps
 copy %MAPFILE% %MAPFILE%.backup

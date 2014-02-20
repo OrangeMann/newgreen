@@ -122,14 +122,12 @@ I said no!
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/brainburger
 
-/* NO FUN ALLOWED
 /datum/recipe/roburger
+	reagents = list("flour" = 5)
 	items = list(
-		/obj/item/weapon/reagent_containers/food/snacks/flour,
 		/obj/item/robot_parts/head
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/roburger
-*/
 
 /datum/recipe/xenoburger
 	reagents = list("flour" = 5)

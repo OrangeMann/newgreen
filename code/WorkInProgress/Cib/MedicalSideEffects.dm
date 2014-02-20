@@ -24,7 +24,7 @@
 			side_effects += M
 
 /mob/living/carbon/human/proc/handle_medical_side_effects()
-	if(src.reagents.has_reagent("cryoxadone") || src.reagents.get_reagent_amount("bicaridine") >= 15 || src.reagents.get_reagent_amount("tricordrazine") >= 15)
+/*	if(src.reagents.has_reagent("cryoxadone") || src.reagents.get_reagent_amount("bicaridine") >= 15 || src.reagents.get_reagent_amount("tricordrazine") >= 15)
 		src.add_side_effect("Headache")
 
 	if(src.reagents.get_reagent_amount("kelotane") >= 30 || src.reagents.get_reagent_amount("dermaline") >= 15)
@@ -34,7 +34,7 @@
 		src.add_side_effect("Cramps")
 
 	if(src.reagents.get_reagent_amount("space_drugs") >= 10)
-		src.add_side_effect("Itch")
+		src.add_side_effect("Itch")*/
 
 	// One full cycle(in terms of strength) every 10 minutes
 	var/strength_percent = sin(life_tick / 2)

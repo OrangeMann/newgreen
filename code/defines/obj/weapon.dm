@@ -580,6 +580,7 @@
 	throw_speed = 4
 	throw_range = 4
 	m_amt = 15000
+	sharp = 1
 	origin_tech = "materials=2;combat=1"
 	attack_verb = list("chopped", "torn", "cut")
 
@@ -603,6 +604,7 @@
 	throw_speed = 1
 	throw_range = 3
 	w_class = 4.0
+	sharp = 1
 	flags = FPRINT | TABLEPASS | NOSHIELD
 	slot_flags = SLOT_BACK
 	origin_tech = "materials=2;combat=2"

@@ -363,6 +363,25 @@ obj/item/weapon/circuitboard/rdserver
 							"/obj/item/weapon/stock_parts/subspace/crystal" = 1,
 							"/obj/item/weapon/stock_parts/micro_laser/high" = 2)
 
+/obj/item/weapon/circuitboard/turntable
+	name = "Circuit board (Music Machine)"
+	build_path = "/obj/machinery/party/turntable"
+	board_type = "machine"
+	origin_tech = "programming=3;engineering=3"
+	frame_desc = "Requires 2 Matter Bins, 1 Manipulator, 1 Micro-Laser and 1 Console Screen."
+	req_components = list(
+							"/obj/item/weapon/stock_parts/matter_bin" = 2,
+							"/obj/item/weapon/stock_parts/manipulator" = 1,
+							"/obj/item/weapon/stock_parts/micro_laser" = 1,
+							"/obj/item/weapon/stock_parts/console_screen" = 1)
 
-
-
+/obj/item/weapon/circuitboard/hydroponicst
+	name = "Circuit board (Hydroponics Tray)"
+	build_path = "/obj/machinery/hydroponics"
+	board_type = "machine"
+	origin_tech = "programming=2;engineering=1"
+	frame_desc = "Requires 2 Matter Bins, 3 Manipulator and 1 Console Screen."
+	req_components = list(
+							"/obj/item/weapon/stock_parts/matter_bin" = 2,
+							"/obj/item/weapon/stock_parts/manipulator" = 3,
+							"/obj/item/weapon/stock_parts/console_screen" = 1)

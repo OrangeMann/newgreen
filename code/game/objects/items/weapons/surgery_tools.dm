@@ -383,6 +383,7 @@ LOOK FOR SURGERY.DM*/
 	throwforce = 5.0
 	throw_speed = 3
 	throw_range = 5
+	sharp = 1
 	m_amt = 10000
 	g_amt = 5000
 	origin_tech = "materials=1;biotech=1"
@@ -631,6 +632,7 @@ LOOK FOR SURGERY.DM*/
 	hitsound = 'sound/weapons/circsawhit.ogg'
 	flags = FPRINT | TABLEPASS | CONDUCT
 	force = 15.0
+	sharp = 1
 	w_class = 2.0
 	throwforce = 9.0
 	throw_speed = 3

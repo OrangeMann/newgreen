@@ -102,6 +102,7 @@
 	force = 40
 	throwforce = 10
 	w_class = 3
+	sharp = 1
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 
 	IsShield()

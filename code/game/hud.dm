@@ -249,6 +249,34 @@ var/datum/global_hud/global_hud = new()
 
 		if("acti") return ui_acti
 
+/mob/living/carbon/human/proc/get_slot_loc(var/slot)
+	if(hud_used)
+		return hud_used.get_slot_loc(slot)
+
+	switch(slot)
+		if("mask") return ui_mask
+		if("oclothing") return ui_oclothing
+		if("iclothing") return ui_iclothing
+
+		if("sstore1") return ui_sstore1
+		if("id") return ui_id
+		if("belt") return ui_belt
+		if("back") return ui_back
+
+		if("rhand") return ui_rhand
+		if("lhand") return ui_lhand
+
+		if("storage1") return ui_storage1
+		if("storage2") return ui_storage2
+
+		if("shoes") return ui_shoes
+		if("head") return ui_head
+		if("gloves") return ui_gloves
+		if("ears") return ui_ears
+		if("glasses") return ui_glasses
+
+		if("acti") return ui_acti
+
 /datum/hud/proc/hidden_inventory_update()
 	if(!mymob) return
 	if(ishuman(mymob))

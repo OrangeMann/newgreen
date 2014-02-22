@@ -374,7 +374,7 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 				B.title = title
 				B.author = author
 				B.dat = content
-				B.icon_state = "book[rand(1,7)]"
+				B.icon_state = "book[rand(1,18)]"
 				src.visible_message("[src]'s printer hums as it produces a completely bound book. How did it do that?")
 				break
 	if(href_list["orderbyid"])

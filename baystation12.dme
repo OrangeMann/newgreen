@@ -798,6 +798,7 @@
 #include "code\modules\clothing\under\jobs\engineering.dm"
 #include "code\modules\clothing\under\jobs\medsci.dm"
 #include "code\modules\clothing\under\jobs\security.dm"
+#include "code\modules\crafting\bedsheet_craft.dm"
 #include "code\modules\crafting\jail.dm"
 #include "code\modules\crafting\medical_craft.dm"
 #include "code\modules\customitems\item_defines.dm"

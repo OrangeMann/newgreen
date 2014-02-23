@@ -22,6 +22,7 @@
 	icon_state = "kkc"
 	item_state = "kkc"
 	flags = FPRINT|TABLEPASS|HEADCOVERSEYES|HEADCOVERSMOUTH|BLOCKHAIR
+	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
 
 /obj/item/clothing/head/hairflower
 	name = "hair flower pin"

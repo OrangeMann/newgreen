@@ -47,9 +47,17 @@
 		if(affecting.anchored)//This will prevent from grabbing people that are anchored.
 			del(src)
 		if (assailant.r_hand == src)
-			hud1.screen_loc = ui_rhand
+			if(ishuman(assailant))
+				var/mob/living/carbon/human/H = assailant
+				hud1.screen_loc = H.get_slot_loc("rhand")
+			else
+				hud1.screen_loc = ui_rhand
 		else
-			hud1.screen_loc = ui_lhand
+			if(ishuman(assailant))
+				var/mob/living/carbon/human/H = assailant
+				hud1.screen_loc = H.get_slot_loc("lhand")
+			else
+				hud1.screen_loc = ui_lhand
 	return
 
 

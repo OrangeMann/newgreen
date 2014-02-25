@@ -148,6 +148,10 @@ var/global/list/datum/stack_recipe/wood_recipes = list ( \
 /*
  * Cloth
  */
+ var/global/list/datum/stack_recipe/cloth_recipes = list ( \
+	new/datum/stack_recipe("KKK mask", /obj/item/clothing/head/kkc, 1), \
+	)
+
 /obj/item/stack/sheet/cloth
 	name = "cloth"
 	desc = "This roll of cloth is made from only the finest chemicals and bunny rabbits."

@@ -81,7 +81,7 @@
 
 /obj/machinery/vending/proc/reconnect_database()
 	for(var/obj/machinery/account_database/DB in world)
-		if(DB.z == src.z)
+		if(DB.z != 2)
 			linked_db = DB
 			break
 

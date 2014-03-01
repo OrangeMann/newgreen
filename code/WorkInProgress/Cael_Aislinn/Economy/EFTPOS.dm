@@ -71,7 +71,7 @@
 
 /obj/item/device/eftpos/proc/reconnect_database()
 	for(var/obj/machinery/account_database/DB in world) //Hotfix until someone finds out why it isn't in 'machines'
-		if(DB.z == src.z)
+		if(DB.z != 2)
 			linked_db = DB
 			break
 

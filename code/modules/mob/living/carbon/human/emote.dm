@@ -541,6 +541,23 @@
 					message = "<B>[src]</B> makes a very loud noise."
 					m_type = 2
 
+		if("fart")
+			message = pick("<B>[src]</B> farts robustly!", "<B>[src]</B> farts.", "<B>[src]</B> farts. Smells like a medbay!")
+			m_type = 1
+			call_sound_emote("fart")
+
+			var/area/A = get_area(src.loc)
+			if(A && A.name == "\improper Chapel")
+				message = "<B>[src]</B>'s butt explodes!"
+				src.Weaken(12)
+				flick("e_flash", src.flash)
+				var/datum/organ/external/affecting = src.get_organ("groin")
+				if(affecting)
+					if(affecting.take_damage(10, 15))
+						src.UpdateDamageIcon()
+					src.updatehealth()
+
+
 		if ("help")
 			src << "blink, blink_r, blush, bow-(none)/mob, burp, choke, chuckle, clap, collapse, cough,\ncry, custom, deathgasp, drool, eyebrow, frown, gasp, giggle, groan, grumble, handshake, hug-(none)/mob, glare-(none)/mob,\ngrin, laugh, look-(none)/mob, moan, mumble, nod, pale, point-atom, raise, salute, shake, shiver, shrug,\nsigh, signal-#1-10, smile, sneeze, sniff, snore, stare-(none)/mob, tremble, twitch, twitch_s, whimper,\nwink, yawn"
 
@@ -593,7 +610,8 @@
 			else
 				playsound(src.loc, pick('sound/voice/Screams_Woman_1.ogg', 'sound/voice/Screams_Woman_2.ogg', 'sound/voice/Screams_Woman_3.ogg'), 100, 1)
 
-	switch(E)
 		if("laugh")
-			if (src.gender == "male")
-				playsound(src.loc, pick('sound/voice/laugh1.ogg', 'sound/voice/laugh2.ogg', 'sound/voice/laugh3.ogg'), 100, 1)
+			playsound(src.loc, pick('sound/voice/laugh1.ogg', 'sound/voice/laugh2.ogg', 'sound/voice/laugh3.ogg'), 100, 1)
+
+		if("fart")
+			playsound(src.loc, 'sound/voice/fart1.ogg', 100, 1)

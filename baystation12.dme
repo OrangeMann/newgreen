@@ -1378,5 +1378,6 @@
 #include "code\ZAS\ZAS_Zones.dm"
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
-#include "maps\fernflower_1.3.dmm"
+#include "maps\fernflower_classic.dmm"
+#include "maps\event\derelict_event.dmm"
 // END_INCLUDE

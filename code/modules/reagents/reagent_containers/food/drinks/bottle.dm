@@ -8,9 +8,35 @@
 	item_state = "broken_beer" //Generic held-item sprite until unique ones are made.
 	var/const/duration = 13 //Directly relates to the 'weaken' duration. Lowered by armor (i.e. helmets)
 	var/isGlass = 1 //Whether the 'bottle' is made of glass or not so that milk cartons dont shatter when someone gets hit by it
+	var/molotov = 0 // 1 for rag, 2 for ingited
+
+	throw_impact(atom/hit_atom)
+		..()
+		if(molotov)
+			var/turf/location = get_turf(hit_atom)
+
+			var/obj/item/weapon/broken_bottle/B = new /obj/item/weapon/broken_bottle(location)
+			B.icon_state = src.icon_state
+
+			var/icon/I = new('icons/obj/drinks.dmi', src.icon_state)
+			I.Blend(B.broken_outline, ICON_OVERLAY, rand(5), 1)
+			I.SwapColor(rgb(255, 0, 220, 255), rgb(0, 0, 0, 0))
+			B.icon = I
+			playsound(src, "shatter", 70, 1)
+
+			for(var/turf/splashturf in range(1,location))
+				reagents.reaction(splashturf)
+				for(var/atom/A in splashturf)
+					reagents.reaction(A)
+
+			if(molotov > 1)
+				location.hotspot_expose(700, 5)
+
+			visible_message("\red The [src.name] breaks!","You hear a smash.")
+			spawn(10)
+				del(src)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/proc/smash(mob/living/target as mob, mob/living/user as mob)
-
 	//Creates a shattering noise and replaces the bottle with a broken_bottle
 	user.drop_item()
 	var/obj/item/weapon/broken_bottle/B = new /obj/item/weapon/broken_bottle(user.loc)

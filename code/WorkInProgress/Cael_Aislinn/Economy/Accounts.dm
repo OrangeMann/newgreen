@@ -185,43 +185,44 @@ var/global/list/all_money_accounts = list()
 				dat += "<i>New accounts are automatically assigned a secret number and pin, which are printed separately in a sealed package.</i><br>"
 				dat += "<input type='submit' value='Create'><br>"
 				dat += "</form>"
-			else
-				if(detailed_account_view)
-					dat += "<br>"
-					dat += "<a href='?src=\ref[src];choice=view_accounts_list;'>Return to accounts list</a><hr>"
-					dat += "<b>Account number:</b> #[detailed_account_view.account_number]<br>"
-					dat += "<b>Account holder:</b> [detailed_account_view.owner_name]<br>"
-					dat += "<b>Account balance:</b> $[detailed_account_view.money]<br>"
-					dat += "<table border=1 style='width:100%'>"
+
+			else if(detailed_account_view)
+				dat += "<br>"
+				dat += "<a href='?src=\ref[src];choice=view_accounts_list;'>Return to accounts list</a><hr>"
+				dat += "<b>Account number:</b> #[detailed_account_view.account_number]<br>"
+				dat += "<b>Account holder:</b> [detailed_account_view.owner_name]<br>"
+				dat += "<b>Account balance:</b> $[detailed_account_view.money]<br>"
+				dat += "<table border=1 style='width:100%'>"
+				dat += "<tr>"
+				dat += "<td><b>Date</b></td>"
+				dat += "<td><b>Time</b></td>"
+				dat += "<td><b>Target</b></td>"
+				dat += "<td><b>Purpose</b></td>"
+				dat += "<td><b>Value</b></td>"
+				dat += "<td><b>Source terminal ID</b></td>"
+				dat += "</tr>"
+				for(var/datum/transaction/T in detailed_account_view.transaction_log)
 					dat += "<tr>"
-					dat += "<td><b>Date</b></td>"
-					dat += "<td><b>Time</b></td>"
-					dat += "<td><b>Target</b></td>"
-					dat += "<td><b>Purpose</b></td>"
-					dat += "<td><b>Value</b></td>"
-					dat += "<td><b>Source terminal ID</b></td>"
+					dat += "<td>[T.date]</td>"
+					dat += "<td>[T.time]</td>"
+					dat += "<td>[T.target_name]</td>"
+					dat += "<td>[T.purpose]</td>"
+					dat += "<td>$[T.amount]</td>"
+					dat += "<td>[T.source_terminal]</td>"
 					dat += "</tr>"
-					for(var/datum/transaction/T in detailed_account_view.transaction_log)
-						dat += "<tr>"
-						dat += "<td>[T.date]</td>"
-						dat += "<td>[T.time]</td>"
-						dat += "<td>[T.target_name]</td>"
-						dat += "<td>[T.purpose]</td>"
-						dat += "<td>$[T.amount]</td>"
-						dat += "<td>[T.source_terminal]</td>"
-						dat += "</tr>"
-					dat += "</table>"
-				else
-					dat += "<a href='?src=\ref[src];choice=create_account;'>Create new account</a><br><br>"
-					dat += "<table border=1 style='width:100%'>"
-					for(var/i=1, i<=all_money_accounts.len, i++)
-						var/datum/money_account/D = all_money_accounts[i]
-						dat += "<tr>"
-						dat += "<td>#[D.account_number]</td>"
-						dat += "<td>[D.owner_name]</td>"
-						dat += "<td><a href='?src=\ref[src];choice=view_account_detail;account_index=[i]'>View in detail</a></td>"
-						dat += "</tr>"
-					dat += "</table>"
+				dat += "</table>"
+
+			else
+				dat += "<a href='?src=\ref[src];choice=create_account;'>Create new account</a><br><br>"
+				dat += "<table border=1 style='width:100%'>"
+				for(var/i=1, i<=all_money_accounts.len, i++)
+					var/datum/money_account/D = all_money_accounts[i]
+					dat += "<tr>"
+					dat += "<td>#[D.account_number]</td>"
+					dat += "<td>[D.owner_name]</td>"
+					dat += "<td><a href='?src=\ref[src];choice=view_account_detail;account_index=[i]'>View in detail</a></td>"
+					dat += "</tr>"
+				dat += "</table>"
 
 		user << browse(dat,"window=account_db;size=700x650")
 	else
@@ -243,6 +244,8 @@ var/global/list/all_money_accounts = list()
 		..()
 
 /obj/machinery/account_database/Topic(var/href, var/href_list)
+	if(..())
+		return
 
 	if(href_list["toggle_activated"])
 		activated = !activated

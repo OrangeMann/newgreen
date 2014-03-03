@@ -501,45 +501,51 @@ datum
 			result = "virusfood"
 			required_reagents = list("water" = 5, "milk" = 5, "oxygen" = 5)
 			result_amount = 15
-/*
+
 		mix_virus
 			name = "Mix Virus"
 			id = "mixvirus"
 			result = "blood"
 			required_reagents = list("virusfood" = 5)
-			required_catalysts = list("blood")
-			var/level = 2
+			required_catalysts = list("blood" = 5)
+			var/level_min = 0
+			var/level_max = 2
 
 			on_reaction(var/datum/reagents/holder, var/created_volume)
-
 				var/datum/reagent/blood/B = locate(/datum/reagent/blood) in holder.reagent_list
 				if(B && B.data)
 					var/datum/disease/advance/D = locate(/datum/disease/advance) in B.data["viruses"]
 					if(D)
-						D.Evolve(level - rand(0, 1))
+						D.Evolve(level_min, level_max)
 
 
 			mix_virus_2
-
 				name = "Mix Virus 2"
 				id = "mixvirus2"
 				required_reagents = list("mutagen" = 5)
-				level = 4
+				level_min = 2
+				level_max = 4
+
+			mix_virus_3
+				name = "Mix Virus 3"
+				id = "mixvirus3"
+				required_reagents = list("plasma" = 5)
+				level_min = 4
+				level_max = 6
 
 			rem_virus
-
 				name = "Devolve Virus"
 				id = "remvirus"
-				required_reagents = list("synaptizine" = 5)
+				required_reagents = list("synaptizine" = 1)
+				required_catalysts = list("blood" = 1)
 
 				on_reaction(var/datum/reagents/holder, var/created_volume)
-
 					var/datum/reagent/blood/B = locate(/datum/reagent/blood) in holder.reagent_list
 					if(B && B.data)
 						var/datum/disease/advance/D = locate(/datum/disease/advance) in B.data["viruses"]
 						if(D)
 							D.Devolve()
-*/
+
 		condensedcapsaicin
 			name = "Condensed Capsaicin"
 			id = "condensedcapsaicin"

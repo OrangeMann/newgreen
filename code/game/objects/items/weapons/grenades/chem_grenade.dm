@@ -44,7 +44,6 @@
 				C.throw_mode_on()
 
 	attackby(obj/item/weapon/W as obj, mob/user as mob)
-
 		if(istype(W,/obj/item/device/assembly_holder) && (!stage || stage==1) && path != 2)
 			var/obj/item/device/assembly_holder/det = W
 			if(istype(det.a_left,det.a_right.type) || (!isigniter(det.a_left) && !isigniter(det.a_right)))
@@ -169,6 +168,26 @@
 			crit_fail = 1
 			for(var/obj/item/weapon/reagent_containers/glass/G in beakers)
 				G.loc = get_turf(src.loc)*/
+
+		if(detonator)
+			usr << "With attached [detonator.name]"
+
+
+/obj/item/weapon/grenade/chem_grenade/HasProximity(atom/movable/AM as mob|obj)
+	if(detonator)
+		detonator.HasProximity(AM)
+
+/obj/item/weapon/grenade/chem_grenade/HasEntered(atom/movable/AM as mob|obj) //for mousetraps
+	if(detonator)
+		detonator.HasEntered(AM)
+
+/obj/item/weapon/grenade/chem_grenade/on_found(mob/finder as mob) //for mousetraps
+	if(detonator)
+		return detonator.on_found(finder)
+
+/obj/item/weapon/grenade/chem_grenade/hear_talk(mob/living/M, msg)
+	if(detonator)
+		detonator.hear_talk(M, msg)
 
 
 /obj/item/weapon/grenade/chem_grenade/large

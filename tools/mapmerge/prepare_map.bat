@@ -1,4 +1,4 @@
-set MAPFILE=fernflower_1.3.dmm
+set MAPFILE=fernflower_classic.dmm
 
 cd ../../maps
 copy %MAPFILE% %MAPFILE%.backup

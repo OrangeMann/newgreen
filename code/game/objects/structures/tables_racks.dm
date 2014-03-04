@@ -20,31 +20,25 @@
 	layer = 2.8
 	throwpass = 1	//You can throw objects over this, despite it's density.")
 	var/parts = /obj/item/weapon/table_parts
-	var/dented = 0
-	var/tabletype = 1
-/obj/structure/table/New()
-	..()
-	for(var/obj/structure/table/T in src.loc)
-		if(T != src)
-			switch(T.tabletype)					//Bug'o'fix. Wood table must spawn WOOD PARTS, right?
-				if (1)
-					new /obj/item/weapon/table_parts/( get_turf(src.loc), 2 )
-				if (2)
-					new /obj/item/weapon/table_parts/reinforced( get_turf(src.loc), 2 )
-				if (3)
-					new /obj/item/weapon/table_parts/wood( get_turf(src.loc), 2 )
-			del(T)
-	update_icon()
+	var/flipped = 0
+	var/health = 100
+
+/obj/structure/table/proc/update_adjacent()
 	for(var/direction in list(1,2,4,8,5,6,9,10))
 		if(locate(/obj/structure/table,get_step(src,direction)))
 			var/obj/structure/table/T = locate(/obj/structure/table,get_step(src,direction))
 			T.update_icon()
 
+/obj/structure/table/New()
+	..()
+	for(var/obj/structure/table/T in src.loc)
+		if(T != src)
+			del(T)
+	update_icon()
+	update_adjacent()
+
 /obj/structure/table/Del()
-	for(var/direction in list(1,2,4,8,5,6,9,10))
-		if(locate(/obj/structure/table,get_step(src,direction)))
-			var/obj/structure/table/T = locate(/obj/structure/table,get_step(src,direction))
-			T.update_icon()
+	update_adjacent()
 	..()
 
 /obj/structure/table/proc/destroy()
@@ -52,9 +46,36 @@
 	density = 0
 	del(src)
 
+/obj/structure/rack/proc/destroy()
+	new parts(loc)
+	density = 0
+	del(src)
 
 /obj/structure/table/update_icon()
 	spawn(2) //So it properly updates when deleting
+
+		if(flipped)
+			var/type = 0
+			var/tabledirs = 0
+			for(var/direction in list(turn(dir,90), turn(dir,-90)) )
+				var/obj/structure/table/T = locate(/obj/structure/table,get_step(src,direction))
+				if (T && T.flipped && T.dir == src.dir)
+					type++
+					tabledirs |= direction
+			var/base = "table"
+			if (istype(src, /obj/structure/table/woodentable))
+				base = "wood"
+			if (istype(src, /obj/structure/table/reinforced))
+				base = "rtable"
+
+			icon_state = "[base]flip[type]"
+			if (type==1)
+				if (tabledirs & turn(dir,90))
+					icon_state = icon_state+"-"
+				if (tabledirs & turn(dir,-90))
+					icon_state = icon_state+"+"
+			return 1
+
 		var/dir_sum = 0
 		for(var/direction in list(1,2,4,8,5,6,9,10))
 			var/skip_sum = 0
@@ -85,7 +106,8 @@
 					skip_sum = 1
 					continue
 			if(!skip_sum) //means there is a window between the two tiles in this direction
-				if(locate(/obj/structure/table,get_step(src,direction)))
+				var/obj/structure/table/T = locate(/obj/structure/table,get_step(src,direction))
+				if(T && !T.flipped)
 					if(direction <5)
 						dir_sum += direction
 					else
@@ -238,20 +260,10 @@
 		else
 	return
 
-/obj/structure/table/examine()
-	set src in oview()
-	..()
-	if(dented)
-		usr << "It looks to have [dented] [prob(30) ? "face shaped " : ""] dents in it."
 
 /obj/structure/table/blob_act()
 	if(prob(75))
 		destroy()
-
-
-/obj/structure/table/hand_p(mob/user as mob)
-	return src.attack_paw(user)
-
 
 /obj/structure/table/attack_paw(mob/user)
 	if(HULK in user.mutations)
@@ -262,7 +274,6 @@
 
 /obj/structure/table/attack_alien(mob/user)
 	visible_message("<span class='danger'>[user] slices [src] apart!</span>")
-	destroy()
 
 /obj/structure/table/attack_animal(mob/living/simple_animal/user)
 	if(user.wall_smash)
@@ -277,18 +288,69 @@
 		user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
 		destroy()
 
+//obj/structure/table/attack_tk() // no telehulk sorry
+	return
 
 /obj/structure/table/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group || (height==0)) return 1
-
+	if(istype(mover,/obj/item/projectile))
+		return (check_cover(mover,target))
+	if(locate(/obj/structure/table, mover.loc))
+		return 1
 	if(istype(mover) && mover.checkpass(PASSTABLE))
 		return 1
-	else
+	if (flipped)
+		if (get_dir(loc, target) == dir)
+			return !density
+		else
+			return 1
+	return 0
+/*
+/obj/structure/table/Bump()
+	if(locate(/obj/structure/table, usr.loc))
 		return 0
+	return ..()
+*/
+//checks if projectile 'P' from turf 'from' can hit whatever is behind the table. Returns 1 if it can, 0 if bullet stops.
+/obj/structure/table/proc/check_cover(obj/item/projectile/P, turf/from)
+	var/turf/cover = flipped ? get_turf(src) : get_step(loc, get_dir(from, loc))
+	if (get_dist(P.starting, loc) <= 1) //Tables won't help you if people are THIS close
+		return 1
+	if (get_turf(P.original) == cover)
+		var/chance = 20
+		if (ismob(P.original))
+			var/mob/M = P.original
+			if (M.lying)
+				chance += 20				//Lying down lets you catch less bullets
+		if(flipped)
+			if(get_dir(loc, from) == dir)	//Flipped tables catch mroe bullets
+				chance += 20
+			else
+				return 1					//But only from one side
+		if(prob(chance))
+			health -= P.damage/2
+			if (health > 0)
+				visible_message("<span class='warning'>[P] hits \the [src]!</span>")
+				return 0
+			else
+				visible_message("<span class='warning'>[src] breaks down!</span>")
+				destroy()
+				return 1
+	return 1
 
+/obj/structure/table/CheckExit(atom/movable/O as mob|obj, target as turf)
+	if(locate(/obj/structure/table, O.loc))
+		return 1
+	if(istype(O) && O.checkpass(PASSTABLE))
+		return 1
+	if (flipped)
+		if (get_dir(loc, target) == dir)
+			return !density
+		else
+			return 1
+	return 1
 
 /obj/structure/table/MouseDrop_T(obj/O as obj, mob/user as mob)
-
 	if ((!( istype(O, /obj/item/weapon) ) || user.get_active_hand() != O))
 		return
 	if(isrobot(user))
@@ -299,59 +361,27 @@
 	return
 
 
-/obj/structure/table/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/table/attackby(obj/item/W as obj, mob/user as mob)
+	if (!W) return
 	if (istype(W, /obj/item/weapon/grab) && get_dist(src,user)<2)
 		var/obj/item/weapon/grab/G = W
-		if(G.state<2)
-			if(ishuman(G.affecting))
-				G.affecting.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been smashed on a table by [G.assailant.name] ([G.assailant.ckey])</font>")
-				G.assailant.attack_log += text("\[[time_stamp()]\] <font color='red'>Smashed [G.affecting.name] ([G.affecting.ckey]) on a table.</font>")
-
-				//log_admin("ATTACK: [G.assailant] ([G.assailant.ckey]) smashed [G.affecting] ([G.affecting.ckey]) on a table.", 2)
-				message_admins("ATTACK: [G.assailant] ([G.assailant.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[G]'>JMP</A>) smashed [G.affecting] ([G.affecting.ckey]) on a table.", 2)
-				log_attack("[G.assailant] ([G.assailant.ckey]) smashed [G.affecting] ([G.affecting.ckey]) on a table.")
-
-				var/mob/living/carbon/human/H = G.affecting
-				var/datum/organ/external/affecting = H.get_organ("head")
-				if(prob(25))
-					add_blood(G.affecting, 1) //Forced
-					affecting.take_damage(rand(10,15), 0)
-					H.Weaken(2)
-					if(prob(20)) // One chance in 20 to DENT THE TABLE
-						affecting.take_damage(rand(5,10), 0) //Extra damage
-						if(dented)
-							G.assailant.visible_message("\red \The [G.assailant] smashes \the [H]'s head on \the [src] with enough force to further deform \the [src]!\nYou wish you could unhear that sound.",\
-							"\red You smash \the [H]'s head on \the [src] with enough force to leave another dent!\n[prob(50)?"That was a satisfying noise." : "That sound will haunt your nightmares"]",\
-							"\red You hear the nauseating crunch of bone and gristle on solid metal and the squeal of said metal deforming.")
-						else
-							G.assailant.visible_message("\red \The [G.assailant] smashes \the [H]'s head on \the [src] so hard it left a dent!\nYou wish you could unhear that sound.",\
-							"\red You smash \the [H]'s head on \the [src] with enough force to leave a dent!\n[prob(5)?"That was a satisfying noise." : "That sound will haunt your nightmares"]",\
-							"\red You hear the nauseating crunch of bone and gristle on solid metal and the squeal of said metal deforming.")
-						dented++
-					else if(prob(50))
-						G.assailant.visible_message("\red [G.assailant] smashes \the [H]'s head on \the [src], [H.get_visible_gender() == MALE ? "his" : H.get_visible_gender() == FEMALE ? "her" : "their"] bone and cartilage making a loud crunch!",\
-						"\red You smash \the [H]'s head on \the [src], [H.get_visible_gender() == MALE ? "his" : H.get_visible_gender() == FEMALE ? "her" : "their"] bone and cartilage making a loud crunch!",\
-						"\red You hear the nauseating crunch of bone and gristle on solid metal, the noise echoing through the room.")
-					else
-						G.assailant.visible_message("\red [G.assailant] smashes \the [H]'s head on \the [src], [H.get_visible_gender() == MALE ? "his" : H.get_visible_gender() == FEMALE ? "her" : "their"] nose smashed and face bloodied!",\
-						"\red You smash \the [H]'s head on \the [src], [H.get_visible_gender() == MALE ? "his" : H.get_visible_gender() == FEMALE ? "her" : "their"] nose smashed and face bloodied!",\
-						"\red You hear the nauseating crunch of bone and gristle on solid metal and the gurgling gasp of someone who is trying to breathe through their own blood.")
+		if (istype(G.affecting, /mob/living))
+			var/mob/living/M = G.affecting
+			if (G.state < 2)
+				if(user.a_intent == "hurt")
+					if (prob(15))	M.Weaken(5)
+					M.apply_damage(8,def_zone = "head")
+					visible_message("\red [G.assailant] slams [G.affecting]'s face against \the [src]!")
+					playsound(src.loc, 'sound/weapons/tablehit1.ogg', 50, 1)
 				else
-					affecting.take_damage(rand(5,10), 0)
-					G.assailant.visible_message("\red [G.assailant] smashes \the [H]'s head on \the [src]!",\
-					"\red You smash \the [H]'s head on \the [src]!",\
-					"\red You hear the nauseating crunch of bone and gristle on solid metal.")
-				H.UpdateDamageIcon()
-				H.updatehealth()
-				playsound(src.loc, 'tablehit1.ogg', 50, 1, -3)
+					user << "\red You need a better grip to do that!"
+					return
+			else
+				G.affecting.loc = src.loc
+				G.affecting.Weaken(5)
+				visible_message("\red [G.assailant] puts [G.affecting] on \the [src].")
+				del(W)
 			return
-		G.affecting.loc = src.loc
-		G.affecting.Weaken(5)
-		for(var/mob/O in viewers(world.view, src))
-			if (O.client)
-				O << "\red [G.assailant] puts [G.affecting] on the table."
-		del(W)
-		return
 
 	if (istype(W, /obj/item/weapon/wrench))
 		user << "\blue Now disassembling table"
@@ -376,28 +406,145 @@
 	user.drop_item(src)
 	return
 
+/obj/structure/table/proc/straight_table_check(var/direction)
+	var/obj/structure/table/T
+	for(var/angle in list(-90,90))
+		T = locate() in get_step(src.loc,turn(direction,angle))
+		if(T && !T.flipped)
+			return 0
+	T = locate() in get_step(src.loc,direction)
+	if (!T || T.flipped)
+		return 1
+	if (istype(T,/obj/structure/table/reinforced/))
+		var/obj/structure/table/reinforced/R = T
+		if (R.status == 2)
+			return 0
+	return T.straight_table_check(direction)
+
+/obj/structure/table/verb/can_touch(var/mob/user)
+	if (!user)
+		return 0
+	if (user.stat)	//zombie goasts go away
+		return 0
+	if (issilicon(user))
+		user << "<span class='notice'>You need hands for this.</span>"
+		return 0
+	return 1
+
+/obj/structure/table/verb/do_flip()
+	set name = "Flip table"
+	set desc = "Flips a non-reinforced table"
+	set category = "Object"
+	set src in oview(1)
+	if(ismouse(usr))
+		return
+	if (!can_touch(usr))
+		return
+	if(!flip(get_cardinal_dir(usr,src)))
+		usr << "<span class='notice'>It won't budge.</span>"
+	else
+		usr.visible_message("<span class='warning'>[usr] flips \the [src]!</span>")
+		return
+
+/obj/structure/table/proc/unflipping_check(var/direction)
+	for(var/mob/M in oview(src,0))
+		return 0
+
+	var/list/L = list()
+	if(direction)
+		L.Add(direction)
+	else
+		L.Add(turn(src.dir,-90))
+		L.Add(turn(src.dir,90))
+	for(var/new_dir in L)
+		var/obj/structure/table/T = locate() in get_step(src.loc,new_dir)
+		if(T)
+			if(T.flipped && T.dir == src.dir && !T.unflipping_check(new_dir))
+				return 0
+	return 1
+
+/obj/structure/table/proc/do_put()
+	set name = "Put table back"
+	set desc = "Puts flipped table back"
+	set category = "Object"
+	set src in oview(1)
+
+	if (!can_touch(usr))
+		return
+
+	if (!unflipping_check())
+		usr << "<span class='notice'>It won't budge.</span>"
+		return
+	unflip()
+
+/obj/structure/table/proc/flip(var/direction)
+	if( !straight_table_check(turn(direction,90)) || !straight_table_check(turn(direction,-90)) )
+		return 0
+
+	verbs -=/obj/structure/table/verb/do_flip
+	verbs +=/obj/structure/table/proc/do_put
+
+	var/list/targets = list(get_step(src,dir),get_step(src,turn(dir, 45)),get_step(src,turn(dir, -45)))
+	for (var/atom/movable/A in get_turf(src))
+		if (!A.anchored)
+			spawn(0)
+				A.throw_at(pick(targets),1,1)
+
+	dir = direction
+	if(dir != NORTH)
+		layer = 5
+	flipped = 1
+	flags |= ON_BORDER
+	for(var/D in list(turn(direction, 90), turn(direction, -90)))
+		var/obj/structure/table/T = locate() in get_step(src,D)
+		if(T && !T.flipped)
+			T.flip(direction)
+	update_icon()
+	update_adjacent()
+
+	return 1
+
+/obj/structure/table/proc/unflip()
+	verbs -=/obj/structure/table/proc/do_put
+	verbs +=/obj/structure/table/verb/do_flip
+
+	layer = initial(layer)
+	flipped = 0
+	flags &= ~ON_BORDER
+	for(var/D in list(turn(dir, 90), turn(dir, -90)))
+		var/obj/structure/table/T = locate() in get_step(src.loc,D)
+		if(T && T.flipped && T.dir == src.dir)
+			T.unflip()
+	update_icon()
+	update_adjacent()
+
+	return 1
 
 /*
  * Wooden tables
  */
 /obj/structure/table/woodentable
-	tabletype = 3
 	name = "wooden table"
 	desc = "Do not apply fire to this. Rumour says it burns easily."
 	icon_state = "wood_table"
 	parts = /obj/item/weapon/table_parts/wood
-
+	health = 50
 /*
  * Reinforced tables
  */
 /obj/structure/table/reinforced
-	tabletype = 2
 	name = "reinforced table"
 	desc = "A version of the four legged table. It is stronger."
 	icon_state = "reinf_table"
+	health = 200
 	var/status = 2
 	parts = /obj/item/weapon/table_parts/reinforced
 
+/obj/structure/table/reinforced/flip(var/direction)
+	if (status == 2)
+		return 0
+	else
+		return ..()
 
 /obj/structure/table/reinforced/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/weldingtool))
@@ -438,6 +585,7 @@
 	flags = FPRINT
 	anchored = 1.0
 	throwpass = 1	//You can throw objects over this, despite it's density.
+	var/parts = /obj/item/weapon/rack_parts
 
 /obj/structure/rack/ex_act(severity)
 	switch(severity)
@@ -465,14 +613,8 @@
 	if(air_group || (height==0)) return 1
 	if(src.density == 0) //Because broken racks -Agouri |TODO: SPRITE!|
 		return 1
-	if(istype(mover))
-		if (mover.checkpass(PASSTABLE))
-			return 1
-		else
-			for (var/obj/structure/table/T in mover.loc.contents)
-				if (istype(T))
-					return 1
-			return 0
+	if(istype(mover) && mover.checkpass(PASSTABLE))
+		return 1
 	else
 		return 0
 
@@ -506,38 +648,37 @@
 	if(HULK in user.mutations)
 		visible_message("<span class='danger'>[user] smashes [src] apart!</span>")
 		user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
-		new parts(loc)
-		density = 0
-		del(src)
+		destroy()
 
 	if(usr.a_intent == "disarm" && get_dist(usr, src) <= 1 && !usr.buckled)
-		if(prob(70))
+		if(prob(60))
 			visible_message("<span class='notice'>[user] climbs on the [src].</span>")
 			usr.loc = src.loc
+			pass_flags |= PASSTABLE
+//			spawn(60)
+
 		else
-			sleep(5)
+			sleep(10)
 			visible_message("<span class='warning'>[user] slipped off the edge of the [src].</span>")
 			usr.weakened += 3
+
 
 /obj/structure/rack/attack_paw(mob/user)
 	if(HULK in user.mutations)
 		user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
 		visible_message("<span class='danger'>[user] smashes [src] apart!</span>")
-		new /obj/item/weapon/rack_parts(loc)
-		density = 0
-		del(src)
+		destroy()
 
 
 /obj/structure/rack/attack_alien(mob/user)
 	visible_message("<span class='danger'>[user] slices [src] apart!</span>")
-	new /obj/item/weapon/rack_parts(loc)
-	density = 0
-	del(src)
+	destroy()
 
 
 /obj/structure/rack/attack_animal(mob/living/simple_animal/user)
 	if(user.wall_smash)
 		visible_message("<span class='danger'>[user] smashes [src] apart!</span>")
-		new /obj/item/weapon/rack_parts(loc)
-		density = 0
-		del(src)
+		destroy()
+
+//obj/structure/rack/attack_tk() // no telehulk sorry
+	return

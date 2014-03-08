@@ -7,8 +7,8 @@
 	origin_tech = "magnets=1;biotech=1"
 
 	var/scanning = 0
-
 	var/health_scan
+	var/alarm_health = 0
 
 	proc
 		toggle_scan()
@@ -31,6 +31,17 @@
 		update_icon()
 		return secured
 
+	attackby(obj/item/weapon/W as obj, mob/user as mob)
+		if(istype(W, /obj/item/device/multitool))
+			if(alarm_health == 0)
+				alarm_health = -90
+				user.show_message("You toggle [src] to \"detect death\" mode.")
+			else
+				alarm_health = 0
+				user.show_message("You toggle [src] to \"detect critical state\" mode.")
+			return
+		else
+			return ..()
 
 	sense()
 		if(!secured|| !scanning || cooldown > 0)	return 0
@@ -50,7 +61,7 @@
 
 		if(M)
 			health_scan = M.health
-			if(health_scan < 0)
+			if(health_scan <= alarm_health)
 				sense()
 				scanning = 0
 			return

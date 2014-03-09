@@ -502,9 +502,12 @@
 		temp = "Updating local R&D database..."
 		src.updateUsrDialog()
 		sleep(30) //only sleep if called by user
+	var/found = 0
+
 	for(var/obj/machinery/computer/rdconsole/RDC in get_area(src))
 		if(!RDC.sync)
 			continue
+		found++
 		for(var/datum/tech/T in RDC.files.known_tech)
 			files.AddTech2Known(T)
 		for(var/datum/design/D in RDC.files.known_designs)
@@ -519,6 +522,11 @@
 			src.updateUsrDialog()
 		if(i || tech_output)
 			src.visible_message("\icon[src] <b>[src]</b> beeps, \"Succesfully synchronized with R&D server. New data processed.\"")
+	if(!found)
+		temp = "Failed to connect R&D server.<br>"
+		temp += "<a href='?src=\ref[src];clear_temp=1'>Return</a>"
+		src.updateUsrDialog()
+		src.visible_message("\icon[src] <b>[src]</b> beeps, \"Error! Failed to connect R&D server.\"")
 	return
 
 /obj/machinery/mecha_part_fabricator/proc/get_resource_cost_w_coeff(var/obj/item/part as obj,var/resource as text, var/roundto=1)

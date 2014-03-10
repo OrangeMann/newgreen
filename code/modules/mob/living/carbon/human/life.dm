@@ -21,6 +21,8 @@
 #define COLD_GAS_DAMAGE_LEVEL_2 1.5 //Amount of damage applied when the current breath's temperature passes the 200K point
 #define COLD_GAS_DAMAGE_LEVEL_3 3 //Amount of damage applied when the current breath's temperature passes the 120K point
 
+var/global/HUNGER_FACTOR = 0.34
+
 /mob/living/carbon/human
 	var/oxygen_alert = 0
 	var/toxins_alert = 0
@@ -29,6 +31,7 @@
 	var/prev_gender = null // Debug for plural genders
 	var/temperature_alert = 0
 	var/in_stasis = 0
+
 
 
 /mob/living/carbon/human/Life()
@@ -729,7 +732,7 @@
 		switch(bodytemperature)
 			if(-INFINITY to 260.15) //260.15 is 310.15 - 50, the temperature where you start to feel effects.
 				if(nutrition >= 0.2) //If we are very, very cold we'll use up quite a bit of nutriment to heat us up.
-					nutrition -= 0.2
+					nutrition -= 0.5
 				var/recovery_amt = max((body_temperature_difference / BODYTEMP_AUTORECOVERY_DIVISOR), BODYTEMP_AUTORECOVERY_MINIMUM)
 //				log_debug("Cold. Difference = [body_temperature_difference]. Recovering [recovery_amt]")
 				bodytemperature += recovery_amt
@@ -988,33 +991,37 @@
 				overeatduration -= 2 //doubled the unfat rate
 
 		// Начало злоебучего кода голода. Подсветка синтаксиса даже выделяет его коричневым!
-		/*if(nutrition > 50)
-			adjustBrainLoss(-68)
-			if(getBrainLoss() == 1)
-				src << "<font size='3' color='green'><b>You feel yourself better and beast inside gone to deepest part of your mind</b></font>"*/
-		if(nutrition < 50)
-			if(prob(20))
-				src << pick("\red Food... i need some food.. Horrible pain in stomack...", "\red I'm starving...", "\red I feel horrible! Food...")
+		switch(nutrition)
+			if(300 to 400)
+				nutritionLoss -=10
+			if(200 to 299)
+				nutritionLoss -=5
+			if(30 to 99)
+				if(prob(10))
+					nutritionLoss +=0.2
+			if(2 to 29)
+				if(prob(15))
+					nutritionLoss += 0.7
+					if(prob(5))
+						src << "\red You have fallen unconcious from starvation"
+						src.AdjustParalysis(1)
+			if(0 to 1)
+				if(prob(20))
+					nutritionLoss +=2.0
+					if(prob(5))
+						src.AdjustParalysis(1)
 
-		if(nutrition < 30)
+		if(nutrition < 100)
 			if(prob(5))
-				src << "\red You have fallen unconcious from starvation"
-				src.AdjustParalysis(1)
-/*		if(nutrition < 1)
-			if(getBrainLoss() < 70)
-				adjustBrainLoss(1)
-				if(getBrainLoss() == 30)
-					src << "<font size='3' color='red'><b>You start loosing your humanity</b></font>"
-				if(getBrainLoss() == 40)
-					src << "<font size='3' color='red'><b>You feel beast within weaking up</b></font>"
-				if(getBrainLoss() == 50)
-					src << "<font size='3' color='red'><b>You feel beast within taking control of you</b></font>"
-				if(getBrainLoss() == 69)
-					src << "<font size='3' color='red'><b>BEAST INSIDE WOKE UP! YOU WANT TO EAT EVERY LIVING THING YOU SEE</b></font>"
-			else
-				if(prob(30))
-					adjustCloneLoss(1)*/
+				src << pick("\red Food... i need some food.. Horrible pain in stomach...", "\red I'm starving...", "\red I feel horrible! Food...")
+
+		if(nutritionLoss<0)
+			nutritionLoss = 0
+
+		if(!client)
+			nutritionLoss = nutritionLoss/2
 		// Конец злоебучего кода голода.
+
 
 		if(nutrition > 1)
 			if(overeatduration > 1)
@@ -1419,7 +1426,7 @@
 						if(2)	healths.icon_state = "health7"
 						else
 							//switch(health - halloss)
-							switch(100 - traumatic_shock)
+							switch(health - traumatic_shock)
 								if(100 to INFINITY)		healths.icon_state = "health0"
 								if(80 to 100)			healths.icon_state = "health1"
 								if(60 to 80)			healths.icon_state = "health2"

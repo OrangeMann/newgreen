@@ -354,6 +354,11 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 		message_admins("[key_name_admin(src)] has deleted all instances of [hsbitem].", 0)
 	feedback_add_details("admin_verb","DELA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
+/client/proc/change_hunger_factor()
+	set category = "Debug"
+	set name = "Change Hunger Factor"
+	HUNGER_FACTOR = input(usr,"Enter New Volume","Change Hunger Factor",HUNGER_FACTOR) as num
+
 /client/proc/cmd_debug_make_powernets()
 	set category = "Debug"
 	set name = "Make Powernets"

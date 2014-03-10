@@ -25,6 +25,7 @@
 
 	var/underwear = 1	//Which underwear the player wants
 	var/backbag = 2		//Which backpack type the player has chosen. Nothing, Satchel or Backpack.
+	var/nutritionLoss = 0
 
 	//Equipment slots
 	var/obj/item/wear_suit = null

@@ -469,15 +469,15 @@
 						H.Weaken(2)
 						if(prob(20)) // One chance in 20 to DENT THE TABLE
 							affecting.take_damage(rand(0,5), 0) //Extra damage
-/*							if(dented)
-							G.assailant.visible_message("\red \The [G.assailant] smashes \the [H]'s head on \the [src] with enough force to further deform \the [src]!\nYou wish you could unhear that sound.",\
+							if(dented)
+								G.assailant.visible_message("\red \The [G.assailant] smashes \the [H]'s head on \the [src] with enough force to further deform \the [src]!\nYou wish you could unhear that sound.",\
 								"\red You smash \the [H]'s head on \the [src] with enough force to leave another dent!\n\black [prob(50)?"That was a satisfying noise." : "That sound will haunt your nightmares"]",\
 								"\red You hear the nauseating crunch of bone and gristle on solid metal and the squeal of said metal deforming.")
-							else*/
-							G.assailant.visible_message("\red \The [G.assailant] smashes \the [H]'s head on \the [src] so hard it left a dent!\nYou wish you could unhear that sound.",\
+							else
+								G.assailant.visible_message("\red \The [G.assailant] smashes \the [H]'s head on \the [src] so hard it left a dent!\nYou wish you could unhear that sound.",\
 								"\red You smash \the [H]'s head on \the [src] with enough force to leave a dent!\n\black [prob(5)?"That was a satisfying noise." : "That sound will haunt your nightmares"]",\
 								"\red You hear the nauseating crunch of bone and gristle on solid metal and the squeal of said metal deforming.")
-//							dented++
+							dented++
 						else if(prob(50))
 							G.assailant.visible_message("\red [G.assailant] smashes \the [H]'s head on \the [src], [H.get_visible_gender() == MALE ? "his" : H.get_visible_gender() == FEMALE ? "her" : "their"] bone and cartilage making a loud crunch!",\
 							"\red You smash \the [H]'s head on \the [src], [H.get_visible_gender() == MALE ? "his" : H.get_visible_gender() == FEMALE ? "her" : "their"] bone and cartilage making a loud crunch!",\

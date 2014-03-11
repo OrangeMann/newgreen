@@ -123,7 +123,8 @@
 						/obj/item/borg/upgrade/restart,
 						/obj/item/borg/upgrade/vtec,
 						/obj/item/borg/upgrade/tasercooler,
-						/obj/item/borg/upgrade/jetpack
+						/obj/item/borg/upgrade/jetpack,
+						/obj/item/borg/upgrade/vanity,
 						),
 
 

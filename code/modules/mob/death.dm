@@ -8,6 +8,8 @@
 	icon = null
 	invisibility = 101
 
+	log_game("[src] ([src.ckey]) was gibbed")
+
 	animation = new(loc)
 	animation.icon_state = "blank"
 	animation.icon = 'icons/mob/mob.dmi'
@@ -32,6 +34,8 @@
 	canmove = 0
 	icon = null
 	invisibility = 101
+
+	log_game("[src] ([src.ckey]) turned into dust")
 
 	animation = new(loc)
 	animation.icon_state = "blank"

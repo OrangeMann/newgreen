@@ -591,6 +591,7 @@
 		O.adjustOxyLoss(M.getOxyLoss())
 		O.stat = M.stat
 		O.a_intent = "hurt"
+		O.attack_log = M.attack_log
 		for (var/obj/item/weapon/implant/I in implants)
 			I.loc = O
 			I.implanted = O
@@ -675,6 +676,7 @@
 		O.adjustToxLoss(M.getToxLoss())
 		O.adjustOxyLoss(M.getOxyLoss())
 		O.stat = M.stat
+		O.attack_log = M.attack_log
 		for (var/obj/item/weapon/implant/I in implants)
 			I.loc = O
 			I.implanted = O

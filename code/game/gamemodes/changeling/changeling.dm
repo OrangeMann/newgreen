@@ -74,6 +74,7 @@ var/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","Epsilon"
 		changeling.special_role = "Changeling"
 		forge_changeling_objectives(changeling)
 		greet_changeling(changeling)
+		log_game("[changeling.current.name]([changeling.current.ckey]) now became a Changeling")
 
 	spawn (rand(waittime_l, waittime_h))
 		send_intercept()

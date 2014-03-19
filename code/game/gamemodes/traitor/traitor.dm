@@ -69,6 +69,7 @@
 		spawn(rand(10,100))
 			finalize_traitor(traitor)
 			greet_traitor(traitor)
+			log_game("[traitor.current.name]([traitor.current.ckey]) is a Traitor")
 	modePlayer += traitors
 	spawn (rand(waittime_l, waittime_h))
 		send_intercept()

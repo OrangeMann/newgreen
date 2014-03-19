@@ -66,14 +66,32 @@
 	if (!(istype(usr, /mob/living/carbon/human) || ticker) && ticker.mode.name != "monkey")
 		user << "\red You don't have the dexterity to do this!"
 		return
-	M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been injected with [name] by [user.name] ([user.ckey])</font>")
-	user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [name] to inject [M.name] ([M.ckey])</font>")
 
-	log_attack("[user.name] ([user.ckey]) used the [name] to inject [M.name] ([M.ckey])")
+	//Some text don't want to display text macro "\himself"
+	var/gender_text =""
+	if (M.gender == MALE)
+		gender_text = "himself"
+	else //i.e. female
+		gender_text = "herself"
+
+	var/victim_full = ""
+	var/attacker = ""
+	if (M != user)
+		victim_full = "[M.name] ([M.ckey])"
+		attacker = "[user]"
+	else
+		victim_full = "[gender_text]"
+		attacker = "[gender_text]"
+
+	if (M != user)
+		M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been trying to injected with [name] by [user.name] ([user.ckey])</font>")
+	user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [name] to inject [victim_full]</font>")
+
+	log_attack("[user.name] ([user.ckey]) used the [name] to inject [victim_full]")
 
 	if (user)
-		if (istype(M, /mob/living/carbon/human))
-			if(!inuse)
+		if(!inuse)
+			if (istype(M, /mob/living/carbon/human))
 				var/obj/effect/equip_e/human/O = new /obj/effect/equip_e/human(  )
 				O.source = user
 				O.target = M
@@ -85,38 +103,37 @@
 				spawn(50) // Not the best fix. There should be an failure proc, for /effect/equip_e/, which is called when the first initital checks fail
 					inuse = 0
 				M.requests += O
+				if (M != user)
+					M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been injected with [name] by [user.name] ([user.ckey])</font>")
+				user.attack_log += text("\[[time_stamp()]\] <font color='red'>Injected [victim_full] with [name]</font>")
 				if (dnatype == "se")
-					if (isblockon(getblock(dna, MONKEYBLOCK,3),MONKEYBLOCK) && istype(M, /mob/living/carbon/human))
-						msg_admin_attack("[key_name_admin(user)] injected [key_name_admin(M)] with the [name] \red(MONKEY) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
+					if (isblockon(getblock(dna, MONKEYBLOCK,3),MONKEYBLOCK) || istype(src, /obj/item/weapon/dnainjector/h2m))
+						//msg_admin_attack("[key_name_admin(user)] injected [key_name_admin(M)] with the [name] \red(MONKEY) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
+						message_admins("[user.name] ([user.ckey]) injected [victim_full] with the [name] <font color='red'>(MONKEY)</font> (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)",0)
+						log_attack("[user.name] ([user.ckey]) injected [victim_full]  with the [name] (MONKEY)")
 					else
 	//					message_admins("[key_name_admin(user)] injected [key_name_admin(M)] with the [name]")
-						log_attack("[key_name(user)] injected [key_name(M)] with the [name]")
+						log_attack("[user.name] ([user.ckey]) injected [victim_full]  with the [name]")
 				else
 	//				message_admins("[key_name_admin(user)] injected [key_name_admin(M)] with the [name]")
-					log_attack("[key_name(user)] injected [key_name(M)] with the [name]")
+					log_attack("[user.name] ([user.ckey]) injected [victim_full] with the [name]")
 
 				spawn( 0 )
 					O.process()
 					return
-		else
-			if(!inuse)
+			else
 
-				for(var/mob/O in viewers(M, null))
-					O.show_message(text("\red [] has been injected with [] by [].", M, src, user), 1)
-					//Foreach goto(192)
-				if (!(istype(M, /mob/living/carbon/human) || istype(M, /mob/living/carbon/monkey)))
+				if (!(istype(M, /mob/living/carbon/monkey)))
 					user << "\red Apparently it didn't work."
 					return
-				if (dnatype == "se")
-					if (isblockon(getblock(dna, 14,3),14) && istype(M, /mob/living/carbon/human))
-						message_admins("[key_name_admin(user)] injected [key_name_admin(M)] with the [name] \red(MONKEY)")
-						log_game("[key_name(user)] injected [key_name(M)] with the [name] (MONKEY)")
-					else
-//						message_admins("[key_name_admin(user)] injected [key_name_admin(M)] with the [name]")
-						log_game("[key_name(user)] injected [key_name(M)] with the [name]")
-				else
-//					message_admins("[key_name_admin(user)] injected [key_name_admin(M)] with the [name]")
-					log_game("[key_name(user)] injected [key_name(M)] with the [name]")
+				for(var/mob/O in viewers(M, null))
+					O.show_message(text("\red [] has been injected with [] by [].", M, src, attacker), 1)
+					//Foreach goto(192)
+				if (M != user)
+					M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been injected with [name] by [user.name] ([user.ckey])</font>")
+				user.attack_log += text("\[[time_stamp()]\] <font color='red'>Injected [victim_full] with [name]</font>")
+//				message_admins("[key_name_admin(user)] injected [key_name_admin(M)] with the [name]")
+				log_game("[user.name] ([user.ckey]) injected [victim_full] with the [name]")
 				inuse = 1
 				inject(M, user)//Now we actually do the heavy lifting.
 				spawn(50)

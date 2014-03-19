@@ -61,6 +61,8 @@
 
 		AI_mind.current.verbs += /datum/game_mode/malfunction/proc/takeover
 
+		log_game("[AI_mind.current.name]([AI_mind.current.ckey]) now became a Malfunction")
+
 /*		AI_mind.current.icon_state = "ai-malf"
 		spawn(10)
 			if(alert(AI_mind.current,"Do you want to use an alternative sprite for your real core?",,"Yes","No")=="Yes")

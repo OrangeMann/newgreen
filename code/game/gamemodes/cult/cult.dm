@@ -99,6 +99,7 @@
 		cult_mind.current << "\blue You are a member of the cult!"
 		memoize_cult_objectives(cult_mind)
 		cult_mind.special_role = "Cultist"
+		log_game("[cult_mind.current.name]([cult_mind.current.ckey]) is a Cultist")
 
 	spawn (rand(waittime_l, waittime_h))
 		send_intercept()

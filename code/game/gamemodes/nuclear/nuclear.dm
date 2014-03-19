@@ -142,6 +142,8 @@
 		spawnpos++
 		update_synd_icons_added(synd_mind)
 
+		log_game("[synd_mind.current.name]([synd_mind.current.ckey]) now became a Syndicate Operative")
+
 	update_all_synd_icons()
 
 	if(uplinklocker)

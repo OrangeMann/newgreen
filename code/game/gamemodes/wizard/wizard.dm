@@ -55,6 +55,7 @@
 		equip_wizard(wizard.current)
 		name_wizard(wizard.current)
 		greet_wizard(wizard)
+		log_game("[wizard.current.name]([wizard.current.ckey]) now became a Wizard")
 
 	spawn (rand(waittime_l, waittime_h))
 		send_intercept()

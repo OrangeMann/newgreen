@@ -408,7 +408,9 @@ About the new airlock wires panel:
 			//one wire for electrifying the door. Sending a pulse through this electrifies the door for 30 seconds.
 			if(src.secondsElectrified==0)
 				shockedby += text("\[[time_stamp()]\][usr](ckey:[usr.ckey])")
-				usr.attack_log += text("\[[time_stamp()]\] <font color='red'>Electrified the [name] at [x] [y] [z]</font>")
+				usr.attack_log += text("\[[time_stamp()]\] <font color='red'>Electrified the [name] at [x],[y],[z] for 30 seconds</font>")
+				message_admins("ATTACK: [usr.name] ([usr.ckey])(<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</A>) electrified the [name] at [x],[y],[z] for 30 seconds.", 0)
+				log_attack("[usr.name] ([usr.ckey]) electrified the [name] at [x],[y],[z] for 30 seconds")
 				src.secondsElectrified = 30
 				spawn(10)
 					//TODO: Move this into process() and make pulsing reset secondsElectrified to 30
@@ -472,7 +474,9 @@ About the new airlock wires panel:
 			//Cutting this wire electrifies the door, so that the next person to touch the door without insulated gloves gets electrocuted.
 			if(src.secondsElectrified != -1)
 				shockedby += text("\[[time_stamp()]\][usr](ckey:[usr.ckey])")
-				usr.attack_log += text("\[[time_stamp()]\] <font color='red'>Electrified the [name] at [x] [y] [z]</font>")
+				usr.attack_log += text("\[[time_stamp()]\] <font color='red'>Electrified the [name] at [x],[y],[z]</font>")
+				message_admins("ATTACK: [usr.name] ([usr.ckey])(<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</A>) electrified the [name] at [x],[y],[z].", 0)
+				log_attack("[usr.name] ([usr.ckey]) electrified the [name] at [x],[y],[z]")
 				src.secondsElectrified = -1
 		if (AIRLOCK_WIRE_SAFETY)
 			safe = 0
@@ -1079,7 +1083,9 @@ About the new airlock wires panel:
 						usr << text("The door is already electrified. You can't re-electrify it while it's already electrified.<br>\n")
 					else
 						shockedby += text("\[[time_stamp()]\][usr](ckey:[usr.ckey])")
-						usr.attack_log += text("\[[time_stamp()]\] <font color='red'>Electrified the [name] at [x] [y] [z]</font>")
+						usr.attack_log += text("\[[time_stamp()]\] <font color='red'>Electrified the [name] at [x],[y],[z] for 30 seconds</font>")
+						message_admins("ATTACK: [usr.name] ([usr.ckey])(<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</A>) electrified the [name] at [x],[y],[z] for 30 seconds.", 0)
+						log_attack("[usr.name] ([usr.ckey]) electrified the [name] at [x],[y],[z] for 30 seconds")
 						src.secondsElectrified = 30
 						spawn(10)
 							while (src.secondsElectrified>0)
@@ -1098,7 +1104,9 @@ About the new airlock wires panel:
 						usr << text("The door is already electrified. You can't re-electrify it while it's already electrified.<br>\n")
 					else
 						shockedby += text("\[[time_stamp()]\][usr](ckey:[usr.ckey])")
-						usr.attack_log += text("\[[time_stamp()]\] <font color='red'>Electrified the [name] at [x] [y] [z]</font>")
+						usr.attack_log += text("\[[time_stamp()]\] <font color='red'>Electrified the [name] at [x],[y],[z]</font>")
+						message_admins("ATTACK: [usr.name] ([usr.ckey])(<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</A>) electrified the [name] at [x],[y],[z] for 30 seconds.", 0)
+						log_attack("[usr.name] ([usr.ckey]) electrified the [name] at [x],[y],[z] for 30 seconds")
 						src.secondsElectrified = -1
 
 				if (8) // Not in order >.>

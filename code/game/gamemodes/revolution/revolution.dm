@@ -89,6 +89,7 @@
 
 	for(var/datum/mind/rev_mind in head_revolutionaries)
 		greet_revolutionary(rev_mind)
+		log_game("[rev_mind.current.name]([rev_mind.current.ckey]) now became a Head Revolutionary")
 	modePlayer += head_revolutionaries
 	if(emergency_shuttle)
 		emergency_shuttle.always_fake_recall = 1

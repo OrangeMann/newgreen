@@ -81,7 +81,8 @@ mob/living/parasite/meme/New()
 
 	var/newhost = pick(allowed_mob)
 	src.enter_host(newhost)
-	message_admins("[newhost] has become [src.key]'s host")
+	message_admins("[host]([host.ckey]) has become [src.key]'s host", 0)
+	log_game("[src.key] is a meme.[host]([host.ckey]) has become [src.key]'s host")
 
 //	ticker.mode.memes += src
 
@@ -131,6 +132,8 @@ mob/living/parasite/meme/death()
 	host.parasites -= src
 	src.stat = 2
 	..()
+	message_admins("[src.key](MEME) is die. Last host: [src.host]([src.host.ckey])", 0)
+	log_game("[src.key](MEME) is die. Last host: [src.host]([src.host.ckey])")
 	del src
 
 // When a meme speaks, it speaks through its host
@@ -142,6 +145,8 @@ mob/living/parasite/meme/say(message as text)
 		usr << "\red You can't speak without host!"
 		return
 
+	log_game("[src.key](MEME) ([src.host]([src.host.ckey])) say: [message]")
+
 	return host.say(message, 1)
 
 // Same as speak, just with whisper
@@ -152,6 +157,8 @@ mob/living/parasite/meme/whisper(message as text)
 	if(!host)
 		usr << "\red You can't speak without host!"
 		return
+
+	log_game("[src.key](MEME) ([src.host]([src.host.ckey])) whisper: [message]")
 
 	return host.whisper(message)
 
@@ -166,6 +173,7 @@ mob/living/parasite/meme/me_verb(message as text)
 		usr << "\red You can't emote without host!"
 		return
 	message = sanitize_uni(message)
+	log_game("[src.key](MEME) ([src.host]([src.host.ckey])) emote: [message]")
 	return host.emote("me", 1, message)
 
 // A meme understands everything their host understands
@@ -255,6 +263,8 @@ mob/living/parasite/meme/verb/Thought()
 
 	usr << "<i>You make [target] hear:</i> [rendered]"
 
+	log_game("[src.key](MEME) ([src.host]([src.host.ckey])) make [target]([target.ckey]) hear: [rendered]")
+
 // Mutes the host
 mob/living/parasite/meme/verb/Mute()
 	set category = "Meme"
@@ -278,6 +288,9 @@ mob/living/parasite/meme/verb/Mute()
 		host.silent = 1200
 //		host.speech_allowed = 0
 
+		message_admins("[src.key](MEME)(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src.host]'>JMP</A>) mute his host [src.host]([src.host.ckey])", 0)
+		log_game("[src.key](MEME) mute his host [src.host]([src.host.ckey])")
+
 		sleep(1200)
 
 		host.silent = 0
@@ -300,6 +313,9 @@ mob/living/parasite/meme/verb/Paralyze()
 	usr << "\red Your host can't use body language anymore."
 
 	host.weakened = 1200
+
+	message_admins("[src.key](MEME)(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src.host]'>JMP</A>) paralyze his host [src.host]([src.host.ckey])", 0)
+	log_game("[src.key](MEME) paralyze his host [src.host]([src.host.ckey])")
 
 	sleep(1200)
 
@@ -328,6 +344,10 @@ mob/living/parasite/meme/verb/Agony()
 		usr << "<b>You send a jolt of agonizing pain through [host], they should be unable to concentrate on anything else for half a minute.</b>"
 
 		host.emote("scream")
+
+		host.attack_log += "\[[time_stamp()]\] <font color='orange'>Pained by [src.key](MEME)</font>"
+		message_admins("[src.key](MEME)(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src.host]'>JMP</A>) pain his host [src.host]([src.host.ckey])", 0)
+		log_game("[src.key](MEME) pain his host [src.host]([src.host.ckey])")
 
 		for(var/i=0, i<10, i++)
 			host.stuttering = 2
@@ -361,6 +381,8 @@ mob/living/parasite/meme/verb/Joy()
 
 		host << "\red You are feeling wonderful! Your head is numb and drowsy, and you can't help forgetting all the worries in the world."
 
+		log_game("[src.key](MEME) injecting waves of endorphines and dopamine into host [src.host]([src.host.ckey])")
+
 		while(host.druggy > 0)
 			sleep(10)
 
@@ -380,6 +402,10 @@ mob/living/parasite/meme/verb/Hallucinate()
 	target:hallucination += 100
 
 	usr << "<b>You make [target] hallucinate.</b>"
+
+	host.attack_log += "\[[time_stamp()]\] <font color='orange'>Hallucinated by [src.key](MEME)</font>"
+	message_admins("[src.key](MEME)(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src.host]'>JMP</A>) make his host [src.host]([src.host.ckey]) hallucinate", 0)
+	log_game("[src.key](MEME) make his host [src.host]([src.host.ckey]) hallucinate")
 
 // Jump to a closeby target through a whisper
 mob/living/parasite/meme/verb/SubtleJump(mob/living/carbon/human/target as mob in view(1,host) - usr - usr:host)
@@ -413,12 +439,13 @@ mob/living/parasite/meme/verb/SubtleJump(mob/living/carbon/human/target as mob i
 
 	if(!use_points(350)) return
 
+	var/mob/living/carbon/human/old_host = src.host
 	src.exit_host()
 	src.enter_host(target)
 
 	usr << "<b>You successfully jumped to [target]."
-	log_admin("[src.key] has jumped (meme) to [target]")
-	message_admins("[src.key] has jumped (meme) to [target]")
+	message_admins("[src.key](MEME)(<A HREF='?_src_=holder;adminplayerobservejump=\ref[target]'>JMP</A>) has jumped from [old_host]([old_host.ckey]) to [target]([target.ckey])(Whisper)", 0)
+	log_game("[src.key](MEME) has jumped from [old_host]([old_host.ckey]) to [target]([target.ckey])(Whisper)")
 
 // Jump to a distant target through a shout
 mob/living/parasite/meme/verb/ObviousJump(mob/living/carbon/human/target as mob in view(host) - usr - usr:host)
@@ -452,12 +479,13 @@ mob/living/parasite/meme/verb/ObviousJump(mob/living/carbon/human/target as mob 
 
 	if(!use_points(750)) return
 
+	var/mob/living/carbon/human/old_host = src.host
 	src.exit_host()
 	src.enter_host(target)
 
 	usr << "<b>You successfully jumped to [target]."
-	log_admin("[src.key] has jumped (meme) to [target]")
-	message_admins("[src.key] has jumped (meme) to [target]")
+	message_admins("[src.key](MEME)(<A HREF='?_src_=holder;adminplayerobservejump=\ref[target]'>JMP</A>) has jumped from [old_host]([old_host.ckey]) to [target]([target.ckey])(Shout)", 0)
+	log_game("[src.key](MEME) has jumped from [old_host]([old_host.ckey]) to [target]([target.ckey])(Shout)")
 
 // Jump to an attuned mob for free
 mob/living/parasite/meme/verb/AttunedJump(mob/living/carbon/human/target as mob in view(host) - usr - usr:host)
@@ -479,13 +507,15 @@ mob/living/parasite/meme/verb/AttunedJump(mob/living/carbon/human/target as mob 
 		src << "<b>Your target already is possessed by something..</b>"
 		return
 
+	var/mob/living/carbon/human/old_host = src.host
 	src.exit_host()
 	src.enter_host(target)
 
 	usr << "<b>You successfully jumped to [target]."
 
-	log_admin("[src.key] has jumped (meme) to [target]")
-	message_admins("[src.key] has jumped (meme) to [target]")
+	message_admins("[src.key](MEME)(<A HREF='?_src_=holder;adminplayerobservejump=\ref[target]'>JMP</A>) has jumped from [old_host]([old_host.ckey]) to [target]([target.ckey])(Attune)", 0)
+	log_game("[src.key](MEME) has jumped from [old_host]([old_host.ckey]) to [target]([target.ckey])(Attune)")
+
 
 // ATTUNE a mob, adding it to the indoctrinated list
 mob/living/parasite/meme/verb/Attune()
@@ -505,8 +535,8 @@ mob/living/parasite/meme/verb/Attune()
 	usr << "<b>You successfully indoctrinated [host]."
 	host << "\red Your head feels a bit roomier.."
 
-	log_admin("[src.key] has attuned [host]")
-	message_admins("[src.key] has attuned [host]")
+	message_admins("[src.key](MEME)(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src.host]'>JMP</A>) has attuned [src.host]([src.host.ckey])", 0)
+	log_game("[src.key](MEME) has attuned [src.host]([src.host.ckey])")
 
 // Enables the mob to take a lot more damage
 mob/living/parasite/meme/verb/Analgesic()
@@ -523,6 +553,10 @@ mob/living/parasite/meme/verb/Analgesic()
 	usr << "<b>You inject drugs into [host]."
 	host << "\red You feel your body strengthen and your pain subside.."
 	host.analgesic = 60
+
+	message_admins("[src.key](MEME)(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src.host]'>JMP</A>) inject analgesic into [src.host]([src.host.ckey])", 0)
+	log_game("[src.key](MEME) inject analgesic into [src.host]([src.host.ckey])")
+
 	while(host.analgesic > 0)
 		sleep(10)
 	host << "\red The dizziness wears off, and you can feel pain again.."
@@ -561,13 +595,15 @@ mob/living/parasite/meme/verb/Possession()
 
 		dummy << "\blue You feel very drowsy.. Your eyelids become heavy..."
 
-		log_admin("[meme_mind.key] has taken possession of [host]([host_mind.key])")
-		message_admins("[meme_mind.key] has taken possession of [host]([host_mind.key])")
+		host.attack_log += "\[[time_stamp()]\] <font color='orange'>Possessioned by [src.key](MEME)</font>"
+		message_admins("[meme_mind.key](MEME)(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src.host]'>JMP</A>) has taken possession of [host]([host_mind.key])", 0)
+		log_game("[meme_mind.key](MEME) has taken possession of [host]([host_mind.key])")
 
 		sleep(600)
 
-		log_admin("[meme_mind.key] has lost possession of [host]([host_mind.key])")
-		message_admins("[meme_mind.key] has lost possession of [host]([host_mind.key])")
+		host.attack_log += "\[[time_stamp()]\] <font color='orange'>[src.key](MEME) has lost possession of host</font>"
+		message_admins("[meme_mind.key](MEME)(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src.host]'>JMP</A>) has lost possession of [host]([host_mind.key])", 0)
+		log_game("[meme_mind.key](MEME) has lost possession of [host]([host_mind.key])")
 
 		meme_mind.transfer_to(src)
 		host_mind.transfer_to(host)
@@ -590,12 +626,16 @@ mob/living/parasite/meme/verb/Dormant()
 
 	dormant = 1
 
+	log_game("[src.key](MEME) activate Dormant")
+
 	while(meme_points < MAXIMUM_MEME_POINTS)
 		sleep(10)
 
 	dormant = 0
 
 	usr << "\red You have regained all points and exited dormant mode!"
+
+	log_game("[src.key](MEME) have regained all points and exited dormant mode")
 
 mob/living/parasite/meme/verb/Show_Points()
 	set category = "Meme"

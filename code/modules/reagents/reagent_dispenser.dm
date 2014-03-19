@@ -161,7 +161,9 @@
 		explode()
 
 	proc/explode()
-		if (reagents.total_volume > 500)
+		if(reagents.total_volume > 1000) // Only for big fueltanks
+			explosion(src.loc,1,3,5)
+		else if (reagents.total_volume > 500)
 			explosion(src.loc,1,2,4)
 		else if (reagents.total_volume > 100)
 			explosion(src.loc,0,1,3)
@@ -170,6 +172,13 @@
 		if(src)
 			del(src)
 
+/obj/structure/reagent_dispensers/fueltank/HasProximity(atom/movable/AM as mob|obj)
+	if(rig)
+		rig.HasProximity(AM)
+
+/obj/structure/reagent_dispensers/fueltank/hear_talk(mob/living/M, msg)
+	if(rig)
+		rig.hear_talk(M, msg)
 
 /obj/structure/reagent_dispensers/fueltank/hv
 	name = "high-volume fueltank"

@@ -23,6 +23,7 @@
 				src.verbs += P.verbpath
 
 	mind.changeling.absorbed_dna |= dna
+
 	return 1
 
 //removes our changeling verbs
@@ -95,6 +96,13 @@
 		return
 
 	changeling.isabsorbing = 1
+	var/target_changeling = 0
+	if(T.mind && T.mind.changeling)
+		target_changeling = 1
+	T.attack_log += "\[[time_stamp()]\] <font color='orange'>Absorbing by [src.name] ([src.ckey])</font>"
+	src.attack_log += "\[[time_stamp()]\] <font color='red'>Start absorbing DNA of [T.name] ([T.ckey])</font>"
+	message_admins("ATTACK: [src]([src.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src]'>JMP</A>) start absorbing DNA of [T]([T.ckey])[target_changeling ? "(Other changeling)":""].", 0)
+	log_attack("[src]([src.ckey]) start absorbing DNA of [T]([T.ckey])[target_changeling ? "(Other changeling)":""]")
 	for(var/stage = 1, stage<=3, stage++)
 		switch(stage)
 			if(1)
@@ -115,6 +123,7 @@
 		if(!do_mob(src, T, 150))
 			src << "<span class='warning'>Our absorption of [T] has been interrupted!</span>"
 			changeling.isabsorbing = 0
+			log_game("[src]([src.ckey]) absorption of [T]([T.ckey]) has been interrupted")
 			return
 
 	src << "<span class='notice'>We have absorbed [T]!</span>"
@@ -162,6 +171,10 @@
 	if(prob(changeling.absorbedcount*3 - 3))
 		T.make_changeling()
 		T << "\red <FONT size = 3>You are now a changeling!</FONT>"
+	T.attack_log += "\[[time_stamp()]\] <font color='orange'>Absorbed by [src.name] ([src.ckey])</font>"
+	src.attack_log += "\[[time_stamp()]\] <font color='red'>Absorbed DNA of [T.name] ([T.ckey])</font>"
+	message_admins("ATTACK: [src]([src.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src]'>JMP</A>) absorbed DNA of [T]([T.ckey])[target_changeling ? "(Other changeling)":""].", 0)
+	log_attack("[src]([src.ckey]) absorbed dna of [T]([T.ckey])[target_changeling ? "(Other changeling)":""]")
 	return 1
 
 
@@ -184,6 +197,7 @@
 	if(!chosen_dna)
 		return
 
+	var/old_name = src.real_name
 	changeling.chem_charges -= 5
 	src.visible_message("<span class='warning'>[src] transforms!</span>")
 	changeling.geneticdamage = 30
@@ -197,6 +211,7 @@
 	spawn(10)	src.verbs += /mob/proc/changeling_transform
 
 	feedback_add_details("changeling_powers","TR")
+	log_game("([src.ckey]) transforms. Old name: [old_name] New name: [src.real_name]")
 	return 1
 
 
@@ -251,6 +266,7 @@
 	O.adjustFireLoss(C.getFireLoss())
 	O.stat = C.stat
 	O.a_intent = "hurt"
+	O.attack_log = C.attack_log
 	for(var/obj/item/weapon/implant/I in implants)
 		I.loc = O
 		I.implanted = O
@@ -260,6 +276,7 @@
 	O.make_changeling(1)
 	O.verbs += /mob/proc/changeling_lesser_transform
 	feedback_add_details("changeling_powers","LF")
+	log_game("[C]([O.ckey]) transform into [O.name]")
 	del(C)
 	return 1
 
@@ -337,6 +354,7 @@
 	O.setOxyLoss(C.getOxyLoss())
 	O.adjustFireLoss(C.getFireLoss())
 	O.stat = C.stat
+	O.attack_log = C.attack_log
 	for (var/obj/item/weapon/implant/I in implants)
 		I.loc = O
 		I.implanted = O
@@ -345,6 +363,7 @@
 	O.make_changeling()
 
 	feedback_add_details("changeling_powers","LFT")
+	log_game("[C]([O.ckey]) transform into [O.real_name]")
 	del(C)
 	return 1
 
@@ -361,6 +380,7 @@
 	if(!C.stat && alert("Are we sure we wish to fake our death?",,"Yes","No") == "No")//Confirmation for living changelings if they want to fake their death
 		return
 	C << "<span class='notice'>We will attempt to regenerate our form.</span>"
+	log_game("[C]([C.ckey]) activate Regenerative Stasis and start regenerate")
 
 	C.status_flags |= FAKEDEATH		//play dead
 	C.update_canmove()
@@ -393,6 +413,7 @@
 			C.update_canmove()
 			C.make_changeling()
 	feedback_add_details("changeling_powers","FD")
+	log_game("[C]([C.ckey]) have regenerated")
 	return 1
 
 
@@ -410,6 +431,7 @@
 	src.verbs -= /mob/proc/changeling_boost_range
 	spawn(5)	src.verbs += /mob/proc/changeling_boost_range
 	feedback_add_details("changeling_powers","RS")
+	log_game("[src]([src.ckey]) activate Ranged Sting")
 	return 1
 
 
@@ -434,6 +456,7 @@
 	src.verbs -= /mob/proc/changeling_unstun
 	spawn(5)	src.verbs += /mob/proc/changeling_unstun
 	feedback_add_details("changeling_powers","UNS")
+	log_game("[C]([C.ckey]) activate Epinephrine Sacs(Removes all stuns)")
 	return 1
 
 
@@ -470,6 +493,7 @@
 	src.verbs -= /mob/proc/changeling_digitalcamo
 	spawn(5)	src.verbs += /mob/proc/changeling_digitalcamo
 	feedback_add_details("changeling_powers","CAM")
+	log_game("[C]([C.ckey]) [C.digitalcamo ? "":"de"]activate Digital Camoflague")
 	return 1
 
 
@@ -496,6 +520,7 @@
 	src.verbs -= /mob/proc/changeling_rapidregen
 	spawn(5)	src.verbs += /mob/proc/changeling_rapidregen
 	feedback_add_details("changeling_powers","RR")
+	log_game("[C]([C.ckey]) activate Rapid Regeneration")
 	return 1
 
 // HIVE MIND UPLOAD/DOWNLOAD DNA
@@ -530,6 +555,7 @@ var/list/datum/dna/hivemind_bank = list()
 	hivemind_bank += chosen_dna
 	src << "<span class='notice'>We channel the DNA of [S] to the air.</span>"
 	feedback_add_details("changeling_powers","HU")
+	log_game("[src]([src.ckey]) channel the DNA of [S] to the air")
 	return 1
 
 /mob/proc/changeling_hivedownload()
@@ -559,6 +585,7 @@ var/list/datum/dna/hivemind_bank = list()
 	changeling.absorbed_dna += chosen_dna
 	src << "<span class='notice'>We absorb the DNA of [S] from the air.</span>"
 	feedback_add_details("changeling_powers","HD")
+	log_game("[src]([src.ckey]) absorb the DNA of [S] from the air")
 	return 1
 
 // Fake Voice
@@ -575,6 +602,7 @@ var/list/datum/dna/hivemind_bank = list()
 	if(changeling.mimicing)
 		changeling.mimicing = ""
 		src << "<span class='notice'>We return our vocal glands to their original location.</span>"
+		log_game("[src]([src.ckey]) return his voice to normal")
 		return
 
 	var/mimic_voice = input("Enter a name to mimic.", "Mimic Voice", null) as text
@@ -587,6 +615,7 @@ var/list/datum/dna/hivemind_bank = list()
 	src << "<span class='notice'>Use this power again to return to our original voice and reproduce chemicals again.</span>"
 
 	feedback_add_details("changeling_powers","MV")
+	log_game("[src]([src.ckey]) take the voice of [mimic_voice]")
 
 	spawn(0)
 		while(src && src.mind && src.mind.changeling && src.mind.changeling.mimicing)
@@ -594,6 +623,8 @@ var/list/datum/dna/hivemind_bank = list()
 			sleep(40)
 		if(src && src.mind && src.mind.changeling)
 			src.mind.changeling.mimicing = ""
+
+
 	//////////
 	//STINGS//	//They get a pretty header because there's just so fucking many of them ;_;
 	//////////
@@ -641,22 +672,30 @@ var/list/datum/dna/hivemind_bank = list()
 	spawn(rand(300,600))
 		if(T)	T.hallucination += 400
 	feedback_add_details("changeling_powers","HS")
+	T.attack_log += "\[[time_stamp()]\] <font color='orange'>Stinged with Hallucination Sting by [src.name] ([src.ckey])</font>"
+	src.attack_log += "\[[time_stamp()]\] <font color='red'>Used Hallucination Sting on [T.name] ([T.ckey])</font>"
+	message_admins("ATTACK: [src]([src.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src]'>JMP</A>) sting [T]([T.ckey]) with Hallucination Sting.", 0)
+	log_attack("[src]([src.ckey]) sting [T]([T.ckey]) with Hallucination Sting")
 	return 1
 
 /mob/proc/changeling_silence_sting()
 	set category = "Changeling"
-	set name = "Silence sting (10)"
+	set name = "Silence Sting (10)"
 	set desc="Sting target"
 
 	var/mob/living/carbon/T = changeling_sting(10,/mob/proc/changeling_silence_sting)
 	if(!T)	return 0
 	T.silent += 30
 	feedback_add_details("changeling_powers","SS")
+	T.attack_log += "\[[time_stamp()]\] <font color='orange'>Stinged with Silence Sting by [src.name] ([src.ckey])</font>"
+	src.attack_log += "\[[time_stamp()]\] <font color='red'>Used Silence Sting on [T.name] ([T.ckey])</font>"
+	message_admins("ATTACK: [src]([src.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src]'>JMP</A>) sting [T]([T.ckey]) with Silence Sting.", 0)
+	log_attack("[src]([src.ckey]) sting [T]([T.ckey]) with Silence Sting")
 	return 1
 
 /mob/proc/changeling_blind_sting()
 	set category = "Changeling"
-	set name = "Blind sting (20)"
+	set name = "Blind Sting (20)"
 	set desc="Sting target"
 
 	var/mob/living/carbon/T = changeling_sting(20,/mob/proc/changeling_blind_sting)
@@ -667,11 +706,15 @@ var/list/datum/dna/hivemind_bank = list()
 	T.eye_blind = 10
 	T.eye_blurry = 20
 	feedback_add_details("changeling_powers","BS")
+	T.attack_log += "\[[time_stamp()]\] <font color='orange'>Stinged with Blind Sting by [src.name] ([src.ckey])</font>"
+	src.attack_log += "\[[time_stamp()]\] <font color='red'>Used Blind Sting on [T.name] ([T.ckey])</font>"
+	message_admins("ATTACK: [src]([src.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src]'>JMP</A>) sting [T]([T.ckey]) with Blind Sting.", 0)
+	log_attack("[src]([src.ckey]) sting [T]([T.ckey]) with Blind Sting")
 	return 1
 
 /mob/proc/changeling_deaf_sting()
 	set category = "Changeling"
-	set name = "Deaf sting (5)"
+	set name = "Deaf Sting (5)"
 	set desc="Sting target:"
 
 	var/mob/living/carbon/T = changeling_sting(5,/mob/proc/changeling_deaf_sting)
@@ -680,12 +723,16 @@ var/list/datum/dna/hivemind_bank = list()
 	T.sdisabilities |= DEAF
 	spawn(300)	T.sdisabilities &= ~DEAF
 	feedback_add_details("changeling_powers","DS")
+	T.attack_log += "\[[time_stamp()]\] <font color='orange'>Stinged with Deaf Sting by [src.name] ([src.ckey])</font>"
+	src.attack_log += "\[[time_stamp()]\] <font color='red'>Used Deaf Sting on [T.name] ([T.ckey])</font>"
+	message_admins("ATTACK: [src]([src.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src]'>JMP</A>) sting [T]([T.ckey]) with Deaf Sting.", 0)
+	log_attack("[src]([src.ckey]) sting [T]([T.ckey]) with Deaf Sting")
 	return 1
 
 
 /mob/proc/changeling_paralysis_sting()
 	set category = "Changeling"
-	set name = "Paralysis sting (30)"
+	set name = "Paralysis Sting (30)"
 	set desc="Sting target"
 
 	var/mob/living/carbon/T = changeling_sting(30,/mob/proc/changeling_paralysis_sting)
@@ -693,11 +740,15 @@ var/list/datum/dna/hivemind_bank = list()
 	T << "<span class='danger'>Your muscles begin to painfully tighten.</span>"
 	T.Weaken(30)
 	feedback_add_details("changeling_powers","PS")
+	T.attack_log += "\[[time_stamp()]\] <font color='orange'>Stinged with Paralysis Sting by [src.name] ([src.ckey])</font>"
+	src.attack_log += "\[[time_stamp()]\] <font color='red'>Used Paralysis Sting on [T.name] ([T.ckey])</font>"
+	message_admins("ATTACK: [src]([src.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src]'>JMP</A>) sting [T]([T.ckey]) with Paralysis Sting.", 0)
+	log_attack("[src]([src.ckey]) sting [T]([T.ckey]) with Paralysis Sting")
 	return 1
 
 /mob/proc/changeling_transformation_sting()
 	set category = "Changeling"
-	set name = "Transformation sting (40)"
+	set name = "Transformation Sting (40)"
 	set desc="Sting target"
 
 	var/datum/changeling/changeling = changeling_power(40)
@@ -721,25 +772,34 @@ var/list/datum/dna/hivemind_bank = list()
 	if((HUSK in T.mutations) || (!ishuman(T) && !ismonkey(T)))
 		src << "<span class='warning'>Our sting appears ineffective against its DNA.</span>"
 		return 0
+	var/old_name = T.real_name
 	T.visible_message("<span class='warning'>[T] transforms!</span>")
 	T.dna = chosen_dna
 	T.real_name = chosen_dna.real_name
 	updateappearance(T, T.dna.uni_identity)
 	domutcheck(T, null)
 	feedback_add_details("changeling_powers","TS")
+	T.attack_log += "\[[time_stamp()]\] <font color='orange'>Stinged with Transformation Sting by [src.name] ([src.ckey])</font>"
+	src.attack_log += "\[[time_stamp()]\] <font color='red'>Used Transformation Sting on [T.name] ([T.ckey])</font>"
+	message_admins("ATTACK: [src]([src.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src]'>JMP</A>) sting [T]([T.ckey]) with Transformation Sting. Old name: [old_name]", 0)
+	log_attack("[src]([src.ckey]) sting [T]([T.ckey]) with Transformation Sting. Old name: [old_name]")
 	return 1
 
 /mob/proc/changeling_unfat_sting()
 	set category = "Changeling"
-	set name = "Unfat sting (5)"
+	set name = "Unfat Sting (5)"
 	set desc = "Sting target"
 
 	var/mob/living/carbon/T = changeling_sting(5,/mob/proc/changeling_unfat_sting)
 	if(!T)	return 0
-	T << "<span class='danger'>you feel a small prick as stomach churns violently and you become to feel skinnier.</span>"
+	T << "<span class='danger'>You feel a small prick as stomach churns violently and you become to feel skinnier.</span>"
 	T.overeatduration = 0
 	T.nutrition -= 100
 	feedback_add_details("changeling_powers","US")
+	T.attack_log += "\[[time_stamp()]\] <font color='orange'>Stinged with Unfat Sting by [src.name] ([src.ckey])</font>"
+	src.attack_log += "\[[time_stamp()]\] <font color='red'>Used Unfat Sting on [T.name] ([T.ckey])</font>"
+	message_admins("ATTACK: [src]([src.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src]'>JMP</A>) sting [T]([T.ckey]) with Unfat Sting.", 0)
+	log_attack("[src]([src.ckey]) sting [T]([T.ckey]) with Unfat Sting")
 	return 1
 
 /mob/proc/changeling_DEATHsting()
@@ -755,6 +815,10 @@ var/list/datum/dna/hivemind_bank = list()
 	T.make_jittery(1000)
 	if(T.reagents)	T.reagents.add_reagent("lexorin", 40)
 	feedback_add_details("changeling_powers","DTHS")
+	T.attack_log += "\[[time_stamp()]\] <font color='orange'>Stinged with Death Sting by [src.name] ([src.ckey])</font>"
+	src.attack_log += "\[[time_stamp()]\] <font color='red'>Used Death Sting on [T.name] ([T.ckey])</font>"
+	message_admins("ATTACK: [src]([src.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src]'>JMP</A>) sting [T]([T.ckey]) with Death Sting.", 0)
+	log_attack("[src]([src.ckey]) sting [T]([T.ckey]) with Death Sting")
 	return 1
 
 /mob/proc/changeling_extract_dna_sting()
@@ -775,4 +839,8 @@ var/list/datum/dna/hivemind_bank = list()
 	changeling.absorbed_dna |= T.dna
 
 	feedback_add_details("changeling_powers","ED")
+	T.attack_log += "\[[time_stamp()]\] <font color='orange'>Stinged with Extract DNA Sting by [src.name] ([src.ckey])</font>"
+	src.attack_log += "\[[time_stamp()]\] <font color='red'>Used Extract DNA Sting on [T.name] ([T.ckey])</font>"
+	message_admins("ATTACK: [src]([src.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src]'>JMP</A>) sting [T]([T.ckey]) with Extract DNA Sting.", 0)
+	log_attack("[src]([src.ckey]) sting [T]([T.ckey]) with Extract DNA Sting")
 	return 1

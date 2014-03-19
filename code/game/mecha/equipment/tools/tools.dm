@@ -59,6 +59,9 @@
 				M.updatehealth()
 				occupant_message("\red You squeeze [target] with [src.name]. Something cracks.")
 				chassis.visible_message("\red [chassis] squeezes [target].")
+				usr.attack_log += text("\[[time_stamp()]\] <font color='red'>Squeeze [target] with [src.name]</font>")
+				message_admins("ATTACK: [chassis.occupant.name] ([chassis.occupant.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[chassis.occupant]'>JMP</A>) in [chassis.name] squeeze [target] with [src.name].", 0)
+				log_attack("[chassis.occupant.name] ([chassis.occupant.ckey]) in [chassis.name] squeeze [target] with [src.name]")
 			else
 				step_away(M,chassis)
 				occupant_message("You push [target] out of the way.")
@@ -116,6 +119,10 @@
 				else if(target.loc == C)
 					log_message("Drilled through [target]")
 					target.ex_act(2)
+					if(istype(target,/mob/living))
+						usr.attack_log += text("\[[time_stamp()]\] <font color='red'>Drilled through [target] with [src.name]</font>")
+						message_admins("ATTACK: [chassis.occupant.name] ([chassis.occupant.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[chassis.occupant]'>JMP</A>) in [chassis.name] drilled through [target] with [src.name].", 0)
+						log_attack("[chassis.occupant.name] ([chassis.occupant.ckey]) in [chassis.name] drilled through [target] with [src.name]")
 		return 1
 
 	can_attach(obj/mecha/M as obj)
@@ -173,6 +180,10 @@
 				else if(target.loc == C)
 					log_message("Drilled through [target]")
 					target.ex_act(2)
+					if(istype(target,/mob/living))
+						usr.attack_log += text("\[[time_stamp()]\] <font color='red'>Drilled through [target] with [src.name]</font>")
+						message_admins("ATTACK: [chassis.occupant.name] ([chassis.occupant.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[chassis.occupant]'>JMP</A>) in [chassis.name] drilled through [target] with [src.name].", 0)
+						log_attack("[chassis.occupant.name] ([chassis.occupant.ckey]) in [chassis.name] drilled through [target] with [src.name]")
 		return 1
 
 	can_attach(obj/mecha/M as obj)

@@ -39,5 +39,6 @@
 		changeling.special_role = "Changeling"
 		forge_changeling_objectives(changeling)
 		greet_changeling(changeling)
+		log_game("[changeling.current.name]([changeling.current.ckey]) now became a Changeling")
 	..()
 	return

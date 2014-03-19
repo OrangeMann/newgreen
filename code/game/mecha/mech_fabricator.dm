@@ -23,7 +23,7 @@
 										"diamond"=0,
 										"plasma"=0,
 										"uranium"=0,
-										//"bananium"=0 No need to state what it can no longer hold
+										"bananium"=0 //No need to state what it can no longer hold
 										)
 	var/res_max_amount = 200000
 	var/datum/research/files
@@ -123,7 +123,8 @@
 						/obj/item/borg/upgrade/restart,
 						/obj/item/borg/upgrade/vtec,
 						/obj/item/borg/upgrade/tasercooler,
-						/obj/item/borg/upgrade/jetpack
+						/obj/item/borg/upgrade/jetpack,
+						/obj/item/borg/upgrade/vanity,
 						),
 
 
@@ -502,9 +503,12 @@
 		temp = "Updating local R&D database..."
 		src.updateUsrDialog()
 		sleep(30) //only sleep if called by user
+	var/found = 0
+
 	for(var/obj/machinery/computer/rdconsole/RDC in get_area(src))
 		if(!RDC.sync)
 			continue
+		found++
 		for(var/datum/tech/T in RDC.files.known_tech)
 			files.AddTech2Known(T)
 		for(var/datum/design/D in RDC.files.known_designs)
@@ -519,6 +523,11 @@
 			src.updateUsrDialog()
 		if(i || tech_output)
 			src.visible_message("\icon[src] <b>[src]</b> beeps, \"Succesfully synchronized with R&D server. New data processed.\"")
+	if(!found)
+		temp = "Failed to connect R&D server.<br>"
+		temp += "<a href='?src=\ref[src];clear_temp=1'>Return</a>"
+		src.updateUsrDialog()
+		src.visible_message("\icon[src] <b>[src]</b> beeps, \"Error! Failed to connect R&D server.\"")
 	return
 
 /obj/machinery/mecha_part_fabricator/proc/get_resource_cost_w_coeff(var/obj/item/part as obj,var/resource as text, var/roundto=1)
@@ -681,8 +690,8 @@
 			type = /obj/item/stack/sheet/mineral/plasma
 		if("uranium")
 			type = /obj/item/stack/sheet/mineral/uranium
-		/*if("bananium")
-			type = /obj/item/stack/sheet/mineral/clown Sorry, but no more clown mechs, even if you do manage to get to the clown planet.*/
+		if("bananium")
+			type = /obj/item/stack/sheet/mineral/clown //Sorry, but no more nerfocluwnees
 		else
 			return 0
 	var/result = 0
@@ -740,9 +749,9 @@
 			if(src.resources["diamond"] >= 2000)
 				var/obj/item/stack/sheet/mineral/diamond/G = new /obj/item/stack/sheet/mineral/diamond(src.loc)
 				G.amount = round(src.resources["diamond"] / G.perunit)
-			/*if(src.resources["bananium"] >= 2000)
+			if(src.resources["bananium"] >= 2000)
 				var/obj/item/stack/sheet/mineral/clown/G = new /obj/item/stack/sheet/mineral/clown(src.loc)
-				G.amount = round(src.resources["bananium"] / G.perunit) Sorry, but no bananium allowed*/
+				G.amount = round(src.resources["bananium"] / G.perunit)
 			del(src)
 			return 1
 		else
@@ -766,8 +775,8 @@
 			material = "metal"
 		if(/obj/item/stack/sheet/glass)
 			material = "glass"
-		/*if(/obj/item/stack/sheet/mineral/clown)
-			material = "bananium"*/
+		if(/obj/item/stack/sheet/mineral/clown)
+			material = "bananium"
 		if(/obj/item/stack/sheet/mineral/uranium)
 			material = "uranium"
 		else

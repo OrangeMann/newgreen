@@ -106,6 +106,8 @@ var/global/datum/controller/gameticker/ticker
 	else
 		src.mode.announce()
 
+	log_game("The current game mode is - [src.mode.name][hide_mode ? "(HIDE)":""]")
+
 	//setup the money accounts
 	if(!centcomm_account_db)
 		for(var/obj/machinery/account_database/check_db in machines)
@@ -275,6 +277,7 @@ var/global/datum/controller/gameticker/ticker
 				if(player.mind.assigned_role != "MODE")
 					job_master.EquipRank(player, player.mind.assigned_role, 0)
 					EquipCustomItems(player)
+					log_game("[player.name]([player.ckey]) - [player.mind.assigned_role]")
 		if(captainless)
 			for(var/mob/M in player_list)
 				if(!istype(M,/mob/new_player))

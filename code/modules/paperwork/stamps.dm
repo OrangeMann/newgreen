@@ -59,5 +59,15 @@
 	icon_state = "stamp-qm"
 	item_color = "qm"
 
+/obj/item/weapon/stamp/law
+	name = "law office's rubber stamp"
+	icon_state = "stamp-law"
+	item_color = "cargo"
+
+/obj/item/weapon/stamp/centcomm
+	name = "CentComm rubber stamp"
+	icon_state = "stamp-cent"
+	item_color = "centcom"
+
 /obj/item/weapon/stamp/attack_paw(mob/user as mob)
 	return attack_hand(user)

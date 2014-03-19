@@ -22,6 +22,7 @@
 	var/bumped = 0		//Prevents it from hitting more than one guy at once
 	var/def_zone = ""	//Aiming at
 	var/mob/firer = null//Who shot it
+	var/obj/firer_obj = null //What shot it
 	var/silenced = 0	//Attack message
 	var/yo = null
 	var/xo = null
@@ -108,10 +109,20 @@
 				if(istype(firer, /mob))
 					M.attack_log += "\[[time_stamp()]\] <b>[firer]/[firer.ckey]</b> shot <b>[M]/[M.ckey]</b> with a <b>[src.type]</b>"
 					firer.attack_log += "\[[time_stamp()]\] <b>[firer]/[firer.ckey]</b> shot <b>[M]/[M.ckey]</b> with a <b>[src.type]</b>"
-					message_admins("ATTACK: [firer] ([firer.ckey])(<A HREF='?src=\ref[src];adminplayerobservejump=\ref[firer]'>JMP</A>) shot [M] ([M.ckey]) with [src].") //BS12 EDIT ALG
+					message_admins("ATTACK: [firer] ([firer.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[firer]'>JMP</A>) shot [M] ([M.ckey]) with [src].") //BS12 EDIT ALG
+					log_attack("[firer] ([firer.ckey]) shot [M] ([M.ckey]) with [src.type]")
 				else
 					M.attack_log += "\[[time_stamp()]\] <b>UNKNOWN SUBJECT (No longer exists)</b> shot <b>[M]/[M.ckey]</b> with a <b>[src]</b>"
-					message_admins("ATTACK: UNKNOWN (no longer exists) shot [M] ([M.ckey])(<A HREF='?src=\ref[src];adminplayerobservejump=\ref[M]'>JMP</A>) with [src].") //BS12 EDIT ALG
+					message_admins("ATTACK: UNKNOWN (no longer exists) shot [M] ([M.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[M]'>JMP</A>) with [src].") //BS12 EDIT ALG
+					log_attack("UNKNOWN (no longer exists) shot [M] ([M.ckey]) with [src]")
+		if(firer_obj && istype(A, /mob))
+			var/mob/M = A
+
+			if (istype(A, /mob/living/carbon/human) || istype(A, /mob/living/carbon/monkey) || istype(A, /mob/living/silicon/robot) || istype(A, /mob/living/silicon/ai))
+				message_admins("ATTACK: [firer_obj] from [firer_obj.x],[firer_obj.y],[firer_obj.z] shot [M]/[M.ckey] with [src]")
+
+			M.attack_log += "\[[time_stamp()]\] <b>[firer_obj] from [firer_obj.x],[firer_obj.y],[firer_obj.z]</b> shot <b>[M]/[M.ckey]</b> with a <b>[src.type]</b>"
+			log_attack("[firer_obj] from [firer_obj.x],[firer_obj.y],[firer_obj.z] shot [M] ([M.ckey]) with a [src.type]")
 		spawn(0)
 
 			if(A)

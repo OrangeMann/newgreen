@@ -41,9 +41,10 @@
 			for(var/mob/O in viewers(world.view, user))
 				O.show_message("\red [user] forces [M] to swallow [src].", 1)
 
-			M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been fed [src.name] by [user.name] ([user.ckey]) Reagents: [reagentlist(src)]</font>")
-			user.attack_log += text("\[[time_stamp()]\] <font color='red'>Fed [M.name] by [M.name] ([M.ckey]) Reagents: [reagentlist(src)]</font>")
-			message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[user]'>JMP</A>) fed [M] ([M.ckey]) with [src].", 2)
+			M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been fed [src.name] by [user.name] ([user.ckey]). Reagents: [reagentlist(src)]</font>")
+			user.attack_log += text("\[[time_stamp()]\] <font color='red'>Fed [M.name] ([M.ckey]) with [src.name]. Reagents: [reagentlist(src)]</font>")
+			message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[user]'>JMP</A>) fed [M] ([M.ckey]) with [src]. Reagents: [reagentlist(src)]", 0)
+			log_attack("[user.name] ([user.ckey]) fed [M.name] ([M.ckey]) with [src.name]. Reagents: [reagentlist(src)]")
 
 			if(reagents.total_volume)
 				reagents.reaction(M, INGEST)

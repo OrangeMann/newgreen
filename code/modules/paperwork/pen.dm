@@ -24,6 +24,7 @@
 	m_amt = 10
 	var/colour = "black"	//what colour the ink is!
 	pressure_resistance = 2
+	var/parrent_alog = 1   //write parrent attack log if 1
 
 
 /obj/item/weapon/pen/blue
@@ -47,12 +48,13 @@
 		return
 	user << "<span class='warning'>You stab [M] with the pen.</span>"
 	M << "\red You feel a tiny prick!" //That's a whole lot of meta!
-	M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been stabbed with [name]  by [user.name] ([user.ckey])</font>")
-	user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [name] to stab [M.name] ([M.ckey])</font>")
+	if (parrent_alog)
+		M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been stabbed with [name]  by [user.name] ([user.ckey])</font>")
+		user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [name] to stab [M.name] ([M.ckey])</font>")
 
-	log_admin("ATTACK: [user] ([user.ckey]) stabbed [M] ([M.ckey]) with [src].")
-	message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[user]'>JMP</A>) stabbed [M] ([M.ckey]) with [src].", 2)
-	log_attack("<font color='red'>[user.name] ([user.ckey]) Used the [src.name] to stab [M.name] ([M.ckey])</font>")
+		//log_admin("ATTACK: [user] ([user.ckey]) stabbed [M] ([M.ckey]) with [src].")
+		message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[user]'>JMP</A>) stabbed [M] ([M.ckey]) with [src].", 0)
+		log_attack("[user.name] ([user.ckey]) Used the [src.name] to stab [M.name] ([M.ckey])")
 
 	return
 
@@ -64,6 +66,7 @@
 	desc = "It's a black ink pen with a sharp point and a carefully engraved \"Waffle Co.\""
 	flags = FPRINT | OPENCONTAINER
 	origin_tech = "materials=2;syndicate=5"
+	parrent_alog = 0
 
 
 /obj/item/weapon/pen/sleepypen/New()
@@ -79,8 +82,22 @@
 	if(!(istype(M,/mob)))
 		return
 	..()
+	var/contained = null
+	var/list/injected = list()
 	if(reagents.total_volume)
-		if(M.reagents) reagents.trans_to(M, 50) //used to be 150
+		if(M.reagents)
+			for(var/datum/reagent/R in src.reagents.reagent_list)
+				injected += R.name
+			contained = english_list(injected)
+
+			reagents.trans_to(M, 50) //used to be 150
+
+	M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been stabbed with [name]  by [user.name] ([user.ckey]). Reagents: [contained]</font>")
+	user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [name] to stab [M.name] ([M.ckey]). Reagents: [contained]</font>")
+
+	message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[user]'>JMP</A>) stabbed [M] ([M.ckey]) with [src]. Reagents: [contained]", 0)
+	log_attack("[user.name] ([user.ckey]) Used the [src.name] to stab [M.name] ([M.ckey]). Reagents: [contained]")
+
 	return
 
 
@@ -90,14 +107,29 @@
 /obj/item/weapon/pen/paralysis
 	flags = FPRINT | OPENCONTAINER
 	origin_tech = "materials=2;syndicate=5"
+	parrent_alog = 0
 
 /obj/item/weapon/pen/paralysis/attack(mob/M as mob, mob/user as mob)
 	if(!(istype(M,/mob)))
 		return
 	..()
 	sleep(10)
+	var/contained = null
+	var/list/injected = list()
 	if(reagents.total_volume)
-		if(M && M.reagents) reagents.trans_to(M, 25)
+		if(M && M.reagents)
+			for(var/datum/reagent/R in src.reagents.reagent_list)
+				injected += R.name
+			contained = english_list(injected)
+
+			reagents.trans_to(M, 25)
+	if(M)
+		M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been stabbed with [name]  by [user.name] ([user.ckey]). Reagents: [contained]</font>")
+		user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [name] to stab [M.name] ([M.ckey]). Reagents: [contained]</font>")
+
+		message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[user]'>JMP</A>) stabbed [M] ([M.ckey]) with [src]. Reagents: [contained]", 0)
+		log_attack("[user.name] ([user.ckey]) Used the [src.name] to stab [M.name] ([M.ckey]). Reagents: [contained]")
+
 	return
 
 /obj/item/weapon/pen/paralysis/New()

@@ -161,6 +161,8 @@
 		D.flags |= NOREACT
 		playsound(user.loc, 'sound/items/syringeproj.ogg', 50, 1)
 
+		var/user_name = user.name
+		var/user_ckey = user.ckey
 		for(var/i=0, i<6, i++)
 			if(!D) break
 			if(D.loc == trg) break
@@ -176,14 +178,13 @@
 						for(var/datum/reagent/A in D.reagents.reagent_list)
 							R += A.id + " ("
 							R += num2text(A.volume) + "),"
-					if (istype(M, /mob))
-						M.attack_log += "\[[time_stamp()]\] <b>[user]/[user.ckey]</b> shot <b>[M]/[M.ckey]</b> with a <b>dartgun</b> ([R])"
-						user.attack_log += "\[[time_stamp()]\] <b>[user]/[user.ckey]</b> shot <b>[M]/[M.ckey]</b> with a <b>dartgun</b> ([R])"
-						msg_admin_attack("[user] ([user.ckey]) shot [M] ([M.ckey]) with a dartgun ([R]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 
-					else
-						M.attack_log += "\[[time_stamp()]\] <b>UNKNOWN SUBJECT (No longer exists)</b> shot <b>[M]/[M.ckey]</b> with a <b>dartgun</b> ([R])"
-						msg_admin_attack("UNKNOWN shot [M] ([M.ckey]) with a <b>dartgun</b> ([R]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
+					M.attack_log += "\[[time_stamp()]\] <b>[user_name]/[user_ckey]</b> shot <b>[M]/[M.ckey]</b> with a <b>dartgun</b> ([R])"
+					user.attack_log += "\[[time_stamp()]\] <b>[user_name]/[user_ckey]</b> shot <b>[M]/[M.ckey]</b> with a <b>dartgun</b> ([R])"
+					//msg_admin_attack("[user] ([user.ckey]) shot [M] ([M.ckey]) with a dartgun ([R]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
+					message_admins("ATTACK: [user_name] ([user_ckey])(<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[M.x];Y=[M.y];Z=[M.z]'>JMP</a>) shot [M] ([M.ckey]) with [src].", 0)
+					log_attack("[user_name] ([user_ckey]) shot [M.name] ([M.ckey]) with [src]")
+
 
 					if(D.reagents)
 						D.reagents.trans_to(M, 15)

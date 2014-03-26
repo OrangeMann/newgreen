@@ -8,6 +8,7 @@
 	req_one_access = list(access_atmospherics, access_engine_equip)
 	opacity = 0
 	density = 0
+	layer = 2.69
 
 	var/blocked = 0
 	var/nextstate = null

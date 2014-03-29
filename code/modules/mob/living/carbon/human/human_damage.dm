@@ -163,7 +163,7 @@
 		var/brute_was = picked.brute_dam
 		var/burn_was = picked.burn_dam
 
-		update |= picked.take_damage(brute,burn,sharp,used_weapon)
+		update |= picked.take_damage(brute/(pick(2,3,1)),burn/(pick(2,3,1)),sharp,used_weapon)
 		brute	-= (picked.brute_dam - brute_was)
 		burn	-= (picked.burn_dam - burn_was)
 
@@ -191,6 +191,8 @@
 	return organs_by_name[zone]
 
 /mob/living/carbon/human/apply_damage(var/damage = 0,var/damagetype = BRUTE, var/def_zone = null, var/blocked = 0, var/sharp = 0, var/obj/used_weapon = null, mob/living/user as mob)
+
+	if(!damage) return 0
 
 	//visible_message("Hit debug. [damage] | [damagetype] | [def_zone] | [blocked] | [sharp] | [used_weapon]")
 	if((damagetype != BRUTE) && (damagetype != BURN))
@@ -250,7 +252,7 @@
 				S.add_blood(src)
 	*/
 
-	if(istype(used_weapon,/obj/item/projectile) && src.zone_sel.selecting == "chest" && usr:wear_suit.armor["bullet"] < 50) //We don't want to use the actual projectile item, so we spawn some shrapnel.
+	if(istype(used_weapon,/obj/item/projectile) && def_zone == "chest" && src.wear_suit.armor["bullet"] < 50) //We don't want to use the actual projectile item, so we spawn some shrapnel.
 		if(damagetype == BRUTE && prob(75))
 			var/obj/item/projectile/P = used_weapon
 			var/obj/item/weapon/shard/shrapnel/S = new()

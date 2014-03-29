@@ -64,9 +64,10 @@
 
 				if(!do_mob(user, M)) return
 
-				M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been fed [src.name] by [user.name] ([user.ckey]) Reagents: [reagentlist(src)]</font>")
+				M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been fed [src.name] by [user.name] ([user.ckey]). Reagents: [reagentlist(src)]</font>")
 				user.attack_log += text("\[[time_stamp()]\] <font color='red'>Fed [src.name] by [M.name] ([M.ckey]) Reagents: [reagentlist(src)]</font>")
-				log_attack("[user.name] ([user.ckey]) fed [M.name] ([M.ckey]) with [src.name] Reagents: [reagentlist(src)] (INTENT: [uppertext(user.a_intent)])")
+				message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[user]'>JMP</A>) fed [M.name] ([M.ckey]) with [src]. Reagents: [reagentlist(src)]", 0)
+				log_attack("[user.name] ([user.ckey]) fed [M.name] ([M.ckey]) with [src.name]. Reagents: [reagentlist(src)]")
 
 				for(var/mob/O in viewers(world.view, user))
 					O.show_message("\red [user] feeds [M] [src].", 1)
@@ -604,6 +605,7 @@
 	New()
 		..()
 		reagents.add_reagent("nutriment", 3)
+		reagents.add_reagent("xenomicrobes", 2)
 		src.bitesize = 6
 
 /obj/item/weapon/reagent_containers/food/snacks/faggot
@@ -728,6 +730,7 @@
 	New()
 		..()
 		reagents.add_reagent("nutriment", 8)
+		reagents.add_reagent("xenomicrobes", 1)
 		bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/clownburger
@@ -910,12 +913,9 @@
 		if(prob(10))
 			name = "exceptional plump pie"
 			desc = "Microwave is taken by a fey mood! It has cooked an exceptional plump pie!"
-			reagents.add_reagent("nutriment", 8)
-			reagents.add_reagent("tricordrazine", 5)
-			bitesize = 2
-		else
-			reagents.add_reagent("nutriment", 8)
-			bitesize = 2
+			reagents.add_reagent("tricordrazine", 10)
+		reagents.add_reagent("nutriment", 8)
+		bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/xemeatpie
 	name = "Xeno-pie"
@@ -925,6 +925,7 @@
 	New()
 		..()
 		reagents.add_reagent("nutriment", 10)
+		reagents.add_reagent("xenomicrobes", 2)
 		bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/wingfangchu
@@ -1883,6 +1884,7 @@
 	New()
 		..()
 		reagents.add_reagent("nutriment", 30)
+		reagents.add_reagent("xenomicrobes", 3)
 		bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/xenomeatbreadslice

@@ -32,6 +32,7 @@
 				reagents.reaction(M, INGEST)
 				spawn(5)
 					reagents.trans_to(M, gulp_size)
+				log_game("[user.name] ([user.ckey]) drink from the [src]. Reagents: [reagentlist(src)]")
 
 			playsound(M.loc,'sound/items/drink.ogg', rand(10,50), 1)
 			return 1
@@ -43,9 +44,10 @@
 			for(var/mob/O in viewers(world.view, user))
 				O.show_message("\red [user] feeds [M] [src].", 1)
 
-			M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been fed [src.name] by [user.name] ([user.ckey]) Reagents: [reagentlist(src)]</font>")
+			M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been fed [src.name] by [user.name] ([user.ckey]). Reagents: [reagentlist(src)]</font>")
 			user.attack_log += text("\[[time_stamp()]\] <font color='red'>Fed [M.name] by [M.name] ([M.ckey]) Reagents: [reagentlist(src)]</font>")
-			log_attack("[user.name] ([user.ckey]) fed [M.name] ([M.ckey]) with [src.name] Reagents: [reagentlist(src)] (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
+			message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[user]'>JMP</A>) fed [M.name] ([M.ckey]) with [src]. Reagents: [reagentlist(src)]", 0)
+			log_attack("[user.name] ([user.ckey]) fed [M.name] ([M.ckey]) with [src.name]. Reagents: [reagentlist(src)]")
 
 			if(reagents.total_volume)
 				reagents.reaction(M, INGEST)

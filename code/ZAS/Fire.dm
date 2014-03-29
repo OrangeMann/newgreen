@@ -34,15 +34,13 @@ turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh, atom/sou
 	if(air_contents.check_combustability(liquid))
 		igniting = 1
 
-		if(! (locate(/obj/fire) in src))
+		new /obj/fire(src,1000)
 
-			new /obj/fire(src,1000)
-
-			if (source)
-				if (source.fingerprintslast && istype(source,/obj/item))
-					message_admins("Tile ignited at ([x],[y],[z]) by [source] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>). Last touched by: <B>[source.fingerprintslast]</B>")
-				else
-					message_admins("Tile ignited at ([x],[y],[z]) by [source] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>)")
+		if (source)
+			if (source.fingerprintslast && istype(source,/obj/item))
+				message_admins("Tile ignited at ([x],[y],[z]) by [source] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>). Last touched by: <B>[source.fingerprintslast]</B>")
+			else
+				message_admins("Tile ignited at ([x],[y],[z]) by [source] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>)")
 
 		//active_hotspot.just_spawned = (current_cycle < air_master.current_cycle)
 		//remove just_spawned protection if no longer processing this cell
@@ -128,14 +126,14 @@ turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh, atom/sou
 ///////////////////////////////// FLOW HAS BEEN CREATED /// DONT DELETE THE FIRE UNTIL IT IS MERGED BACK OR YOU WILL DELETE AIR ///////////////////////////////////////////////
 
 	if(flow)
-		if(flow.check_combustability(liquid))
+		//if(flow.check_combustability(liquid))
 			//Ensure flow temperature is higher than minimum fire temperatures.
 				//this creates some energy ex nihilo but is necessary to get a fire started
 				//lets just pretend this energy comes from the ignition source and dont mention this again
 			//flow.temperature = max(PLASMA_MINIMUM_BURN_TEMPERATURE+0.1,flow.temperature)
 
 			//burn baby burn!
-			flow.zburn(liquid,1)
+		flow.zburn(liquid,1)
 
 		//merge the air back
 		S.assume_air(flow)
@@ -175,62 +173,78 @@ turf/simulated/apply_fire_protection()
 datum/gas_mixture/proc/zburn(obj/effect/decal/cleanable/liquid_fuel/liquid,force_burn)
 	var/value = 0
 
-	if((temperature > PLASMA_MINIMUM_BURN_TEMPERATURE || force_burn) && check_combustability(liquid) )
-		var/total_fuel = 0
+	if(temperature > PLASMA_MINIMUM_BURN_TEMPERATURE || force_burn)
+
 		var/datum/gas/volatile_fuel/fuel = locate() in trace_gases
 
-		total_fuel += toxins
+		if(oxygen > 0.01 && (toxins > 0.01 || (fuel && fuel.moles > 0.01) || liquid))
+			var/total_fuel = 0
 
-		if(fuel)
-		//Volatile Fuel
-			total_fuel += fuel.moles
+			total_fuel += toxins
 
-		if(liquid)
-		//Liquid Fuel
-			if(liquid.amount <= 0)
-				del liquid
-			else
-				total_fuel += liquid.amount
+			if(fuel)
+			//Volatile Fuel
+				total_fuel += fuel.moles
 
-		//Calculate the firelevel.
-		var/firelevel = calculate_firelevel(liquid)
+			if(liquid)
+			//Liquid Fuel
+				if(liquid.amount <= 0)
+					del liquid
+				else
+					total_fuel += liquid.amount
 
-		//get the current inner energy of the gas mix
-		//this must be taken here to prevent the addition or deletion of energy by a changing heat capacity
-		var/starting_energy = temperature * heat_capacity()
+			//Calculate the firelevel.
+			var/firelevel = 0
 
-		//determine the amount of oxygen used
-		var/total_oxygen = min(oxygen, 2 * total_fuel)
+			var/total_combustables = (total_fuel + oxygen)
 
-		//determine the amount of fuel actually used
-		var/used_fuel_ratio = min(oxygen / 2 , total_fuel) / total_fuel
-		total_fuel = total_fuel * used_fuel_ratio
+			if(total_fuel > 0 && oxygen > 0)
 
-		var/total_reactants = total_fuel + total_oxygen
+				//slows down the burning when the concentration of the reactants is low
+				var/dampening_multiplier = total_combustables / (total_combustables + nitrogen + carbon_dioxide)
+				//calculates how close the mixture of the reactants is to the optimum
+				var/mix_multiplier = 1 / (1 + (5 * ((oxygen / total_combustables) ** 2)))
+				//toss everything together
+				firelevel = vsc.fire_firelevel_multiplier * mix_multiplier * dampening_multiplier
 
-		//determine the amount of reactants actually reacting
-		var/used_reactants_ratio = min( max(total_reactants * firelevel / vsc.fire_firelevel_multiplier, 0.2), total_reactants) / total_reactants
+			firelevel = max( 0, firelevel)
 
-		//remove and add gasses as calculated
-		oxygen -= min(oxygen, total_oxygen * used_reactants_ratio )
+			//get the current inner energy of the gas mix
+			//this must be taken here to prevent the addition or deletion of energy by a changing heat capacity
+			var/starting_energy = temperature * heat_capacity()
 
-		toxins -= min(toxins, toxins * used_fuel_ratio * used_reactants_ratio )
+			//determine the amount of oxygen used
+			var/total_oxygen = min(oxygen, 2 * total_fuel)
 
-		carbon_dioxide += max(2 * total_fuel, 0)
+			//determine the amount of fuel actually used
+			var/used_fuel_ratio = min(oxygen / 2 , total_fuel) / total_fuel
+			total_fuel = total_fuel * used_fuel_ratio
 
-		if(fuel)
-			fuel.moles -= fuel.moles * used_fuel_ratio * used_reactants_ratio
-			if(fuel.moles <= 0) del fuel
+			var/total_reactants = total_fuel + total_oxygen
 
-		if(liquid)
-			liquid.amount -= liquid.amount * used_fuel_ratio * used_reactants_ratio
-			if(liquid.amount <= 0) del liquid
+			//determine the amount of reactants actually reacting
+			var/used_reactants_ratio = min( max(total_reactants * firelevel / vsc.fire_firelevel_multiplier, 0.2), total_reactants) / total_reactants
 
-		//calculate the energy produced by the reaction and then set the new temperature of the mix
-		temperature = (starting_energy + vsc.fire_fuel_energy_release * total_fuel) / heat_capacity()
+			//remove and add gasses as calculated
+			oxygen -= min(oxygen, total_oxygen * used_reactants_ratio )
 
-		update_values()
-		value = total_reactants * used_reactants_ratio
+			toxins -= min(toxins, toxins * used_fuel_ratio * used_reactants_ratio )
+
+			carbon_dioxide += max(2 * total_fuel, 0)
+
+			if(fuel)
+				fuel.moles -= fuel.moles * used_fuel_ratio * used_reactants_ratio
+				if(fuel.moles <= 0) del fuel
+
+			if(liquid)
+				liquid.amount -= liquid.amount * used_fuel_ratio * used_reactants_ratio
+				if(liquid.amount <= 0) del liquid
+
+			//calculate the energy produced by the reaction and then set the new temperature of the mix
+			temperature = (starting_energy + vsc.fire_fuel_energy_release * total_fuel) / heat_capacity()
+
+			update_values()
+			value = total_reactants * used_reactants_ratio
 	return value
 
 datum/gas_mixture/proc/check_combustability(obj/effect/decal/cleanable/liquid_fuel/liquid)
@@ -311,12 +325,17 @@ datum/gas_mixture/proc/calculate_firelevel(obj/effect/decal/cleanable/liquid_fue
 
 	//Always check these damage procs first if fire damage isn't working. They're probably what's wrong.
 
-	apply_damage(8*mx*head_exposure, BURN, "head", 0, 0, "Fire")
-	apply_damage(8*mx*chest_exposure, BURN, "chest", 0, 0, "Fire")
-	apply_damage(7*mx*groin_exposure, BURN, "groin", 0, 0, "Fire")
-	apply_damage(3*mx*legs_exposure, BURN, "l_leg", 0, 0, "Fire")
-	apply_damage(3*mx*legs_exposure, BURN, "r_leg", 0, 0, "Fire")
-	apply_damage(2*mx*arms_exposure, BURN, "l_arm", 0, 0, "Fire")
-	apply_damage(2*mx*arms_exposure, BURN, "r_arm", 0, 0, "Fire")
+	if(head_exposure)
+		apply_damage(8*mx, BURN, "head", 0, 0, "Fire")
+	if (chest_exposure)
+		apply_damage(8*mx, BURN, "chest", 0, 0, "Fire")
+	if (groin_exposure)
+		apply_damage(7*mx, BURN, "groin", 0, 0, "Fire")
+	if (legs_exposure)
+		apply_damage(3*mx, BURN, "l_leg", 0, 0, "Fire")
+		apply_damage(3*mx, BURN, "r_leg", 0, 0, "Fire")
+	if (arms_exposure)
+		apply_damage(2*mx, BURN, "l_arm", 0, 0, "Fire")
+		apply_damage(2*mx, BURN, "r_arm", 0, 0, "Fire")
 
 	//flash_pain()

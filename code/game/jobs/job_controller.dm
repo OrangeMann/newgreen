@@ -366,6 +366,9 @@ var/global/datum/controller/occupations/job_master
 				S = locate("start*[rank]") // use old stype
 			if(istype(S, /obj/effect/landmark/start) && istype(S.loc, /turf))
 				H.loc = S.loc
+				log_game("[H.name] ([H.ckey]) with rank ([rank]) spawn at [H.x],[H.y],[H.z]")
+			else
+				log_game("[H.name] ([H.ckey]) with rank ([rank]) can't spawn at landmark!")
 
 		//give them an account in the station database
 		if(centcomm_account_db)

@@ -192,6 +192,8 @@
 
 /mob/living/carbon/human/apply_damage(var/damage = 0,var/damagetype = BRUTE, var/def_zone = null, var/blocked = 0, var/sharp = 0, var/obj/used_weapon = null, mob/living/user as mob)
 
+	if(!damage) return 0
+
 	//visible_message("Hit debug. [damage] | [damagetype] | [def_zone] | [blocked] | [sharp] | [used_weapon]")
 	if((damagetype != BRUTE) && (damagetype != BURN))
 		..(damage, damagetype, def_zone, blocked)
@@ -250,7 +252,7 @@
 				S.add_blood(src)
 	*/
 
-	if(istype(used_weapon,/obj/item/projectile) && src.zone_sel.selecting == "chest" && usr:wear_suit.armor["bullet"] < 50) //We don't want to use the actual projectile item, so we spawn some shrapnel.
+	if(istype(used_weapon,/obj/item/projectile) && def_zone == "chest" && src.wear_suit.armor["bullet"] < 50) //We don't want to use the actual projectile item, so we spawn some shrapnel.
 		if(damagetype == BRUTE && prob(75))
 			var/obj/item/projectile/P = used_weapon
 			var/obj/item/weapon/shard/shrapnel/S = new()

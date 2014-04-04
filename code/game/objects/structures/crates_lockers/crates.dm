@@ -394,7 +394,7 @@
 			return
 		multi.is_used = 1
 		user << "\red Resetting circuitry(0/6)..."
-		playsound(user, 'lockreset.ogg', 50, 1)
+		playsound(user, 'sound/machines/lockreset.ogg', 50, 1)
 		var/obj/structure/closet/crate/secure/crat = src
 		src = null
 		if(do_mob(user, crat, 200))

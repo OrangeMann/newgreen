@@ -1,7 +1,7 @@
 /obj/item/device/telepadremote
 	icon = 'icons/obj/hacktool.dmi'
 	name = "telepad remote control"
-	icon_state = "hacktool-g"
+	icon_state = "hacktool_alt"
 	flags = FPRINT | TABLEPASS | CONDUCT
 	w_class = 2.0
 	m_amt = 50

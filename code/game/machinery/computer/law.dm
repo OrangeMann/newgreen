@@ -52,8 +52,8 @@
 		return
 
 /obj/machinery/computer/aiupload/newscreen
-	name = "Cyborg Upload"
-	desc = "Used to upload laws to Cyborgs."
+	name = "AI Upload"
+	desc = "Used to upload laws to AI."
 	icon_state = "aimainframe"
 	circuit = "/obj/item/weapon/circuitboard/aiupload"
 

@@ -1,10 +1,10 @@
 obj/item/weapon/gun/energy/freezegun
 	name = "Freezer gun"
 	desc = "Special gun to freeze some badasses"
-	icon = 'gun.dmi'
+	icon = 'icons/obj/gun.dmi'
 	icon_state = "freezegun"
 	item_state = "freezegun"
-	fire_sound = 'pulse3.ogg'
+	fire_sound = 'sound/weapons/pulse3.ogg'
 	flags =  FPRINT | TABLEPASS | CONDUCT | USEDELAY
 	charge_cost = 500
 	projectile_type = "/obj/item/projectile/freezeball"
@@ -47,7 +47,7 @@ obj/item/weapon/gun/energy/freezegun
 
 /obj/structure/freezedmob
 	name = "Pile of ice"
-	icon = 'device.dmi'
+	icon = 'icons/obj/device.dmi'
 	icon_state = "singlebath-bottom"
 	desc = "Big pile of ice. Some aborigens at waterless planets can kill for ot"
 	density = 1
@@ -174,12 +174,12 @@ obj/item/weapon/gun/energy/freezegun
 		src.occupant.gib()
 		del(src)
 	else
-		playsound(src.loc, 'Glasshit.ogg', 75, 1)
+		playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
 	return
 
 /obj/structure/freezedmob/proc/icecheck()
 	if (src.ice <= 0)
-		playsound(src.loc, 'Welder2.ogg', 100, 1)
+		playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
 		var/mob/living/M = src.occupant
 		src.occupant = null
 		M.loc = src.loc
@@ -307,7 +307,7 @@ proc/freezemob(mob/M as mob in world)
 /obj/machinery/freezer/freezer_platform
 	name = "Freezer platform"
 	desc = "Freezing and unfreezing people."
-	icon = 'freezer.dmi'
+	icon = 'icons/obj/freezer.dmi'
 	icon_state = "freezer_pad"
 	density = 0
 	opacity = 0

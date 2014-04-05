@@ -343,7 +343,7 @@
 					"\red You hear the nauseating crunch of bone and gristle on solid metal.")
 				H.UpdateDamageIcon()
 				H.updatehealth()
-				playsound(src.loc, 'tablehit1.ogg', 50, 1, -3)
+				playsound(src.loc, 'sound/weapons/tablehit1.ogg', 50, 1, -3)
 			return
 		G.affecting.loc = src.loc
 		G.affecting.Weaken(5)

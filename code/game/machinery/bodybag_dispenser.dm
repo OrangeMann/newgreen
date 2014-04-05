@@ -1,7 +1,7 @@
 /obj/machinery/bodybag_dispenser
 	name = "BodyBag Dispencer"
 	desc = "."
-	icon = 'bodybag.dmi'
+	icon = 'icons/obj/bodybag.dmi'
 	icon_state = "bodybagdispenser_on"
 	var/charge = 0
 	var/chargemax = 20

@@ -165,7 +165,9 @@
 	..()
 
 /obj/item/borg/upgrade/vanity/attackby(obj/item/weapon/W as obj)
-	if(istype(W, /obj/item/weapon/reagent_containers/syringe))
+	if(!istype(W, /obj/item/weapon/reagent_containers/syringe))
+		return
+
 	var/obj/item/weapon/reagent_containers/syringe/S = W
 
 	if(S.reagents.total_volume !=0)

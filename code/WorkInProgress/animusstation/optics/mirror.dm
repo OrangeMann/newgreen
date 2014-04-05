@@ -17,7 +17,7 @@
 // can clean with acetone+wipes
 
 /obj/optical/mirror
-	icon = 'optics.dmi'
+	icon = 'icons/obj/optics.dmi'
 	icon_state = "mirrorA"
 	dir = 1
 	desc = "A large, optical-grade mirror firmly mounted on a stand."

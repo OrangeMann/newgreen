@@ -233,7 +233,55 @@
 				overlays += "welded_open"
 		return
 
+/obj/machinery/door/firedoor/open()
+	if(!density)		return 1
+	if(operating > 0)	return
+	if(!ticker)			return 0
+	if(!operating)		operating = 1
 
+	do_animate("opening")
+	icon_state = "door0"
+	src.SetOpacity(0)
+	sleep(10)
+	src.layer = 2.6		//NO, FIREDOOR, NO!
+	src.density = 0
+	explosion_resistance = 0
+	update_icon()
+	SetOpacity(0)
+	update_nearby_tiles()
+
+	if(operating)	operating = 0
+
+	if(autoclose  && normalspeed)
+		spawn(150)
+			autoclose()
+	if(autoclose && !normalspeed)
+		spawn(5)
+			autoclose()
+
+	return 1
+
+
+/obj/machinery/door/firedoor/close()
+	if(density)	return 1
+	if(operating > 0)	return
+	operating = 1
+
+	do_animate("closing")
+	src.density = 1
+	explosion_resistance = initial(explosion_resistance)
+	src.layer = 3.0
+	sleep(10)
+	update_icon()
+	if(visible && !glass)
+		SetOpacity(1)
+	operating = 0
+	update_nearby_tiles()
+
+	var/obj/fire/fire = locate() in loc
+	if(fire)
+		del fire
+	return
 
 /obj/machinery/door/firedoor/border_only
 //These are playing merry hell on ZAS.  Sorry fellas :(

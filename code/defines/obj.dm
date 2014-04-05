@@ -282,7 +282,7 @@
 /obj/item/metroid_core
 	name = "metroid core"
 	desc = "A very slimy and tender part of a Metroid. They also legend to have \"magical powers\"."
-	icon = 'surgery.dmi'
+	icon = 'icons/obj/surgery.dmi'
 	icon_state = "metroid core"
 	flags = TABLEPASS | OPENCONTAINER
 	force = 1.0

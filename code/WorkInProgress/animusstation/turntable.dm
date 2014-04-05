@@ -1,5 +1,5 @@
 /sound/turntable/test
-	file = 'TestLoop1.ogg'
+	file = 'sound/misc/TestLoop1.ogg'
 	falloff = 2
 	repeat = 1
 
@@ -22,7 +22,7 @@ proc/add_turntable_soundtracks()
 /obj/machinery/party/turntable
 	name = "Turntable"
 	desc = "A jukebox is a partially automated music-playing device, usually a coin-operated machine, that will play a patron's selection from self-contained media."
-	icon = 'lasers2.dmi'
+	icon = 'icons/effects/lasers2.dmi'
 	icon_state = "Jukebox7"
 	var/playing = 0
 	anchored = 1
@@ -31,7 +31,7 @@ proc/add_turntable_soundtracks()
 /obj/machinery/party/mixer
 	name = "mixer"
 	desc = "A mixing board for mixing music"
-	icon = 'lasers2.dmi'
+	icon = 'icons/effects/lasers2.dmi'
 	icon_state = "mixer"
 	density = 0
 	anchored = 1
@@ -141,7 +141,7 @@ proc/add_turntable_soundtracks()
 /obj/machinery/party/lasermachine
 	name = "laser machine"
 	desc = "A laser machine that shoots lasers."
-	icon = 'lasers2.dmi'
+	icon = 'icons/effects/lasers2.dmi'
 	icon_state = "lasermachine"
 	anchored = 1
 	var/mirrored = 0
@@ -149,7 +149,7 @@ proc/add_turntable_soundtracks()
 /obj/effects/laser
 	name = "laser"
 	desc = "A laser..."
-	icon = 'lasers2.dmi'
+	icon = 'icons/effects/lasers2.dmi'
 	icon_state = "laserred1"
 	anchored = 1
 	layer = 4

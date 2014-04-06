@@ -79,6 +79,77 @@ var/global/normal_ooc_colour = "#002eb8"
 				C << "<font color='[normal_ooc_colour]'><span class='ooc'><span class='prefix'>OOC:</span> <EM>[src.key]:</EM> <span class='message'>[msg]</span></span></font>"
 			*/
 
+/client/proc/looc(msg as text)
+	set name = "LOOC"
+	set category = "OOC"
+
+	if(say_disabled)	//This is here to try to identify lag problems
+		usr << "\red Speech is currently admin-disabled."
+		return
+
+	if(!mob)	return
+	if(IsGuestKey(key))
+		src << "Guests may not use LOOC."
+		return
+
+	if(ticker.current_state != GAME_STATE_PLAYING)
+		src << "You can use LOOC only at game"
+
+	msg = copytext(sanitize(msg), 1, MAX_MESSAGE_LEN)
+	if(!msg)	return
+
+	if(!(prefs.toggles & CHAT_OOC))
+		src << "\red You have OOC muted."
+		return
+
+	if(!holder)
+		if(!looc_allowed)
+			src << "\red LOOC is globally muted"
+			return
+		if(!dooc_allowed && (mob.stat == DEAD))
+			usr << "\red OOC for dead mobs has been turned off."
+			return
+		if(prefs.muted & MUTE_OOC)
+			src << "\red You cannot use OOC (muted)."
+			return
+		if(handle_spam_prevention(msg,MUTE_OOC))
+			return
+		if(findtext(msg, "byond://"))
+			src << "<B>Advertising other servers is not allowed.</B>"
+			log_admin("[key_name(src)] has attempted to advertise in OOC: [msg]")
+			message_admins("[key_name_admin(src)] has attempted to advertise in OOC: [msg]")
+			return
+
+	log_looc("[mob.name]/[key] : [msg]")
+
+	var/display_colour = "#6DB3FF"
+	if(holder && !holder.fakekey)
+		display_colour = "#6DB3FF"
+		if(holder.rights & R_MOD && !(holder.rights & R_ADMIN))
+			display_colour = "#898FFF"
+		else if(holder.rights & R_ADMIN)
+			display_colour = "#898FFF"
+
+
+	var/list/heard = list()
+	var/list/mobs = range(mob, 7)
+
+	for(var/client/C in clients)
+		if((C.mob && (C.mob in mobs)) || (C.holder && (C.holder.prefs.toggles & CHAT_LOOC_GLOBAL)))
+			heard.Add(C)
+
+	for(var/client/C in heard)
+		var/display_name = src.key
+		if(holder)
+			if(holder.fakekey)
+				if(C.holder)
+					display_name = "[holder.fakekey]/([src.key])"
+				else
+					display_name = holder.fakekey
+		C << "<font color='[display_colour]'><span class='looc'><span class='prefix'>LOOC:</span> <EM>[display_name]:</EM> <span class='message'>[msg]</span></span></font>"
+
+
+
 /client/proc/set_ooc(newColor as color)
 	set name = "Set Player OOC Colour"
 	set desc = "Set to yellow for eye burning goodness."

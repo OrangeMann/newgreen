@@ -1329,5 +1329,5 @@
 #include "code\ZAS\ZAS_Zones.dm"
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
-#include "maps\spacebattle.dmm"
+#include "maps\fernflower_classic.dmm"
 // END_INCLUDE

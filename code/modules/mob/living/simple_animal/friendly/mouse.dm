@@ -86,30 +86,22 @@
 		else
 			welded = 1
 	if(vent_found)
-		if(vent_found.network&&vent_found.network.normal_members.len)
+		if(vent_found.network && vent_found.network.normal_members.len)
 			var/list/vents = list()
 			for(var/obj/machinery/atmospherics/unary/vent_pump/temp_vent in vent_found.network.normal_members)
-				if(temp_vent.loc == loc)
+				if(temp_vent.loc == loc || temp_vent.z != loc.z)
 					continue
 				vents.Add(temp_vent)
-			var/list/choices = list()
-			for(var/obj/machinery/atmospherics/unary/vent_pump/vent in vents)
-				if(vent.loc.z != loc.z)
-					continue
-				var/atom/a = get_turf(vent)
-				choices.Add(a.loc)
 			var/turf/startloc = loc
-			var/obj/selection = input("Select a destination.", "Duct System") in choices
-			var/selection_position = choices.Find(selection)
-			if(loc==startloc)
-				var/obj/target_vent = vents[selection_position]
-				if(target_vent)
+			var/obj/selection = input("Select a destination.", "Duct System") in vents
+			if(loc == startloc)
+				if(selection)
 					/*
 					for(var/mob/O in oviewers(src, null))
 						if ((O.client && !( O.blinded )))
 							O.show_message(text("<B>[src] scrambles into the ventillation ducts!</B>"), 1)
 					*/
-					loc = target_vent.loc
+					loc = get_turf(selection)
 			else
 				src << "\blue You need to remain still while entering a vent."
 		else

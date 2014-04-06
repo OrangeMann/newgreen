@@ -165,25 +165,27 @@ var/global/datum/controller/gameticker/ticker
 		var/obj/structure/stool/bed/temp_buckle = new(src)
 		//Incredibly hackish. It creates a bed within the gameticker (lol) to stop mobs running around
 		if(station_missed)
-			for(var/mob/living/M in living_mob_list)
-				M.buckled = temp_buckle				//buckles the mob so it can't do anything
-				if(M.client)
-					M.client.screen += cinematic	//show every client the cinematic
-		else	//nuke kills everyone on z-level 1 to prevent "hurr-durr I survived"
-			for(var/mob/living/M in living_mob_list)
-				M.buckled = temp_buckle
-				if(M.client)
-					M.client.screen += cinematic
-
-				switch(M.z)
-					if(0)	//inside a crate or something
-						var/turf/T = get_turf(M)
-						if(T && T.z==1)				//we don't use M.death(0) because it calls a for(/mob) loop and
-							M.health = 0
-							M.stat = DEAD
-					if(1)	//on a z-level 1 turf.
-						M.health = 0
-						M.stat = DEAD
+			for(var/client/C)
+				C.screen += cinematic
+				if(C.mob)
+					C.mob.buckled = temp_buckle //buckles the mob so it can't do anything
+		else
+			//nuke kills everyone on z-level 1 to prevent "hurr-durr I survived"
+			for(var/client/C)
+				C.screen += cinematic
+				if(C.mob)
+					C.mob.buckled = temp_buckle //buckles the mob so it can't do anything
+					if(istype(C.mob, /mob/living))
+						var/mob/living/M = C.mob
+						switch(C.mob.z)
+							if(0) //inside a crate or something
+								var/turf/T = get_turf(C.mob)
+								if(T && T.z==1) //we don't use M.death(0) because it calls a for(/mob) loop and
+									M.health = 0
+									M.stat = DEAD
+							if(1) //on a z-level 1 turf.
+								M.health = 0
+								M.stat = DEAD
 
 		//Now animate the cinematic
 		switch(station_missed)
@@ -271,7 +273,7 @@ var/global/datum/controller/gameticker/ticker
 	proc/equip_characters()
 		var/captainless=1
 		for(var/mob/living/carbon/human/player in player_list)
-			if(player && player.mind && player.mind.assigned_role)
+			if(!isnull(player) && !isnull(player.mind) && !isnull(player.mind.assigned_role))
 				if(player.mind.assigned_role == "Captain")
 					captainless=0
 				if(player.mind.assigned_role != "MODE")

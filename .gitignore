@@ -17,3 +17,5 @@ info.json
 /data/ban_unban_log.txt
 /data/investigate
 /maps/backup
+/tools/Runtime Condenser/Output.txt
+/tools/Runtime Condenser/Input.txt

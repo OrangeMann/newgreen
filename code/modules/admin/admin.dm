@@ -28,6 +28,7 @@ var/global/floorIsLava = 0
 	set category = "Admin"
 	set name = "Show Player Panel"
 	set desc="Edit player (respawn, ban, heal, etc)"
+	set hidden = 1
 
 	if(!M)
 		usr << "You seem to be selecting a mob that doesn't exist anymore."

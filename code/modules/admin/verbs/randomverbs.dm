@@ -491,6 +491,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 /client/proc/cmd_admin_delete(atom/O as obj|mob|turf in world)
 	set category = "Admin"
 	set name = "Delete"
+	set hidden = 1
 
 	if (!holder)
 		src << "Only administrators may use this command."

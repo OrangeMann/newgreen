@@ -53,7 +53,7 @@
 		user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [name] to stab [M.name] ([M.ckey])</font>")
 
 		//log_admin("ATTACK: [user] ([user.ckey]) stabbed [M] ([M.ckey]) with [src].")
-		message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[user]'>JMP</A>) stabbed [M] ([M.ckey]) with [src].", 0)
+		msg_admin_attack("ATTACK: [user] ([user.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[user]'>JMP</A>) stabbed [M] ([M.ckey]) with [src].", 0)
 		log_attack("[user.name] ([user.ckey]) Used the [src.name] to stab [M.name] ([M.ckey])")
 
 	return
@@ -95,7 +95,7 @@
 	M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been stabbed with [name]  by [user.name] ([user.ckey]). Reagents: [contained]</font>")
 	user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [name] to stab [M.name] ([M.ckey]). Reagents: [contained]</font>")
 
-	message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[user]'>JMP</A>) stabbed [M] ([M.ckey]) with [src]. Reagents: [contained]", 0)
+	msg_admin_attack("ATTACK: [user] ([user.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[user]'>JMP</A>) stabbed [M] ([M.ckey]) with [src]. Reagents: [contained]", 0)
 	log_attack("[user.name] ([user.ckey]) Used the [src.name] to stab [M.name] ([M.ckey]). Reagents: [contained]")
 
 	return
@@ -127,7 +127,7 @@
 		M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been stabbed with [name]  by [user.name] ([user.ckey]). Reagents: [contained]</font>")
 		user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [name] to stab [M.name] ([M.ckey]). Reagents: [contained]</font>")
 
-		message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[user]'>JMP</A>) stabbed [M] ([M.ckey]) with [src]. Reagents: [contained]", 0)
+		msg_admin_attack("ATTACK: [user] ([user.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[user]'>JMP</A>) stabbed [M] ([M.ckey]) with [src]. Reagents: [contained]", 0)
 		log_attack("[user.name] ([user.ckey]) Used the [src.name] to stab [M.name] ([M.ckey]). Reagents: [contained]")
 
 	return

@@ -81,7 +81,7 @@
 			M.take_organ_damage(src:throwforce)
 
 			log_attack("<font color='red'>[hit_atom] ([M.ckey]) was hit by [src] thrown by ([src.fingerprintslast])</font>")
-			log_admin("ATTACK: [hit_atom] ([M.ckey]) was hit by [src] thrown by ([src.fingerprintslast])")
+			//log_admin("ATTACK: [hit_atom] ([M.ckey]) was hit by [src] thrown by ([src.fingerprintslast])")
 			msg_admin_attack("ATTACK: [hit_atom] ([M.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[M]'>JMP</A>) was hit by [src] thrown by ([src.fingerprintslast])", 2)
 
 	else if(isobj(hit_atom))

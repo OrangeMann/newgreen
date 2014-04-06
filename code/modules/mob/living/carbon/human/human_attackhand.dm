@@ -35,14 +35,14 @@
 						src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been stungloved by [M.name] ([M.ckey])</font>")
 
 						//log_admin("ATTACK: [src] ([src.ckey]) stungloved [M] ([M.ckey]).")
-						message_admins("ATTACK: [M] ([M.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src]'>JMP</A>) stungloved [src] ([src.ckey]).", 0)
+						msg_admin_attack("ATTACK: [M] ([M.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src]'>JMP</A>) stungloved [src] ([src.ckey]).", 0)
 						log_attack("[M] ([M.ckey]) stungloved [src] ([src.ckey])")
 					else
 						visible_message("\red <B>[src] has been touched with the stun gloves by \himself!</B>")
 						src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been stungloved by [gender_text]</font>")
 
 						//log_admin("ATTACK: [src] ([src.ckey]) stungloved [M] ([M.ckey]).")
-						message_admins("ATTACK: [src] ([src.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src]'>JMP</A>) stungloved [gender_text].", 0)
+						msg_admin_attack("ATTACK: [src] ([src.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src]'>JMP</A>) stungloved [gender_text].", 0)
 						log_attack("[src] ([src.ckey]) stungloved [gender_text]")
 
 					var/armorblock = run_armor_check(M.zone_sel.selecting, "energy")
@@ -52,11 +52,11 @@
 					M << "\red Not enough charge! "
 					if(M != src)
 						visible_message("\red <B>[src] has been touched with the stun gloves by [M]!</B>")
-						message_admins("ATTACK: [M] ([M.ckey](<A HREF='?_src_=holder;adminplayerobservejump=\ref[src]'>JMP</A>) was trying to stunglove [src] ([src.ckey]).", 0)
+						msg_admin_attack("ATTACK: [M] ([M.ckey](<A HREF='?_src_=holder;adminplayerobservejump=\ref[src]'>JMP</A>) was trying to stunglove [src] ([src.ckey]).", 0)
 						log_attack("[M] ([M.ckey] was trying to stunglove [src] ([src.ckey])")
 					else
 						visible_message("\red <B>[src] has been touched with the stun gloves by \himself!</B>")
-						message_admins("ATTACK: [src] ([src.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src]'>JMP</A>) was trying to stunglove [gender_text].", 0)
+						msg_admin_attack("ATTACK: [src] ([src.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src]'>JMP</A>) was trying to stunglove [gender_text].", 0)
 						log_attack("[src] ([src.ckey]) was trying to stunglove [gender_text]")
 				return
 
@@ -153,12 +153,12 @@
 				M.attack_log += text("\[[time_stamp()]\] <font color='red'>[M.species.attack_verb]ed [src.name] ([src.ckey])</font>")
 				src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been [M.species.attack_verb]ed by [M.name] ([M.ckey])</font>")
 
-				message_admins("ATTACK: [M.name] ([M.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[M]'>JMP</A>) [M.species.attack_verb]ed [src.name] ([src.ckey])",0)
+				msg_admin_attack("ATTACK: [M.name] ([M.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[M]'>JMP</A>) [M.species.attack_verb]ed [src.name] ([src.ckey])",0)
 				log_attack("[M.name] ([M.ckey]) [M.species.attack_verb]ed [src.name] ([src.ckey])")
 			else
 				src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been [M.species.attack_verb]ed by [gender_text]</font>")
 
-				message_admins("ATTACK: [src.name] ([src.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src]'>JMP</A>) [src.species.attack_verb]ed [gender_text]",0)
+				msg_admin_attack("ATTACK: [src.name] ([src.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src]'>JMP</A>) [src.species.attack_verb]ed [gender_text]",0)
 				log_attack("[src.name] ([src.ckey]) [src.species.attack_verb]ed [gender_text]")
 
 			var/damage = rand(0, 5)//BS12 EDIT
@@ -207,12 +207,12 @@
 				M.attack_log += text("\[[time_stamp()]\] <font color='red'>Disarmed [src.name] ([src.ckey])</font>")
 				src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been disarmed by [M.name] ([M.ckey])</font>")
 
-				message_admins("ATTACK: [M.name] ([M.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[M]'>JMP</A>) disarmed [src.name] ([src.ckey])",0)
+				msg_admin_attack("ATTACK: [M.name] ([M.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[M]'>JMP</A>) disarmed [src.name] ([src.ckey])",0)
 				log_attack("[M.name] ([M.ckey]) disarmed [src.name] ([src.ckey])")
 			else
 				src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been disarmed by [gender_text]</font>")
 
-				message_admins("ATTACK: [src.name] ([src.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src]'>JMP</A>) disarmed [gender_text]",0)
+				msg_admin_attack("ATTACK: [src.name] ([src.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src]'>JMP</A>) disarmed [gender_text]",0)
 				log_attack("[src.name] ([src.ckey]) disarmed [gender_text]")
 
 

@@ -56,7 +56,7 @@
 	user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to flash [victim_full]</font>")
 
 	//log_admin("ATTACK: [user] ([user.ckey]) flashed [M] ([M.ckey]) with [src].")
-	message_admins("ATTACK: [user] ([user.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[user]'>JMP</A>) flashed [victim_full] with [src].", 0)
+	msg_admin_attack("ATTACK: [user] ([user.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[user]'>JMP</A>) flashed [victim_full] with [src].", 0)
 	log_attack("[user.name] ([user.ckey]) Used the [src.name] to flash [victim_full]")
 
 

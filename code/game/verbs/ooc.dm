@@ -135,7 +135,7 @@ var/global/normal_ooc_colour = "#002eb8"
 	var/list/mobs = range(mob, 7)
 
 	for(var/client/C in clients)
-		if((C.mob && (C.mob in mobs)) || (C.holder && (C.holder.prefs.toggles & CHAT_LOOC_GLOBAL)))
+		if((C.mob && (C.mob in mobs)) || (C.holder && (C.prefs.toggles & CHAT_LOOC_GLOBAL)))
 			heard.Add(C)
 
 	for(var/client/C in heard)

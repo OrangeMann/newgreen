@@ -44,10 +44,10 @@
 	flick("pdoorc0", src)
 	src.icon_state = "pdoor0"
 	src.SetOpacity(0)
+	playsound(src.loc, 'sound/machines/poddoor.ogg', 30, 1)
 	sleep(10)
 	src.density = 0
 	update_nearby_tiles()
-	playsound(src.loc, 'sound/machines/poddoor.ogg', 30, 1)
 
 	if(operating == 1) //emag again
 		src.operating = 0

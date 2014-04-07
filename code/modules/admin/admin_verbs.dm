@@ -533,9 +533,9 @@ var/list/admin_verbs_events = list(
 	set name = "Drop Bomb"
 	set desc = "Cause an explosion of varying strength at your location."
 
-	var/turf/epicenter = mob.loc
 	var/list/choices = list("Small Bomb", "Medium Bomb", "Big Bomb", "Custom Bomb")
-	var/choice = input("What size explosion would you like to produce?") in choices
+	var/choice = input("What size explosion would you like to produce?") as null|anything in choices
+	var/turf/epicenter = mob.loc
 	switch(choice)
 		if(null)
 			return 0

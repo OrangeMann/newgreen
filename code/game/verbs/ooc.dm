@@ -79,7 +79,7 @@ var/global/normal_ooc_colour = "#002eb8"
 				C << "<font color='[normal_ooc_colour]'><span class='ooc'><span class='prefix'>OOC:</span> <EM>[src.key]:</EM> <span class='message'>[msg]</span></span></font>"
 			*/
 
-/client/proc/looc(msg as text)
+/client/verb/looc(msg as text)
 	set name = "LOOC"
 	set category = "OOC"
 

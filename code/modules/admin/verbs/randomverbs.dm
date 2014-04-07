@@ -489,7 +489,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	feedback_add_details("admin_verb","CCR") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/cmd_admin_delete(atom/O as obj|mob|turf in world)
-	set category = "Admin"
+	set category = null
 	set name = "Delete"
 
 	if (!holder)

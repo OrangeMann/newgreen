@@ -45,6 +45,10 @@
 	if (config.log_ooc)
 		diary << "\[[time_stamp()]]OOC: [text]"
 
+/proc/log_looc(text)
+	if (config.log_looc)
+		diary << "\[[time_stamp()]]LOOC: [text]"
+
 /proc/log_whisper(text)
 	if (config.log_whisper)
 		diary << "\[[time_stamp()]]WHISPER: [text]"

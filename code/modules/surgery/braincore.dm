@@ -9,7 +9,7 @@
 	blood_level = 1
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		if(!istype(target))
-			return
+			return 0
 		return target_zone == "head" && hasorgans(target)
 
 /datum/surgery_step/brain/saw_skull
@@ -182,7 +182,7 @@ mob/living/carbon/human
 /datum/surgery_step/metroid/
 	can_use(mob/living/user, mob/living/carbon/metroid/target, target_zone, obj/item/tool)
 		if(!istype(target))
-			return
+			return 0
 		return istype(target, /mob/living/carbon/metroid) && target.stat == 2
 
 /datum/surgery_step/metroid/cut_flesh

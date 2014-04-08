@@ -80,6 +80,11 @@ proc/add_turntable_soundtracks()
 	onclose(user, "turntable")
 	return
 
+/obj/machinery/party/turntable/power_change()
+	var/list/href_list = list()
+	href_list["off"] = 1
+	Topic("off", href_list)
+
 /obj/machinery/party/turntable/Topic(href, href_list)
 	if(..())
 		return

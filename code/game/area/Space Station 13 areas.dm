@@ -1183,6 +1183,18 @@ proc/process_ghost_teleport_locs()
 	name = "\improper Prison Wing"
 	icon_state = "sec_prison"
 
+/area/security/prison/lobby
+	name = "\improper Prison Lobby"
+	icon_state = "sec_prison"
+
+/area/security/prison/crew
+	name = "\improper Prison Security Room"
+	icon_state = "sec_prison"
+
+/area/security/prison/observ
+	name = "\improper Prison Observing Room"
+	icon_state = "sec_prison"
+
 /area/security/warden
 	name = "\improper Warden"
 	icon_state = "Warden"
@@ -1255,6 +1267,14 @@ proc/process_ghost_teleport_locs()
 /area/security/vacantoffice2
 	name = "\improper Vacant Office"
 	icon_state = "security"
+
+/area/turret_protected/scom
+	name = "\improper Prison Satellite"
+	icon_state = "green"
+
+/area/turret_protected/sfoyer
+	name = "\improper Prison Foyer"
+	icon_state = "yellow"
 
 /area/quartermaster
 	name = "\improper Quartermasters"

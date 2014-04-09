@@ -723,6 +723,9 @@ proc
 			addY1 = min(flatY1, I:pixel_y+1)
 			addY2 = max(flatY2, I:pixel_y+add.Height())
 
+			if(flatX2 > 1000 || flatY2 > 1000 || addX2 > 1000 || addY2 > 1000)
+				log_admin("Error in getFlatIcon proc. Second value is overflow. [A.name]([A.x], [A.y], [A.z])")
+
 			if(addX1!=flatX1 || addX2!=flatX2 || addY1!=flatY1 || addY2!=flatY2)
 				// Resize the flattened icon so the new icon fits
 				flat.Crop(addX1-flatX1+1, addY1-flatY1+1, addX2-flatX1+1, addY2-flatY1+1)

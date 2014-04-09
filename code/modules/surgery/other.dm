@@ -18,7 +18,7 @@
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		if(!istype(target))
-			return
+			return 0
 		var/datum/organ/external/affected = target.get_organ(target_zone)
 
 		var/internal_bleeding = 0

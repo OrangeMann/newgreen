@@ -54,7 +54,8 @@ var/list/admin_verbs_admin = list(
 	/client/proc/investigate_show,		/*various admintools for investigation. Such as a singulo grief-log*/
 	/client/proc/secrets,
 	/datum/admins/proc/toggleooc,		/*toggles ooc on/off for everyone*/
-	/client/verb/listen_lgooc,	/*toggles global hearing of looc*/
+	/datum/admins/proc/togglelooc		/*toggles looc on/off for everyone*/
+	/client/verb/listen_lgooc,			/*toggles global hearing of looc*/
 	/datum/admins/proc/toggleoocdead,	/*toggles ooc on/off for everyone who is dead*/
 	/client/proc/game_panel,			/*game panel, allows to change game-mode etc*/
 	/client/proc/cmd_admin_say,			/*admin-only ooc chat*/

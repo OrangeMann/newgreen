@@ -2386,7 +2386,7 @@
 
 	// player info stuff
 
-	if(href_list["add_player_info"])
+	else if(href_list["add_player_info"])
 		var/key = href_list["add_player_info"]
 		var/add = input("Add Player Info") as null|text
 		if(!add) return
@@ -2394,14 +2394,14 @@
 		notes_add(key,add,usr)
 		show_player_info(key)
 
-	if(href_list["remove_player_info"])
+	else if(href_list["remove_player_info"])
 		var/key = href_list["remove_player_info"]
 		var/index = text2num(href_list["remove_index"])
 
 		notes_del(key, index)
 		show_player_info(key)
 
-	if(href_list["notes"])
+	else if(href_list["notes"])
 		var/ckey = href_list["ckey"]
 		if(!ckey)
 			var/mob/M = locate(href_list["mob"])
@@ -2415,7 +2415,7 @@
 				PlayerNotesPage(text2num(href_list["index"]))
 		return
 
-	if(href_list["job_lock"])
+	else if(href_list["job_lock"])
 		if(href_list["select"])
 			var/datum/job/J = locate(href_list["select"])
 			J.locked = !J.locked
@@ -2433,12 +2433,12 @@
 		if (href_list["refresh"])
 			job_lock()
 
-	if(href_list["unbuckle_mob"])
+	else if(href_list["unbuckle_mob"])
 		var/mob/living/M = locate(href_list["unbuckle_mob"])
 		if (M)
 			M.unbuckle()
 
-	if(href_list["show_mob_attacklog"])
+	else if(href_list["show_mob_attacklog"])
 		var/mob/M = locate(href_list["show_mob_attacklog"])
 		var/text = "No attack log"
 		if (M.attack_log)

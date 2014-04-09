@@ -8,7 +8,7 @@
 	priority = 1
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		if(!istype(target))
-			return
+			return 0
 		var/datum/organ/external/affected = target.get_organ(target_zone)
 		return affected.open == 2 && !(affected.status & ORGAN_BLEEDING) && (target_zone != "chest" || target.op_stage.ribcage == 2)
 

@@ -717,8 +717,8 @@ var/global/floorIsLava = 0
 
 /datum/admins/proc/toggleooc()
 	set category = "Server"
-	set desc="Toggle dis bitch"
-	set name="Toggle OOC"
+	set desc = "Toggle dis bitch"
+	set name = "Toggle OOC"
 	ooc_allowed = !( ooc_allowed )
 	if (ooc_allowed)
 		world << "<B>The OOC channel has been globally enabled!</B>"
@@ -730,8 +730,8 @@ var/global/floorIsLava = 0
 
 /datum/admins/proc/tooglelooc()
 	set category = "Server"
-	set desc="Toggle dis bitch"
-	set name="Toggle LOOC"
+	set desc = "Toggle dis bitch"
+	set name = "Toggle LOOC"
 	looc_allowed = !( looc_allowed )
 	if (looc_allowed)
 		world << "<B>The LOOC channel has been globally enabled!</B>"

@@ -728,7 +728,7 @@ var/global/floorIsLava = 0
 	message_admins("[key_name_admin(usr)] toggled OOC.", 1)
 	feedback_add_details("admin_verb","TOOC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-/datum/admins/proc/tooglelooc()
+/datum/admins/proc/togglelooc()
 	set category = "Server"
 	set desc = "Toggle dis bitch"
 	set name = "Toggle LOOC"
@@ -1001,7 +1001,7 @@ var/global/floorIsLava = 0
 		if(!chosen)
 			return
 
-	new chosen(usr.loc)
+	new chosen(get_turf(usr))
 
 	log_admin("[key_name(usr)] spawned [chosen] at ([usr.x],[usr.y],[usr.z])")
 	feedback_add_details("admin_verb","SA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!

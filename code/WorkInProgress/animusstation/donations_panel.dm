@@ -280,7 +280,12 @@ var/list/datum/spawn_item/donator_items = list()
 		if(!I)
 			return
 
+		if(!istype(I))
+			message_admins("[usr.name] tried to spawn custom item. (Cache Inject!)")
+			return
+
 		if(!(I in donator_items))
+			message_admins("[usr.name] tried to spawn item have not in donator_items. (Cache Inject!)")
 			return
 
 		if(I.cost > money)
@@ -297,6 +302,9 @@ var/list/datum/spawn_item/donator_items = list()
 
 		if(owner.mob.stat)
 			return
+
+
+		message_admins("[usr.name]([usr.ckey]) spawned [I.name]")
 		money -= I.cost
 		I.give_item(owner.mob)
 		owner.cmd_donator_panel()

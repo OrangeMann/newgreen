@@ -30,46 +30,46 @@
 	var/newscaster_announcements = null
 	var/uplink_welcome = "Syndicate Uplink Console:"
 	var/uplink_uses = 10
-	var/list/datum/uplink_item/uplink_items = list()
+	var/list/datum/spawn_item/uplink_items = list()
 
 /datum/game_mode/proc/generate_uplink_items()
 	//Highly Visible and Dangerous Weapons
-	uplink_items.Add(new /datum/uplink_item/revolver)
-	uplink_items.Add(new /datum/uplink_item/revolver_ammo)
-	uplink_items.Add(new /datum/uplink_item/crossbow)
-	uplink_items.Add(new /datum/uplink_item/sword)
-	uplink_items.Add(new /datum/uplink_item/syndicate_bundle)
-	uplink_items.Add(new /datum/uplink_item/emp_grenades)
-	uplink_items.Add(new /datum/uplink_item/syndicate_bomb)
+	uplink_items.Add(new /datum/spawn_item/revolver)
+	uplink_items.Add(new /datum/spawn_item/revolver_ammo)
+	uplink_items.Add(new /datum/spawn_item/crossbow)
+	uplink_items.Add(new /datum/spawn_item/sword)
+	uplink_items.Add(new /datum/spawn_item/syndicate_bundle)
+	uplink_items.Add(new /datum/spawn_item/emp_grenades)
+	uplink_items.Add(new /datum/spawn_item/syndicate_bomb)
 	//Stealthy and Inconspicuous Weapons
-	uplink_items.Add(new /datum/uplink_item/paralysis_pen)
-	uplink_items.Add(new /datum/uplink_item/syndicate_soap)
-	uplink_items.Add(new /datum/uplink_item/detomatrix)
+	uplink_items.Add(new /datum/spawn_item/paralysis_pen)
+	uplink_items.Add(new /datum/spawn_item/syndicate_soap)
+	uplink_items.Add(new /datum/spawn_item/detomatrix)
 	//Stealth and Camouflage Items
-	uplink_items.Add(new /datum/uplink_item/chameleon_kit)
-	uplink_items.Add(new /datum/uplink_item/syndicate_shoes)
-	uplink_items.Add(new /datum/uplink_item/agentcard)
-	uplink_items.Add(new /datum/uplink_item/voice_changer)
-	uplink_items.Add(new /datum/uplink_item/chameleon_projector)
-	uplink_items.Add(new /datum/uplink_item/cloaking_device)
+	uplink_items.Add(new /datum/spawn_item/chameleon_kit)
+	uplink_items.Add(new /datum/spawn_item/syndicate_shoes)
+	uplink_items.Add(new /datum/spawn_item/agentcard)
+	uplink_items.Add(new /datum/spawn_item/voice_changer)
+	uplink_items.Add(new /datum/spawn_item/chameleon_projector)
+	uplink_items.Add(new /datum/spawn_item/cloaking_device)
 	//Devices and Tools
-	uplink_items.Add(new /datum/uplink_item/emag)
-//	uplink_items.Add(new /datum/uplink_item/hacktool) Where is your hacktool?
-	uplink_items.Add(new /datum/uplink_item/toolbox)
-	uplink_items.Add(new /datum/uplink_item/thermal)
-	uplink_items.Add(new /datum/uplink_item/binary)
-	uplink_items.Add(new /datum/uplink_item/aimodule)
-	uplink_items.Add(new /datum/uplink_item/c4)
-	uplink_items.Add(new /datum/uplink_item/powersink)
-	uplink_items.Add(new /datum/uplink_item/singularity_beacon)
-	uplink_items.Add(new /datum/uplink_item/teleporter_board)
+	uplink_items.Add(new /datum/spawn_item/emag)
+//	uplink_items.Add(new /datum/spawn_item/hacktool) Where is your hacktool?
+	uplink_items.Add(new /datum/spawn_item/toolbox)
+	uplink_items.Add(new /datum/spawn_item/thermal)
+	uplink_items.Add(new /datum/spawn_item/binary)
+	uplink_items.Add(new /datum/spawn_item/aimodule)
+	uplink_items.Add(new /datum/spawn_item/c4)
+	uplink_items.Add(new /datum/spawn_item/powersink)
+	uplink_items.Add(new /datum/spawn_item/singularity_beacon)
+	uplink_items.Add(new /datum/spawn_item/teleporter_board)
 	//Implants
-	uplink_items.Add(new /datum/uplink_item/imp_freedom)
-	uplink_items.Add(new /datum/uplink_item/imp_uplink)
-	uplink_items.Add(new /datum/uplink_item/imp_explosive)
-	uplink_items.Add(new /datum/uplink_item/imp_explosive)
+	uplink_items.Add(new /datum/spawn_item/imp_freedom)
+	uplink_items.Add(new /datum/spawn_item/imp_uplink)
+	uplink_items.Add(new /datum/spawn_item/imp_explosive)
+	uplink_items.Add(new /datum/spawn_item/imp_explosive)
 	//Badassery
-	uplink_items.Add(new /datum/uplink_item/balloon)
+	uplink_items.Add(new /datum/spawn_item/balloon)
 
 
 /datum/game_mode/proc/announce() //to be calles when round starts

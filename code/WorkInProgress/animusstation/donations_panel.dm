@@ -1,4 +1,5 @@
 var/list/donators = list()
+var/list/datum/spawn_item/donator_items = list()
 
 /proc/load_donators()
 	if(donators.len)
@@ -14,6 +15,85 @@ var/list/donators = list()
 	query.Execute()
 	while(query.NextRow())
 		donators[query.item[1]] = round(query.item[2])
+
+	load_donator_items()
+
+/proc/load_donator_items()
+	//Hats
+	donator_items.Add(new /datum/spawn_item/swat_cap)
+	donator_items.Add(new /datum/spawn_item/collectable_pete_hat)
+	donator_items.Add(new /datum/spawn_item/collectable_metroid_hat)
+	donator_items.Add(new /datum/spawn_item/collectable_xeno_hat)
+	donator_items.Add(new /datum/spawn_item/collectable_top_hat)
+	donator_items.Add(new /datum/spawn_item/kitty_ears)
+	donator_items.Add(new /datum/spawn_item/ushanka)
+	//Personal Stuff
+	donator_items.Add(new /datum/spawn_item/eye_patch)
+	donator_items.Add(new /datum/spawn_item/cane)
+	donator_items.Add(new /datum/spawn_item/golden_pen)
+	donator_items.Add(new /datum/spawn_item/zippo)
+	donator_items.Add(new /datum/spawn_item/engraved_zippo)
+	donator_items.Add(new /datum/spawn_item/golden_zippo)
+	donator_items.Add(new /datum/spawn_item/cigarette_packet)
+	donator_items.Add(new /datum/spawn_item/dromedaryco_packet)
+	donator_items.Add(new /datum/spawn_item/premium_havanian_cigar)
+	donator_items.Add(new /datum/spawn_item/electronic_cigarette)
+	donator_items.Add(new /datum/spawn_item/beer_bottle)
+	donator_items.Add(new /datum/spawn_item/captain_flask)
+	donator_items.Add(new /datum/spawn_item/pai_card)
+	donator_items.Add(new /datum/spawn_item/teapot)
+	donator_items.Add(new /datum/spawn_item/three_mile_island_ice_tea)
+	donator_items.Add(new /datum/spawn_item/plague_doctor_set)
+	//Shoes
+	donator_items.Add(new /datum/spawn_item/clown_shoes)
+	donator_items.Add(new /datum/spawn_item/rainbow_shoes)
+	donator_items.Add(new /datum/spawn_item/cyborg_shoes)
+	donator_items.Add(new /datum/spawn_item/laceups_shoes)
+	donator_items.Add(new /datum/spawn_item/leather_shoes)
+	donator_items.Add(new /datum/spawn_item/red_shoes)
+	donator_items.Add(new /datum/spawn_item/green_shoes)
+	donator_items.Add(new /datum/spawn_item/blue_shoes)
+	donator_items.Add(new /datum/spawn_item/yellow_shoes)
+	donator_items.Add(new /datum/spawn_item/purple_shoes)
+	donator_items.Add(new /datum/spawn_item/wooden_sandals)
+	donator_items.Add(new /datum/spawn_item/fluffy_slippers)
+	//Jumpsuits
+	donator_items.Add(new /datum/spawn_item/vice_policeman)
+	donator_items.Add(new /datum/spawn_item/rainbow_suit)
+	donator_items.Add(new /datum/spawn_item/lightblue_suit)
+	donator_items.Add(new /datum/spawn_item/aqua_suit)
+	donator_items.Add(new /datum/spawn_item/purple_suit)
+	donator_items.Add(new /datum/spawn_item/lightpurple_suit)
+	donator_items.Add(new /datum/spawn_item/lightbrown_suit)
+	donator_items.Add(new /datum/spawn_item/brown_suit)
+	donator_items.Add(new /datum/spawn_item/darkblue_suit)
+	donator_items.Add(new /datum/spawn_item/lightred_suit)
+	donator_items.Add(new /datum/spawn_item/darkred_suit)
+	donator_items.Add(new /datum/spawn_item/grim_jacket)
+	donator_items.Add(new /datum/spawn_item/black_jacket)
+	donator_items.Add(new /datum/spawn_item/police_uniform)
+	donator_items.Add(new /datum/spawn_item/scratched_suit)
+	donator_items.Add(new /datum/spawn_item/downy_jumpsuit)
+	donator_items.Add(new /datum/spawn_item/tacticool_turtleneck)
+	//Gloves
+	donator_items.Add(new /datum/spawn_item/white)
+	donator_items.Add(new /datum/spawn_item/rainbow)
+	donator_items.Add(new /datum/spawn_item/black)
+	//Coats
+	donator_items.Add(new /datum/spawn_item/brown_coat)
+	//Bedsheets
+	donator_items.Add(new /datum/spawn_item/clown_bedsheet)
+	donator_items.Add(new /datum/spawn_item/mime_bedsheet)
+	donator_items.Add(new /datum/spawn_item/rainbow_bedsheet)
+	donator_items.Add(new /datum/spawn_item/captain_bedsheet)
+	//Toys
+	donator_items.Add(new /datum/spawn_item/rubber_duck)
+	donator_items.Add(new /datum/spawn_item/the_holy_cross)
+	donator_items.Add(new /datum/spawn_item/champion_belt)
+	donator_items.Add(new /datum/spawn_item/keppel)
+	//Special Stuff
+	donator_items.Add(new /datum/spawn_item/santabag)
+	donator_items.Add(new /datum/spawn_item/sunglasses)
 
 /client/var/datum/donators/donator = null
 
@@ -64,6 +144,16 @@ var/list/donators = list()
 	dat += "Allowed number of items: [allowed_num_items]/10<br><br>"
 	dat += "<b>Select items:</b> <br>"
 
+	var/last_category = ""
+	for(var/datum/spawn_item/i in donator_items)
+		if(last_category != i.category)
+			dat += "<b>[i.category]</b><br>"
+			last_category = i.category
+		if(money < i.cost)
+			dat += "[i.name] ([i.cost])<br>"
+		else
+			dat += "<a href='?src=\ref[src];buy_item=\ref[i]'>[i.name]</a> ([i.cost])<br>"
+/*
 	//here items list
 	dat += "<b>Hats:</b> <br>"
 //	dat += "Tough Guy's Toque: <A href='?src=\ref[src];item=/obj/item/clothing/head/fluff/enos_adlai_1;cost=600'>600</A><br>"
@@ -180,16 +270,38 @@ var/list/donators = list()
 	dat += "Sunglasses: <A href='?src=\ref[src];item=/obj/item/clothing/glasses/sunglasses;cost=600'>600</A><br>"
 //	dat += "Soul stone shard: <A href='?src=\ref[src];item=/obj/item/device/soulstone;cost=1500'>1500</A><br>"
 //	dat += "Plastic balisong knife: <A href='?src=\ref[src];item=/obj/item/weapon/kitchenknife/b_knife;cost=800'>800</A><br>"
-
+*/
 	usr << browse(dat, "window=donatorpanel;size=250x400")
 
 
 /datum/donators/Topic(href, href_list)
-	if(href_list["item"])
-		attemptSpawnItem(href_list["item"],text2num(href_list["cost"]))
-		return
+	if(href_list["buy_item"])
+		var/datum/spawn_item/I = locate(href_list["buy_item"])
+		if(!I)
+			return
 
+		if(!(I in donator_items))
+			return
 
+		if(I.cost > money)
+			usr << "\red You don't have enough funds."
+			return
+
+		if(!allowed_num_items)
+			usr << "\red You already spawned max count of items."
+			return
+
+		if(!istype(owner.mob, /mob/living/carbon/human))
+			usr << "\red You must be a human to use this."
+			return
+
+		if(owner.mob.stat)
+			return
+		money -= I.cost
+		I.give_item(owner.mob)
+		owner.cmd_donator_panel()
+
+/*
 /datum/donators/proc/attemptSpawnItem(var/item,var/cost)
 	var/path = text2path(item)
 
@@ -241,7 +353,7 @@ var/list/donators = list()
 	money -= cost
 	allowed_num_items--
 	owner.cmd_donator_panel()
-
+*/
 
 
 /proc/dd_text2list(text, separator, var/list/withinList)

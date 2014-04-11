@@ -8,7 +8,7 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 
 /obj/item/device/uplink
 	var/welcome 						// Welcoming menu message
-	var/list/datum/uplink_item/items	// Parsed list of items
+	var/list/datum/spawn_item/items	// Parsed list of items
 	var/uses 							// Numbers of crystals
 	// List of items not to shove in their hands.
 	var/list/NotInHand = list(/obj/machinery/singularity_beacon/syndicate)
@@ -28,10 +28,10 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 	dat += "<B>Request item:</B><BR>"
 	dat += "<I>Each item costs a number of tele-crystals as indicated by the number following their name.</I><br><BR>"
 
-	for(var/datum/uplink_item/i in items)
+	for(var/datum/spawn_item/i in items)
 		if(last_category != i.category)
 			if(count_of_items <= 0)
-				dat += "<i>We apologize, as you could not afford anything from this category.</i><br>"
+				dat += "<i>We apologize, as you could not afford anything from this category.</i><br><br>"
 			dat += "[i.category]<br>"
 			last_category = i.category
 			count_of_items = 0
@@ -47,8 +47,10 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 /obj/item/device/uplink/Topic(href, href_list)
 
 	if (href_list["buy_item"])
-		var/datum/uplink_item/i = locate(href_list["buy_item"])
+		var/datum/spawn_item/i = locate(href_list["buy_item"])
 		if(!i)
+			return 0
+		if(!(i in items))
 			return 0
 		if(i.cost > uses)
 			return 0
@@ -130,7 +132,7 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 			return 1
 
 		if(..(href, href_list) == 1)
-			var/datum/uplink_item/i = locate(href_list["buy_item"])
+			var/datum/spawn_item/i = locate(href_list["buy_item"])
 			var/obj/I = i.give_item(usr)
 			purchase_log += "[usr] ([usr.ckey]) bought [I]."
 	interact(usr)

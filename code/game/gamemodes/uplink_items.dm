@@ -1,4 +1,4 @@
-/datum/uplink_item
+/datum/spawn_item
 	var/name = "invalid"
 	var/path = /obj
 	var/cost = 1
@@ -10,103 +10,103 @@
 			var/mob/living/carbon/human/A = loc
 			A.put_in_any_hand_if_possible(I)
 
-/datum/uplink_item/revolver
+/datum/spawn_item/revolver
 	name = "Revolver"
 	path = /obj/item/weapon/gun/projectile/revolver
 	cost = 6
 	category = "Highly Visible and Dangerous Weapons"
 
-/datum/uplink_item/revolver_ammo
+/datum/spawn_item/revolver_ammo
 	name = "Ammo-357"
 	path = /obj/item/ammo_magazine/box/a357
 	cost = 2
 	category = "Highly Visible and Dangerous Weapons"
 
-/datum/uplink_item/crossbow
+/datum/spawn_item/crossbow
 	name = "Energy Crossbow"
 	path = /obj/item/weapon/gun/energy/crossbow
 	cost = 5
 	category = "Highly Visible and Dangerous Weapons"
 
-/datum/uplink_item/crossbow
+/datum/spawn_item/crossbow
 	name = "Energy Crossbow"
 	path = /obj/item/weapon/gun/energy/crossbow
 	cost = 5
 	category = "Highly Visible and Dangerous Weapons"
 
-/datum/uplink_item/sword
+/datum/spawn_item/sword
 	name = "Energy Sword"
 	path = /obj/item/weapon/melee/energy/sword
 	cost = 4
 	category = "Highly Visible and Dangerous Weapons"
 
-/datum/uplink_item/syndicate_bundle
+/datum/spawn_item/syndicate_bundle
 	name = "Syndicate Bundle"
 	path = /obj/item/weapon/storage/box/syndicate
 	cost = 10
 	category = "Highly Visible and Dangerous Weapons"
 
-/datum/uplink_item/emp_grenades
+/datum/spawn_item/emp_grenades
 	name = "5 EMP Grenades"
 	path = /obj/item/weapon/storage/box/emps
 	cost = 3
 	category = "Highly Visible and Dangerous Weapons"
 
-/datum/uplink_item/syndicate_bomb
+/datum/spawn_item/syndicate_bomb
 	name = "Syndicate Bundle"
 	path = /obj/item/device/syndicatebomb
 	cost = 6
 	category = "Highly Visible and Dangerous Weapons"
 
-/datum/uplink_item/paralysis_pen
+/datum/spawn_item/paralysis_pen
 	name = "Paralysis Pen"
 	path = /obj/item/weapon/pen/paralysis
 	cost = 3
 	category = "Stealthy and Inconspicuous Weapons"
 
-/datum/uplink_item/syndicate_soap
+/datum/spawn_item/syndicate_soap
 	name = "Syndicate Soap"
 	path = /obj/item/weapon/soap/syndie
 	cost = 1
 	category = "Stealthy and Inconspicuous Weapons"
 
-/datum/uplink_item/detomatrix
+/datum/spawn_item/detomatrix
 	name = "Detomatix PDA Cartridge"
 	path = /obj/item/weapon/cartridge/syndicate
 	cost = 3
 	category = "Stealthy and Inconspicuous Weapons"
 
-/datum/uplink_item/chameleon_kit
+/datum/spawn_item/chameleon_kit
 	name = "Chameleon Kit"
 	path = /obj/item/weapon/storage/box/syndie_kit/chameleon
 	cost = 7
 	category = "Stealth and Camouflage Items"
 
-/datum/uplink_item/syndicate_shoes
+/datum/spawn_item/syndicate_shoes
 	name = "No-Slip Syndicate Shoes"
 	path = /obj/item/clothing/shoes/syndigaloshes
 	cost = 2
 	category = "Stealth and Camouflage Items"
 
-/datum/uplink_item/agentcard
+/datum/spawn_item/agentcard
 	name = "Agent ID card"
 	path = /obj/item/weapon/card/id/syndicate
 	cost = 2
 	category = "Stealth and Camouflage Items"
 
-/datum/uplink_item/voice_changer
+/datum/spawn_item/voice_changer
 	name = "Voice Changer"
 	path = /obj/item/clothing/mask/gas/voice
 	cost = 4
 	category = "Stealth and Camouflage Items"
 
-/datum/uplink_item/chameleon_projector
+/datum/spawn_item/chameleon_projector
 	name = "Chameleon-Projector"
 	path = /obj/item/device/chameleon
 	cost = 4
 	category = "Stealth and Camouflage Items"
 
-/datum/uplink_item/cloaking_device
+/datum/spawn_item/cloaking_device
 	name = "Cloaking Device"
 	path = /obj/item/weapon/cloaking_device
 	cost = 8
@@ -114,93 +114,96 @@
 
 	give_item(var/atom/loc)
 		loc << "/red You feel some shitty smell from [name]"
+		if(ishuman(loc))
+			var/mob/living/carbon/human/H = loc
+			message_admins("[H.name]([H.ckey]) spawned cloaking device.")
 		..()
 
-/datum/uplink_item/emag
+/datum/spawn_item/emag
 	name = "Cryptographic Sequencer"
 	path = /obj/item/weapon/card/emag
 	cost = 3
 	category = "Devices and Tools"
 
-///datum/uplink_item/hacktool
+///datum/spawn_item/hacktool
 //	name = "Hacktool (Slow, but stealthy.  Unlimited uses)"
 //	path = /obj/item/device/hacktool
 //	cost = 4
 //	category = "Devices and Tools"
 
-/datum/uplink_item/toolbox
+/datum/spawn_item/toolbox
 	name = "Fully Loaded Toolbox;"
 	path = /obj/item/weapon/storage/toolbox/syndicate
 	cost = 1
 	category = "Devices and Tools"
 
-/datum/uplink_item/thermal
+/datum/spawn_item/thermal
 	name = "Thermal Imaging Glasses"
 	path = /obj/item/clothing/glasses/thermal/syndi
 	cost = 3
 	category = "Devices and Tools"
 
-/datum/uplink_item/binary
+/datum/spawn_item/binary
 	name = "Binary Translator Key"
 	path = /obj/item/device/encryptionkey/binary
 	cost = 3
 	category = "Devices and Tools"
 
-/datum/uplink_item/aimodule
+/datum/spawn_item/aimodule
 	name = "Hacked AI Upload Module"
 	path = /obj/item/weapon/aiModule/syndicate
 	cost = 7
 	category = "Devices and Tools"
 
-/datum/uplink_item/c4
+/datum/spawn_item/c4
 	name = "C-4 (Destroys walls)"
 	path = /obj/item/weapon/plastique
 	cost = 2
 	category = "Devices and Tools"
 
-/datum/uplink_item/powersink
+/datum/spawn_item/powersink
 	name = "Powersink (DANGER!)"
 	path = /obj/item/device/powersink
 	cost = 5
 	category = "Devices and Tools"
 
-/datum/uplink_item/singularity_beacon
+/datum/spawn_item/singularity_beacon
 	name = "Singularity Beacon (DANGER!)"
 	path = /obj/item/device/radio/beacon/syndicate
 	cost = 7
 	category = "Devices and Tools"
 
-/datum/uplink_item/teleporter_board
+/datum/spawn_item/teleporter_board
 	name = "Teleporter Circuit Board"
 	path = /obj/item/weapon/circuitboard/teleporter
 	cost = 20
 	category = "Devices and Tools"
 
-/datum/uplink_item/imp_freedom
+/datum/spawn_item/imp_freedom
 	name = "Freedom Implant"
 	path = /obj/item/weapon/storage/box/syndie_kit/imp_freedom
 	cost = 3
 	category = "Implants"
 
-/datum/uplink_item/imp_uplink
+/datum/spawn_item/imp_uplink
 	name = "Uplink Implant (Contains 5 Telecrystals)"
 	path = /obj/item/weapon/storage/box/syndie_kit/imp_uplink
 	cost = 10
 	category = "Implants"
 
-/datum/uplink_item/imp_explosive
+/datum/spawn_item/imp_explosive
 	name = "Explosive Implant (DANGER!)"
 	path = /obj/item/weapon/storage/box/syndie_kit/imp_explosive
 	cost = 6
 	category = "Implants"
 
-/datum/uplink_item/imp_explosive
+/datum/spawn_item/imp_explosive
 	name = "Compressed Matter Implant"
 	path = /obj/item/weapon/storage/box/syndie_kit/imp_compress
 	cost = 4
 	category = "Implants"
 
-/datum/uplink_item/balloon
+/datum/spawn_item/balloon
 	name = "For showing that You Are The BOSS (Useless Balloon)"
 	path = /obj/item/toy/syndicateballoon
 	cost = 10
@@ -211,7 +214,7 @@
 		..()
 
 /*
-/datum/uplink_item
+/datum/spawn_item
 	name = ""
 	path =
 	cost =

@@ -38,7 +38,7 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 		if(uses < i.cost)
 			continue
 		count_of_items++
-		dat += "<a href='?src=\ref[src];buy_item=\ref[i]'>[i.name]</a><br>"
+		dat += "<a href='?src=\ref[src];buy_item=\ref[i]'>[i.name]</a> ([i.cost])<br>"
 	if(count_of_items <= 0)
 		dat += "<i>We apologize, as you could not afford anything from this category.</i><br>"
 	dat += "<HR>"

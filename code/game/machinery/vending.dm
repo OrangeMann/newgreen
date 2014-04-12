@@ -374,6 +374,9 @@
 			if (!R || !istype(R) || !R.product_path || R.amount <= 0)
 				return
 
+			if(!(R in product_records) && !(R in hidden_records) && !(R in coin_records))
+				message_admins("[usr.name]([(usr:ckey) ? "[usr:ckey]" : "*no ckey*"]) tried to request [R.name] product from [src.name] vendor. (Cache Inject)")
+
 			if(R.price == null)
 				src.vend(R, usr)
 			else

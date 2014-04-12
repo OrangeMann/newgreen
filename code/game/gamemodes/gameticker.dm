@@ -277,12 +277,9 @@ var/global/datum/controller/gameticker/ticker
 				if(player.mind.assigned_role == "Captain")
 					captainless=0
 				if(player.mind.assigned_role != "MODE")
-					if(player.mind)
-						job_master.EquipRank(player, player.mind.assigned_role, 0)
-						EquipCustomItems(player)
-						log_game("[player.name]([player.ckey]) - [player.mind.assigned_role]")
-					else
-						log_admin("Something went wrong in equip characters.")
+					job_master.EquipRank(player, player.mind.assigned_role, 0)
+					//EquipCustomItems(player)
+					//log_game("[player.name]([player.ckey]) - [player.mind.assigned_role]")
 		if(captainless)
 			for(var/mob/M in player_list)
 				if(!istype(M,/mob/new_player))

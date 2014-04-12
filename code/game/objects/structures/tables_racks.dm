@@ -512,7 +512,7 @@
 
 	if(usr.a_intent == "disarm" && get_dist(user, src) <= 1 && !usr.buckled)
 		visible_message("<span class='notice'>[user] trying to clumb on the [src].</span>")
-		if(do_mob(user, get_turf(user), 8)
+		if(do_mob(user, get_turf(user), 8))
 			if(prob(50))
 				visible_message("<span class='notice'>[user] climbs on the [src].</span>")
 				usr.loc = src.loc

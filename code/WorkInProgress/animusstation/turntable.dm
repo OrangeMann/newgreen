@@ -90,58 +90,55 @@ proc/add_turntable_soundtracks()
 		return
 
 	if(href_list["on"])
-		if(src.playing == 0)
-			//world << "Should be working..."
-			var/datum/turntable_soundtrack/D = locate(href_list["on"])
-			if(!istype(D))
-				return
-
-			var/sound/S = sound(D.path)
-
-			S.repeat = 1
-			S.channel = 10
-			S.falloff = 2
-			S.wait = 1
-			S.environment = 0
-			//for(var/mob/M in world)
-			//	if(M.loc.loc == src.loc.loc && M.music == 0)
-			//		world << "Found the song..."
-			//		M << S
-			//		M.music = 1
-			var/area/A = src.loc.loc:master
-
-			for(var/area/RA in A.related)
-				for(var/obj/machinery/party/lasermachine/L in RA)
-					L.turnon()
-			playing = 1
-			while(playing == 1)
-				for(var/mob/M in world)
-					if((M.loc.loc in A.related) && M.music == 0)
-						//world << "Found the song..."
-						M << S
-						M.music = 1
-					else if(!(M.loc.loc in A.related) && M.music == 1)
-						var/sound/Soff = sound(null)
-						Soff.channel = 10
-						M << Soff
-						M.music = 0
-				sleep(10)
-			return
+		turn_on(locate(href_list["on"]))
 
 	if(href_list["off"])
-		if(src.playing == 1)
-			var/sound/S = sound(null)
-			S.channel = 10
-			S.wait = 1
-			for(var/mob/M in world)
-				M << S
-				M.music = 0
-			playing = 0
-			var/area/A = src.loc.loc:master
-			for(var/area/RA in A.related)
-				for(var/obj/machinery/party/lasermachine/L in RA)
-					L.turnoff()
+		turn_off()
 
+/obj/machinery/party/turntable/proc/turn_on(var/datum/turntable_soundtrack/track)
+	if(src.playing)
+		turn_off()
+	var/sound/S = sound(track.path)
+	S.repeat = 1
+	S.channel = 10
+	S.falloff = 2
+	S.wait = 1
+	S.environment = 0
+	var/area/A = src.loc.loc:master
+
+	for(var/area/RA in A.related)
+		for(var/obj/machinery/party/lasermachine/L in RA)
+			L.turnon()
+	playing = 1
+	while(playing == 1)
+		for(var/mob/M in world)
+			if((M.loc.loc in A.related) && M.music == 0)
+				//world << "Found the song..."
+				M << S
+				M.music = 1
+			else if(!(M.loc.loc in A.related) && M.music == 1)
+				var/sound/Soff = sound(null)
+				Soff.channel = 10
+				M << Soff
+				M.music = 0
+		sleep(10)
+	return
+
+/obj/machinery/party/turntable/proc/turn_off()
+	if(!src.playing)
+		return
+	var/sound/S = sound(null)
+	S.channel = 10
+	S.wait = 1
+	for(var/mob/M in world)
+		if(M.music)
+			M << S
+			M.music = 0
+	playing = 0
+	var/area/A = src.loc.loc:master
+	for(var/area/RA in A.related)
+		for(var/obj/machinery/party/lasermachine/L in RA)
+			L.turnoff()
 
 /obj/machinery/party/lasermachine
 	name = "laser machine"

@@ -61,6 +61,8 @@ var/global/floorIsLava = 0
 	if(istype(M,/mob/living/silicon/robot) || istype(M,/mob/living/silicon/ai))
 		body += "<br>"
 		body += "<A href='?src=\ref[src];showlaws=\ref[M]'>Check Laws</font></a>"
+		if(istype(M, /mob/living/silicon/robot))
+			body += " <a href='?src=\ref[src];forcelawsync=\ref[M]'>Force Law Sync</a>"
 
 	body += {"
 		<br><br>\[

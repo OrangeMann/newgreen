@@ -36,7 +36,6 @@
 	else
 		who << "<b>Remember, you are not bound to any AI, you are not required to listen to them.</b>"
 
-
 /mob/living/silicon/robot/proc/lawsync()
 	laws_sanity_check()
 	var/datum/ai_laws/master = connected_ai ? connected_ai.laws : null

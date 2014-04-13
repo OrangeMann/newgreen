@@ -850,6 +850,14 @@
 			usr << "<B>[M.name] laws:</B>"
 			M.laws.show_laws(usr)
 
+	else if(href_list["forcelawsync"])
+		if(!check_rights(R_ADMIN))	return
+
+		var/mob/living/silicon/robot/M = locate(href_list["forcelawsync"])
+		if(!ismob(M)) return
+
+		M.lawsync()
+
 	else if(href_list["c_mode"])
 		if(!check_rights(R_ADMIN))	return
 

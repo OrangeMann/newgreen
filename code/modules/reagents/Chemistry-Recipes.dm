@@ -1590,9 +1590,9 @@ datum
 			on_reaction(var/datum/reagents/holder, var/created_volume)
 				holder.clear_reagents()
 				var/list/borks = typesof(/obj/item/weapon/reagent_containers/food/snacks) - /obj/item/weapon/reagent_containers/food/snacks
-				borks -= /obj/item/weapon/reagent_containers/food/snacks/xenoburger
-				borks -= /obj/item/weapon/reagent_containers/food/snacks/roburger
-				borks -= /obj/item/weapon/reagent_containers/food/snacks/roburgerbig
+				//borks -= /obj/item/weapon/reagent_containers/food/snacks/xenoburger
+				//borks -= /obj/item/weapon/reagent_containers/food/snacks/roburger
+				//borks -= /obj/item/weapon/reagent_containers/food/snacks/roburgerbig
 				// BORK BORK BORK
 
 				playsound(get_turf(holder.my_atom), 'sound/effects/phasein.ogg', 100, 1)

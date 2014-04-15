@@ -605,7 +605,8 @@
 	New()
 		..()
 		reagents.add_reagent("nutriment", 3)
-		reagents.add_reagent("xenomicrobes", 2)
+		if(aliens_allowed)
+			reagents.add_reagent("xenomicrobes", 2)
 		src.bitesize = 6
 
 /obj/item/weapon/reagent_containers/food/snacks/faggot
@@ -730,7 +731,8 @@
 	New()
 		..()
 		reagents.add_reagent("nutriment", 8)
-		reagents.add_reagent("xenomicrobes", 1)
+		if(aliens_allowed)
+			reagents.add_reagent("xenomicrobes", 1)
 		bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/clownburger
@@ -925,7 +927,8 @@
 	New()
 		..()
 		reagents.add_reagent("nutriment", 10)
-		reagents.add_reagent("xenomicrobes", 2)
+		if(aliens_allowed)
+			reagents.add_reagent("xenomicrobes", 2)
 		bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/wingfangchu
@@ -1884,7 +1887,8 @@
 	New()
 		..()
 		reagents.add_reagent("nutriment", 30)
-		reagents.add_reagent("xenomicrobes", 3)
+		if(aliens_allowed)
+			reagents.add_reagent("xenomicrobes", 3)
 		bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/xenomeatbreadslice

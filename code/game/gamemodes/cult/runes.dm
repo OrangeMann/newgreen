@@ -378,6 +378,7 @@ var/list/sacrificed = list()
 				while(L)
 					if(L.key)
 						L.ajourn=0
+						ticker.mode.update_cult_icons_added(L.mind)
 						return
 					else
 						L.take_organ_damage(10, 0)

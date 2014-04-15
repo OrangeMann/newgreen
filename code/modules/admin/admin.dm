@@ -61,6 +61,8 @@ var/global/floorIsLava = 0
 	if(istype(M,/mob/living/silicon/robot) || istype(M,/mob/living/silicon/ai))
 		body += "<br>"
 		body += "<A href='?src=\ref[src];showlaws=\ref[M]'>Check Laws</font></a>"
+		if(istype(M, /mob/living/silicon/robot))
+			body += " <a href='?src=\ref[src];forcelawsync=\ref[M]'>Force Law Sync</a>"
 
 	body += {"
 		<br><br>\[
@@ -594,20 +596,23 @@ var/global/floorIsLava = 0
 			"}
 
 	if(check_rights(R_FUN,0))
+		/* To fix
+		<A href='?src=\ref[src];secretsfun=gravanomalies'>Spawn a gravitational anomaly (aka lagitational anomolag)</A><BR>
+		<A href='?src=\ref[src];secretsfun=timeanomalies'>Spawn wormholes</A><BR>
+		<A href='?src=\ref[src];secretsfun=aliens'>Trigger an Alien infestation</A><BR>
+		<A href='?src=\ref[src];secretsfun=alien_silent'>Spawn an Alien silently</A><BR>
+		<A href='?src=\ref[src];secretsfun=spiders'>Trigger a Spider infestation</A><BR>
+		<A href='?src=\ref[src];secretsfun=spaceninja'>Send in a space ninja</A><BR>
+		<A href='?src=\ref[src];secretsfun=carp'>Trigger an Carp migration</A><BR>
+		<A href='?src=\ref[src];secretsfun=comms_blackout'>Trigger a communication blackout</A><BR>
+		*/
 		dat += {"
 			<B>'Random' Events</B><BR>
 			<BR>
 			<A href='?src=\ref[src];secretsfun=gravity'>Toggle station artificial gravity</A><BR>
 			<A href='?src=\ref[src];secretsfun=wave'>Spawn a wave of meteors (aka lagocolyptic shower)</A><BR>
-			<A href='?src=\ref[src];secretsfun=gravanomalies'>Spawn a gravitational anomaly (aka lagitational anomolag)</A><BR>
-			<A href='?src=\ref[src];secretsfun=timeanomalies'>Spawn wormholes</A><BR>
 			<A href='?src=\ref[src];secretsfun=goblob'>Spawn blob</A><BR>
-			<A href='?src=\ref[src];secretsfun=aliens'>Trigger an Alien infestation</A><BR>
-			<A href='?src=\ref[src];secretsfun=alien_silent'>Spawn an Alien silently</A><BR>
-			<A href='?src=\ref[src];secretsfun=spiders'>Trigger a Spider infestation</A><BR>
-			<A href='?src=\ref[src];secretsfun=spaceninja'>Send in a space ninja</A><BR>
 			<A href='?src=\ref[src];secretsfun=striketeam'>Send in a strike team</A><BR>
-			<A href='?src=\ref[src];secretsfun=carp'>Trigger an Carp migration</A><BR>
 			<A href='?src=\ref[src];secretsfun=radiation'>Irradiate the station</A><BR>
 			<A href='?src=\ref[src];secretsfun=prison_break'>Trigger a Prison Break</A><BR>
 			<A href='?src=\ref[src];secretsfun=virus'>Trigger a Virus Outbreak</A><BR>
@@ -615,14 +620,14 @@ var/global/floorIsLava = 0
 			<A href='?src=\ref[src];secretsfun=lightsout'>Toggle a "lights out" event</A><BR>
 			<A href='?src=\ref[src];secretsfun=ionstorm'>Spawn an Ion Storm</A><BR>
 			<A href='?src=\ref[src];secretsfun=spacevines'>Spawn Space-Vines</A><BR>
-			<A href='?src=\ref[src];secretsfun=comms_blackout'>Trigger a communication blackout</A><BR>
 			<BR>
 			<B>Fun Secrets</B><BR>
 			<BR>
 			<A href='?src=\ref[src];secretsfun=sec_clothes'>Remove 'internal' clothing</A><BR>
 			<A href='?src=\ref[src];secretsfun=sec_all_clothes'>Remove ALL clothing</A><BR>
-			<A href='?src=\ref[src];secretsfun=monkey'>Turn all humans into monkeys</A><BR>
 			<A href='?src=\ref[src];secretsfun=sec_classic1'>Remove firesuits, grilles, and pods</A><BR>
+			<A href='?src=\ref[src];secretsfun=monkey'>Turn all humans into monkeys</A><BR>
+			<A href='?src=\ref[src];secretsfun=corgi'>Turn all humans into corgi</A><BR>
 			<A href='?src=\ref[src];secretsfun=power'>Make all areas powered</A><BR>
 			<A href='?src=\ref[src];secretsfun=unpower'>Make all areas unpowered</A><BR>
 			<A href='?src=\ref[src];secretsfun=quickpower'>Power all SMES</A><BR>
@@ -646,6 +651,7 @@ var/global/floorIsLava = 0
 			<A href='?src=\ref[src];secretsfun=whiteout'>Fix all lights</A><BR>
 			<A href='?src=\ref[src];secretsfun=friendai'>Best Friend AI</A><BR>
 			<A href='?src=\ref[src];secretsfun=floorlava'>The floor is lava! (DANGEROUS: extremely lame)</A><BR>
+			<A href='?src=\ref[src];secretsfun=dorf'>Dward Breads</A><BR>
 			"}
 
 	if(check_rights(R_SERVER,0))

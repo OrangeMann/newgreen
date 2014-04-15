@@ -7,85 +7,55 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 */
 
 /obj/item/device/uplink
-	var/welcome 					// Welcoming menu message
-	var/items						// List of items
-	var/item_data					// raw item text
-	var/list/ItemList				// Parsed list of items
-	var/uses 						// Numbers of crystals
+	var/welcome 						// Welcoming menu message
+	var/list/datum/spawn_item/items	// Parsed list of items
+	var/uses 							// Numbers of crystals
 	// List of items not to shove in their hands.
 	var/list/NotInHand = list(/obj/machinery/singularity_beacon/syndicate)
 
 /obj/item/device/uplink/New()
 	welcome = ticker.mode.uplink_welcome
-	if(!item_data)
-		items = replacetext(ticker.mode.uplink_items, "\n", "")	// Getting the text string of items
-	else
-		items = replacetext(item_data)
-	ItemList = text2list(src.items, ";")	// Parsing the items text string
+	items = ticker.mode.uplink_items
 	uses = ticker.mode.uplink_uses
 
 //Let's build a menu!
 /obj/item/device/uplink/proc/generate_menu()
-
+	var/last_category = ""
+	var/count_of_items = 1
 	var/dat = "<B>[src.welcome]</B><BR>"
 	dat += "Tele-Crystals left: [src.uses]<BR>"
 	dat += "<HR>"
 	dat += "<B>Request item:</B><BR>"
 	dat += "<I>Each item costs a number of tele-crystals as indicated by the number following their name.</I><br><BR>"
 
-	var/cost
-	var/item
-	var/name
-	var/path_obj
-	var/path_text
-	var/category_items = 1 //To prevent stupid :P
-
-	for(var/D in ItemList)
-		var/list/O = stringsplit(D, ":")
-		if(O.len != 3)	//If it is not an actual item, make a break in the menu.
-			if(O.len == 1)	//If there is one item, it's probably a title
-				dat += "<b>[O[1]]</b><br>"
-				category_items = 0
-			else	//Else, it's a white space.
-				if(category_items < 1)	//If there were no itens in the last category...
-					dat += "<i>We apologize, as you could not afford anything from this category.</i><br>"
-				dat += "<br>"
+	for(var/datum/spawn_item/i in items)
+		if(last_category != i.category)
+			if(count_of_items <= 0)
+				dat += "<i>We apologize, as you could not afford anything from this category.</i><br><br>"
+			dat += "[i.category]<br>"
+			last_category = i.category
+			count_of_items = 0
+		if(uses < i.cost)
 			continue
-
-		path_text = O[1]
-		cost = text2num(O[2])
-
-		if(cost>uses)
-			continue
-
-		path_obj = text2path(path_text)
-
-		// Because we're using strings, this comes up if item paths change.
-		// Failure to handle this error borks uplinks entirely.  -Sayu
-		if(!path_obj)
-			error("Syndicate item is not a valid path: [path_text]")
-		else
-			item = new path_obj()
-			name = O[3]
-			del item
-
-			dat += "<A href='byond://?src=\ref[src];buy_item=[path_text];cost=[cost]'>[name]</A> ([cost])<BR>"
-			category_items++
-
+		count_of_items++
+		dat += "<a href='?src=\ref[src];buy_item=\ref[i]'>[i.name]</a> ([i.cost])<br>"
+	if(count_of_items <= 0)
+		dat += "<i>We apologize, as you could not afford anything from this category.</i><br>"
 	dat += "<HR>"
 	return dat
 
 /obj/item/device/uplink/Topic(href, href_list)
 
 	if (href_list["buy_item"])
-		if(text2num(href_list["cost"]) > uses) // Not enough crystals for the item
+		var/datum/spawn_item/i = locate(href_list["buy_item"])
+		if(!i)
 			return 0
+		if(!(i in items))
+			return 0
+		if(i.cost > uses)
+			return 0
+		uses -= i.cost
 
-		//if(usr:mind && ticker.mode.traitors[usr:mind])
-			//var/datum/traitorinfo/info = ticker.mode.traitors[usr:mind]
-			//info.spawnlist += href_list["buy_item"]
-
-		uses -= text2num(href_list["cost"])
 		return 1
 
 
@@ -162,11 +132,8 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 			return 1
 
 		if(..(href, href_list) == 1)
-			var/path_obj = text2path(href_list["buy_item"])
-			var/obj/I = new path_obj(get_turf(usr))
-			if(ishuman(usr))
-				var/mob/living/carbon/human/A = usr
-				A.put_in_any_hand_if_possible(I)
+			var/datum/spawn_item/i = locate(href_list["buy_item"])
+			var/obj/I = i.give_item(usr)
 			purchase_log += "[usr] ([usr.ckey]) bought [I]."
 	interact(usr)
 	return

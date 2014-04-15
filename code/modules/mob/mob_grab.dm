@@ -247,7 +247,7 @@
 							log_attack("[assailant.name] ([assailant.ckey]) strangled [affecting.name] ([affecting.ckey])")
 
 							assailant.next_move = world.time + 10
-							affecting.losebreath += 1
+							affecting.losebreath += 2
 						else
 							assailant.visible_message("\red [assailant] was unable to tighten \his grip on [affecting]'s neck!")
 							killing = 0

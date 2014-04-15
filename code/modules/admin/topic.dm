@@ -850,6 +850,14 @@
 			usr << "<B>[M.name] laws:</B>"
 			M.laws.show_laws(usr)
 
+	else if(href_list["forcelawsync"])
+		if(!check_rights(R_ADMIN))	return
+
+		var/mob/living/silicon/robot/M = locate(href_list["forcelawsync"])
+		if(!ismob(M)) return
+
+		M.lawsync()
+
 	else if(href_list["c_mode"])
 		if(!check_rights(R_ADMIN))	return
 
@@ -1579,55 +1587,6 @@
 
 		var/ok = 0
 		switch(href_list["secretsfun"])
-			if("sec_clothes")
-				feedback_inc("admin_secrets_fun_used",1)
-				feedback_add_details("admin_secrets_fun_used","SC")
-				for(var/obj/item/clothing/under/O in world)
-					del(O)
-				ok = 1
-			if("sec_all_clothes")
-				feedback_inc("admin_secrets_fun_used",1)
-				feedback_add_details("admin_secrets_fun_used","SAC")
-				for(var/obj/item/clothing/O in world)
-					del(O)
-				ok = 1
-			if("sec_classic1")
-				feedback_inc("admin_secrets_fun_used",1)
-				feedback_add_details("admin_secrets_fun_used","SC1")
-				for(var/obj/item/clothing/suit/fire/O in world)
-					del(O)
-				for(var/obj/structure/grille/O in world)
-					del(O)
-/*					for(var/obj/machinery/vehicle/pod/O in world)
-					for(var/mob/M in src)
-						M.loc = src.loc
-						if (M.client)
-							M.client.perspective = MOB_PERSPECTIVE
-							M.client.eye = M
-					del(O)
-				ok = 1*/
-			if("monkey")
-				feedback_inc("admin_secrets_fun_used",1)
-				feedback_add_details("admin_secrets_fun_used","M")
-				for(var/mob/living/carbon/human/H in mob_list)
-					spawn(0)
-						H.monkeyize()
-				ok = 1
-			if("corgi")
-				feedback_inc("admin_secrets_fun_used",1)
-				feedback_add_details("admin_secrets_fun_used","M")
-				for(var/mob/living/carbon/human/H in mob_list)
-					spawn(0)
-						H.corgize()
-				ok = 1
-			if("striketeam")
-				if(usr.client.strike_team())
-					feedback_inc("admin_secrets_fun_used",1)
-					feedback_add_details("admin_secrets_fun_used","Strike")
-			if("tripleAI")
-				usr.client.triple_ai()
-				feedback_inc("admin_secrets_fun_used",1)
-				feedback_add_details("admin_secrets_fun_used","TriAI")
 			if("gravity")
 				if(!(ticker && ticker.mode))
 					usr << "Please wait until the game starts!  Not sure how it will work otherwise."
@@ -1651,6 +1610,94 @@
 				log_admin("[key_name(usr)] spawned a meteor wave", 1)
 				message_admins("\blue [key_name_admin(usr)] spawned a meteor wave.", 1)
 				new /datum/event/meteor_wave
+			if("goblob")
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","Blob")
+				log_admin("[key_name(usr)] spawned a blob", 1)
+				message_admins("\blue [key_name_admin(usr)] spawned a blob.", 1)
+				new /datum/event/blob
+			if("striketeam")
+				if(usr.client.strike_team())
+					feedback_inc("admin_secrets_fun_used",1)
+					feedback_add_details("admin_secrets_fun_used","Strike")
+			if("radiation")
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","Radiation")
+				log_admin("[key_name(usr)] spawned a radiation belt", 1)
+				message_admins("\blue [key_name_admin(usr)] radiation belt.", 1)
+				new /datum/event/radiation_storm
+			if("prison_break")
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","PB")
+				message_admins("[key_name_admin(usr)] has allowed a prison break", 1)
+				prison_break()
+			if("virus")
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","V")
+				var/answer = alert("Do you want this to be a greater disease or a lesser one?",,"Greater","Lesser")
+				if(answer=="Lesser")
+					virus2_lesser_infection()
+					message_admins("[key_name_admin(usr)] has triggered a lesser virus outbreak.", 1)
+				else
+					virus2_greater_infection()
+					message_admins("[key_name_admin(usr)] has triggered a greater virus outbreak.", 1)
+			if("immovable")
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","IR")
+				message_admins("[key_name_admin(usr)] has sent an immovable rod to the station", 1)
+				immovablerod()
+			if("lightsout")
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","LO")
+				message_admins("[key_name_admin(usr)] has broke a lot of lights", 1)
+				lightsout(1,2)
+			if("ionstorm")
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","I")
+				IonStorm()
+				message_admins("[key_name_admin(usr)] triggered an ion storm")
+				var/show_log = alert(usr, "Show ion message?", "Message", "Yes", "No")
+				if(show_log == "Yes")
+					command_alert("Ion storm detected near the station. Please check all AI-controlled equipment for errors.", "Anomaly Alert")
+					world << sound('sound/AI/ionstorm.ogg')
+			if("spacevines")
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","K")
+				message_admins("[key_name_admin(usr)] has spawned spacevines", 1)
+				new /datum/event/spacevine
+			if("sec_clothes")
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","SC")
+				for(var/obj/item/clothing/under/O in world)
+					del(O)
+				ok = 1
+			if("sec_all_clothes")
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","SAC")
+				for(var/obj/item/clothing/O in world)
+					del(O)
+				ok = 1
+			if("sec_classic1")
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","SC1")
+				for(var/obj/item/clothing/suit/fire/O in world)
+					del(O)
+				for(var/obj/structure/grille/O in world)
+					del(O)
+			if("monkey")
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","M")
+				for(var/mob/living/carbon/human/H in mob_list)
+					spawn(0)
+						H.monkeyize()
+				ok = 1
+			if("corgi")
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","M")
+				for(var/mob/living/carbon/human/H in mob_list)
+					spawn(0)
+						H.corgize()
+				ok = 1
 			if("power")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","P")
@@ -1737,6 +1784,10 @@
 						//teleport security person
 						H.loc = pick(prisonsecuritywarp)
 					prisonwarped += H
+			if("tripleAI")
+				usr.client.triple_ai()
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","TriAI")
 			if("traitor_all")
 				if(!ticker)
 					alert("The game hasn't started yet!")
@@ -1770,48 +1821,11 @@
 					ticker.mode.finalize_traitor(A.mind)
 				message_admins("\blue [key_name_admin(usr)] used everyone is a traitor secret. Objective is [objective]", 1)
 				log_admin("[key_name(usr)] used everyone is a traitor secret. Objective is [objective]")
-			if("moveminingshuttle")
-				if(mining_shuttle_moving)
-					return
+			if("onlyone")
 				feedback_inc("admin_secrets_fun_used",1)
-				feedback_add_details("admin_secrets_fun_used","ShM")
-				move_mining_shuttle()
-				message_admins("\blue [key_name_admin(usr)] moved mining shuttle", 1)
-				log_admin("[key_name(usr)] moved the mining shuttle")
-			if("moveadminshuttle")
-				feedback_inc("admin_secrets_fun_used",1)
-				feedback_add_details("admin_secrets_fun_used","ShA")
-				move_admin_shuttle()
-				message_admins("\blue [key_name_admin(usr)] moved the centcom administration shuttle", 1)
-				log_admin("[key_name(usr)] moved the centcom administration shuttle")
-			if("moveferry")
-				feedback_inc("admin_secrets_fun_used",1)
-				feedback_add_details("admin_secrets_fun_used","ShF")
-				move_ferry()
-				message_admins("\blue [key_name_admin(usr)] moved the centcom ferry", 1)
-				log_admin("[key_name(usr)] moved the centcom ferry")
-			if("movealienship")
-				feedback_inc("admin_secrets_fun_used",1)
-				feedback_add_details("admin_secrets_fun_used","ShX")
-				move_alien_ship()
-				message_admins("\blue [key_name_admin(usr)] moved the alien dinghy", 1)
-				log_admin("[key_name(usr)] moved the alien dinghy")
-			if("togglebombcap")
-				feedback_inc("admin_secrets_fun_used",1)
-				feedback_add_details("admin_secrets_fun_used","BC")
-				switch(MAX_EXPLOSION_RANGE)
-					if(14)	MAX_EXPLOSION_RANGE = 16
-					if(16)	MAX_EXPLOSION_RANGE = 20
-					if(20)	MAX_EXPLOSION_RANGE = 28
-					if(28)	MAX_EXPLOSION_RANGE = 56
-					if(56)	MAX_EXPLOSION_RANGE = 128
-					if(128)	MAX_EXPLOSION_RANGE = 14
-				var/range_dev = MAX_EXPLOSION_RANGE *0.25
-				var/range_high = MAX_EXPLOSION_RANGE *0.5
-				var/range_low = MAX_EXPLOSION_RANGE
-				message_admins("\red <b> [key_name_admin(usr)] changed the bomb cap to [range_dev], [range_high], [range_low]</b>", 1)
-				log_admin("[key_name_admin(usr)] changed the bomb cap to [MAX_EXPLOSION_RANGE]")
-
+				feedback_add_details("admin_secrets_fun_used","OO")
+				usr.client.only_one()
+				message_admins("[key_name_admin(usr)] has triggered a battle to the death (only one)")
 			if("flicklights")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","FL")
@@ -1843,7 +1857,88 @@
 				for(var/mob/M in player_list)
 					if(M.stat != 2)
 						M.show_message(text("\blue The chilling wind suddenly stops..."), 1)
-/*				if("shockwave")
+			if("retardify")
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","RET")
+				for(var/mob/living/carbon/human/H in player_list)
+					H << "\red <B>You suddenly feel stupid.</B>"
+					H.setBrainLoss(60)
+				message_admins("[key_name_admin(usr)] made everybody retarded")
+			if("fakeguns")
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","FG")
+				for(var/obj/item/W in world)
+					if(istype(W, /obj/item/clothing) || istype(W, /obj/item/weapon/card/id) || istype(W, /obj/item/weapon/disk) || istype(W, /obj/item/weapon/tank))
+						continue
+					W.icon = 'icons/obj/gun.dmi'
+					W.icon_state = "revolver"
+					W.item_state = "gun"
+				message_admins("[key_name_admin(usr)] made every item look like a gun")
+			if("schoolgirl")
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","SG")
+				for(var/obj/item/clothing/under/W in world)
+					W.icon_state = "schoolgirl"
+					W.item_state = "w_suit"
+					W.item_color = "schoolgirl"
+					if(isliving(W.loc))
+						var/mob/living/L = W.loc
+						L.update_inv_w_uniform()
+				message_admins("[key_name_admin(usr)] activated Japanese Animes mode")
+				world << sound('sound/AI/animes.ogg')
+			if("eagles")//SCRAW
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","EgL")
+				for(var/obj/machinery/door/airlock/W in world)
+					if(W.z == 1 && !istype(get_area(W), /area/bridge) && !istype(get_area(W), /area/crew_quarters) && !istype(get_area(W), /area/security/prison))
+						W.req_access = list()
+						W.req_one_access = list()
+				message_admins("[key_name_admin(usr)] activated Egalitarian Station mode")
+				command_alert("Centcomm airlock control override activated. Please take this time to get acquainted with your coworkers.")
+				world << sound('sound/AI/commandreport.ogg')
+			if("moveadminshuttle")
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","ShA")
+				move_admin_shuttle()
+				message_admins("\blue [key_name_admin(usr)] moved the centcom administration shuttle", 1)
+				log_admin("[key_name(usr)] moved the centcom administration shuttle")
+			if("moveferry")
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","ShF")
+				move_ferry()
+				message_admins("\blue [key_name_admin(usr)] moved the centcom ferry", 1)
+				log_admin("[key_name(usr)] moved the centcom ferry")
+			if("movealienship")
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","ShX")
+				move_alien_ship()
+				message_admins("\blue [key_name_admin(usr)] moved the alien dinghy", 1)
+				log_admin("[key_name(usr)] moved the alien dinghy")
+			if("moveminingshuttle")
+				if(mining_shuttle_moving)
+					return
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","ShM")
+				move_mining_shuttle()
+				message_admins("\blue [key_name_admin(usr)] moved mining shuttle", 1)
+				log_admin("[key_name(usr)] moved the mining shuttle")
+			if("togglebombcap")
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","BC")
+				switch(MAX_EXPLOSION_RANGE)
+					if(14)	MAX_EXPLOSION_RANGE = 16
+					if(16)	MAX_EXPLOSION_RANGE = 20
+					if(20)	MAX_EXPLOSION_RANGE = 28
+					if(28)	MAX_EXPLOSION_RANGE = 56
+					if(56)	MAX_EXPLOSION_RANGE = 128
+					if(128)	MAX_EXPLOSION_RANGE = 14
+				var/range_dev = MAX_EXPLOSION_RANGE *0.25
+				var/range_high = MAX_EXPLOSION_RANGE *0.5
+				var/range_low = MAX_EXPLOSION_RANGE
+				message_admins("\red <b> [key_name_admin(usr)] changed the bomb cap to [range_dev], [range_high], [range_low]</b>", 1)
+				log_admin("[key_name_admin(usr)] changed the bomb cap to [MAX_EXPLOSION_RANGE]")
+
+/*			if("shockwave")
 				ok = 1
 				world << "\red <B><big>ALERT: STATION STRESS CRITICAL</big></B>"
 				sleep(60)
@@ -1885,21 +1980,6 @@
 					spawn(0)
 						sleep(rand(30,400))
 						Wall.ex_act(rand(2,1)) */
-			if("immovable")
-				feedback_inc("admin_secrets_fun_used",1)
-				feedback_add_details("admin_secrets_fun_used","IR")
-				message_admins("[key_name_admin(usr)] has sent an immovable rod to the station", 1)
-				immovablerod()
-			if("prison_break")
-				feedback_inc("admin_secrets_fun_used",1)
-				feedback_add_details("admin_secrets_fun_used","PB")
-				message_admins("[key_name_admin(usr)] has allowed a prison break", 1)
-				prison_break()
-			if("lightout")
-				feedback_inc("admin_secrets_fun_used",1)
-				feedback_add_details("admin_secrets_fun_used","LO")
-				message_admins("[key_name_admin(usr)] has broke a lot of lights", 1)
-				lightsout(1,2)
 			if("blackout")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","BO")
@@ -1979,51 +2059,6 @@
 							F.update_icon()
 					floorIsLava = 0
 				return
-			if("virus")
-				feedback_inc("admin_secrets_fun_used",1)
-				feedback_add_details("admin_secrets_fun_used","V")
-				var/answer = alert("Do you want this to be a greater disease or a lesser one?",,"Greater","Lesser")
-				if(answer=="Lesser")
-					virus2_lesser_infection()
-					message_admins("[key_name_admin(usr)] has triggered a lesser virus outbreak.", 1)
-				else
-					virus2_greater_infection()
-					message_admins("[key_name_admin(usr)] has triggered a greater virus outbreak.", 1)
-			if("retardify")
-				feedback_inc("admin_secrets_fun_used",1)
-				feedback_add_details("admin_secrets_fun_used","RET")
-				for(var/mob/living/carbon/human/H in player_list)
-					H << "\red <B>You suddenly feel stupid.</B>"
-					H.setBrainLoss(60)
-				message_admins("[key_name_admin(usr)] made everybody retarded")
-			if("fakeguns")
-				feedback_inc("admin_secrets_fun_used",1)
-				feedback_add_details("admin_secrets_fun_used","FG")
-				for(var/obj/item/W in world)
-					if(istype(W, /obj/item/clothing) || istype(W, /obj/item/weapon/card/id) || istype(W, /obj/item/weapon/disk) || istype(W, /obj/item/weapon/tank))
-						continue
-					W.icon = 'icons/obj/gun.dmi'
-					W.icon_state = "revolver"
-					W.item_state = "gun"
-				message_admins("[key_name_admin(usr)] made every item look like a gun")
-			if("schoolgirl")
-				feedback_inc("admin_secrets_fun_used",1)
-				feedback_add_details("admin_secrets_fun_used","SG")
-				for(var/obj/item/clothing/under/W in world)
-					W.icon_state = "schoolgirl"
-					W.item_state = "w_suit"
-					W.color = "schoolgirl"
-				message_admins("[key_name_admin(usr)] activated Japanese Animes mode")
-				world << sound('sound/AI/animes.ogg')
-			if("eagles")//SCRAW
-				feedback_inc("admin_secrets_fun_used",1)
-				feedback_add_details("admin_secrets_fun_used","EgL")
-				for(var/obj/machinery/door/airlock/W in world)
-					if(W.z == 1 && !istype(get_area(W), /area/bridge) && !istype(get_area(W), /area/crew_quarters) && !istype(get_area(W), /area/security/prison))
-						W.req_access = list()
-				message_admins("[key_name_admin(usr)] activated Egalitarian Station mode")
-				command_alert("Centcomm airlock control override activated. Please take this time to get acquainted with your coworkers.")
-				world << sound('sound/AI/commandreport.ogg')
 			if("dorf")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","DF")
@@ -2031,25 +2066,6 @@
 					B.f_style = "Dward Beard"
 					B.update_hair()
 				message_admins("[key_name_admin(usr)] activated dorf mode")
-			if("ionstorm")
-				feedback_inc("admin_secrets_fun_used",1)
-				feedback_add_details("admin_secrets_fun_used","I")
-				IonStorm()
-				message_admins("[key_name_admin(usr)] triggered an ion storm")
-				var/show_log = alert(usr, "Show ion message?", "Message", "Yes", "No")
-				if(show_log == "Yes")
-					command_alert("Ion storm detected near the station. Please check all AI-controlled equipment for errors.", "Anomaly Alert")
-					world << sound('sound/AI/ionstorm.ogg')
-			if("spacevines")
-				feedback_inc("admin_secrets_fun_used",1)
-				feedback_add_details("admin_secrets_fun_used","K")
-				//new /datum/event/spacevine
-				message_admins("[key_name_admin(usr)] has spawned spacevines", 1)
-			if("onlyone")
-				feedback_inc("admin_secrets_fun_used",1)
-				feedback_add_details("admin_secrets_fun_used","OO")
-				usr.client.only_one()
-//				message_admins("[key_name_admin(usr)] has triggered a battle to the death (only one)")
 		if(usr)
 			log_admin("[key_name(usr)] used secret [href_list["secretsfun"]]")
 			if (ok)

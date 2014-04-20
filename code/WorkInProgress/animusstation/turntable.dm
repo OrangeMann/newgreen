@@ -102,7 +102,7 @@ proc/add_turntable_soundtracks()
 	S.falloff = 2
 	S.wait = 1
 	S.environment = 0
-	var/area/A = src.loc.loc:master
+	var/area/A = get_area(src)
 
 	for(var/area/RA in A.related)
 		for(var/obj/machinery/party/lasermachine/L in RA)
@@ -110,11 +110,11 @@ proc/add_turntable_soundtracks()
 	playing = 1
 	while(playing == 1)
 		for(var/mob/M in world)
-			if((M.loc.loc in A.related) && M.music == 0)
+			if((get_turf(M) in A.related) && M.music == 0)
 				//world << "Found the song..."
 				M << S
 				M.music = 1
-			else if(!(M.loc.loc in A.related) && M.music == 1)
+			else if(!(get_turf(M) in A.related) && M.music == 1)
 				var/sound/Soff = sound(null)
 				Soff.channel = 10
 				M << Soff
@@ -133,7 +133,7 @@ proc/add_turntable_soundtracks()
 			M << S
 			M.music = 0
 	playing = 0
-	var/area/A = src.loc.loc:master
+	var/area/A = get_area(src)
 	for(var/area/RA in A.related)
 		for(var/obj/machinery/party/lasermachine/L in RA)
 			L.turnoff()

@@ -243,7 +243,7 @@
 ///////////////////////////////////////////////////////////////////////
 
 	else if(href_list["warn"])
-		usr.client.warn(href_list["warn"])
+		usr.client.warn(locate(href_list["warn"]))
 
 	else if(href_list["dbunban"])
 		BDB_unban(href_list["dbunban"])
@@ -252,10 +252,10 @@
 		BDB_ban_edit(href_list["dbban_edit"])
 
 	else if(href_list["jobban_panel"])
-		jobban_panel(href_list["jobban_panel"])
+		jobban_panel(locate(href_list["jobban_panel"]))
 
 	else if(href_list["jobban"])
-		create_jobban(href_list["jobban_mob"], href_list["jobban"])
+		create_jobban(locate(href_list["jobban_mob"]), href_list["jobban"])
 
 ///////////////////////////////////////////////////////////////////////
 /////////////////////////Ban stuff finish here/////////////////////////

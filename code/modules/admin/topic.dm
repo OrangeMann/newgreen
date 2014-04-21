@@ -243,7 +243,7 @@
 ///////////////////////////////////////////////////////////////////////
 
 	else if(href_list["warn"])
-		usr.client.warn(locate(href_list["warn"]))
+		usr.client.warn(href_list["warn"])
 
 	else if(href_list["dbunban"])
 		BDB_unban(href_list["dbunban"])

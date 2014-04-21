@@ -96,8 +96,7 @@ proc/add_turntable_soundtracks()
 /obj/machinery/party/turntable/process()
 	var/area/A = get_area(src)
 	if(playing)
-		for(var/mob/M in world)
-			world << "[M.name]"
+		for(var/mob/M)
 			if((get_area(M) in A.related) && M.music == 0)
 				M << track
 				M.music = 1
@@ -131,7 +130,7 @@ proc/add_turntable_soundtracks()
 	var/sound/Soff = sound(null)
 	Soff.channel = 10
 	Soff.wait = 1
-	for(var/mob/M in world)
+	for(var/mob/M)
 		if(M.music)
 			M << Soff
 			M.music = 0

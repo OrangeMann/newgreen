@@ -1,7 +1,7 @@
 /obj/item/weapon/radar
-	name = "Mind radar"
-	icon = 'icons/obj/bodybag.dmi'
-	icon_state = "bodybag_folded"
+	name = "mind radar"
+	icon = 'icons/obj/handradar.dmi'
+	icon_state = "handradaroff"
 	var/mob/seeker
 	var/on = 0
 
@@ -14,6 +14,7 @@
 		return
 	if(!seeker)
 		on = !on
+		icon_state = "handradaroff"
 		return
 	ping()
 
@@ -26,7 +27,7 @@
 		seeker = null
 
 /obj/item/weapon/radar/proc/ping()
-	clear_screen() //Here's no time for optimization!
+	clear_screen()	//Here's no time for optimization!
 
 	var/turf/T = get_turf(src)
 	for(var/mob/living/L in range(T, 16))
@@ -50,6 +51,7 @@
 	if(on)
 		return
 	on = 1
+	icon_state = "handradaron" //CAUSE HARDCODE WORK BETTER @:
 
 	var/obj/screen/S = new
 	S.name = "radar"
@@ -89,6 +91,7 @@
 	if(!seeker.client)
 		return
 	on = 0
+	icon_state = "handradaroff"
 
 	clear_screen()
 	for(var/obj/screen/S in seeker.client.screen)

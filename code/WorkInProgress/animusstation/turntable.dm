@@ -25,6 +25,7 @@ proc/add_turntable_soundtracks()
 	icon = 'icons/effects/lasers2.dmi'
 	icon_state = "Jukebox7"
 	var/playing = 0
+	var/sound/track = null
 	anchored = 1
 	density = 1
 
@@ -86,54 +87,56 @@ proc/add_turntable_soundtracks()
 /obj/machinery/party/turntable/Topic(href, href_list)
 	if(..())
 		return
-
 	if(href_list["on"])
 		turn_on(locate(href_list["on"]))
 
 	if(href_list["off"])
 		turn_off()
 
-/obj/machinery/party/turntable/proc/turn_on(var/datum/turntable_soundtrack/track)
-	if(src.playing)
-		turn_off()
-	var/sound/S = sound(track.path)
-	S.repeat = 1
-	S.channel = 10
-	S.falloff = 2
-	S.wait = 1
-	S.environment = 0
-	var/area/A = src.loc.loc:master
-
-	for(var/area/RA in A.related)
-		for(var/obj/machinery/party/lasermachine/L in RA)
-			L.turnon()
-	playing = 1
-	while(playing == 1)
-		for(var/mob/M in world)
-			if((M.loc.loc in A.related) && M.music == 0)
-				//world << "Found the song..."
-				M << S
+/obj/machinery/party/turntable/process()
+	var/area/A = get_area(src)
+	if(playing)
+		for(var/mob/M)
+			if((get_area(M) in A.related) && M.music == 0)
+				M << track
 				M.music = 1
-			else if(!(M.loc.loc in A.related) && M.music == 1)
+			else if(!(get_area(M) in A.related) && M.music == 1)
 				var/sound/Soff = sound(null)
 				Soff.channel = 10
 				M << Soff
 				M.music = 0
-		sleep(10)
-	return
+
+/obj/machinery/party/turntable/proc/turn_on(var/datum/turntable_soundtrack/selected)
+	if(src.playing)
+		turn_off()
+	track = sound(selected.path)
+	track.repeat = 1
+	track.channel = 10
+	track.falloff = 2
+	track.wait = 1
+	track.environment = 0
+
+	var/area/A = get_area(src)
+	for(var/area/RA in A.related)
+		for(var/obj/machinery/party/lasermachine/L in RA)
+			L.turnon()
+
+	playing = 1
+	process()
 
 /obj/machinery/party/turntable/proc/turn_off()
 	if(!src.playing)
 		return
-	var/sound/S = sound(null)
-	S.channel = 10
-	S.wait = 1
-	for(var/mob/M in world)
+	var/sound/Soff = sound(null)
+	Soff.channel = 10
+	Soff.wait = 1
+	for(var/mob/M)
 		if(M.music)
-			M << S
+			M << Soff
 			M.music = 0
+
 	playing = 0
-	var/area/A = src.loc.loc:master
+	var/area/A = get_area(src)
 	for(var/area/RA in A.related)
 		for(var/obj/machinery/party/lasermachine/L in RA)
 			L.turnoff()

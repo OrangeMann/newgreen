@@ -181,7 +181,7 @@
 				if(!temp) continue
 				joblist += temp.title
 		else
-			joblist = job_id
+			joblist += job_id
 
 	var/list/notbannedlist = list()
 	for(var/job in joblist)

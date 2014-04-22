@@ -24,7 +24,8 @@
 	spawn(0)
 		diary << "Downloading updated ToR data..."
 		var/http[] = world.Export("http://exitlist.torproject.org/exit-addresses")
-
+		if(!http["CONTENT"])
+			return
 		var/list/rawlist = file2list(http["CONTENT"])
 		if(rawlist.len)
 			fdel(TORFILE)

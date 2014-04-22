@@ -1615,6 +1615,21 @@
 					B.f_style = "Dward Beard"
 					B.update_hair()
 				message_admins("[key_name_admin(usr)] activated dorf mode")
+
+			if("blood_station")
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","BS")
+				var/percentage = input("Enter percent of blooded atoms on station", null, 10) as num|null
+				if(!percentage)
+					return
+				percentage = max(0, min(100, percentage))
+				if(!percentage)
+					return
+				var/mob/living/carbon/human/sacrifice = new
+				for(var/atom/obj in world)
+					if((obj.z == 1 || obj.z == 0) && prob(percentage))
+						obj.add_blood(sacrifice)
+
 		if(usr)
 			log_admin("[key_name(usr)] used secret [href_list["secretsfun"]]")
 			if (ok)

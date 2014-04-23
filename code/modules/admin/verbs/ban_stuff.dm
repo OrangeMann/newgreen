@@ -192,7 +192,7 @@
 		jobban_from(M, notbannedlist)
 
 	if(joblist.len)
-		unjobban_from(M, joblist)
+		unjobban_from(M, joblist - notbannedlist)
 
 /datum/admins/proc/jobban_panel(var/mob/M) //Поменять на ДБ
 	if(!check_rights(R_BAN))	return

@@ -39,6 +39,7 @@
 		var/obj/item/weapon/implant/death_alarm/A = new/obj/item/weapon/implant/death_alarm(H)
 		A.imp_in = H
 		A.implanted = 1
+		A.implanted(H)
 		world << "<b>[H.real_name] is the captain!</b>"
 		return 1
 
@@ -93,4 +94,5 @@
 		var/obj/item/weapon/implant/death_alarm/A = new/obj/item/weapon/implant/death_alarm(H)
 		A.imp_in = H
 		A.implanted = 1
+		A.implanted(H)
 		return 1

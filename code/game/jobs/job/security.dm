@@ -47,6 +47,7 @@
 		var/obj/item/weapon/implant/death_alarm/A = new/obj/item/weapon/implant/death_alarm(H)
 		A.imp_in = H
 		A.implanted = 1
+		A.implanted(H)
 		return 1
 
 

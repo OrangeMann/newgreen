@@ -34,6 +34,10 @@
 			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H), slot_r_hand)
 		else
 			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H.back), slot_in_backpack)
+		H.equip_to_slot_or_del(new /obj/item/weapon/gun/energy/gun/mini(H), slot_l_store)
+		var/obj/item/weapon/implant/death_alarm/A = new/obj/item/weapon/implant/death_alarm(H)
+		A.imp_in = H
+		A.implanted = 1
 		return 1
 
 

@@ -36,6 +36,9 @@
 		var/obj/item/weapon/implant/loyalty/L = new/obj/item/weapon/implant/loyalty(H)
 		L.imp_in = H
 		L.implanted = 1
+		var/obj/item/weapon/implant/death_alarm/A = new/obj/item/weapon/implant/death_alarm(H)
+		A.imp_in = H
+		A.implanted = 1
 		world << "<b>[H.real_name] is the captain!</b>"
 		return 1
 
@@ -87,4 +90,7 @@
 		else
 			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/ids(H.back), slot_in_backpack)
 			H.equip_to_slot_or_del(new /obj/item/weapon/storage/wallet/random(H.back), slot_in_backpack)
+		var/obj/item/weapon/implant/death_alarm/A = new/obj/item/weapon/implant/death_alarm(H)
+		A.imp_in = H
+		A.implanted = 1
 		return 1

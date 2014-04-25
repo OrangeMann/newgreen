@@ -31,6 +31,28 @@
 				modifystate = "energystun"
 		update_icon()
 
+/obj/item/weapon/gun/energy/gun/mini
+	icon_state = "energy_mini"
+	modifystate = "energy_ministun"
+	charge_cost = 250
+
+	attack_self(mob/living/user as mob)
+		switch(mode)
+			if(0)
+				mode = 1
+				charge_cost = 250
+				fire_sound = 'sound/weapons/Laser.ogg'
+				user << "\red [src.name] is now set to kill."
+				projectile_type = "/obj/item/projectile/beam"
+				modifystate = "energy_minikill"
+			if(1)
+				mode = 0
+				charge_cost = 250
+				fire_sound = 'sound/weapons/Taser.ogg'
+				user << "\red [src.name] is now set to stun."
+				projectile_type = "/obj/item/projectile/energy/electrode"
+				modifystate = "energy_ministun"
+		update_icon()
 
 
 /obj/item/weapon/gun/energy/gun/nuclear

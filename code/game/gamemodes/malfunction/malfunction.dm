@@ -60,6 +60,8 @@
 		AI_mind.special_role = "malfunction"
 
 		AI_mind.current.verbs += /datum/game_mode/malfunction/proc/takeover
+		for(var/mob/living/silicon/robot/C in AI_mind.current:connected_robots)
+			C.lawsync()
 
 		log_game("[AI_mind.current.name]([AI_mind.current.ckey]) now became a Malfunction")
 

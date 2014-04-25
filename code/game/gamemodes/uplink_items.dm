@@ -8,7 +8,8 @@
 		var/obj/I = new path(loc)
 		if(ishuman(loc))
 			var/mob/living/carbon/human/A = loc
-			A.put_in_any_hand_if_possible(I)
+			if(!A.put_in_any_hand_if_possible(I))
+				I.loc = get_turf(loc)
 
 /datum/spawn_item/revolver
 	name = "Revolver"

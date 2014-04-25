@@ -44,6 +44,9 @@
 		var/obj/item/weapon/implant/loyalty/L = new/obj/item/weapon/implant/loyalty(H)
 		L.imp_in = H
 		L.implanted = 1
+		var/obj/item/weapon/implant/death_alarm/A = new/obj/item/weapon/implant/death_alarm(H)
+		A.imp_in = H
+		A.implanted = 1
 		return 1
 
 

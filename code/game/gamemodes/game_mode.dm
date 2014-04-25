@@ -62,12 +62,13 @@
 	uplink_items.Add(new /datum/spawn_item/c4)
 	uplink_items.Add(new /datum/spawn_item/powersink)
 	uplink_items.Add(new /datum/spawn_item/singularity_beacon)
+	uplink_items.Add(new /datum/spawn_item/space_suit)
 	uplink_items.Add(new /datum/spawn_item/teleporter_board)
 	//Implants
 	uplink_items.Add(new /datum/spawn_item/imp_freedom)
 	uplink_items.Add(new /datum/spawn_item/imp_uplink)
 	uplink_items.Add(new /datum/spawn_item/imp_explosive)
-	uplink_items.Add(new /datum/spawn_item/imp_explosive)
+	uplink_items.Add(new /datum/spawn_item/imp_compressed)
 	//Badassery
 	uplink_items.Add(new /datum/spawn_item/balloon)
 

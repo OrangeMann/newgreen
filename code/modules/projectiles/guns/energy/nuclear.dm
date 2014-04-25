@@ -35,6 +35,7 @@
 	icon_state = "energy_mini"
 	modifystate = "energy_ministun"
 	charge_cost = 250
+	w_class = 2
 
 	attack_self(mob/living/user as mob)
 		switch(mode)

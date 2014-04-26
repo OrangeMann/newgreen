@@ -26,6 +26,7 @@ proc/add_turntable_soundtracks()
 	icon_state = "Jukebox7"
 	var/playing = 0
 	var/sound/track = null
+	var/volume = 100
 	anchored = 1
 	density = 1
 
@@ -56,28 +57,36 @@ proc/add_turntable_soundtracks()
 	usr.set_machine(src)
 	src.add_fingerprint(usr)
 
-	var/t = "<body background='http://i.imgur.com/ITjP1mW.jpg'><br><br><br><div align='center'><table border='0'><B><font color='maroon' size='6'>J</font><font size='5' color='purple'>uke Box</font> <font size='5' color='green'>Interface</font></B><br><br><br><br>"
-//	t += "<A href='?src=\ref[src];on=1'>On</A><br>"
-	t += "<tr><td height='50' weight='50'></td><td height='50' weight='50'><A href='?src=\ref[src];off=1'><font color='maroon'>T</font><font color='geen'>urn</font> <font color='red'>Off</font></A></td><td height='50' weight='50'></td></tr>"
-	t+= "<tr>"
+	var/t = "<body background='turntable_back.jpg'><br><br><br><div align='center'><table border='0'><B><font color='maroon' size='6'>J</font><font size='5' color='purple'>uke Box</font> <font size='5' color='green'>Interface</font></B><br><br><br><br>"
+	t += "<A href='?src=\ref[src];on=1'>On</A><br>"
+	t += "<tr><td height='50' weight='50'></td><td height='50' weight='50'><A href='?src=\ref[src];off=1'><font color='maroon'>T</font><font color='lightgreen'>urn</font> <font color='red'>Off</font></A></td><td height='50' weight='50'></td></tr>"
+	t += "<tr>"
+
+
+	var/lastcolor = "green"
+	for(var/i = 10; i <= 100; i += 10)
+		t += "<A href='?src=\ref[src];set_volume=[i]'><font color='[lastcolor]'>[i]</font></A> "
+		if(lastcolor == "green")
+			lastcolor = "purple"
+		else
+			lastcolor = "green"
 
 	var/i = 0
-	var/lastcolor = "green"
-
 	for(var/datum/turntable_soundtrack/D in turntable_soundtracks)
 		if(i == 3)
 			i = 0
 			t += "</tr><tr>"
 
-		if(lastcolor == "green")
-			lastcolor = "purple"
+		if(i == 1)
+			lastcolor = pick("lightgreen", "purple")
 		else
-			lastcolor = "green"
+			lastcolor = pick("green", "purple")
+
 		t += "<td height='50' weight='50'><A href='?src=\ref[src];on=\ref[D]'><font color='maroon'>[D.f_name]</font><font color='[lastcolor]'>[D.name]</font></A></td>"
 		i++
 
 	t += "</table></div></body>"
-	user << browse(t, "window=turntable;size=450x700")
+	user << browse(t, "window=turntable;size=450x700;can_resize=1")
 	onclose(user, "turntable")
 	return
 
@@ -90,8 +99,11 @@ proc/add_turntable_soundtracks()
 	if(href_list["on"])
 		turn_on(locate(href_list["on"]))
 
-	if(href_list["off"])
+	else if(href_list["off"])
 		turn_off()
+
+	else if(href_list["set_volume"])
+		set_volume(text2num(href_list["set_volume"]))
 
 /obj/machinery/party/turntable/process()
 	var/area/A = get_area(src)
@@ -107,13 +119,17 @@ proc/add_turntable_soundtracks()
 				M.music = 0
 
 /obj/machinery/party/turntable/proc/turn_on(var/datum/turntable_soundtrack/selected)
-	if(src.playing)
+	if(playing)
 		turn_off()
-	track = sound(selected.path)
+	if(selected)
+		track = sound(selected.path)
+	if(!track)
+		return
 	track.repeat = 1
 	track.channel = 10
 	track.falloff = 2
 	track.wait = 1
+	track.volume = src.volume
 	track.environment = 0
 
 	var/area/A = get_area(src)
@@ -125,7 +141,7 @@ proc/add_turntable_soundtracks()
 	process()
 
 /obj/machinery/party/turntable/proc/turn_off()
-	if(!src.playing)
+	if(!playing)
 		return
 	var/sound/Soff = sound(null)
 	Soff.channel = 10
@@ -140,6 +156,12 @@ proc/add_turntable_soundtracks()
 	for(var/area/RA in A.related)
 		for(var/obj/machinery/party/lasermachine/L in RA)
 			L.turnoff()
+
+/obj/machinery/party/turntable/proc/set_volume(var/new_volume)
+	volume = max(0, min(100, new_volume))
+	if(playing)
+		turn_off()
+		turn_on()
 
 /obj/machinery/party/lasermachine
 	name = "laser machine"

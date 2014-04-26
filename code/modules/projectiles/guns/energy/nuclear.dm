@@ -32,7 +32,9 @@
 		update_icon()
 
 /obj/item/weapon/gun/energy/gun/mini
+	name = "mini energy gun"
 	icon_state = "energy_mini"
+	item_state = "energystun100"
 	modifystate = "energy_ministun"
 	charge_cost = 250
 	w_class = 2
@@ -46,6 +48,7 @@
 				user << "\red [src.name] is now set to kill."
 				projectile_type = "/obj/item/projectile/beam"
 				modifystate = "energy_minikill"
+				item_state = "energykill[round(power_supply.charge / power_supply.maxcharge, 0.25) * 100]" //3: ~Intercross
 			if(1)
 				mode = 0
 				charge_cost = 250
@@ -53,6 +56,7 @@
 				user << "\red [src.name] is now set to stun."
 				projectile_type = "/obj/item/projectile/energy/electrode"
 				modifystate = "energy_ministun"
+				item_state = "energystun[round(power_supply.charge / power_supply.maxcharge, 0.25) * 100]" //3: ~Intercross
 		update_icon()
 
 

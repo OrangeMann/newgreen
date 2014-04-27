@@ -1,4 +1,45 @@
-/mob/var/music = 0
+/mob/var/datum/hear_music/hear_music
+#define NONE_MUSIC 0
+#define UPLOADING 1
+#define PLAYING 2
+
+/datum/hear_music
+	var/mob/target = null
+	//var/sound/sound
+	var/status = NONE_MUSIC
+	var/stop = 0
+
+	proc/play(sound/S)
+		status = NONE_MUSIC
+		if(!target)
+			return
+		if(!S)
+			return
+		status = UPLOADING
+		target << browse_rsc(S)
+		//sound = S
+		if(target.hear_music != src)
+			del(src)
+		if(!stop)
+			target << S
+			status = PLAYING
+		else
+			del(src)
+
+	proc/stop()
+		if(!target)
+			return
+		if(status == PLAYING)
+			var/sound/S = sound(null)
+			S.channel = 10
+			S.wait = 1
+			target << S
+			del(src)
+		else if(status == UPLOADING)
+			stop = 1
+		target.hear_music = null
+
+
 
 /datum/turntable_soundtrack
 	var/f_name
@@ -103,24 +144,23 @@
 	else if(href_list["eject"])
 		if(disk)
 			disk.loc = src.loc
-			if(track == disk.data.sound)
+			if(disk.data && track == disk.data.sound)
 				turn_off()
 				track = null
 			disk = null
-
 
 /obj/machinery/party/turntable/process()
 	var/area/A = get_area(src)
 	if(playing)
 		for(var/mob/M)
-			if((get_area(M) in A.related) && M.music == 0)
-				M << track
-				M.music = 1
-			else if(!(get_area(M) in A.related) && M.music == 1)
-				var/sound/Soff = sound(null)
-				Soff.channel = 10
-				M << Soff
-				M.music = 0
+			var/inRange = (get_area(M) in A.related)
+			if(inRange && !M.hear_music)
+				M.hear_music = new()
+				M.hear_music.target = M
+				M.hear_music.play(track)
+			//else if(M.music
+			else if(!inRange && M.hear_music)
+				M.hear_music.stop()
 
 /obj/machinery/party/turntable/proc/turn_on(var/datum/turntable_soundtrack/selected)
 	if(playing)
@@ -153,9 +193,8 @@
 	Soff.channel = 10
 	Soff.wait = 1
 	for(var/mob/M)
-		if(M.music)
-			M << Soff
-			M.music = 0
+		if(M.hear_music)
+			M.hear_music.stop()
 
 	playing = 0
 	var/area/A = get_area(src)

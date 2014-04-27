@@ -26,13 +26,13 @@
 /obj/machinery/party/musicwriter/attack_hand(mob/user)
 	var/dat = ""
 	if(writing)
-		dat += "Writing from [retard_name] mind... Please Stand By."
+		dat += "Memory scan completed. <br>Writing from scan of [retard_name] mind... Please Stand By."
 	else if(!coin)
 		dat += "Please insert coin"
 	else
 		dat += "<A href='?src=\ref[src];write=1'>Write</A>"
 
-	user << browse(dat, "window=musicwriter;size=150x50")
+	user << browse(dat, "window=musicwriter;size=200x100")
 	onclose(user, "onclose")
 	return
 
@@ -44,7 +44,7 @@
 			retard = usr
 			retard_name = retard.name
 			var/N = sanitize_russian(input("Name of music") as text|null)
-			retard << "Please stand still while your file is uploading"
+			retard << "Please stand still while your data is uploading"
 			if(N)
 				var/sound/S = input("Your music file") as sound|null
 				if(S)
@@ -58,7 +58,7 @@
 					disk.name = "disk ([N])"
 					disk.loc = src.loc
 					var/mob/M = usr
-					message_admins("[M.real_name]([M.ckey]) uploaded <A HREF='?_src_=holder;listensound=\ref[T.sound]'>sound</A>. <A HREF='?_src_=holder;wipedata=\ref[disk]'>Wipe</A>")
+					message_admins("[M.real_name]([M.ckey]) uploaded <A HREF='?_src_=holder;listensound=\ref[S]'>sound</A> named as [N]. <A HREF='?_src_=holder;wipedata=\ref[disk]'>Wipe</A> data.")
 			icon_state = "off"
 			writing = 0
 			retard = null

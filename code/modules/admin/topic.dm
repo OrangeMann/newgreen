@@ -2028,7 +2028,7 @@
 		usr << browse(text, "window=mob_attacklog;size=650x620")
 
 	else if(href_list["listensound"])
-		var/sound/S = locate(href_list["listensound"])
+		var/sound/S = sound(locate(href_list["listensound"]))
 		if(!S)
 			return
 		S.channel = 703

@@ -8,8 +8,8 @@
 
 /obj/machinery/party/musicwriter
 	name = "Music writer"
-	icon = 'icons/obj/terminals.dmi'
-	icon_state = "req_comp0"
+	icon = 'icons/obj/objects.dmi'
+	icon_state = "off"
 	var/obj/item/weapon/disk/music/disk
 
 /obj/machinery/party/musicwriter/attackby(obj/O, mob/user)
@@ -41,6 +41,7 @@
 			disk = null
 	else if(href_list["write"])
 		if(disk)
+			icon_state = "on"
 			var/sound/S = input("Your music") as sound|null
 			var/N = sanitize_russian(input("Name of music") as text|null)
 			var/datum/turntable_soundtrack/T = new()
@@ -53,4 +54,4 @@
 				disk.name = "disk ([N])"
 				var/mob/M = usr
 				message_admins("[M.real_name]([M.ckey]) uploaded <A HREF='?_src_=holder;listensound=\ref[T.sound]'>sound</A>")
-
+			icon_state = "off"

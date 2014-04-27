@@ -2026,3 +2026,19 @@
 			for(var/row in M.attack_log)
 				text += row + "<BR>"
 		usr << browse(text, "window=mob_attacklog;size=650x620")
+
+	else if(href_list["listensound"])
+		var/sound/S = locate(href_list["listensound"])
+		//S.repeat = 0
+		S.channel = 703
+		//S.falloff = 2
+		//S.wait = 1
+		//S.volume = 100
+		//S.environment = 0
+		usr << S
+		usr << "<B><A HREF='?_src_=holder;stoplistensound=1'>Stop listen</A></B>"
+
+	else if(href_list["stoplistensound"])
+		var/sound/S = sound(null)
+		S.channel = 703
+		usr << S

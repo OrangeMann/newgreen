@@ -2042,3 +2042,9 @@
 		var/sound/S = sound(null)
 		S.channel = 703
 		usr << S
+
+	else if(href_list["wipedata"])
+		var/obj/item/weapon/disk/music/disk = locate(href_list["wipedata"])
+		if(alert("Wipe data?",,"Yes", "No") == "Yes")
+			disk.data = null
+			disk.name = "burned disk"

@@ -7,51 +7,59 @@
 	var/datum/turntable_soundtrack/data
 
 /obj/machinery/party/musicwriter
-	name = "Music writer"
+	name = "Memories writer"
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "off"
-	var/obj/item/weapon/disk/music/disk
+	var/coin = 0
+	//var/obj/item/weapon/disk/music/disk
+	var/mob/retard //current user
+	var/retard_name
+	var/writing = 0
 
 /obj/machinery/party/musicwriter/attackby(obj/O, mob/user)
-	if(istype(O, /obj/item/weapon/disk/music))
-		if(!disk)
+	if(istype(O, /obj/item/weapon/coin))
+		if(!coin)
 			user.drop_item()
 			O.loc = src
-			disk = O
+			coin = 1
 
 /obj/machinery/party/musicwriter/attack_hand(mob/user)
 	var/dat = ""
-	if(!disk)
-		dat += "Please insert disk"
+	if(writing)
+		dat += "Writing from [retard_name] mind... Please Stand By."
+	else if(!coin)
+		dat += "Please insert coin"
 	else
-		dat += "<A href='?src=\ref[src];eject=1'>Eject disk</A>"
-		if(disk.data)
-			dat += "<BR>Data: [disk.data.f_name][disk.data.name]"
-		else
-			dat += "<BR><A href='?src=\ref[src];write=1'>Write to disk</A>"
+		dat += "<A href='?src=\ref[src];write=1'>Write</A>"
 
-	user << browse(dat, "window=musicwriter;size=450x700")
+	user << browse(dat, "window=musicwriter;size=150x50")
 	onclose(user, "onclose")
 	return
 
 /obj/machinery/party/musicwriter/Topic(href, href_list)
-	if(href_list["eject"])
-		if(disk)
-			disk.loc = src.loc
-			disk = null
-	else if(href_list["write"])
-		if(disk)
+	if(href_list["write"])
+		if(!writing && !retard)
 			icon_state = "on"
-			var/sound/S = input("Your music") as sound|null
+			writing = 1
+			retard = usr
+			retard_name = retard.name
 			var/N = sanitize_russian(input("Name of music") as text|null)
-			var/datum/turntable_soundtrack/T = new()
-			if(S && N && !disk.data)
-				T.path = S
-				T.sound = sound(S)
-				T.f_name = copytext(N, 1, 2)
-				T.name = copytext(N, 2)
-				disk.data = T
-				disk.name = "disk ([N])"
-				var/mob/M = usr
-				message_admins("[M.real_name]([M.ckey]) uploaded <A HREF='?_src_=holder;listensound=\ref[T.sound]'>sound</A>")
+			retard << "Please stand still while your file is uploading"
+			if(N)
+				var/sound/S = input("Your music file") as sound|null
+				if(S)
+					var/datum/turntable_soundtrack/T = new()
+					var/obj/item/weapon/disk/music/disk = new()
+					T.path = S
+					T.sound = sound(S)
+					T.f_name = copytext(N, 1, 2)
+					T.name = copytext(N, 2)
+					disk.data = T
+					disk.name = "disk ([N])"
+					disk.loc = src.loc
+					var/mob/M = usr
+					message_admins("[M.real_name]([M.ckey]) uploaded <A HREF='?_src_=holder;listensound=\ref[T.sound]'>sound</A>.<A HREF='?_src_=holder;wipedata=\ref[disk]'>Wipe</A>")
 			icon_state = "off"
+			writing = 0
+			retard = null
+			retard_name = null

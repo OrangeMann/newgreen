@@ -105,6 +105,7 @@
 			disk.loc = src.loc
 			if(track == disk.data.sound)
 				turn_off()
+				track = null
 			disk = null
 
 

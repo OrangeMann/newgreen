@@ -8,7 +8,8 @@
 		var/obj/I = new path(loc)
 		if(ishuman(loc))
 			var/mob/living/carbon/human/A = loc
-			A.put_in_any_hand_if_possible(I)
+			if(!A.put_in_any_hand_if_possible(I))
+				I.loc = get_turf(loc)
 
 /datum/spawn_item/revolver
 	name = "Revolver"
@@ -173,6 +174,12 @@
 	cost = 7
 	category = "Devices and Tools"
 
+/datum/spawn_item/space_suit
+	name = "Syndicate Space Suit"
+	path = /obj/item/weapon/storage/box/syndie_kit/space
+	cost = 4
+	category = "Devices and Tools"
+
 /datum/spawn_item/teleporter_board
 	name = "Teleporter Circuit Board"
 	path = /obj/item/weapon/circuitboard/teleporter
@@ -197,7 +204,7 @@
 	cost = 6
 	category = "Implants"
 
-/datum/spawn_item/imp_explosive
+/datum/spawn_item/imp_compressed
 	name = "Compressed Matter Implant"
 	path = /obj/item/weapon/storage/box/syndie_kit/imp_compress
 	cost = 4

@@ -132,6 +132,9 @@
 		forge_syndicate_objectives(synd_mind)
 		greet_syndicate(synd_mind)
 		equip_syndicate(synd_mind.current)
+		spawn(0)
+			var/obj/item/weapon/implant/explosive/E = locate(/obj/item/weapon/implant/explosive) in synd_mind.current
+			E.implanted(synd_mind.current)
 
 		if(!leader_selected)
 			prepare_syndicate_leader(synd_mind, nuke_code)
@@ -151,6 +154,7 @@
 	if(nuke_spawn && synd_spawn.len > 0)
 		var/obj/machinery/nuclearbomb/the_bomb = new /obj/machinery/nuclearbomb(nuke_spawn.loc)
 		the_bomb.r_code = nuke_code
+
 
 	spawn (rand(waittime_l, waittime_h))
 		send_intercept()

@@ -1,50 +1,81 @@
-/sound/turntable/test
-	file = 'sound/misc/TestLoop1.ogg'
-	falloff = 2
-	repeat = 1
+/mob/var/datum/hear_music/hear_music
+#define NONE_MUSIC 0
+#define UPLOADING 1
+#define PLAYING 2
 
-/mob/var/music = 0
+/datum/hear_music
+	var/mob/target = null
+	//var/sound/sound
+	var/status = NONE_MUSIC
+	var/stop = 0
 
-var/list/turntable_soundtracks = list()
+	proc/play(sound/S)
+		status = NONE_MUSIC
+		if(!target)
+			return
+		if(!S)
+			return
+		status = UPLOADING
+		target << browse_rsc(S)
+		//sound = S
+		if(target.hear_music != src)
+			del(src)
+		if(!stop)
+			target << S
+			status = PLAYING
+		else
+			del(src)
 
-proc/add_turntable_soundtracks()
-	turntable_soundtracks = list()
-	for(var/i in typesof(/datum/turntable_soundtrack))
-		var/datum/turntable_soundtrack/D = new i()
-		if(D.path)
-			turntable_soundtracks.Add(D)
+	proc/stop()
+		if(!target)
+			return
+		if(status == PLAYING)
+			var/sound/S = sound(null)
+			S.channel = 10
+			S.wait = 1
+			target << S
+			del(src)
+		else if(status == UPLOADING)
+			stop = 1
+		target.hear_music = null
+
+
 
 /datum/turntable_soundtrack
 	var/f_name
 	var/name
 	var/path
+	var/sound/sound
 
 /obj/machinery/party/turntable
-	name = "Turntable"
+	name = "Jukebox"
 	desc = "A jukebox is a partially automated music-playing device, usually a coin-operated machine, that will play a patron's selection from self-contained media."
 	icon = 'icons/effects/lasers2.dmi'
 	icon_state = "Jukebox7"
+	var/obj/item/weapon/disk/music/disk
 	var/playing = 0
 	var/sound/track = null
+	var/volume = 100
+	var/list/turntable_soundtracks = list()
 	anchored = 1
 	density = 1
 
-/obj/machinery/party/mixer
-	name = "mixer"
-	desc = "A mixing board for mixing music"
-	icon = 'icons/effects/lasers2.dmi'
-	icon_state = "mixer"
-	density = 0
-	anchored = 1
-
-
 /obj/machinery/party/turntable/New()
 	..()
-	sleep(2)
-	new /sound/turntable/test(src)
-	if(!turntable_soundtracks.len)
-		add_turntable_soundtracks()
-	return
+	turntable_soundtracks = list()
+	for(var/i in typesof(/datum/turntable_soundtrack) - /datum/turntable_soundtrack)
+		var/datum/turntable_soundtrack/D = new i()
+		if(D.path)
+			D.sound = sound(D.path)
+			turntable_soundtracks.Add(D)
+
+/obj/machinery/party/turntable/attackby(obj/O, mob/user)
+	if(istype(O, /obj/item/weapon/disk/music) && !disk)
+		user.drop_item()
+		O.loc = src
+		disk = O
+		attack_hand(user)
+
 
 /obj/machinery/party/turntable/attack_paw(user as mob)
 	return src.attack_hand(user)
@@ -56,28 +87,42 @@ proc/add_turntable_soundtracks()
 	usr.set_machine(src)
 	src.add_fingerprint(usr)
 
-	var/t = "<body background='http://i.imgur.com/ITjP1mW.jpg'><br><br><br><div align='center'><table border='0'><B><font color='maroon' size='6'>J</font><font size='5' color='purple'>uke Box</font> <font size='5' color='green'>Interface</font></B><br><br><br><br>"
-//	t += "<A href='?src=\ref[src];on=1'>On</A><br>"
-	t += "<tr><td height='50' weight='50'></td><td height='50' weight='50'><A href='?src=\ref[src];off=1'><font color='maroon'>T</font><font color='geen'>urn</font> <font color='red'>Off</font></A></td><td height='50' weight='50'></td></tr>"
-	t+= "<tr>"
+	var/t = "<body background='turntable_back.jpg'><br><br><br><div align='center'><table border='0'><B><font color='maroon' size='6'>J</font><font size='5' color='purple'>uke Box</font> <font size='5' color='green'>Interface</font></B><br><br><br><br>"
+	t += "<A href='?src=\ref[src];on=1'>On</A><br>"
+	if(disk)
+		t += "<A href='?src=\ref[src];eject=1'>Eject disk</A><br>"
+	t += "<tr><td height='50' weight='50'></td><td height='50' weight='50'><A href='?src=\ref[src];off=1'><font color='maroon'>T</font><font color='lightgreen'>urn</font> <font color='red'>Off</font></A></td><td height='50' weight='50'></td></tr>"
+	t += "<tr>"
 
-	var/i = 0
+
 	var/lastcolor = "green"
-
-	for(var/datum/turntable_soundtrack/D in turntable_soundtracks)
-		if(i == 3)
-			i = 0
-			t += "</tr><tr>"
-
+	for(var/i = 10; i <= 100; i += 10)
+		t += "<A href='?src=\ref[src];set_volume=[i]'><font color='[lastcolor]'>[i]</font></A> "
 		if(lastcolor == "green")
 			lastcolor = "purple"
 		else
 			lastcolor = "green"
+
+	var/i = 0
+	for(var/datum/turntable_soundtrack/D in turntable_soundtracks)
 		t += "<td height='50' weight='50'><A href='?src=\ref[src];on=\ref[D]'><font color='maroon'>[D.f_name]</font><font color='[lastcolor]'>[D.name]</font></A></td>"
 		i++
+		if(i == 1)
+			lastcolor = pick("lightgreen", "purple")
+		else
+			lastcolor = pick("green", "purple")
+		if(i == 3)
+			i = 0
+			t += "</tr><tr>"
+
+	if(disk)
+		if(disk.data)
+			t += "<td height='50' weight='50'><A href='?src=\ref[src];on=\ref[disk.data]'><font color='maroon'>[disk.data.f_name]</font><font color='[lastcolor]'>[disk.data.name]</font></A></td>"
+		else
+			t += "<td height='50' weight='50'><font color='maroon'>D</font><font color='[lastcolor]'>isk empty</font></td>"
 
 	t += "</table></div></body>"
-	user << browse(t, "window=turntable;size=450x700")
+	user << browse(t, "window=turntable;size=450x700;can_resize=0")
 	onclose(user, "turntable")
 	return
 
@@ -90,30 +135,47 @@ proc/add_turntable_soundtracks()
 	if(href_list["on"])
 		turn_on(locate(href_list["on"]))
 
-	if(href_list["off"])
+	else if(href_list["off"])
 		turn_off()
+
+	else if(href_list["set_volume"])
+		set_volume(text2num(href_list["set_volume"]))
+
+	else if(href_list["eject"])
+		if(disk)
+			disk.loc = src.loc
+			if(disk.data && track == disk.data.sound)
+				turn_off()
+				track = null
+			disk = null
 
 /obj/machinery/party/turntable/process()
 	var/area/A = get_area(src)
 	if(playing)
 		for(var/mob/M)
-			if((get_area(M) in A.related) && M.music == 0)
-				M << track
-				M.music = 1
-			else if(!(get_area(M) in A.related) && M.music == 1)
-				var/sound/Soff = sound(null)
-				Soff.channel = 10
-				M << Soff
-				M.music = 0
+			var/inRange = (get_area(M) in A.related)
+			if(inRange && !M.hear_music)
+				M.hear_music = new()
+				M.hear_music.target = M
+				M.hear_music.play(track)
+			//else if(M.music
+			else if(!inRange && M.hear_music)
+				M.hear_music.stop()
 
 /obj/machinery/party/turntable/proc/turn_on(var/datum/turntable_soundtrack/selected)
-	if(src.playing)
+	if(playing)
 		turn_off()
-	track = sound(selected.path)
+	if(selected)
+		if(!selected.sound && selected.path)
+			selected.sound = sound(selected.path)
+		track = selected.sound
+	if(!track)
+		return
 	track.repeat = 1
 	track.channel = 10
 	track.falloff = 2
 	track.wait = 1
+	track.volume = src.volume
 	track.environment = 0
 
 	var/area/A = get_area(src)
@@ -125,21 +187,35 @@ proc/add_turntable_soundtracks()
 	process()
 
 /obj/machinery/party/turntable/proc/turn_off()
-	if(!src.playing)
+	if(!playing)
 		return
 	var/sound/Soff = sound(null)
 	Soff.channel = 10
 	Soff.wait = 1
 	for(var/mob/M)
-		if(M.music)
-			M << Soff
-			M.music = 0
+		if(M.hear_music)
+			M.hear_music.stop()
 
 	playing = 0
 	var/area/A = get_area(src)
 	for(var/area/RA in A.related)
 		for(var/obj/machinery/party/lasermachine/L in RA)
 			L.turnoff()
+
+/obj/machinery/party/turntable/proc/set_volume(var/new_volume)
+	volume = max(0, min(100, new_volume))
+	if(playing)
+		turn_off()
+		turn_on()
+
+
+/obj/machinery/party/mixer
+	name = "mixer"
+	desc = "A mixing board for mixing music"
+	icon = 'icons/effects/lasers2.dmi'
+	icon_state = "mixer"
+	density = 0
+	anchored = 1
 
 /obj/machinery/party/lasermachine
 	name = "laser machine"

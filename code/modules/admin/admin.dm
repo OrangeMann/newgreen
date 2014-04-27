@@ -623,6 +623,7 @@ var/global/floorIsLava = 0
 			<BR>
 			<B>Fun Secrets</B><BR>
 			<BR>
+			<A href='?src=\ref[src];secretsfun=blood_station'>Blood for station!</A><BR>
 			<A href='?src=\ref[src];secretsfun=sec_clothes'>Remove 'internal' clothing</A><BR>
 			<A href='?src=\ref[src];secretsfun=sec_all_clothes'>Remove ALL clothing</A><BR>
 			<A href='?src=\ref[src];secretsfun=sec_classic1'>Remove firesuits, grilles, and pods</A><BR>

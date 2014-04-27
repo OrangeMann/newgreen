@@ -243,7 +243,7 @@
 ///////////////////////////////////////////////////////////////////////
 
 	else if(href_list["warn"])
-		usr.client.warn(locate(href_list["warn"]))
+		usr.client.warn(href_list["warn"])
 
 	else if(href_list["dbunban"])
 		BDB_unban(href_list["dbunban"])
@@ -1615,6 +1615,21 @@
 					B.f_style = "Dward Beard"
 					B.update_hair()
 				message_admins("[key_name_admin(usr)] activated dorf mode")
+
+			if("blood_station")
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","BS")
+				var/percentage = input("Enter percent of blooded atoms on station", null, 10) as num|null
+				if(!percentage)
+					return
+				percentage = max(0, min(100, percentage))
+				if(!percentage)
+					return
+				var/mob/living/carbon/human/sacrifice = new
+				for(var/atom/obj in world)
+					if((obj.z == 1 || obj.z == 0) && prob(percentage))
+						obj.add_blood(sacrifice)
+
 		if(usr)
 			log_admin("[key_name(usr)] used secret [href_list["secretsfun"]]")
 			if (ok)
@@ -2011,3 +2026,22 @@
 			for(var/row in M.attack_log)
 				text += row + "<BR>"
 		usr << browse(text, "window=mob_attacklog;size=650x620")
+
+	else if(href_list["listensound"])
+		var/sound/S = sound(locate(href_list["listensound"]))
+		if(!S)
+			return
+		S.channel = 703
+		usr << S
+		usr << "<B><A HREF='?_src_=holder;stoplistensound=1'>Stop listen</A></B>"
+
+	else if(href_list["stoplistensound"])
+		var/sound/S = sound(null)
+		S.channel = 703
+		usr << S
+
+	else if(href_list["wipedata"])
+		var/obj/item/weapon/disk/music/disk = locate(href_list["wipedata"])
+		if(alert("Wipe data?",,"Yes", "No") == "Yes")
+			disk.data = null
+			disk.name = "burned disk"

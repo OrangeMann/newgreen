@@ -440,16 +440,6 @@
 
 	usr << msg
 
-	if (usr != src && istype(src, /mob/living) && istype(usr, /mob/living))
-		for(var/mob/O in viewers(usr, null))
-			if (istype(O, usr))
-				break
-			if (O != src)
-				O.show_message("<b>[usr]</b> looking at <b>[src]</b>.", 1)
-			else
-				O.show_message("<b>[usr]</b> looking at <b>you</b>", 1)
-		usr << "<b>You</b> looking at <b>[src]</b>"
-
 //Helper procedure. Called by /mob/living/carbon/human/examine() and /mob/living/carbon/human/Topic() to determine HUD access to security and medical records.
 /proc/hasHUD(mob/M as mob, hudtype)
 	if(istype(M, /mob/living/carbon/human))

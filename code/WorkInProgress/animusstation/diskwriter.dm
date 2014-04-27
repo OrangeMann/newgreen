@@ -58,7 +58,7 @@
 					disk.name = "disk ([N])"
 					disk.loc = src.loc
 					var/mob/M = usr
-					message_admins("[M.real_name]([M.ckey]) uploaded <A HREF='?_src_=holder;listensound=\ref[T.sound]'>sound</A>.<A HREF='?_src_=holder;wipedata=\ref[disk]'>Wipe</A>")
+					message_admins("[M.real_name]([M.ckey]) uploaded <A HREF='?_src_=holder;listensound=\ref[T.sound]'>sound</A>. <A HREF='?_src_=holder;wipedata=\ref[disk]'>Wipe</A>")
 			icon_state = "off"
 			writing = 0
 			retard = null

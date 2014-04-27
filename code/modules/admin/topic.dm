@@ -2029,12 +2029,9 @@
 
 	else if(href_list["listensound"])
 		var/sound/S = locate(href_list["listensound"])
-		//S.repeat = 0
+		if(!S)
+			return
 		S.channel = 703
-		//S.falloff = 2
-		//S.wait = 1
-		//S.volume = 100
-		//S.environment = 0
 		usr << S
 		usr << "<B><A HREF='?_src_=holder;stoplistensound=1'>Stop listen</A></B>"
 

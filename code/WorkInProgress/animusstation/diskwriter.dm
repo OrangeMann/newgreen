@@ -41,8 +41,8 @@
 			disk = null
 	else if(href_list["write"])
 		if(disk)
-			var/sound/S = input("Your music") as sound
-			var/N = sanitize_russian(input("Name of music") as text)
+			var/sound/S = input("Your music") as sound|null
+			var/N = sanitize_russian(input("Name of music") as text|null)
 			var/datum/turntable_soundtrack/T = new()
 			if(S && N && !disk.data)
 				T.path = S

@@ -3209,7 +3209,7 @@
 "bjK" = (/obj/machinery/atmospherics/pipe/manifold{color = "blue"; dir = 1; icon_state = "manifold-b-f"; level = 1; name = "pipe manifold"},/turf/simulated/floor{icon_state = "bar"},/area/crew_quarters/cafeteria)
 "bjL" = (/obj/structure/stool{pixel_y = 8},/obj/machinery/atmospherics/pipe/simple/supply/hidden{dir = 4},/turf/simulated/floor{icon_state = "bar"},/area/crew_quarters/cafeteria)
 "bjM" = (/obj/structure/table/reinforced,/obj/machinery/atmospherics/pipe/simple/supply/hidden{dir = 4},/turf/simulated/floor{icon_state = "bar"},/area/crew_quarters/cafeteria)
-"bjN" = (/obj/structure/table/reinforced,/obj/machinery/atmospherics/pipe/simple/supply/hidden{dir = 10},/obj/item/weapon/disk/music,/obj/item/weapon/disk/music,/obj/item/weapon/disk/music,/obj/item/weapon/disk/music,/obj/item/weapon/disk/music,/turf/simulated/floor{icon_state = "bar"},/area/crew_quarters/cafeteria)
+"bjN" = (/obj/structure/table/reinforced,/obj/machinery/atmospherics/pipe/simple/supply/hidden{dir = 10},/turf/simulated/floor{icon_state = "bar"},/area/crew_quarters/cafeteria)
 "bjO" = (/obj/machinery/door/window/northright{req_access_txt = "25"},/turf/simulated/floor{icon_state = "bar"},/area/crew_quarters/cafeteria)
 "bjP" = (/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,/obj/machinery/light/small{dir = 4},/turf/simulated/floor/plating,/area/maintenance/asmaint)
 "bjQ" = (/obj/structure/table,/turf/simulated/floor{dir = 8; icon_state = "whitegreenfull"},/area/medical/medbay)

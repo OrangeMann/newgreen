@@ -2042,6 +2042,14 @@
 
 	else if(href_list["wipedata"])
 		var/obj/item/weapon/disk/music/disk = locate(href_list["wipedata"])
-		if(alert("Wipe data?",,"Yes", "No") == "Yes")
+		if(!disk.data)
+			usr << "This disk have no data or wiped."
+			return
+		if(alert("Wipe data written by [(disk.uploader_ckey) ? disk.uploader_ckey : "<b>*NULL*</b>"]?",,"Yes", "No") == "Yes")
+			if(istype(disk.loc, /obj/machinery/party/turntable))
+				var/obj/machinery/party/turntable/T = disk.loc
+				if(T.track && T.track == disk.data.sound)
+					T.track = null
+					T.turn_off()
 			disk.data = null
 			disk.name = "burned disk"

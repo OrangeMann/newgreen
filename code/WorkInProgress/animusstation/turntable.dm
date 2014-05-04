@@ -164,14 +164,8 @@
 		return
 
 	for(var/mob/M)
-		var/sound/S = sound(track.path)
-		S.repeat = 1
-		S.channel = 10
-		S.falloff = 2
-		S.volume = src.volume
-		S.status = SOUND_STREAM
-		M.music = S
-		M << S
+		create_sound(M)
+	update_sound()
 
 	var/area/A = get_area(src)
 	for(var/area/RA in A.related)
@@ -206,6 +200,9 @@
 	var/area/A = get_area(src)
 	for(var/mob/M)
 		var/inRange = (get_area(M) in A.related)
+		if(!M.music)
+			create_sound(M)
+			continue
 		if(inRange && (M.music.volume != volume || update))
 			//world << "In range. Volume: [M.music.volume]. Update: [update]"
 			M.music.status = SOUND_UPDATE|SOUND_STREAM
@@ -217,6 +214,17 @@
 			M.music.volume = 0
 			M << M.music
 
+/obj/machinery/party/turntable/proc/create_sound(mob/M)
+	var/area/A = get_area(src)
+	var/inRange = (get_area(M) in A.related)
+	var/sound/S = sound(track.path)
+	S.repeat = 1
+	S.channel = 10
+	S.falloff = 2
+	S.volume = inRange ? src.volume : 0
+	S.status = SOUND_STREAM
+	M.music = S
+	M << S
 
 /obj/machinery/party/mixer
 	name = "mixer"

@@ -2696,6 +2696,12 @@ datum
 					id = "lemonade"
 					reagent_color = "#FFFF00" // rgb: 255, 255, 0
 
+				kvas
+					name = "Kvas"
+					description = "Oh god...das ist Fantastik!"
+					id = "kvas"
+					reagent_color = "#9F3400" // rgb: 255, 255, 0
+
 				kiraspecial
 					name = "Kira Special"
 					description = "Long live the guy who everyone had mistaken for a girl. Baka!"

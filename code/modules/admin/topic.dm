@@ -2048,7 +2048,7 @@
 		if(alert("Wipe data written by [(disk.uploader_ckey) ? disk.uploader_ckey : "<b>*NULL*</b>"]?",,"Yes", "No") == "Yes")
 			if(istype(disk.loc, /obj/machinery/party/turntable))
 				var/obj/machinery/party/turntable/T = disk.loc
-				if(T.track && T.track == disk.data.sound)
+				if(T.track && T.track == disk.data)
 					T.track = null
 					T.turn_off()
 			disk.data = null

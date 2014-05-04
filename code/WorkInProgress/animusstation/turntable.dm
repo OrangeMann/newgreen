@@ -1,3 +1,6 @@
+#define TURNTABLE_CHANNEL
+
+/*
 /mob/var/datum/hear_music/hear_music
 #define NONE_MUSIC 0
 #define UPLOADING 1
@@ -39,13 +42,13 @@
 			stop = 1
 		target.hear_music = null
 
-
+*/
+/mob/var/sound/music
 
 /datum/turntable_soundtrack
 	var/f_name
 	var/name
 	var/path
-	var/sound/sound
 
 /obj/machinery/party/turntable
 	name = "Jukebox"
@@ -54,7 +57,7 @@
 	icon_state = "Jukebox7"
 	var/obj/item/weapon/disk/music/disk
 	var/playing = 0
-	var/sound/track = null
+	var/datum/turntable_soundtrack/track = null
 	var/volume = 100
 	var/list/turntable_soundtracks = list()
 	anchored = 1
@@ -66,7 +69,6 @@
 	for(var/i in typesof(/datum/turntable_soundtrack) - /datum/turntable_soundtrack)
 		var/datum/turntable_soundtrack/D = new i()
 		if(D.path)
-			D.sound = sound(D.path)
 			turntable_soundtracks.Add(D)
 
 /obj/machinery/party/turntable/attackby(obj/O, mob/user)
@@ -144,39 +146,32 @@
 	else if(href_list["eject"])
 		if(disk)
 			disk.loc = src.loc
-			if(disk.data && track == disk.data.sound)
+			if(disk.data && track == disk.data)
 				turn_off()
 				track = null
 			disk = null
 
 /obj/machinery/party/turntable/process()
-	var/area/A = get_area(src)
 	if(playing)
-		for(var/mob/M)
-			var/inRange = (get_area(M) in A.related)
-			if(inRange && !M.hear_music)
-				M.hear_music = new()
-				M.hear_music.target = M
-				M.hear_music.play(track)
-			//else if(M.music
-			else if(!inRange && M.hear_music)
-				M.hear_music.stop()
+		update_sound()
 
 /obj/machinery/party/turntable/proc/turn_on(var/datum/turntable_soundtrack/selected)
 	if(playing)
 		turn_off()
 	if(selected)
-		if(!selected.sound && selected.path)
-			selected.sound = sound(selected.path)
-		track = selected.sound
+		track = selected
 	if(!track)
 		return
-	track.repeat = 1
-	track.channel = 10
-	track.falloff = 2
-	track.wait = 1
-	track.volume = src.volume
-	track.environment = 0
+
+	for(var/mob/M)
+		var/sound/S = sound(track.path)
+		S.repeat = 1
+		S.channel = 10
+		S.falloff = 2
+		S.volume = src.volume
+		S.status = SOUND_STREAM
+		M.music = S
+		M << S
 
 	var/area/A = get_area(src)
 	for(var/area/RA in A.related)
@@ -193,8 +188,8 @@
 	Soff.channel = 10
 	Soff.wait = 1
 	for(var/mob/M)
-		if(M.hear_music)
-			M.hear_music.stop()
+		M.music = null
+		M << sound(null, channel = 10)
 
 	playing = 0
 	var/area/A = get_area(src)
@@ -205,8 +200,22 @@
 /obj/machinery/party/turntable/proc/set_volume(var/new_volume)
 	volume = max(0, min(100, new_volume))
 	if(playing)
-		turn_off()
-		turn_on()
+		update_sound(1)
+
+/obj/machinery/party/turntable/proc/update_sound(update = 0)
+	var/area/A = get_area(src)
+	for(var/mob/M)
+		var/inRange = (get_area(M) in A.related)
+		if(inRange && (M.music.volume != volume || update))
+			//world << "In range. Volume: [M.music.volume]. Update: [update]"
+			M.music.status = SOUND_UPDATE|SOUND_STREAM
+			M.music.volume = volume
+			M << M.music
+		else if(!inRange && M.music.volume != 0)
+			//world << "!In range. Volume: [M.music.volume]."
+			M.music.status = SOUND_UPDATE|SOUND_STREAM
+			M.music.volume = 0
+			M << M.music
 
 
 /obj/machinery/party/mixer

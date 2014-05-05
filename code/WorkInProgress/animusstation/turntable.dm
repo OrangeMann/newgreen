@@ -1,4 +1,4 @@
-#define TURNTABLE_CHANNEL
+#define TURNTABLE_CHANNEL 10
 
 /*
 /mob/var/datum/hear_music/hear_music
@@ -179,11 +179,11 @@
 	if(!playing)
 		return
 	var/sound/Soff = sound(null)
-	Soff.channel = 10
+	Soff.channel = TURNTABLE_CHANNEL
 	Soff.wait = 1
 	for(var/mob/M)
 		M.music = null
-		M << sound(null, channel = 10)
+		M << sound(null, channel = TURNTABLE_CHANNEL)
 
 	playing = 0
 	var/area/A = get_area(src)
@@ -219,9 +219,10 @@
 	var/inRange = (get_area(M) in A.related)
 	var/sound/S = sound(track.path)
 	S.repeat = 1
-	S.channel = 10
+	S.channel = TURNTABLE_CHANNEL
 	S.falloff = 2
-	S.volume = inRange ? src.volume : 0
+	S.wait = 0
+	S.volume = 0
 	S.status = SOUND_STREAM
 	M.music = S
 	M << S

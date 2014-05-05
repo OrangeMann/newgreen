@@ -178,12 +178,9 @@
 /obj/machinery/party/turntable/proc/turn_off()
 	if(!playing)
 		return
-	var/sound/Soff = sound(null)
-	Soff.channel = TURNTABLE_CHANNEL
-	Soff.wait = 1
 	for(var/mob/M)
 		M.music = null
-		M << sound(null, channel = TURNTABLE_CHANNEL)
+		M << sound(null, channel = TURNTABLE_CHANNEL, wait = 0)
 
 	playing = 0
 	var/area/A = get_area(src)
@@ -216,7 +213,7 @@
 
 /obj/machinery/party/turntable/proc/create_sound(mob/M)
 	var/area/A = get_area(src)
-	var/inRange = (get_area(M) in A.related)
+	//var/inRange = (get_area(M) in A.related)
 	var/sound/S = sound(track.path)
 	S.repeat = 1
 	S.channel = TURNTABLE_CHANNEL

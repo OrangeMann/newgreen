@@ -378,7 +378,7 @@ mob/living/simple_animal/borer/proc/detatch()
 
 //		Простите, но наш билд не может в такую проверку!
 		//Не может - сделаем по-своему ~Intercross21
-		if((H.head && !(H.head.flags & HEADCOVERSMOUTH)) || (H.wear_mask && !(H.wear_mask.flags & MASKCOVERSMOUTH)) //Закрыт ли рот маской или шлемом ~Intercross21
+		if((H.head && !(H.head.flags & HEADCOVERSMOUTH)) || (H.wear_mask && !(H.wear_mask.flags & MASKCOVERSMOUTH))) //Закрыт ли рот маской или шлемом ~Intercross21
 			src << "You cannot get through that host's protective gear."
 			return
 

@@ -623,6 +623,8 @@
 	if(!istype(src.loc, /turf)) //Object is on a turf
 		usr << "\red You can't pick that up!"
 		return
+	if(!usr.Adjacent(src))
+		return
 	//All checks are done, time to pick it up!
 	if(istype(usr, /mob/living/carbon/human))
 		src.attack_hand(usr)

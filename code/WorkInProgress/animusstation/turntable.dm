@@ -212,7 +212,7 @@
 			M << M.music
 
 /obj/machinery/party/turntable/proc/create_sound(mob/M)
-	var/area/A = get_area(src)
+	//var/area/A = get_area(src)
 	//var/inRange = (get_area(M) in A.related)
 	var/sound/S = sound(track.path)
 	S.repeat = 1

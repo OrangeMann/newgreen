@@ -356,29 +356,31 @@ mob/living/simple_animal/borer/proc/detatch()
 
 	var/list/choices = list()
 
-//	Шайтан процессы!
-//	for(var/mob/living/carbon/C in view(1,src))
-//		if(C.stat != 2 && src.Adjacent(C))
-//			choices += C
+	//Шайтан процессы!
+	//Это создание списка людей вокруг для последующего выбора ~Intercross21
+	for(var/mob/living/carbon/C in view(1,src))
+		if(C.stat != 2 && src.Adjacent(C))
+			choices += C
 
 	var/mob/living/carbon/M = input(src,"Who do you wish to infest?") in null|choices
 
 	if(!M || !src) return
 
-//	if(!(src.Adjacent(M))) return
+	if(!(src.Adjacent(M))) return //Проверка на "дотягиваемость" до выбранного моба
 
 	if(M.has_brain_worms())
 		src << "You cannot infest someone who is already infested!"
 		return
 
 //	Шайтан часть кода!
-//	if(istype(M,/mob/living/carbon/human))
-//		var/mob/living/carbon/human/H = M
+	if(istype(M,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = M
 
 //		Простите, но наш билд не может в такую проверку!
-//		if(H.check_head_coverage())
-//			src << "You cannot get through that host's protective gear."
-//			return
+		//Не может - сделаем по-своему ~Intercross21
+		if((H.head && !(H.head.flags & HEADCOVERSMOUTH)) || (H.wear_mask && !(H.wear_mask.flags & MASKCOVERSMOUTH)) //Закрыт ли рот маской или шлемом ~Intercross21
+			src << "You cannot get through that host's protective gear."
+			return
 
 	M << "Something slimy begins probing at the opening of your ear canal..."
 	src << "You slither up [M] and begin probing at their ear canal..."

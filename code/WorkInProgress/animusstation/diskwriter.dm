@@ -45,7 +45,7 @@
 			retard = usr
 			retard_name = retard.name
 			var/N = sanitize_russian(input("Name of music") as text|null)
-			retard << "Please stand still while your data is uploading"
+			//retard << "Please stand still while your data is uploading"
 			if(N)
 				var/sound/S = input("Your music file") as sound|null
 				if(S)

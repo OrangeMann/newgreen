@@ -202,12 +202,12 @@
 			continue
 		if(inRange && (M.music.volume != volume || update))
 			//world << "In range. Volume: [M.music.volume]. Update: [update]"
-			M.music.status = SOUND_UPDATE|SOUND_STREAM
+			M.music.status = SOUND_UPDATE//|SOUND_STREAM
 			M.music.volume = volume
 			M << M.music
 		else if(!inRange && M.music.volume != 0)
 			//world << "!In range. Volume: [M.music.volume]."
-			M.music.status = SOUND_UPDATE|SOUND_STREAM
+			M.music.status = SOUND_UPDATE//|SOUND_STREAM
 			M.music.volume = 0
 			M << M.music
 
@@ -220,7 +220,7 @@
 	S.falloff = 2
 	S.wait = 0
 	S.volume = 0
-	S.status = SOUND_STREAM
+	S.status = 0 //SOUND_STREAM
 	M.music = S
 	M << S
 

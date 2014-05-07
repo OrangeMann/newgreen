@@ -127,8 +127,15 @@ Implant Specifics:<BR>"}
 /obj/item/weapon/implant/explosive
 	name = "explosive implant"
 	desc = "A military grade micro bio-explosive. Highly dangerous."
+	            //supercalafajalistickespeealadojus
 	var/phrase = "supercalifragilisticexpialidocious"
 	icon_state = "implant_evil"
+
+	New()
+		..()
+		phrase = ""
+		for(var/i = 0; i < 10; i++)
+			phrase += pick("1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "A", "B", "C", "D", "E", "F")
 
 	get_data()
 		var/dat = {"

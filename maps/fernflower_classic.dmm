@@ -6984,7 +6984,7 @@
 "cEp" = (/obj/structure/rack,/obj/item/clothing/mask/breath/vox,/obj/item/clothing/shoes/magboots/vox,/obj/item/clothing/suit/space/vox/pressure,/obj/item/clothing/head/helmet/space/vox/pressure,/turf/simulated/shuttle/floor4,/area/shuttle/vox/station)
 "cEq" = (/obj/structure/rack,/obj/item/weapon/dart_cartridge,/obj/item/weapon/dart_cartridge,/obj/item/weapon/gun/dartgun/vox/raider,/turf/simulated/shuttle/floor4,/area/shuttle/vox/station)
 "cEr" = (/obj/structure/stool/bed/chair{dir = 4},/turf/simulated/shuttle/floor{icon_state = "floor4"},/area/syndicate_station/start)
-"cEs" = (/obj/structure/table,/obj/item/weapon/gun/energy/ionrifle,/turf/simulated/shuttle/floor{icon_state = "floor4"},/area/syndicate_station/start)
+"cEs" = (/obj/structure/table,/obj/item/weapon/gun/energy/ionrifle,/obj/item/weapon/storage/box/syndie_kit/eimplants,/turf/simulated/shuttle/floor{icon_state = "floor4"},/area/syndicate_station/start)
 "cEt" = (/obj/machinery/door/poddoor{density = 0; icon_state = "pdoor0"; id = "smindicate"; name = "Outer Airlock"; opacity = 0},/obj/machinery/door/airlock/external{frequency = 1331; icon_state = "door_closed"; id_tag = "synd_outer"; locked = 0; name = "Ship External Access"; req_access = null; req_access_txt = "0"},/turf/simulated/shuttle/plating,/area/syndicate_station/start)
 "cEu" = (/obj/structure/sign/securearea{desc = "A warning sign which reads 'EXTERNAL AIRLOCK'"; icon_state = "space"; layer = 4; name = "EXTERNAL AIRLOCK"; pixel_x = 0},/turf/simulated/shuttle/wall{icon_state = "wall3"},/area/syndicate_station/start)
 "cEv" = (/turf/unsimulated/floor{icon = 'icons/turf/snow.dmi'; icon_state = "snow"},/turf/unsimulated/floor{icon = 'icons/turf/snow.dmi'; icon_state = "gravsnow_corner"; dir = 5},/area/syndicate_mothership)

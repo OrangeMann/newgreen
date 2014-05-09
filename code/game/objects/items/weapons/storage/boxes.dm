@@ -426,7 +426,6 @@
 		for(var/i=1; i <= storage_slots; i++)
 			new /obj/item/weapon/reagent_containers/glass/balloon(src)
 
-
 /obj/item/weapon/storage/box/matches
 	name = "matchbox"
 	desc = "A small box of Almost But Not Quite Plasma Premium Matches."
@@ -450,6 +449,16 @@
 			processing_objects.Add(W)
 		W.update_icon()
 		return
+
+/obj/item/weapon/storage/box/syndie_kit/eimplants
+	name = "box of explosive implants"
+	desc = "A small box with dangerous explosive implants"
+	storage_slots = 12
+
+	New()
+		..()
+		for(var/i = 1; i <= storage_slots; i++)
+			new /obj/item/weapon/implanter/explosive(src)
 
 /obj/item/weapon/storage/box/autoinjectors
 	name = "box of injectors"

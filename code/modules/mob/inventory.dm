@@ -101,6 +101,28 @@
 		return 1
 	return 0
 
+/mob/proc/unEquip(obj/item/I, force) //Force overrides NODROP for things like wizarditis and admin undress.
+	if(!I) //If there's nothing to drop, the drop is automatically succesfull. If(unEquip) should generally be used to check for NODROP.
+		return 1
+
+	/*if((I.flags & NODROP) && !force)
+		return 0*/
+
+	if(I == r_hand)
+		r_hand = null
+		update_inv_r_hand()
+	else if(I == l_hand)
+		l_hand = null
+		update_inv_l_hand()
+
+	if(I)
+		if(client)
+			client.screen -= I
+		I.loc = loc
+		I.dropped(src)
+		if(I)
+			I.layer = initial(I.layer)
+	return 1
 
 //Drops the item in our left hand
 /mob/proc/drop_l_hand(var/atom/Target)

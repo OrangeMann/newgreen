@@ -1,0 +1,6 @@
+#define COMPUTER_BSOD		-1
+#define COMPUTER_OFF		0
+#define COMPUTER_POWERINGUP 1
+#define COMPUTER_BIOS	 	2
+#define COMPUTER_LOADINGOS	3
+#define COMPUTER_OS	 		4

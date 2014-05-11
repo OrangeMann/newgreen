@@ -427,7 +427,7 @@
 	if(!changeling)	return 0
 	changeling.chem_charges -= 10
 	src << "<span class='notice'>Your throat adjusts to launch the sting.</span>"
-	changeling.sting_range = 2
+	changeling.sting_range = 2.9
 	src.verbs -= /mob/proc/changeling_boost_range
 	spawn(5)	src.verbs += /mob/proc/changeling_boost_range
 	feedback_add_details("changeling_powers","RS")

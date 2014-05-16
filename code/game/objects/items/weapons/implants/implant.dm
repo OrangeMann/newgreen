@@ -127,8 +127,15 @@ Implant Specifics:<BR>"}
 /obj/item/weapon/implant/explosive
 	name = "explosive implant"
 	desc = "A military grade micro bio-explosive. Highly dangerous."
+	            //supercalafajalistickespeealadojus
 	var/phrase = "supercalifragilisticexpialidocious"
 	icon_state = "implant_evil"
+
+	New()
+		..()
+		phrase = ""
+		for(var/i = 0; i < 10; i++)
+			phrase += pick("1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "A", "B", "C", "D", "E", "F")
 
 	get_data()
 		var/dat = {"
@@ -171,7 +178,7 @@ Implant Specifics:<BR>"}
 			t.hotspot_expose(3500,125, 0, src)
 
 	implanted(mob/source as mob)
-		phrase = input(source, "Choose activation phrase:") as text
+		phrase = input(source, "Choose exlosive implant activation phrase:") as text
 		var/list/replacechars = list("'" = "","\"" = "",">" = "","<" = "","(" = "",")" = "")
 		phrase = sanitize_simple(phrase, replacechars)
 		source.mind.store_memory("Explosive implant in [source] can be activated by saying something containing the phrase ''[src.phrase]'', <B>say [src.phrase]</B> to attempt to activate.", 0, 0)

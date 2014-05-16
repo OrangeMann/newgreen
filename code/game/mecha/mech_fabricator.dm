@@ -112,9 +112,9 @@
 						///obj/item/mecha_parts/mecha_equipment/jetpack, //TODO MECHA JETPACK SPRITE MISSING
 						/obj/item/mecha_parts/mecha_equipment/weapon/energy/taser,
 						/obj/item/mecha_parts/mecha_equipment/weapon/ballistic/lmg,
-						///obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/mousetrap_mortar, HONK-related mech part
-						///obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/banana_mortar, Also HONK-related
-						///obj/item/mecha_parts/mecha_equipment/weapon/honker Thirdly HONK-related
+						/obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/mousetrap_mortar,
+						/obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/banana_mortar,
+						/obj/item/mecha_parts/mecha_equipment/weapon/honker
 						),
 
 	"Robotic Upgrade Modules" = list(
@@ -505,7 +505,7 @@
 		sleep(30) //only sleep if called by user
 	var/found = 0
 
-	for(var/obj/machinery/computer/rdconsole/RDC in get_area(src))
+	for(var/obj/machinery/computer/rdconsole/RDC in range(10, src))
 		if(!RDC.sync)
 			continue
 		found++

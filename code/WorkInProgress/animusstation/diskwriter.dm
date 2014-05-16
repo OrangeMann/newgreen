@@ -33,13 +33,11 @@
 	else
 		dat += "<A href='?src=\ref[src];write=1'>Write</A>"
 
-	user << browse(dat, "window=musicwriter;size=400x200")
+	user << browse(dat, "window=musicwriter;size=200x100")
 	onclose(user, "onclose")
 	return
 
 /obj/machinery/party/musicwriter/Topic(href, href_list)
-	if(..())
-		return
 	if(href_list["write"])
 		if(!writing && !retard)
 			icon_state = "on"
@@ -47,27 +45,21 @@
 			retard = usr
 			retard_name = retard.name
 			var/N = sanitize_russian(input("Name of music") as text|null)
+			//retard << "Please stand still while your data is uploading"
 			if(N)
-				//retard << "Please stand still while your data is uploading"
-				var/upload = input("Your music file") as sound|null
-				if(upload)
-					var/sound/sound = sound(upload)
-					var/len = length(sound.file)
-					if(len > 10485760) //10 MBytes
-						retard << "You memory file is too big: [round(len / 1024 / 1024, 0.1)] of 10 TBytes possible. Try again with lesser mind area."
-					else
-						var/datum/turntable_soundtrack/T = new()
-						var/obj/item/weapon/disk/music/disk = new()
-						T.path = upload
-						T.sound = sound(upload)
-						T.f_name = copytext(N, 1, 2)
-						T.name = copytext(N, 2)
-						disk.data = T
-						disk.name = "disk ([N])"
-						disk.loc = src.loc
-						disk.uploader_ckey = retard.ckey
-						var/mob/M = usr
-						message_admins("[M.real_name]([M.ckey]) uploaded <A HREF='?_src_=holder;listensound=\ref[upload]'>sound</A> named as [N]. <A HREF='?_src_=holder;wipedata=\ref[disk]'>Wipe</A> data.")
+				var/sound/S = input("Your music file") as sound|null
+				if(S)
+					var/datum/turntable_soundtrack/T = new()
+					var/obj/item/weapon/disk/music/disk = new()
+					T.path = S
+					T.f_name = copytext(N, 1, 2)
+					T.name = copytext(N, 2)
+					disk.data = T
+					disk.name = "disk ([N])"
+					disk.loc = src.loc
+					disk.uploader_ckey = retard.ckey
+					var/mob/M = usr
+					message_admins("[M.real_name]([M.ckey]) uploaded <A HREF='?_src_=holder;listensound=\ref[S]'>sound</A> named as [N]. <A HREF='?_src_=holder;wipedata=\ref[disk]'>Wipe</A> data.")
 			icon_state = "off"
 			writing = 0
 			retard = null

@@ -6,6 +6,8 @@
 	var/sound/uploaded_sound = sound(S, repeat = 0, wait = 1, channel = 777)
 	uploaded_sound.priority = 250
 	uploaded_sound.volume = min(100, max(0, input("Set Volume", null, 100)))
+	if(alert("Do you really want to play this sound?",,"Yes","No") == "No")
+		return
 
 	log_admin("[key_name(src)] played sound [S]")
 	message_admins("[key_name_admin(src)] played sound [S]", 1)

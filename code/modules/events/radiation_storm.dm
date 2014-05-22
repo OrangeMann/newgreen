@@ -9,7 +9,7 @@
 /datum/event/radiation_storm/start()
 	spawn()
 		world << sound('sound/AI/radiation.ogg')
-		command_alert("Зафиксированы высокие уровни радиационного излучения вблизи станции. Пожалуйста, эвакуируйтесь в один из экранированных технических тоннелей.", "Аномальна&#255; Тревога")
+		command_alert("Зафиксированы высокие уровни радиационного излучения вблизи станции. Пожалуйста, эвакуируйтесь в один из экранированных технических тоннелей или дормиторий.", "Аномальна&#255; Тревога")
 		make_maint_all_access()
 
 
@@ -25,8 +25,9 @@
 					continue
 				if(T.z != 1)
 					continue
-				if(istype(T.loc, /area/maintenance) || istype(T.loc, /area/crew_quarters))
+				if((istype(T.loc, /area/maintenance) || istype(T.loc, /area/crew_quarters/sleep)) && !istype(T, /turf/space))
 					continue
+
 
 				if(istype(H,/mob/living/carbon/human))
 					H.apply_effect((rand(15,35)),IRRADIATE,0)

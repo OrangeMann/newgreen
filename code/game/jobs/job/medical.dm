@@ -88,6 +88,10 @@
 						H.equip_to_slot_or_del(new /obj/item/clothing/head/nursehat(H), slot_head)
 					else
 						H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/medical/purple(H), slot_w_uniform)
+				if("Court Medical Expert")
+					H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/medical(H), slot_w_uniform)
+					H.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/labcoat(H), slot_wear_suit)
+					H.equip_to_slot_or_del(new /obj/item/device/detective_scanner(H), slot_r_store)
 		else
 			H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/medical(H), slot_w_uniform)
 			H.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/labcoat(H), slot_wear_suit)

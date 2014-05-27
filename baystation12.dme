@@ -1263,7 +1263,6 @@
 #include "code\WorkInProgress\buildmode.dm"
 #include "code\WorkInProgress\explosion_particles.dm"
 #include "code\WorkInProgress\periodic_news.dm"
-#include "code\WorkInProgress\animusstation\diskwriter.dm"
 #include "code\WorkInProgress\animusstation\donations_panel.dm"
 #include "code\WorkInProgress\animusstation\donator_items.dm"
 #include "code\WorkInProgress\animusstation\radar.dm"

@@ -195,13 +195,17 @@
 		else if (href_list["magbot"])
 			if(src.allowed(usr))
 				var/mob/living/silicon/robot/R = locate(href_list["magbot"])
+				var/mob/living/silicon/ai/A = usr
 				if(R)
 					var/choice = input("Are you certain you wish to hack [R.name]?") in list("Confirm", "Abort")
 					if(choice == "Confirm")
-						if(R && istype(R))
+						if(R && istype(R) && A && istype(A))
 //							message_admins("\blue [key_name_admin(usr)] emagged [R.name] using robotic console!")
 							log_game("[key_name(usr)] emagged [R.name] using robotic console!")
 							R.emagged = 1
+							var/time = time2text(world.realtime,"hh:mm:ss")
+							lawchanges.Add("[time] <B>:</B> [key_name(A)] emagged [key_name(R)]")
+							R.set_zeroth_law(A.laws.zeroth_borg)
 							if(R.mind.special_role)
 								R.verbs += /mob/living/silicon/robot/proc/ResetSecurityCodes
 

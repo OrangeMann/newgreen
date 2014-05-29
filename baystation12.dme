@@ -1332,5 +1332,5 @@
 #include "code\ZAS\ZAS_Zones.dm"
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
-#include "maps\debug\test_map1.dmm"
+#include "maps\fernflower_classic.dmm"
 // END_INCLUDE

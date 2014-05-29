@@ -463,7 +463,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		src << "Only administrators may use this command."
 		return
 	var/input = sanitize(input(usr, "Please enter anything you want. Anything. Serious.", "What?", "") as message|null)
-	var/customname = sanitize(input(usr, "Pick a title for the report.", "Title") as text|null)
+	var/customname = sanitize(input(usr, "Pick a title for the report.", "Title") as text|null, repl_chars = list("ï¿½"="ï¿½","ÿ"="____255_"))
 	if(!input)
 		return
 	if(!customname)

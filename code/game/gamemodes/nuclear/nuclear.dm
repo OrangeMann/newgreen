@@ -21,6 +21,51 @@
 	var/nuke_off_station = 0 //Used for tracking if the syndies actually haul the nuke to the station
 	var/syndies_didnt_escape = 0 //Used for tracking if the syndies got the shuttle off of the z-level
 
+/datum/game_mode/nuclear/generate_uplink_items()
+
+	uplink_items.Add(get_spawn_item_string("Highly Visible and Dangerous Weapons"))
+	uplink_items.Add(new /datum/spawn_item/revolver)
+	uplink_items.Add(new /datum/spawn_item/revolver_ammo)
+	uplink_items.Add(new /datum/spawn_item/crossbow)
+	uplink_items.Add(new /datum/spawn_item/sword)
+	uplink_items.Add(new /datum/spawn_item/syndicate_bundle)
+	uplink_items.Add(new /datum/spawn_item/emp_grenades)
+	uplink_items.Add(new /datum/spawn_item/syndicate_bomb)
+
+	uplink_items.Add(get_spawn_item_string("Stealthy and Inconspicuous Weapons"))
+	uplink_items.Add(new /datum/spawn_item/paralysis_pen)
+	uplink_items.Add(new /datum/spawn_item/syndicate_soap)
+	uplink_items.Add(new /datum/spawn_item/detomatrix)
+
+	uplink_items.Add(get_spawn_item_string("Stealth and Camouflage Items"))
+	uplink_items.Add(new /datum/spawn_item/chameleon_kit)
+	uplink_items.Add(new /datum/spawn_item/syndicate_shoes)
+	uplink_items.Add(new /datum/spawn_item/agentcard)
+	uplink_items.Add(new /datum/spawn_item/voice_changer)
+	uplink_items.Add(new /datum/spawn_item/chameleon_projector)
+//	uplink_items.Add(new /datum/spawn_item/cloaking_device) Use chameleon projector, beatch
+
+	uplink_items.Add(get_spawn_item_string("Devices and Tools"))
+	uplink_items.Add(new /datum/spawn_item/emag)
+//	uplink_items.Add(new /datum/spawn_item/hacktool) Where is your hacktool?
+	uplink_items.Add(new /datum/spawn_item/toolbox)
+	uplink_items.Add(new /datum/spawn_item/thermal)
+	uplink_items.Add(new /datum/spawn_item/binary)
+	uplink_items.Add(new /datum/spawn_item/aimodule)
+	uplink_items.Add(new /datum/spawn_item/c4)
+	uplink_items.Add(new /datum/spawn_item/powersink)
+	uplink_items.Add(new /datum/spawn_item/singularity_beacon)
+	uplink_items.Add(new /datum/spawn_item/space_suit)
+	uplink_items.Add(new /datum/spawn_item/teleporter_board)
+
+	uplink_items.Add(get_spawn_item_string("Implants"))
+	uplink_items.Add(new /datum/spawn_item/imp_freedom)
+	uplink_items.Add(new /datum/spawn_item/imp_uplink)
+	uplink_items.Add(new /datum/spawn_item/imp_explosive)
+	uplink_items.Add(new /datum/spawn_item/imp_compressed)
+
+	uplink_items.Add(get_spawn_item_string("Badassery"))
+	uplink_items.Add(new /datum/spawn_item/balloon)
 
 /datum/game_mode/nuclear/announce()
 	world << "<B>The current game mode is - Nuclear Emergency!</B>"

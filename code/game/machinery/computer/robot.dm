@@ -206,6 +206,7 @@
 							var/time = time2text(world.realtime,"hh:mm:ss")
 							lawchanges.Add("[time] <B>:</B> [key_name(A)] emagged [key_name(R)]")
 							R.set_zeroth_law(A.laws.zeroth_borg)
+							R.show_laws()
 							if(R.mind.special_role)
 								R.verbs += /mob/living/silicon/robot/proc/ResetSecurityCodes
 

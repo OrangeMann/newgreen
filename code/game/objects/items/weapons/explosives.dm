@@ -44,17 +44,14 @@
 	if(ismob(target))
 		user.attack_log += "\[[time_stamp()]\] <font color='red'> [user.real_name] tried planting [name] on [target:real_name] ([target:ckey])</font>"
 		//msg_admin_attack("[user.real_name] ([user.ckey]) tried planting [name] on [target:real_name] ([target:ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
-		msg_admin_attack("ATTACK:[user.name] ([user.ckey]) tried planting [name] on [target.name] ([target:ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
-		log_attack("[user.name] ([user.ckey]) tried planting  [name] on [target.name] ([target:ckey])")
+		msg_admin_attack("ATTACK:[key_name(user)] tried planting [name] on [key_name(target)] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
+		log_attack("[key_name(user)] tried planting  [name] on [key_name(target)]")
 		user.visible_message("\red [user.name] is trying to plant some kind of explosive on [target.name]!")
 
 	if(do_after(user, 50) && in_range(user, target))
 		user.drop_item()
 		target = target
 		loc = null
-		var/location
-		if (isturf(target)) location = target
-		if (isobj(target)) location = target.loc
 		if (ismob(target))
 			target:attack_log += "\[[time_stamp()]\]<font color='orange'> Had the [name] planted on them by [user.real_name] ([user.ckey])</font>"
 			user.visible_message("\red [user.name] finished planting an explosive on [target.name]!")
@@ -64,11 +61,11 @@
 		target.overlays += image('icons/obj/assemblies.dmi', "plastic-explosive2")
 		user << "Bomb has been planted. Timer counting down from [timer]."
 		spawn(timer*10)
-			explode(location)
+			explode(get_turf(target))
 
 /obj/item/weapon/plastique/proc/explode(var/location)
-	if(!target)
-		target = get_atom_on_turf(src)
+	//if(!target)
+	//	target = get_atom_on_turf(src) //No way - loc == null
 	if(!target)
 		target = src
 

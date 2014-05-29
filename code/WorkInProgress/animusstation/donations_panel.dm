@@ -19,7 +19,7 @@ var/list/datum/spawn_item/donator_items = list()
 	load_donator_items()
 
 /proc/load_donator_items()
-	//Hats
+	donator_items.Add(get_spawn_item_string("Hats"))
 	donator_items.Add(new /datum/spawn_item/swat_cap)
 	donator_items.Add(new /datum/spawn_item/collectable_pete_hat)
 	donator_items.Add(new /datum/spawn_item/collectable_metroid_hat)
@@ -27,7 +27,8 @@ var/list/datum/spawn_item/donator_items = list()
 	donator_items.Add(new /datum/spawn_item/collectable_top_hat)
 	donator_items.Add(new /datum/spawn_item/kitty_ears)
 	donator_items.Add(new /datum/spawn_item/ushanka)
-	//Personal Stuff
+
+	donator_items.Add(get_spawn_item_string("Personal Stuff"))
 	donator_items.Add(new /datum/spawn_item/eye_patch)
 	donator_items.Add(new /datum/spawn_item/cane)
 	donator_items.Add(new /datum/spawn_item/golden_pen)
@@ -44,7 +45,8 @@ var/list/datum/spawn_item/donator_items = list()
 	donator_items.Add(new /datum/spawn_item/teapot)
 	donator_items.Add(new /datum/spawn_item/three_mile_island_ice_tea)
 	donator_items.Add(new /datum/spawn_item/plague_doctor_set)
-	//Shoes
+
+	donator_items.Add(get_spawn_item_string("Shoes"))
 	donator_items.Add(new /datum/spawn_item/clown_shoes)
 	donator_items.Add(new /datum/spawn_item/rainbow_shoes)
 	donator_items.Add(new /datum/spawn_item/cyborg_shoes)
@@ -57,7 +59,8 @@ var/list/datum/spawn_item/donator_items = list()
 	donator_items.Add(new /datum/spawn_item/purple_shoes)
 	donator_items.Add(new /datum/spawn_item/wooden_sandals)
 	donator_items.Add(new /datum/spawn_item/fluffy_slippers)
-	//Jumpsuits
+
+	donator_items.Add(get_spawn_item_string("Jumpsuits"))
 	donator_items.Add(new /datum/spawn_item/vice_policeman)
 	donator_items.Add(new /datum/spawn_item/rainbow_suit)
 	donator_items.Add(new /datum/spawn_item/lightblue_suit)
@@ -75,23 +78,28 @@ var/list/datum/spawn_item/donator_items = list()
 	donator_items.Add(new /datum/spawn_item/scratched_suit)
 	donator_items.Add(new /datum/spawn_item/downy_jumpsuit)
 	donator_items.Add(new /datum/spawn_item/tacticool_turtleneck)
-	//Gloves
+
+	donator_items.Add(get_spawn_item_string("Gloves"))
 	donator_items.Add(new /datum/spawn_item/white)
 	donator_items.Add(new /datum/spawn_item/rainbow)
 	donator_items.Add(new /datum/spawn_item/black)
-	//Coats
+
+	donator_items.Add(get_spawn_item_string("Coats"))
 	donator_items.Add(new /datum/spawn_item/brown_coat)
-	//Bedsheets
+
+	donator_items.Add(get_spawn_item_string("Bedsheets"))
 	donator_items.Add(new /datum/spawn_item/clown_bedsheet)
 	donator_items.Add(new /datum/spawn_item/mime_bedsheet)
 	donator_items.Add(new /datum/spawn_item/rainbow_bedsheet)
 	donator_items.Add(new /datum/spawn_item/captain_bedsheet)
-	//Toys
+
+	donator_items.Add(get_spawn_item_string("Toys"))
 	donator_items.Add(new /datum/spawn_item/rubber_duck)
 	donator_items.Add(new /datum/spawn_item/the_holy_cross)
 	donator_items.Add(new /datum/spawn_item/champion_belt)
 	donator_items.Add(new /datum/spawn_item/keppel)
-	//Special Stuff
+
+	donator_items.Add(get_spawn_item_string("Special Stuff"))
 	donator_items.Add(new /datum/spawn_item/santabag)
 	donator_items.Add(new /datum/spawn_item/sunglasses)
 
@@ -144,12 +152,10 @@ var/list/datum/spawn_item/donator_items = list()
 	dat += "Allowed number of items: [allowed_num_items]/10<br><br>"
 	dat += "<b>Select items:</b> <br>"
 
-	var/last_category = ""
 	for(var/datum/spawn_item/i in donator_items)
-		if(last_category != i.category)
-			dat += "<b>[i.category]</b><br>"
-			last_category = i.category
-		if(money < i.cost)
+		if(istype(i, /datum/spawn_item/string))
+			dat += "<br><b>[i.name]:</b><br>"
+		if(money < i.cost || !i.spawnable)
 			dat += "[i.name] ([i.cost])<br>"
 		else
 			dat += "<a href='?src=\ref[src];buy_item=\ref[i]'>[i.name]</a> ([i.cost])<br>"

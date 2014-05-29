@@ -20,21 +20,20 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 
 //Let's build a menu!
 /obj/item/device/uplink/proc/generate_menu()
-	var/last_category = ""
 	var/count_of_items = 1
 	var/dat = "<B>[src.welcome]</B><BR>"
 	dat += "Tele-Crystals left: [src.uses]<BR>"
 	dat += "<HR>"
 	dat += "<B>Request item:</B><BR>"
-	dat += "<I>Each item costs a number of tele-crystals as indicated by the number following their name.</I><br><BR>"
+	dat += "<I>Each item costs a number of tele-crystals as indicated by the number following their name.</I><br>"
 
 	for(var/datum/spawn_item/i in items)
-		if(last_category != i.category)
+		if(istype(i, /datum/spawn_item/string))
 			if(count_of_items <= 0)
 				dat += "<i>We apologize, as you could not afford anything from this category.</i><br><br>"
-			dat += "[i.category]<br>"
-			last_category = i.category
+			dat += "<br><b>[i.name]</b><br>"
 			count_of_items = 0
+			continue
 		if(uses < i.cost)
 			continue
 		count_of_items++

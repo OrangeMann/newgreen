@@ -232,6 +232,11 @@
 		loc << "You are real badass"
 		..()
 
+/datum/spawn_item/moustaches
+	name = "Box of fake moustaches"
+	path = /obj/item/weapon/storage/box/syndie_kit/moustaches
+	cost = 6
+
 /*
 /datum/spawn_item
 	name = ""

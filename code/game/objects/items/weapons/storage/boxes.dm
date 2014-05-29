@@ -460,6 +460,16 @@
 		for(var/i = 1; i <= storage_slots; i++)
 			new /obj/item/weapon/implanter/explosive(src)
 
+
+/obj/item/weapon/storage/box/syndie_kit/moustaches
+	name = "box of moustaches"
+	desc = "Contains fake moustaches"
+	icon_state = "box"
+	New()
+		..()
+		for(var/i; i < storage_slots; i++)
+			new/obj/item/clothing/mask/fakemoustache(src)
+
 /obj/item/weapon/storage/box/autoinjectors
 	name = "box of injectors"
 	desc = "Contains autoinjectors."

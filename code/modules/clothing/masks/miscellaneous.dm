@@ -29,13 +29,11 @@
 	can_eat = 0
 
 /obj/item/clothing/mask/fakemoustache
-	name = "fake moustache"
+	name = "FAKE MOUSTACHE"
 	desc = "Warning: moustache is fake."
 	icon_state = "fake-moustache"
-	flags = FPRINT|TABLEPASS
-	flags_inv = HIDEFACE
-
-//scarves (fit in in mask slot)
+	flags = FPRINT|TABLEPASS|BLOCKHAIR|STOPSPRESSUREDMAGE
+	flags_inv = HIDEEARS|HIDEEYES|HIDEFACE
 
 /obj/item/clothing/mask/bluescarf
 	name = "blue neck scarf"

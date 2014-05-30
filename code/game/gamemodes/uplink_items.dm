@@ -28,7 +28,7 @@
 	s.name = name
 	s.path = path
 	s.cost = cost
-	return
+	return s
 
 /datum/spawn_item/revolver
 	name = "Revolver"

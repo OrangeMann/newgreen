@@ -125,3 +125,34 @@
 	new /obj/item/clothing/shoes/chameleon(src)
 	new /obj/item/weapon/storage/backpack/chameleon(src)
 	return
+
+/obj/item/weapon/storage/box/syndie_kit/eimplants
+	name = "box of explosive implants"
+	desc = "A small box with dangerous explosive implants"
+	storage_slots = 12
+
+/obj/item/weapon/storage/box/syndie_kit/eimplants/New()
+	..()
+	for(var/i = 1; i <= storage_slots; i++)
+		new /obj/item/weapon/implanter/explosive(src)
+
+
+/obj/item/weapon/storage/box/syndie_kit/moustaches
+	name = "box of moustaches"
+	desc = "Contains fake moustaches"
+
+/obj/item/weapon/storage/box/syndie_kit/moustaches/New()
+	..()
+	for(var/i = 1; i <= storage_slots; i++)
+		new/obj/item/clothing/mask/fakemoustache(src)
+
+/obj/item/weapon/storage/box/syndie_kit/stechtkin
+	name = "box with Stechtkin"
+	desc = "Contains Stechtkin"
+
+/obj/item/weapon/storage/box/syndie_kit/stechtkin/New()
+	..()
+	new /obj/item/weapon/gun/projectile/automatic/pistol(src)
+	new /obj/item/weapon/silencer(src)
+	for(var/i = 1; i <= 4; i++)
+		new /obj/item/ammo_magazine/external/mc9mm(src)

@@ -31,6 +31,7 @@
 	uplink_items.Add(new /datum/spawn_item/syndicate_bundle)
 	uplink_items.Add(new /datum/spawn_item/emp_grenades)
 	uplink_items.Add(new /datum/spawn_item/syndicate_bomb)
+	uplink_items.Add(get_spawn_item("Stechtkin", /obj/item/weapon/storage/box/syndie_kit/stechtkin, 4))
 
 	uplink_items.Add(get_spawn_item_string("Stealthy and Inconspicuous Weapons"))
 	uplink_items.Add(new /datum/spawn_item/paralysis_pen)
@@ -44,6 +45,7 @@
 	uplink_items.Add(new /datum/spawn_item/voice_changer)
 	uplink_items.Add(new /datum/spawn_item/chameleon_projector)
 //	uplink_items.Add(new /datum/spawn_item/cloaking_device) Use chameleon projector, beatch
+	uplink_items.Add(get_spawn_item("Box of fake moustaches", /obj/item/weapon/storage/box/syndie_kit/moustaches, 6))
 
 	uplink_items.Add(get_spawn_item_string("Devices and Tools"))
 	uplink_items.Add(new /datum/spawn_item/emag)

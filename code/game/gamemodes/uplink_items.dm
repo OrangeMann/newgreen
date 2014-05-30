@@ -23,6 +23,13 @@
 	S.name = text
 	return S
 
+/proc/get_spawn_item(var/name, var/path, var/cost)
+	var/datum/spawn_item/s = new
+	s.name = name
+	s.path = path
+	s.cost = cost
+	return
+
 /datum/spawn_item/revolver
 	name = "Revolver"
 	path = /obj/item/weapon/gun/projectile/revolver
@@ -236,6 +243,11 @@
 	name = "Box of fake moustaches"
 	path = /obj/item/weapon/storage/box/syndie_kit/moustaches
 	cost = 6
+
+/datum/spawn_item/stechtkin
+	name = "Stechtkin"
+	path = /obj/item/weapon/storage/box/syndie_kit/stechtkin
+	cost = 4
 
 /*
 /datum/spawn_item

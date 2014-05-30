@@ -9,14 +9,14 @@
 /datum/event/radiation_storm/start()
 	spawn()
 		world << sound('sound/AI/radiation.ogg')
-		command_alert("Зафиксированы высокие уровни радиационного излучения вблизи станции. Пожалуйста, эвакуируйтесь в один из экранированных технических тоннелей или дормиторий.", "Аномальна&#255; Тревога")
+		command_alert("Зафиксированы высокие уровни радиационного излучения вблизи станции. Пожалуйста, эвакуируйтесь в один из экранированных технических тоннелей или дормиторий.", "Аномальная Тревога")
 		make_maint_all_access()
 
 
 		sleep(600)
 
 
-		command_alert("Станция вошла в радиационный пояс. Пожалуйста, не покидайте экранированные зоны до тех пор, пока станция не покинет радиационный пояс.", "Аномальна&#255; Тревога" )
+		command_alert("Станция вошла в радиационный пояс. Пожалуйста, не покидайте экранированные зоны до тех пор, пока станция не покинет радиационный пояс.", "Аномальная Тревога" )
 
 		for(var/i = 0, i < 10, i++)
 			for(var/mob/living/carbon/human/H in living_mob_list)
@@ -25,7 +25,7 @@
 					continue
 				if(T.z != 1)
 					continue
-				if((istype(T.loc, /area/maintenance) || istype(T.loc, /area/crew_quarters/sleep)) && !istype(T, /turf/space))
+				if((istype(T.loc, /area/maintenance) || istype(T.loc, /area/crew_quarters/sleep) || istype(T.loc, /area/prison/wing)) && !istype(T, /turf/space))
 					continue
 
 

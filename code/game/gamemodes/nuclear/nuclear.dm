@@ -179,9 +179,9 @@
 		forge_syndicate_objectives(synd_mind)
 		greet_syndicate(synd_mind)
 		equip_syndicate(synd_mind.current)
-		spawn(0)
-			var/obj/item/weapon/implant/explosive/E = locate(/obj/item/weapon/implant/explosive) in synd_mind.current
-			E.implanted(synd_mind.current)
+		//spawn(0)
+		//	var/obj/item/weapon/implant/explosive/E = locate(/obj/item/weapon/implant/explosive) in synd_mind.current
+		//	E.implanted(synd_mind.current)
 
 		if(!leader_selected)
 			prepare_syndicate_leader(synd_mind, nuke_code)

@@ -117,6 +117,18 @@
 	new /obj/item/clothing/head/helmet/space/syndicate(src)
 	return
 
+/obj/item/weapon/storage/box/syndie_kit/space_random
+	name = "Space Suit and Helmet"
+
+/obj/item/weapon/storage/box/syndie_kit/space_random/New()
+	..()
+	var/color = pick("green", "green/dark", "orange", "blue", "black", "black/green", "black/blue", "black/orange", "black/red")//, "black/engie", "black/med")
+	desc = "Box with [color] spacesuit"
+	var/path = text2path("/obj/item/clothing/suit/space/syndicate/[color]")
+	new path(src)
+	path = text2path("/obj/item/clothing/head/helmet/space/syndicate/[color]")
+	new path(src)
+
 /obj/item/weapon/storage/box/syndie_kit/chameleon/New()
 	..()
 	new /obj/item/clothing/under/chameleon(src)

@@ -32,8 +32,8 @@
 	name = "FAKE MOUSTACHE"
 	desc = "Warning: moustache is fake."
 	icon_state = "fake-moustache"
-	flags = FPRINT|TABLEPASS|BLOCKHAIR|STOPSPRESSUREDMAGE
-	flags_inv = HIDEEARS|HIDEEYES|HIDEFACE
+	flags = FPRINT|TABLEPASS|BLOCKHAIR
+	flags_inv = HIDEFACE
 
 /obj/item/clothing/mask/bluescarf
 	name = "blue neck scarf"

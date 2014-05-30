@@ -5,7 +5,6 @@
 
 	var/sound/uploaded_sound = sound(S, repeat = 0, wait = 1, channel = 777)
 	uploaded_sound.priority = 250
-	uploaded_sound.status = SOUND_STREAM
 	uploaded_sound.volume = min(100, max(0, input("Set Volume", null, 100)))
 
 	var/playing_sound = 0
@@ -14,10 +13,12 @@
 			if("Yes")
 				log_admin("[key_name(src)] played sound [S]")
 				message_admins("[key_name_admin(src)] played sound [S]", 1)
+				uploaded_sound.status = SOUND_STREAM
 				for(var/mob/M in player_list)
 					if(M.client.prefs.toggles & SOUND_MIDI)
 						M << uploaded_sound
 				feedback_add_details("admin_verb","PGS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+				return
 			if("No")
 				if(playing_sound)
 					src << sound(null, channel = 777)
@@ -33,9 +34,9 @@
 						if("Change")
 							uploaded_sound.volume = min(100, max(0, input("Set Volume", null, 100)))
 							if(playing_sound)
-								uploaded_sound.status = SOUND_UPDATE
-								src << uploaded_sound
-								uploaded_sound.status = SOUND_STREAM
+								var/sound/s = sound(null, volume = uploaded_sound.volume)
+								s.status = SOUND_UPDATE
+								src << s
 						if("No")
 							if(playing_sound)
 								src << sound(null, channel = 777)

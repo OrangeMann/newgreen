@@ -47,6 +47,13 @@
 			return 1
 		return ..()
 
+/mob/living/carbon/brain/revive()
+	if(istype(src.loc, /obj/item/weapon/organ/head))
+		var/obj/item/weapon/organ/head/H = src.loc
+		if(H.owner)
+			H.owner.revive()
+			return
+	..()
 
 /mob/living/carbon/brain/update_canmove()
 	if(in_contents_of(/obj/mecha))

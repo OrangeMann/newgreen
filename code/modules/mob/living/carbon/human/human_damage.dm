@@ -253,7 +253,8 @@
 	*/
 
 	if(istype(used_weapon,/obj/item/projectile) && def_zone == "chest" && src.wear_suit && src.wear_suit.armor["bullet"] < 50) //We don't want to use the actual projectile item, so we spawn some shrapnel.
-		if(damagetype == BRUTE && prob(75))
+		var/obj/item/projectile/used_projectile = used_weapon
+		if(damagetype == BRUTE && used_projectile.damage >= 20 && prob(75))
 			var/obj/item/projectile/P = used_weapon
 			var/obj/item/weapon/shard/shrapnel/S = new()
 			S.name = "[P.name] shrapnel"

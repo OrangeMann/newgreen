@@ -98,18 +98,29 @@ var/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","Epsilon"
 	kill_objective.find_target()
 	changeling.objectives += kill_objective
 
-	var/datum/objective/steal/steal_objective = new
-	steal_objective.owner = changeling
-	steal_objective.find_target()
-	changeling.objectives += steal_objective
+	if(prob(50))
+		kill_objective = new
+		kill_objective.owner = changeling
+		kill_objective.find_target()
+		changeling.objectives += kill_objective
+	else
+		var/datum/objective/steal/steal_objective = new
+		steal_objective.owner = changeling
+		steal_objective.find_target()
+		changeling.objectives += steal_objective
 
 
 	switch(rand(1,100))
-		if(1 to 80)
+		if(1 to 75)
 			if (!(locate(/datum/objective/escape) in changeling.objectives))
 				var/datum/objective/escape/escape_objective = new
 				escape_objective.owner = changeling
 				changeling.objectives += escape_objective
+		if(76 to 80)
+			if (!(locate(/datum/objective/hijack) in changeling.objectives))
+				var/datum/objective/hijack/hijack_objective = new
+				hijack_objective.owner = changeling
+				changeling.objectives += hijack_objective
 		else
 			if (!(locate(/datum/objective/survive) in changeling.objectives))
 				var/datum/objective/survive/survive_objective = new

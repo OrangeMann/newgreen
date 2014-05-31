@@ -241,7 +241,7 @@ datum/objective/debrain//I want braaaainssss
 			return 1
 		if( !owner.current || owner.current.stat==DEAD )//If you're otherwise dead.
 			return 0
-		if( !target.current || !isbrain(target.current) )
+		if( !target.current || !isbrain(target.current))
 			return 0
 		var/atom/A = target.current
 		while(A.loc)			//check to see if the brainmob is on our person
@@ -495,23 +495,23 @@ datum/objective/steal
 		"the captain's antique laser gun" = /obj/item/weapon/gun/energy/laser/captain,
 		"a hand teleporter" = /obj/item/weapon/hand_tele,
 		"an RCD" = /obj/item/weapon/rcd,
-		"a jetpack" = /obj/item/weapon/tank/jetpack,
-		"a captain's jumpsuit" = /obj/item/clothing/under/rank/captain,
+//		"a jetpack" = /obj/item/weapon/tank/jetpack,
+//		"a captain's jumpsuit" = /obj/item/clothing/under/rank/captain,
 		"a functional AI" = /obj/item/device/aicard,
 		"a pair of magboots" = /obj/item/clothing/shoes/magboots,
 		"the station blueprints" = /obj/item/blueprints,
 		"a nasa voidsuit" = /obj/item/clothing/suit/space/nasavoid,
 		"28 moles of plasma (full tank)" = /obj/item/weapon/tank,
 //		"a sample of metroid core" = /obj/item/metroid_core,
-		"a piece of corgi meat" = /obj/item/weapon/reagent_containers/food/snacks/meat/corgi,
-		"a research director's jumpsuit" = /obj/item/clothing/under/rank/research_director,
-		"a chief engineer's jumpsuit" = /obj/item/clothing/under/rank/chief_engineer,
-		"a chief medical officer's jumpsuit" = /obj/item/clothing/under/rank/chief_medical_officer,
-		"a head of security's jumpsuit" = /obj/item/clothing/under/rank/head_of_security,
-		"a head of personnel's jumpsuit" = /obj/item/clothing/under/rank/head_of_personnel,
-		"the hypospray" = /obj/item/weapon/reagent_containers/hypospray,
-		"the captain's pinpointer" = /obj/item/weapon/pinpointer,
-		"an ablative armor vest" = /obj/item/clothing/suit/armor/laserproof,
+//		"a piece of corgi meat" = /obj/item/weapon/reagent_containers/food/snacks/meat/corgi,
+//		"a research director's jumpsuit" = /obj/item/clothing/under/rank/research_director,
+//		"a chief engineer's jumpsuit" = /obj/item/clothing/under/rank/chief_engineer,
+//		"a chief medical officer's jumpsuit" = /obj/item/clothing/under/rank/chief_medical_officer,
+//		"a head of security's jumpsuit" = /obj/item/clothing/under/rank/head_of_security,
+//		"a head of personnel's jumpsuit" = /obj/item/clothing/under/rank/head_of_personnel,
+//		"the hypospray" = /obj/item/weapon/reagent_containers/hypospray,
+//		"the captain's pinpointer" = /obj/item/weapon/pinpointer,
+//		"an ablative armor vest" = /obj/item/clothing/suit/armor/laserproof,
 	)
 
 	var/global/possible_items_special[] = list(

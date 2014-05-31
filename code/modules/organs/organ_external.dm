@@ -24,6 +24,7 @@
 
 	var/datum/organ/external/parent
 	var/list/datum/organ/external/children
+	var/obj/dropped_limb
 
 	// Internal organs of this body part
 	var/list/datum/organ/internal/internal_organs
@@ -453,7 +454,8 @@
 			if(LOWER_TORSO)
 				owner << "\red You are now sterile."
 			if(HEAD)
-				organ= new /obj/item/weapon/organ/head(owner.loc, owner)
+				organ = new /obj/item/weapon/organ/head(owner.loc, owner)
+				organ:brainmob.death()
 				owner.u_equip(owner.glasses)
 				owner.u_equip(owner.head)
 				owner.u_equip(owner.ears)
@@ -495,6 +497,7 @@
 					organ = new /obj/item/weapon/organ/l_foot(owner.loc, owner)
 				owner.u_equip(owner.shoes)
 		if(organ)
+			dropped_limb = organ
 			destspawn = 1
 			//Robotic limbs explode if sabotaged.
 			if(status & ORGAN_ROBOT && !no_explode && sabotaged)
@@ -518,6 +521,16 @@
 			step(organ,lol)
 
 			owner.regenerate_icons()
+
+/datum/organ/external/proc/return_limb()
+	if(!dropped_limb)
+		return
+	src.status &= ~ORGAN_DESTROYED
+	if(istype(dropped_limb, /obj/item/weapon/organ/head))
+		var/obj/item/weapon/organ/head/H = dropped_limb
+		H.brainmob.mind.transfer_to(owner)
+	del(dropped_limb)
+
 
 
 /****************************************************

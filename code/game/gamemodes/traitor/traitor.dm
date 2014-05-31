@@ -103,7 +103,7 @@
 
 		for(missions_amount, missions_amount>0, missions_amount--)
 			switch(rand(1,100))
-				if(1 to 25)
+				if(1 to 50)
 					var/datum/objective/assassinate/kill_objective = new
 					kill_objective.owner = traitor
 					kill_objective.find_target()
@@ -113,11 +113,6 @@
 //					brig_objective.owner = traitor
 //					brig_objective.find_target()
 //					traitor.objectives += brig_objective
-				if(26 to 30)
-					var/datum/objective/harm/harm_objective = new
-					harm_objective.owner = traitor
-					harm_objective.find_target()
-					traitor.objectives += harm_objective
 				else
 					var/datum/objective/steal/steal_objective = new
 					steal_objective.owner = traitor

@@ -1024,14 +1024,12 @@
 
 /mob/living/carbon/human/revive()
 	for (var/datum/organ/external/O in organs)
-		if(O.amputated)
-			O.return_limb()
-		else
-			O.status &= ~ORGAN_DESTROYED
 		O.status &= ~ORGAN_BROKEN
 		O.status &= ~ORGAN_BLEEDING
 		O.status &= ~ORGAN_SPLINTED
 		O.status &= ~ORGAN_ATTACHABLE
+		if (!O.amputated)
+			O.status &= ~ORGAN_DESTROYED
 		O.wounds.Cut()
 		O.heal_damage(1000,1000,1,1)
 

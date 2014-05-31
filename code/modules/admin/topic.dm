@@ -1169,6 +1169,23 @@
 				if(usr.client.strike_team())
 					feedback_inc("admin_secrets_fun_used",1)
 					feedback_add_details("admin_secrets_fun_used","Strike")
+			if("aliens")
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","Aliens")
+				new /datum/event/alien_infestation
+				log_admin("[key_name(usr)] started an alien invasion.", 1)
+				message_admins("\blue [key_name_admin(usr)] started an alien invasion.", 1)
+			if("alien_silent")
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","Aliens")
+				var/datum/event/alien_infestation/A = new
+				A.silent = 1
+				log_admin("[key_name(usr)] started an alien invasion silently.", 1)
+				message_admins("\blue [key_name_admin(usr)] started an alien invasion silently.", 1)
+			if("comms_blackout")
+				communications_blackout(1)
+			if("comms_blackout_silent")
+				communications_blackout(0)
 			if("radiation")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","Radiation")
@@ -1209,6 +1226,16 @@
 				if(show_log == "Yes")
 					command_alert("Ion storm detected near the station. Please check all AI-controlled equipment for errors.", "Anomaly Alert")
 					world << sound('sound/AI/ionstorm.ogg')
+			if("carp")
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","Carp")
+				message_admins("[key_name_admin(usr)] has sent a carps to the station", 1)
+				new /datum/event/carp_migration
+			if("spider")
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","Spider")
+				message_admins("[key_name_admin(usr)] has sent a spiders to the station", 1)
+				new /datum/event/spider_infestation
 			if("spacevines")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","K")
@@ -1614,11 +1641,11 @@
 				for(var/mob/living/carbon/human/B in mob_list)
 					B.f_style = "Dward Beard"
 					B.update_hair()
-				message_admins("[key_name_admin(usr)] activated dorf mode")
+				message_admins("[key_name_admin(usr)] activated dorf mode.")
 
 			if("blood_station")
 				feedback_inc("admin_secrets_fun_used",1)
-				feedback_add_details("admin_secrets_fun_used","BS")
+				feedback_add_details("admin_secrets_fun_used","BfS")
 				var/percentage = input("Enter percent of blooded atoms on station", null, 10) as num|null
 				if(!percentage)
 					return
@@ -1629,6 +1656,12 @@
 				for(var/atom/obj in world)
 					if((obj.z == 1 || obj.z == 0) && prob(percentage))
 						obj.add_blood(sacrifice)
+				message_admins("[key_name_admin(usr)] blooded the station.")
+			if("appendicitis")
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","App")
+				new /datum/event/spontaneous_appendicitis
+				message_admins("[key_name_admin(usr)] starts spontaneous appendicitis.")
 
 		if(usr)
 			log_admin("[key_name(usr)] used secret [href_list["secretsfun"]]")

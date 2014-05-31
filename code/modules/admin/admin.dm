@@ -599,12 +599,7 @@ var/global/floorIsLava = 0
 		/* To fix
 		<A href='?src=\ref[src];secretsfun=gravanomalies'>Spawn a gravitational anomaly (aka lagitational anomolag)</A><BR>
 		<A href='?src=\ref[src];secretsfun=timeanomalies'>Spawn wormholes</A><BR>
-		<A href='?src=\ref[src];secretsfun=aliens'>Trigger an Alien infestation</A><BR>
-		<A href='?src=\ref[src];secretsfun=alien_silent'>Spawn an Alien silently</A><BR>
-		<A href='?src=\ref[src];secretsfun=spiders'>Trigger a Spider infestation</A><BR>
 		<A href='?src=\ref[src];secretsfun=spaceninja'>Send in a space ninja</A><BR>
-		<A href='?src=\ref[src];secretsfun=carp'>Trigger an Carp migration</A><BR>
-		<A href='?src=\ref[src];secretsfun=comms_blackout'>Trigger a communication blackout</A><BR>
 		*/
 		dat += {"
 			<B>'Random' Events</B><BR>
@@ -613,16 +608,23 @@ var/global/floorIsLava = 0
 			<A href='?src=\ref[src];secretsfun=wave'>Spawn a wave of meteors (aka lagocolyptic shower)</A><BR>
 			<A href='?src=\ref[src];secretsfun=goblob'>Spawn blob</A><BR>
 			<A href='?src=\ref[src];secretsfun=striketeam'>Send in a strike team</A><BR>
+			<A href='?src=\ref[src];secretsfun=aliens'>Start an Alien Invasion</A><BR>
+			<A href='?src=\ref[src];secretsfun=alien_silent'>Start an Alien Invasion silently</A><BR>
+			<A href='?src=\ref[src];secretsfun=comms_blackout'>Trigger a communication blackout</A><BR>
+			<A href='?src=\ref[src];secretsfun=comms_blackout_silent'>Trigger a communication blackout silently</A><BR>
 			<A href='?src=\ref[src];secretsfun=radiation'>Irradiate the station</A><BR>
 			<A href='?src=\ref[src];secretsfun=prison_break'>Trigger a Prison Break</A><BR>
 			<A href='?src=\ref[src];secretsfun=virus'>Trigger a Virus Outbreak</A><BR>
 			<A href='?src=\ref[src];secretsfun=immovable'>Spawn an Immovable Rod</A><BR>
 			<A href='?src=\ref[src];secretsfun=lightsout'>Toggle a "lights out" event</A><BR>
 			<A href='?src=\ref[src];secretsfun=ionstorm'>Spawn an Ion Storm</A><BR>
+			<A href='?src=\ref[src];secretsfun=carp'>Trigger an Carp migration</A><BR>
+			<A href='?src=\ref[src];secretsfun=spiders'>Trigger a Spider infestation</A><BR>
 			<A href='?src=\ref[src];secretsfun=spacevines'>Spawn Space-Vines</A><BR>
 			<BR>
 			<B>Fun Secrets</B><BR>
 			<BR>
+			<A href='?src=\ref[src];secretsfun=appendicitis'>Spontaneous appendicitis</A><BR>
 			<A href='?src=\ref[src];secretsfun=blood_station'>Blood for station!</A><BR>
 			<A href='?src=\ref[src];secretsfun=sec_clothes'>Remove 'internal' clothing</A><BR>
 			<A href='?src=\ref[src];secretsfun=sec_all_clothes'>Remove ALL clothing</A><BR>

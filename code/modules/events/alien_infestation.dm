@@ -4,6 +4,7 @@
 	announceWhen	= 400
 	oneShot			= 1
 
+	var/silent = 0
 	var/spawncount = 1
 	var/successSpawn = 0	//So we don't make a command report if nothing gets spawned.
 
@@ -15,8 +16,12 @@
 
 /datum/event/alien_infestation/announce()
 	if(successSpawn)
-		command_alert("ќбнаружено присутствие неустановленных признаков жизни на борту станции [station_name()]. ”сильте безопасность всех доступов в отсеки извне, включа€ воздуховоды и вентил€цию.", "Ѕиологическа&#255; “ревога")
-		world << sound('sound/AI/aliens.ogg')
+		message_admins("\blue Alien Infestation event automatically turned on aliens.")
+		log_admin("Alien Infestation event automatically turned on aliens.", 1)
+		aliens_allowed = 1
+		if(!silent)
+			command_alert("ќбнаружено присутствие неустановленных признаков жизни на борту станции [station_name()]. ”сильте безопасность всех доступов в отсеки извне, включа€ воздуховоды и вентил€цию.", "Ѕиологическа&#255; “ревога")
+			world << sound('sound/AI/aliens.ogg')
 
 
 /datum/event/alien_infestation/start()

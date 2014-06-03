@@ -128,6 +128,9 @@
 		affecting.Weaken(5) // Should keep you down unless you get help.
 		affecting.Stun(5) // It will hamper your voice, being choked and all.
 		affecting.losebreath = min(affecting.losebreath + 2, 3)
+		if(!(species && species.flags & NO_BREATHE))
+			affecting.adjustOxyLoss(4)
+
 	return
 
 

@@ -409,7 +409,7 @@ About the new airlock wires panel:
 			if(src.secondsElectrified==0)
 				shockedby += text("\[[time_stamp()]\][usr](ckey:[usr.ckey])")
 				usr.attack_log += text("\[[time_stamp()]\] <font color='red'>Electrified the [name] at [x],[y],[z] for 30 seconds</font>")
-				msg_admin_attack("ATTACK: [usr.name] ([usr.ckey])(<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</A>) electrified the [name] at [x],[y],[z] for 30 seconds.", 0)
+				msg_admin_attack("[usr.name] ([usr.ckey])(<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</A>) electrified the [name] at [x],[y],[z] for 30 seconds.", 0)
 				log_attack("[usr.name] ([usr.ckey]) electrified the [name] at [x],[y],[z] for 30 seconds")
 				src.secondsElectrified = 30
 				spawn(10)
@@ -475,7 +475,7 @@ About the new airlock wires panel:
 			if(src.secondsElectrified != -1)
 				shockedby += text("\[[time_stamp()]\][usr](ckey:[usr.ckey])")
 				usr.attack_log += text("\[[time_stamp()]\] <font color='red'>Electrified the [name] at [x],[y],[z]</font>")
-				msg_admin_attack("ATTACK: [usr.name] ([usr.ckey])(<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</A>) electrified the [name] at [x],[y],[z].", 0)
+				msg_admin_attack("[usr.name] ([usr.ckey])(<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</A>) electrified the [name] at [x],[y],[z].", 0)
 				log_attack("[usr.name] ([usr.ckey]) electrified the [name] at [x],[y],[z]")
 				src.secondsElectrified = -1
 		if (AIRLOCK_WIRE_SAFETY)
@@ -1084,7 +1084,7 @@ About the new airlock wires panel:
 					else
 						shockedby += text("\[[time_stamp()]\][usr](ckey:[usr.ckey])")
 						usr.attack_log += text("\[[time_stamp()]\] <font color='red'>Electrified the [name] at [x],[y],[z] for 30 seconds</font>")
-						msg_admin_attack("ATTACK: [usr.name] ([usr.ckey])(<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</A>) electrified the [name] at [x],[y],[z] for 30 seconds.", 0)
+						msg_admin_attack("[usr.name] ([usr.ckey])(<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</A>) electrified the [name] at [x],[y],[z] for 30 seconds.", 0)
 						log_attack("[usr.name] ([usr.ckey]) electrified the [name] at [x],[y],[z] for 30 seconds")
 						src.secondsElectrified = 30
 						spawn(10)
@@ -1105,7 +1105,7 @@ About the new airlock wires panel:
 					else
 						shockedby += text("\[[time_stamp()]\][usr](ckey:[usr.ckey])")
 						usr.attack_log += text("\[[time_stamp()]\] <font color='red'>Electrified the [name] at [x],[y],[z]</font>")
-						msg_admin_attack("ATTACK: [usr.name] ([usr.ckey])(<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</A>) electrified the [name] at [x],[y],[z] for 30 seconds.", 0)
+						msg_admin_attack("[usr.name] ([usr.ckey])(<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</A>) electrified the [name] at [x],[y],[z] for 30 seconds.", 0)
 						log_attack("[usr.name] ([usr.ckey]) electrified the [name] at [x],[y],[z] for 30 seconds")
 						src.secondsElectrified = -1
 

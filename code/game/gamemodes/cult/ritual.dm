@@ -357,7 +357,7 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 
 
 		//log_admin("ATTACK: [user] ([user.ckey]) used the [name] on [M] ([M.ckey]).")
-		msg_admin_attack("ATTACK: [user] ([user.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[user]'>JMP</A>) used the [name] on [victim_full].", 0)
+		msg_admin_attack("[user] ([user.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[user]'>JMP</A>) used the [name] on [victim_full].", 0)
 		log_attack("[user.name] ([user.ckey]) used [name] on [victim_full]")
 
 

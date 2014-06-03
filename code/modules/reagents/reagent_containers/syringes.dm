@@ -155,7 +155,7 @@
 						M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been injected with [src.name] by [user.name] ([user.ckey]). Reagents: [contained]</font>")
 						user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to inject [M.name] ([M.key]). Reagents: [contained]</font>")
 						//msg_admin_attack("[user.name] ([user.ckey]) injected [M.name] ([M.key]) with [src.name]. Reagents: [contained] (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
-						msg_admin_attack("ATTACK: [user] ([user.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[user]'>JMP</A>) injected [M.name] ([M.ckey]) with [src]. Reagents: [contained]", 0)
+						msg_admin_attack("[user] ([user.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[user]'>JMP</A>) injected [M.name] ([M.ckey]) with [src]. Reagents: [contained]", 0)
 						log_attack("[user.name] ([user.ckey]) injected [M.name] ([M.ckey]) with [src.name]. Reagents: [contained]")
 
 					src.reagents.reaction(target, INGEST)
@@ -211,7 +211,7 @@
 		user.attack_log += "\[[time_stamp()]\]<font color='red'> Attacked [target.name] ([target.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>"
 		target.attack_log += "\[[time_stamp()]\]<font color='orange'> Attacked by [user.name] ([user.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>"
 		//msg_admin_attack("[user.name] ([user.ckey]) attacked [target.name] ([target.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
-		msg_admin_attack("ATTACK: [user.name] ([user.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[user]'>JMP</A>) attacked [target.name] ([target.ckey]) with [src].", 0)
+		msg_admin_attack("[user.name] ([user.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[user]'>JMP</A>) attacked [target.name] ([target.ckey]) with [src].", 0)
 		log_attack("[user.name] ([user.ckey]) attacked [target.name] ([target.ckey]) with [src.name]")
 
 		if(istype(target, /mob/living/carbon/human))

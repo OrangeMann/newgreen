@@ -18,7 +18,7 @@
 		user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to card [M.name] ([M.ckey])</font>")
 
 		//log_admin("ATTACK: [user] ([user.ckey]) carded [M] ([M.ckey]) with [src].")
-		msg_admin_attack("ATTACK: [user] ([user.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[user]'>JMP</A>) carded [M] ([M.ckey]) with [src].", 2)
+		msg_admin_attack("[user] ([user.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[user]'>JMP</A>) carded [M] ([M.ckey]) with [src].", 2)
 		log_attack("<font color='red'>[user.name] ([user.ckey]) used the [src.name] to card [M.name] ([M.ckey])</font>")
 
 

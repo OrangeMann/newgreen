@@ -182,7 +182,7 @@
 					M.attack_log += "\[[time_stamp()]\] <b>[user_name]/[user_ckey]</b> shot <b>[M]/[M.ckey]</b> with a <b>dartgun</b> ([R])"
 					user.attack_log += "\[[time_stamp()]\] <b>[user_name]/[user_ckey]</b> shot <b>[M]/[M.ckey]</b> with a <b>dartgun</b> ([R])"
 					//msg_admin_attack("[user] ([user.ckey]) shot [M] ([M.ckey]) with a dartgun ([R]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
-					msg_admin_attack("ATTACK: [user_name] ([user_ckey])(<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[M.x];Y=[M.y];Z=[M.z]'>JMP</a>) shot [M] ([M.ckey]) with [src].", 0)
+					msg_admin_attack("[user_name] ([user_ckey])(<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[M.x];Y=[M.y];Z=[M.z]'>JMP</a>) shot [M] ([M.ckey]) with [src].", 0)
 					log_attack("[user_name] ([user_ckey]) shot [M.name] ([M.ckey]) with [src]")
 
 

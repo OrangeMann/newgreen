@@ -460,7 +460,7 @@
 					G.assailant.attack_log += text("\[[time_stamp()]\] <font color='red'>Smashed [G.affecting.name] ([G.affecting.ckey]) on a table.</font>")
 
 					//log_admin("ATTACK: [G.assailant] ([G.assailant.ckey]) smashed [G.affecting] ([G.affecting.ckey]) on a table.")
-					msg_admin_attack("ATTACK: [G.assailant] ([G.assailant.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[G]'>JMP</A>) smashed [G.affecting] ([G.affecting.ckey]) on a table.", 2)
+					msg_admin_attack("[G.assailant] ([G.assailant.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[G]'>JMP</A>) smashed [G.affecting] ([G.affecting.ckey]) on a table.", 2)
 					log_attack("<font color='red'>[G.assailant] ([G.assailant.ckey]) smashed [G.affecting] ([G.affecting.ckey]) on a table.</font>")
 
 					if(prob(25))

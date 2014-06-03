@@ -101,7 +101,7 @@
 		target_changeling = 1
 	T.attack_log += "\[[time_stamp()]\] <font color='orange'>Absorbing by [src.name] ([src.ckey])</font>"
 	src.attack_log += "\[[time_stamp()]\] <font color='red'>Start absorbing DNA of [T.name] ([T.ckey])</font>"
-	msg_admin_attack("ATTACK: [src]([src.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src]'>JMP</A>) start absorbing DNA of [T]([T.ckey])[target_changeling ? "(Other changeling)":""].", 0)
+	msg_admin_attack("[src]([src.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src]'>JMP</A>) start absorbing DNA of [T]([T.ckey])[target_changeling ? "(Other changeling)":""].", 0)
 	log_attack("[src]([src.ckey]) start absorbing DNA of [T]([T.ckey])[target_changeling ? "(Other changeling)":""]")
 	for(var/stage = 1, stage<=3, stage++)
 		switch(stage)
@@ -173,7 +173,7 @@
 		T << "\red <FONT size = 3>You are now a changeling!</FONT>"
 	T.attack_log += "\[[time_stamp()]\] <font color='orange'>Absorbed by [src.name] ([src.ckey])</font>"
 	src.attack_log += "\[[time_stamp()]\] <font color='red'>Absorbed DNA of [T.name] ([T.ckey])</font>"
-	msg_admin_attack("ATTACK: [src]([src.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src]'>JMP</A>) absorbed DNA of [T]([T.ckey])[target_changeling ? "(Other changeling)":""].", 0)
+	msg_admin_attack("[src]([src.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src]'>JMP</A>) absorbed DNA of [T]([T.ckey])[target_changeling ? "(Other changeling)":""].", 0)
 	log_attack("[src]([src.ckey]) absorbed dna of [T]([T.ckey])[target_changeling ? "(Other changeling)":""]")
 	return 1
 
@@ -674,7 +674,7 @@ var/list/datum/dna/hivemind_bank = list()
 	feedback_add_details("changeling_powers","HS")
 	T.attack_log += "\[[time_stamp()]\] <font color='orange'>Stinged with Hallucination Sting by [src.name] ([src.ckey])</font>"
 	src.attack_log += "\[[time_stamp()]\] <font color='red'>Used Hallucination Sting on [T.name] ([T.ckey])</font>"
-	msg_admin_attack("ATTACK: [src]([src.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src]'>JMP</A>) sting [T]([T.ckey]) with Hallucination Sting.", 0)
+	msg_admin_attack("[src]([src.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src]'>JMP</A>) sting [T]([T.ckey]) with Hallucination Sting.", 0)
 	log_attack("[src]([src.ckey]) sting [T]([T.ckey]) with Hallucination Sting")
 	return 1
 
@@ -689,7 +689,7 @@ var/list/datum/dna/hivemind_bank = list()
 	feedback_add_details("changeling_powers","SS")
 	T.attack_log += "\[[time_stamp()]\] <font color='orange'>Stinged with Silence Sting by [src.name] ([src.ckey])</font>"
 	src.attack_log += "\[[time_stamp()]\] <font color='red'>Used Silence Sting on [T.name] ([T.ckey])</font>"
-	msg_admin_attack("ATTACK: [src]([src.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src]'>JMP</A>) sting [T]([T.ckey]) with Silence Sting.", 0)
+	msg_admin_attack("[src]([src.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src]'>JMP</A>) sting [T]([T.ckey]) with Silence Sting.", 0)
 	log_attack("[src]([src.ckey]) sting [T]([T.ckey]) with Silence Sting")
 	return 1
 
@@ -708,7 +708,7 @@ var/list/datum/dna/hivemind_bank = list()
 	feedback_add_details("changeling_powers","BS")
 	T.attack_log += "\[[time_stamp()]\] <font color='orange'>Stinged with Blind Sting by [src.name] ([src.ckey])</font>"
 	src.attack_log += "\[[time_stamp()]\] <font color='red'>Used Blind Sting on [T.name] ([T.ckey])</font>"
-	msg_admin_attack("ATTACK: [src]([src.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src]'>JMP</A>) sting [T]([T.ckey]) with Blind Sting.", 0)
+	msg_admin_attack("[src]([src.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src]'>JMP</A>) sting [T]([T.ckey]) with Blind Sting.", 0)
 	log_attack("[src]([src.ckey]) sting [T]([T.ckey]) with Blind Sting")
 	return 1
 
@@ -725,7 +725,7 @@ var/list/datum/dna/hivemind_bank = list()
 	feedback_add_details("changeling_powers","DS")
 	T.attack_log += "\[[time_stamp()]\] <font color='orange'>Stinged with Deaf Sting by [src.name] ([src.ckey])</font>"
 	src.attack_log += "\[[time_stamp()]\] <font color='red'>Used Deaf Sting on [T.name] ([T.ckey])</font>"
-	msg_admin_attack("ATTACK: [src]([src.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src]'>JMP</A>) sting [T]([T.ckey]) with Deaf Sting.", 0)
+	msg_admin_attack("[src]([src.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src]'>JMP</A>) sting [T]([T.ckey]) with Deaf Sting.", 0)
 	log_attack("[src]([src.ckey]) sting [T]([T.ckey]) with Deaf Sting")
 	return 1
 
@@ -742,7 +742,7 @@ var/list/datum/dna/hivemind_bank = list()
 	feedback_add_details("changeling_powers","PS")
 	T.attack_log += "\[[time_stamp()]\] <font color='orange'>Stinged with Paralysis Sting by [src.name] ([src.ckey])</font>"
 	src.attack_log += "\[[time_stamp()]\] <font color='red'>Used Paralysis Sting on [T.name] ([T.ckey])</font>"
-	msg_admin_attack("ATTACK: [src]([src.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src]'>JMP</A>) sting [T]([T.ckey]) with Paralysis Sting.", 0)
+	msg_admin_attack("[src]([src.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src]'>JMP</A>) sting [T]([T.ckey]) with Paralysis Sting.", 0)
 	log_attack("[src]([src.ckey]) sting [T]([T.ckey]) with Paralysis Sting")
 	return 1
 
@@ -781,7 +781,7 @@ var/list/datum/dna/hivemind_bank = list()
 	feedback_add_details("changeling_powers","TS")
 	T.attack_log += "\[[time_stamp()]\] <font color='orange'>Stinged with Transformation Sting by [src.name] ([src.ckey])</font>"
 	src.attack_log += "\[[time_stamp()]\] <font color='red'>Used Transformation Sting on [T.name] ([T.ckey])</font>"
-	msg_admin_attack("ATTACK: [src]([src.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src]'>JMP</A>) sting [T]([T.ckey]) with Transformation Sting. Old name: [old_name]", 0)
+	msg_admin_attack("[src]([src.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src]'>JMP</A>) sting [T]([T.ckey]) with Transformation Sting. Old name: [old_name]", 0)
 	log_attack("[src]([src.ckey]) sting [T]([T.ckey]) with Transformation Sting. Old name: [old_name]")
 	return 1
 
@@ -798,7 +798,7 @@ var/list/datum/dna/hivemind_bank = list()
 	feedback_add_details("changeling_powers","US")
 	T.attack_log += "\[[time_stamp()]\] <font color='orange'>Stinged with Unfat Sting by [src.name] ([src.ckey])</font>"
 	src.attack_log += "\[[time_stamp()]\] <font color='red'>Used Unfat Sting on [T.name] ([T.ckey])</font>"
-	msg_admin_attack("ATTACK: [src]([src.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src]'>JMP</A>) sting [T]([T.ckey]) with Unfat Sting.", 0)
+	msg_admin_attack("[src]([src.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src]'>JMP</A>) sting [T]([T.ckey]) with Unfat Sting.", 0)
 	log_attack("[src]([src.ckey]) sting [T]([T.ckey]) with Unfat Sting")
 	return 1
 
@@ -817,7 +817,7 @@ var/list/datum/dna/hivemind_bank = list()
 	feedback_add_details("changeling_powers","DTHS")
 	T.attack_log += "\[[time_stamp()]\] <font color='orange'>Stinged with Death Sting by [src.name] ([src.ckey])</font>"
 	src.attack_log += "\[[time_stamp()]\] <font color='red'>Used Death Sting on [T.name] ([T.ckey])</font>"
-	msg_admin_attack("ATTACK: [src]([src.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src]'>JMP</A>) sting [T]([T.ckey]) with Death Sting.", 0)
+	msg_admin_attack("[src]([src.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src]'>JMP</A>) sting [T]([T.ckey]) with Death Sting.", 0)
 	log_attack("[src]([src.ckey]) sting [T]([T.ckey]) with Death Sting")
 	return 1
 
@@ -841,6 +841,6 @@ var/list/datum/dna/hivemind_bank = list()
 	feedback_add_details("changeling_powers","ED")
 	T.attack_log += "\[[time_stamp()]\] <font color='orange'>Stinged with Extract DNA Sting by [src.name] ([src.ckey])</font>"
 	src.attack_log += "\[[time_stamp()]\] <font color='red'>Used Extract DNA Sting on [T.name] ([T.ckey])</font>"
-	msg_admin_attack("ATTACK: [src]([src.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src]'>JMP</A>) sting [T]([T.ckey]) with Extract DNA Sting.", 0)
+	msg_admin_attack("[src]([src.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src]'>JMP</A>) sting [T]([T.ckey]) with Extract DNA Sting.", 0)
 	log_attack("[src]([src.ckey]) sting [T]([T.ckey]) with Extract DNA Sting")
 	return 1

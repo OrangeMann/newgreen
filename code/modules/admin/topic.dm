@@ -1172,20 +1172,22 @@
 			if("aliens")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","Aliens")
-				new /datum/event/alien_infestation
+				new /datum/event/alien_eggs
 				log_admin("[key_name(usr)] started an alien invasion.", 1)
 				message_admins("\blue [key_name_admin(usr)] started an alien invasion.", 1)
 			if("alien_silent")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","Aliens")
-				var/datum/event/alien_infestation/A = new
+				var/datum/event/alien_eggs/A = new
 				A.silent = 1
 				log_admin("[key_name(usr)] started an alien invasion silently.", 1)
 				message_admins("\blue [key_name_admin(usr)] started an alien invasion silently.", 1)
 			if("comms_blackout")
-				communications_blackout(1)
-			if("comms_blackout_silent")
-				communications_blackout(0)
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","CommsBlackout")
+				new /datum/event/communications_blackout
+				log_admin("[key_name(usr)] activated a comms blackout.", 1)
+				message_admins("\blue [key_name_admin(usr)] activated a comms blackout.", 1)
 			if("radiation")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","Radiation")

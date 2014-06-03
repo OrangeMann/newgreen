@@ -44,3 +44,34 @@
 		vents -= vent
 		spawncount--
 		successSpawn = 1
+
+/datum/event/alien_eggs
+	announceWhen = 400
+	oneShot = 1
+
+	var/silent = 0
+
+/datum/event/alien_eggs/announce()
+	if(!silent)
+		command_alert("ќбнаружено присутствие неустановленных признаков жизни на борту станции [station_name()]. ”сильте безопасность всех доступов в отсеки извне, включа€ воздуховоды и вентил€цию.", "Ѕиологическа€ “ревога")
+		world << sound('sound/AI/aliens.ogg')
+
+/datum/event/alien_eggs/start()
+	var/list/places = list()
+	var/spawns = rand(1, 4)
+	for(var/obj/effect/landmark/L in landmarks_list)
+		if(L.name == "alien_egg")
+			places += L
+	if(places.len <= 0)
+		return
+	message_admins("\blue Alien Infestation event automatically turned on aliens.")
+	log_admin("Alien Infestation event automatically turned on aliens.", 1)
+	aliens_allowed = 1
+	while(spawns > 0)
+		if(places.len <= 0)
+			break
+		var/P = pick(places)
+		places &= !P
+		var/turf/T = get_turf(P)
+		new /obj/effect/alien/egg(T)
+		spawns--

@@ -130,7 +130,7 @@
 		if(H != user)
 			H.attack_log += "\[[time_stamp()]\]<font color='orange'> [atk_text_cap] by [user] ([user.ckey]) with [src.name]</font>"
 		user.attack_log += "\[[time_stamp()]\]<font color='red'> [atk_text_cap_user] [victim_full] with [src.name]</font>"
-		msg_admin_attack("ATTACK: [user] ([user.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[user]'>JMP</A>) [atk_text] [victim_full] with [src].", 0)
+		msg_admin_attack("[user] ([user.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[user]'>JMP</A>) [atk_text] [victim_full] with [src].", 0)
 		log_attack("[user.name] ([user.ckey]) [atk_text] [victim_full] with [src.name]")
 
 	add_fingerprint(user)

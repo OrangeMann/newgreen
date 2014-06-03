@@ -13,7 +13,7 @@ var/global/floorIsLava = 0
 			C << msg
 
 /proc/msg_admin_attack(var/text) //Toggleable Attack Messages
-	var/rendered = "<span class=\"admin\"><span class=\"message\">[text]</span></span>"
+	var/rendered = "<span class=\"admin\"><span class=\"prefix\">ATTACK:</span><span class=\"message\">[text]</span></span>"
 	log_attack(text)
 	for(var/client/C in admins)
 		if(R_ADMIN & C.holder.rights)
@@ -611,7 +611,6 @@ var/global/floorIsLava = 0
 			<A href='?src=\ref[src];secretsfun=aliens'>Start an Alien Invasion</A><BR>
 			<A href='?src=\ref[src];secretsfun=alien_silent'>Start an Alien Invasion silently</A><BR>
 			<A href='?src=\ref[src];secretsfun=comms_blackout'>Trigger a communication blackout</A><BR>
-			<A href='?src=\ref[src];secretsfun=comms_blackout_silent'>Trigger a communication blackout silently</A><BR>
 			<A href='?src=\ref[src];secretsfun=radiation'>Irradiate the station</A><BR>
 			<A href='?src=\ref[src];secretsfun=prison_break'>Trigger a Prison Break</A><BR>
 			<A href='?src=\ref[src];secretsfun=virus'>Trigger a Virus Outbreak</A><BR>

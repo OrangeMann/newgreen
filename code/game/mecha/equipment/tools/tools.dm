@@ -60,7 +60,7 @@
 				occupant_message("\red You squeeze [target] with [src.name]. Something cracks.")
 				chassis.visible_message("\red [chassis] squeezes [target].")
 				usr.attack_log += text("\[[time_stamp()]\] <font color='red'>Squeeze [target] with [src.name]</font>")
-				msg_admin_attack("ATTACK: [chassis.occupant.name] ([chassis.occupant.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[chassis.occupant]'>JMP</A>) in [chassis.name] squeeze [target] with [src.name].", 0)
+				msg_admin_attack("[chassis.occupant.name] ([chassis.occupant.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[chassis.occupant]'>JMP</A>) in [chassis.name] squeeze [target] with [src.name].", 0)
 				log_attack("[chassis.occupant.name] ([chassis.occupant.ckey]) in [chassis.name] squeeze [target] with [src.name]")
 			else
 				step_away(M,chassis)
@@ -121,7 +121,7 @@
 					target.ex_act(2)
 					if(istype(target,/mob/living))
 						usr.attack_log += text("\[[time_stamp()]\] <font color='red'>Drilled through [target] with [src.name]</font>")
-						msg_admin_attack("ATTACK: [chassis.occupant.name] ([chassis.occupant.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[chassis.occupant]'>JMP</A>) in [chassis.name] drilled through [target] with [src.name].", 0)
+						msg_admin_attack("[chassis.occupant.name] ([chassis.occupant.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[chassis.occupant]'>JMP</A>) in [chassis.name] drilled through [target] with [src.name].", 0)
 						log_attack("[chassis.occupant.name] ([chassis.occupant.ckey]) in [chassis.name] drilled through [target] with [src.name]")
 		return 1
 
@@ -182,7 +182,7 @@
 					target.ex_act(2)
 					if(istype(target,/mob/living))
 						usr.attack_log += text("\[[time_stamp()]\] <font color='red'>Drilled through [target] with [src.name]</font>")
-						msg_admin_attack("ATTACK: [chassis.occupant.name] ([chassis.occupant.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[chassis.occupant]'>JMP</A>) in [chassis.name] drilled through [target] with [src.name].", 0)
+						msg_admin_attack("[chassis.occupant.name] ([chassis.occupant.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[chassis.occupant]'>JMP</A>) in [chassis.name] drilled through [target] with [src.name].", 0)
 						log_attack("[chassis.occupant.name] ([chassis.occupant.ckey]) in [chassis.name] drilled through [target] with [src.name]")
 		return 1
 

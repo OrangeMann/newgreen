@@ -29,6 +29,7 @@ var/global/list/uneatable = list(
 	var/consume_range = 0 //How many tiles out do we eat
 	var/event_chance = 15 //Prob for event each tick
 	var/target = null //its target. moves towards the target if it has one
+	var/move_to_target_chance = 60
 	var/last_failed_movement = 0//Will not move in the same dir if it couldnt before, will help with the getting stuck on fields thing
 	var/teleport_del = 0
 	var/last_warning
@@ -46,6 +47,22 @@ var/global/list/uneatable = list(
 		if(singubeacon.active)
 			target = singubeacon
 			break
+	if(!target)
+		world << "no target"
+		var/list/landmarks = list()
+		for(var/obj/effect/landmark/L in landmarks_list)
+			if(L.name == "singulo target")
+				world << "Found."
+			if(L.name == "singulo target" && (abs(x - L.x) + abs(y - L.y)) < 75)
+				landmarks += L
+				world << "In range"
+		world << "landmarks.len [landmarks.len]"
+		if(landmarks.len)
+			var/L = pick(landmarks)
+			var/turf/T = get_turf(L)
+			if(!istype(T, /turf/space))
+				target = T
+				move_to_target_chance = 25
 	return
 
 
@@ -298,7 +315,7 @@ var/global/list/uneatable = list(
 	if(force_move)
 		movement_dir = force_move
 
-	if(target && prob(60))
+	else if(target && prob(move_to_target_chance))
 		movement_dir = get_dir(src,target) //moves to a singulo beacon, if there is one
 
 	if(current_size >= 9)//The superlarge one does not care about things in its way

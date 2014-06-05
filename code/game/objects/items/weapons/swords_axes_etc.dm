@@ -194,7 +194,10 @@
 			else
 				user.take_organ_damage(2*force)
 			return
-
+		if(user.intent == "help")
+			force = 5
+		else
+			force = 15
 		if(!..()) return
 		playsound(src.loc, "swing_hit", 50, 1, -1)
 		//target.Stun(4)	//naaah

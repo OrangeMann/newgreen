@@ -398,7 +398,7 @@ commented out in r5061, I left it because of the shroom thingies
 				if(src.excavation_level > 15)
 					boulder_prob = 10
 				if(artifact_find)
-					boulder_prob += 25
+					boulder_prob += 35
 					if(src.excavation_level >= 100)
 						boulder_prob += 40
 					else if(src.excavation_level > 95)

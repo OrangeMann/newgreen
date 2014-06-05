@@ -1312,6 +1312,15 @@ About the new airlock wires panel:
 			var/turf/location = src.loc
 			if(istype(location, /turf/simulated))
 				location.add_blood(M)
+			if(prob(10))
+				var/list/turf/Tl = list()
+				for(var/a in cardinal)
+					var/turf/T = get_step(src, a)
+					if(!T.density)
+						Tl.Add(T)
+				if(Tl.len)
+					var/turf/T = pick(Tl)
+					M.forceMove(T)
 
 	use_power(50)
 	if(istype(src, /obj/machinery/door/airlock/glass))

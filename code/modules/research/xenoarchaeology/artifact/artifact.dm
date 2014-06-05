@@ -80,7 +80,7 @@
 			reveal_prob = 50 + (excavation_level - 90) * (excavation_level - 90)
 		else if(excavation_level >= 90)
 			reveal_prob = 5
-		if(excavation_level >= 100)
+		if(excavation_level >= 100 && prob(10))
 			//failure
 			user.visible_message("<font color='red'><b>[src] suddenly crumbles away.</b></font>",\
 			"\red [src] has disintegrated under your onslaught, any secrets it was holding long gone.")
@@ -97,5 +97,5 @@
 				src.visible_message("<font color='red'><b>[src] suddenly crumbles away.</b></font>")
 			else
 				user.visible_message("<font color='red'><b>[src] suddenly crumbles away.</b></font>",\
-				"\blue [src] has been whittled away under your careful excavation, but there was nothing of interest inside.")
+				"\blue There was nothing of interest inside.")
 			del(src)

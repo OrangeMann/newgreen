@@ -213,9 +213,11 @@
 		if(user.a_intent == "hurt")
 			user.visible_message("\red <b> \The [user] fires \the [src] point blank at [M]!</b>")
 			in_chamber.damage *= 1.75
-			in_chamber.stun *= 2.5
-			in_chamber.weaken *= 2.5
-			in_chamber.stutter *= 2.5
+			in_chamber.stun *= 1.5
+			in_chamber.weaken *= 1.5
+			in_chamber.stutter *= 1.5
+			if(in_chamber.stun) //“олько если оружие вообще обладает станом
+				in_chamber.paralyze = in_chamber.stun
 			Fire(M,user)
 			return
 		else if(target && M in target)

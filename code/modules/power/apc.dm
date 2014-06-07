@@ -227,7 +227,10 @@
 			user << "You are trying to remove the power control board..." //lpeters - fixed grammar issues
 			if(do_after(user, 50))
 				has_electronics = 0
-				if ((stat & BROKEN) || malfhack)
+				if ((stat & BROKEN) || malfai)
+					malfai = null
+					if(occupant)
+						malfvacate(1)
 					user.visible_message(\
 						"\red [user.name] has broken the power control board inside [src.name]!",\
 						"You broke the charred power control board and remove the remains.",
@@ -256,6 +259,9 @@
 			if (stat & MAINT)
 				user << "\red There is no connector for your power cell."
 				return
+			if (ticker.mode.config_tag == "malfunction" && malfai)
+				if (src.z == 1) //if (is_type_in_list(get_area(src), the_station_areas))
+					ticker.mode:apcs++
 			user.drop_item()
 			W.loc = src
 			cell = W
@@ -464,6 +470,9 @@
 			//user << "You remove the power cell."
 			charging = 0
 			src.update_icon()
+			if (ticker.mode.config_tag == "malfunction" && malfai)
+				if (src.z == 1) //if (is_type_in_list(get_area(src), the_station_areas))
+					ticker.mode:apcs-- // APC offline? Less computing power for you!
 		return
 	if(stat & (BROKEN|MAINT))
 		return
@@ -918,9 +927,10 @@
 	if(!istype(malf))
 		return
 	if(istype(malf.loc, /obj/machinery/power/apc)) // Already in an APC
-		malf << "<span class='warning'>You must evacuate your current apc first.</span>"
+		malf << "<span class='warning'>You must evacuate your current APC first.</span>"
 		return
 	if(src.z != 1)
+		malf << "<span class='warning'>APC is out of range!</span>"
 		return
 	src.occupant = new /mob/living/silicon/ai(src,malf.laws,null,1)
 	src.occupant.adjustOxyLoss(malf.getOxyLoss())
@@ -1254,7 +1264,7 @@
 					sleep(1)
 
 /obj/machinery/power/apc/Del()
-	if(malfai && operating)
+	if(malfai && operating && cell)
 		if (ticker.mode.config_tag == "malfunction")
 			if (src.z == 1) //if (is_type_in_list(get_area(src), the_station_areas))
 				ticker.mode:apcs--

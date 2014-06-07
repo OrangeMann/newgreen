@@ -48,15 +48,15 @@ var/global/list/uneatable = list(
 			target = singubeacon
 			break
 	if(!target)
-		world << "no target"
+		//world << "no target"
 		var/list/landmarks = list()
 		for(var/obj/effect/landmark/L in landmarks_list)
-			if(L.name == "singulo target")
-				world << "Found."
+			//if(L.name == "singulo target")
+				//world << "Found."
 			if(L.name == "singulo target" && (abs(x - L.x) + abs(y - L.y)) < 75)
 				landmarks += L
-				world << "In range"
-		world << "landmarks.len [landmarks.len]"
+				//world << "In range"
+		//world << "landmarks.len [landmarks.len]"
 		if(landmarks.len)
 			var/L = pick(landmarks)
 			var/turf/T = get_turf(L)

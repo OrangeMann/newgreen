@@ -42,6 +42,7 @@
 	uplink_items.Add(new /datum/spawn_item/syndicate_bundle)
 	uplink_items.Add(new /datum/spawn_item/emp_grenades)
 	uplink_items.Add(new /datum/spawn_item/syndicate_bomb)
+	uplink_items.Add(new /datum/spawn_item/manhacks)
 
 	uplink_items.Add(get_spawn_item_string("Stealthy and Inconspicuous Weapons"))
 	uplink_items.Add(new /datum/spawn_item/paralysis_pen)

@@ -249,6 +249,12 @@
 	path = /obj/item/weapon/storage/box/syndie_kit/stechtkin
 	cost = 4
 
+/datum/spawn_item/manhacks
+    name = "Manhacks Grenade"
+    path = /obj/item/weapon/grenade/spawnergrenade/manhacks
+    cost = 3
+    //category = "Highly Visible and Dangerous Weapons"
+
 /*
 /datum/spawn_item
 	name = ""

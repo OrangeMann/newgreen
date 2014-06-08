@@ -57,7 +57,8 @@
 		G.fields["m_stat"]		= "Stable"
 		G.fields["sex"]			= H.gender
 		G.fields["species"]		= H.get_species()
-		G.fields["photo"]		= get_id_photo(H)
+		//G.fields["photo"]		= get_id_photo(H) // fixed by removal --ACCount
+		// TODO: Find Baystation's fix for dat shit
 		if(H.gen_record && !jobban_isbanned(H, "Records"))
 			G.fields["notes"] = H.gen_record
 		else

@@ -1,3 +1,11 @@
+/*
+Как этим пользоваться:
+	get_spawn_item_string - функция, создающая обыкновенную строку в аплинке
+		get_spawn_item_string("Строка")
+	get_spawn_item - функция, создающая новый спавн итем с произвольными параметрами без объявления его в коде.
+		get_spawn_item("Revolver", /obj/item/weapon/gun/projectile/revolver, 6) - револьвер
+*/
+
 /datum/spawn_item
 	var/name = "invalid"
 	var/path = /obj

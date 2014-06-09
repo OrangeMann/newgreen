@@ -57,7 +57,7 @@
 		G.fields["m_stat"]		= "Stable"
 		G.fields["sex"]			= H.gender
 		G.fields["species"]		= H.get_species()
-		//G.fields["photo"]		= get_id_photo(H) // fixed by removal --ACCount
+		G.fields["photo"]		= get_id_photo(H) // fixed by removal --ACCount
 		// TODO: Find Baystation's fix for dat shit
 		if(H.gen_record && !jobban_isbanned(H, "Records"))
 			G.fields["notes"] = H.gen_record
@@ -112,7 +112,7 @@
 		L.fields["b_dna"]		= H.dna.unique_enzymes
 		L.fields["enzymes"]		= H.dna.struc_enzymes
 		L.fields["identity"]	= H.dna.uni_identity
-		L.fields["image"]		= getFlatIcon(H,0)	//This is god-awful
+		L.fields["image"]		= get_id_photo(H)	//This is god-awful
 		locked += L
 	return
 

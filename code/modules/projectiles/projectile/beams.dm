@@ -35,8 +35,8 @@ var/list/beam_master = list()
 
 			if(!bumped && !isturf(original))
 				if(loc == get_turf(original))
-					//if(!(original in permutated))
-					Bump(original)
+					if(!(original in permutated))
+						Bump(original)
 
 			if(!first) //Add the overlay as we pass over tiles
 				var/target_dir = get_dir(src, current) //So we don't call this too much

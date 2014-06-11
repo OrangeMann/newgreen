@@ -12,6 +12,10 @@
 	return 0
 
 /proc/ToRban_autoupdate()
+	// DIS SHIT IS BORKEN, REMOVING
+	config.ToRban = 0
+	return
+
 	var/savefile/F = new(TORFILE)
 	if(F)
 		var/last_update
@@ -21,6 +25,10 @@
 	return
 
 /proc/ToRban_update()
+	// DIS SHIT IS BORKEN, REMOVING
+	config.ToRban = 0
+	return
+
 	spawn(0)
 		diary << "Downloading updated ToR data..."
 		var/http[] = world.Export("http://exitlist.torproject.org/exit-addresses")

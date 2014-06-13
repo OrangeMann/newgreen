@@ -30,7 +30,7 @@
 	var/tmp/told_cant_shoot = 0 //So that it doesn't spam them with the fact they cannot hit them.
 	var/firerate = 1 	// 0 for one bullet after tarrget moves and aim is lowered,
 						//1 for keep shooting until aim is lowered
-	var/fire_delay = 3
+	var/fire_delay = 2
 	var/last_fired = 0
 
 	proc/ready_to_fire()
@@ -210,6 +210,9 @@
 
 	//Point blank shooting if on harm intent or target we were targeting.
 	if(user.a_intent == "hurt")
+		if(!in_chamber)
+			if(!process_chambered())
+				return ..()
 		user.visible_message("\red <b> \The [user] fires \the [src] point blank at [M]!</b>")
 		in_chamber.damage *= 1.75
 		in_chamber.stun *= 1.5

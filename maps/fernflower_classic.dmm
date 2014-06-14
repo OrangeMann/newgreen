@@ -505,7 +505,7 @@
 "ajK" = (/turf/simulated/floor{icon_state = "redcorner"; dir = 1},/area/security/brig)
 "ajL" = (/turf/simulated/floor{icon_state = "redcorner"; dir = 4},/area/security/brig)
 "ajM" = (/turf/simulated/floor{icon_state = "red"; dir = 1},/area/security/brig)
-"ajN" = (/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,/obj/machinery/vending/security,/turf/simulated/floor{icon_state = "redcorner"; dir = 1},/area/security/brig)
+"ajN" = (/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,/turf/simulated/floor{icon_state = "redcorner"; dir = 1},/area/security/brig)
 "ajO" = (/obj/structure/disposalpipe/segment,/obj/machinery/atmospherics/pipe/simple/supply/hidden{dir = 6},/turf/simulated/floor{icon_state = "redcorner"; dir = 1},/area/security/brig)
 "ajP" = (/obj/structure/cable/yellow{icon_state = "1-2"},/obj/structure/cable/yellow{icon_state = "2-4"},/obj/machinery/atmospherics/pipe/manifold{color = "blue"; icon_state = "manifold-b-f"; level = 1; name = "pipe manifold"},/turf/simulated/floor{icon_state = "redcorner"; dir = 4},/area/security/brig)
 "ajQ" = (/obj/structure/grille,/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 8},/obj/machinery/door/poddoor{density = 0; icon_state = "pdoor0"; id = "Secure Gate"; name = "Security Blast Door"; opacity = 0},/obj/machinery/atmospherics/pipe/simple/supply/hidden{dir = 4},/obj/structure/cable/yellow{icon_state = "0-4"},/obj/structure/cable/yellow{icon_state = "0-8"},/turf/simulated/floor/plating,/area/security/brig)

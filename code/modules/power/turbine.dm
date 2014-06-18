@@ -107,8 +107,8 @@
 
 
 #define TURBPRES 9000000
-#define TURBGENQ 20000
-#define TURBGENG 0.8
+#define TURBGENQ 100000
+#define TURBGENG 0.5
 
 /obj/machinery/power/turbine/process()
 	if(!compressor.starter)

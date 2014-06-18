@@ -63,6 +63,11 @@
 	name = "magic shoes"
 	icon_state = "black"
 
+/obj/item/clothing/shoes/sandal/laceup
+	name = "Gentleman's Shoes"
+	desc = "The height of magical fashion, and they're pre-polished!"
+	icon_state = "laceups"
+
 /obj/item/clothing/shoes/galoshes
 	desc = "Rubber boots"
 	name = "galoshes"

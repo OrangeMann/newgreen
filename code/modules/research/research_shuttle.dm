@@ -20,6 +20,10 @@ proc/move_research_shuttle()
 			fromArea = locate(/area/shuttle/research/station)
 			toArea = locate(/area/shuttle/research/outpost)
 
+		for(var/obj/machinery/door/unpowered/shuttle/D in fromArea)
+			if(!D.density)
+				D.close()
+
 
 		var/list/dstturfs = list()
 		var/throwy = world.maxy

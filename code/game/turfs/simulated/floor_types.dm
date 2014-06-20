@@ -143,19 +143,6 @@
 	name = "Brig floor"        // Also added it into the 2x3 brig area of the shuttle.
 	icon_state = "floor4"
 
-/turf/simulated/floor/beach
-	name = "Beach"
-	icon = 'icons/misc/beach.dmi'
-
-/turf/simulated/floor/beach/sand
-	name = "Sand"
-	icon_state = "sand"
-
-/turf/simulated/floor/beach/coastline
-	name = "Coastline"
-	icon = 'icons/misc/beach2.dmi'
-	icon_state = "sandwater"
-
 /turf/simulated/floor/beach/water
 	name = "Water"
 	icon_state = "water"

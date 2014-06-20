@@ -170,6 +170,22 @@
 	user.skincmds["chemdispenser"] = src
 	return
 
+/obj/machinery/chem_dispenser/soda
+	icon_state = "soda_dispenser"
+	name = "soda fountain"
+	desc = "A drink fabricating machine, capable of producing many sugary drinks with just one touch."
+	energy = 100
+	max_energy = 100
+	dispensable_reagents = list("water","ice","coffee","cream","tea","icetea","cola","spacemountainwind","dr_gibb","space_up","tonic","sodawater","lemon_lime","sugar","orangejuice","limejuice","watermelonjuice")
+
+/obj/machinery/chem_dispenser/beer
+	icon_state = "booze_dispenser"
+	name = "booze dispenser"
+	energy = 100
+	max_energy = 100
+	desc = "A technological marvel, supposedly able to mix just the mixture you'd like to drink the moment you ask for one."
+	dispensable_reagents = list("lemon_lime","sugar","orangejuice","limejuice","sodawater","tonic","beer","kahlua","whiskey","wine","vodka","gin","rum","tequilla","vermouth","cognac","ale","mead")
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

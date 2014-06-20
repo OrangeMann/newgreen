@@ -1505,6 +1505,10 @@ proc/process_ghost_teleport_locs()
 	name = "\improper Derelict Singularity Engine"
 	icon_state = "engine"
 
+/area/derelict/pod_carrier
+	name = "\improper Abandoned Pod Carrier"
+	icon_state = "yellow"
+
 //Construction
 
 /area/construction

@@ -1518,11 +1518,11 @@ datum
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
-				M:drowsyness = max(M:drowsyness-5, 0)
-				M.AdjustParalysis(-4)
-				M.AdjustStunned(-4)
-				M.AdjustWeakened(-4)
-				// Recover from stun 5 times faster
+				M:drowsyness = max(M:drowsyness-10, 0)
+				M.AdjustParalysis(-8)
+				M.AdjustStunned(-8)
+				M.AdjustWeakened(-8)
+				// Recover from stun 9 times faster
 				if(prob(40))	M.adjustToxLoss(1)
 				..()
 				return
@@ -1648,7 +1648,7 @@ datum
 				if(!M) M = holder.my_atom
 				if(!data) data = 1
 				data++
-				if(prob(5)) M:emote(pick("twitch","blink_r","shiver"))
+				if(prob(2)) M:emote(pick("twitch","blink_r","shiver"))
 				holder.remove_reagent(src.id, 0.2)
 //				if(data >= 50)
 //					M:adjustToxLoss(0.2)

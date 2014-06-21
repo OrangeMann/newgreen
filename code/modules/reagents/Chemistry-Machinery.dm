@@ -178,6 +178,7 @@
 	max_energy = 100
 	dispensable_reagents = list("water","ice","coffee","cream","tea","icetea","cola","spacemountainwind","dr_gibb","space_up","tonic","sodawater","lemon_lime","sugar","orangejuice","limejuice","watermelonjuice")
 
+<<<<<<< HEAD
 	/obj/machinery/chem_dispenser/soda/attackby(var/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/B as obj, var/mob/user as mob)
 		if(isrobot(user))
 			return
@@ -196,6 +197,11 @@
 		for(var/mob/player in player_list)
 			if (player.machine == src && player.client)
 				updateWindow(player)
+=======
+/obj/machinery/chem_dispenser/soda/attackby(var/obj/item/weapon/B as obj, var/mob/user as mob)
+		..()
+		return
+>>>>>>> dde6ed4eeae846da38facf3aac21e0b73c6d717e
 
 /obj/machinery/chem_dispenser/beer
 	icon_state = "booze_dispenser"
@@ -205,6 +211,7 @@
 	desc = "A technological marvel, supposedly able to mix just the mixture you'd like to drink the moment you ask for one."
 	dispensable_reagents = list("lemon_lime","sugar","orangejuice","limejuice","sodawater","tonic","beer","kahlua","whiskey","wine","vodka","gin","rum","tequilla","vermouth","cognac","ale","mead")
 
+<<<<<<< HEAD
 	/obj/machinery/chem_dispenser/beer/attackby(var/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/B as obj, var/mob/user as mob)
 		if(isrobot(user))
 			return
@@ -223,6 +230,11 @@
 		for(var/mob/player in player_list)
 			if (player.machine == src && player.client)
 				updateWindow(player)
+=======
+/obj/machinery/chem_dispenser/beer/attackby(var/obj/item/weapon/B as obj, var/mob/user as mob)
+		..()
+		return
+>>>>>>> dde6ed4eeae846da38facf3aac21e0b73c6d717e
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

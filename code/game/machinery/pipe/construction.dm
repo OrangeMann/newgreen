@@ -446,6 +446,7 @@ Buildable meters
 
 		if(PIPE_GAS_FILTER)		//gas filter
 			var/obj/machinery/atmospherics/trinary/filter/P = new(src.loc)
+			P.req_access = list()
 			P.dir = dir
 			P.initialize_directions = pipe_dir
 			if (pipename)
@@ -466,6 +467,7 @@ Buildable meters
 
 		if(PIPE_GAS_MIXER)		//gas filter
 			var/obj/machinery/atmospherics/trinary/mixer/P = new(src.loc)
+			P.req_access = list()
 			P.dir = dir
 			P.initialize_directions = pipe_dir
 			if (pipename)

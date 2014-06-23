@@ -187,6 +187,13 @@
 	item_color = "blackskirt"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 
+/obj/item/clothing/under/PMCsuit
+	name = "PMC uniform"
+	desc = "Wow, such military"
+	icon_state = "PMCsuit"
+	item_color = "PMCsuit"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS
+
 /obj/item/clothing/under/schoolgirl
 	name = "schoolgirl uniform"
 	desc = "It's just like one of my Japanese animes!"

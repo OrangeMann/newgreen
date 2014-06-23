@@ -245,13 +245,6 @@
 	item_state = "red_pyjamas"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS
 
-/obj/item/clothing/under/PMCsuit
-	name = "PMC uniform"
-	desc = "Wow, such military"
-	icon_state = "PMCsuit"
-	item_state = "PMCsuit"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS
-
 //coats
 
 /obj/item/clothing/suit/leathercoat

@@ -59,4 +59,4 @@
 
 /turf/unsimulated/beach/sea/New()
 	..()
-	overlays += image("icon"='icons/misc/beach.dmi',"icon_state"="seashallow","layer"=MOB_LAYER+0.1, "alpha"=100)
+	overlays += image("icon"='icons/misc/beach.dmi',"icon_state"="seashallow","layer"=MOB_LAYER+0.1)

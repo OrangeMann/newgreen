@@ -36,6 +36,8 @@
 			usr << "\blue Nothing."
 		if (!is_open_container())
 			usr << "\blue It sealed completely. It was sealed [sealmark] times."
+		else
+			usr << "\blue It unsealed. It was sealed [sealmark] times."
 
 	attack_self()
 		..()
@@ -46,7 +48,6 @@
 		else
 			usr << "<span class = 'notice'>You unsealed \the [src]."
 			flags |= OPENCONTAINER
-		update_icon()
 
 /obj/item/weapon/reagent_containers/blood/APlus
 	blood_type = "A+"

@@ -263,12 +263,6 @@
 	if(areas && areas.len > 0)
 
 		for(var/area/A in areas)
-			for(var/obj/machinery/light/L in A)
-				L.flicker(10)
-
-		sleep(100)
-
-		for(var/area/A in areas)
 			for (var/obj/machinery/power/apc/temp_apc in A)
 				temp_apc.overload_lighting()
 

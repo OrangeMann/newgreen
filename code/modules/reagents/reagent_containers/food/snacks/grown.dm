@@ -247,28 +247,27 @@
 	seed = "/obj/item/seeds/glowberryseed"
 	name = "bunch of glow-berries"
 	desc = "Nutritious!"
-	var/light_on = 1
+	var/on = 1
 	var/brightness_on = 2 //luminosity when on
 	icon_state = "glowberrypile"
 	New()
 		..()
-		spawn(5)	//So potency can be set in the proc that creates these crops
-			reagents.add_reagent("nutriment", round((potency / 10), 1))
-			reagents.add_reagent("uranium", 3+round(potency / 5, 1))
-			bitesize = 1+round(reagents.total_volume / 2, 1)
+		reagents.add_reagent("nutriment", round((potency / 10), 1))
+		reagents.add_reagent("radium", 3+round(potency / 5, 1))
+		bitesize = 1+round(reagents.total_volume / 2, 1)
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/glowberries/Del()
 	if(istype(loc,/mob))
-		loc.SetLuminosity(round(loc.luminosity - potency/5,1))
+		loc.ul_SetLuminosity(loc.LuminosityRed - potency/5, loc.LuminosityGreen - potency/5, loc.LuminosityBlue - potency/5)
 	..()
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/glowberries/pickup(mob/user)
-	src.SetLuminosity(0)
-	user.SetLuminosity(round(user.luminosity + (potency/5),1))
+	ul_SetLuminosity(0)
+	user.ul_SetLuminosity(user.LuminosityRed + potency/5, user.LuminosityGreen + potency/5, user.LuminosityBlue + potency/5)
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/glowberries/dropped(mob/user)
-	user.SetLuminosity(round(user.luminosity - (potency/5),1))
-	src.SetLuminosity(round(potency/5,1))
+	user.ul_SetLuminosity(user.LuminosityRed - potency/5, user.LuminosityGreen - potency/5, user.LuminosityBlue - potency/5)
+	ul_SetLuminosity(potency/5)
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/cocoapod
 	seed = "/obj/item/seeds/cocoapodseed"
@@ -872,7 +871,7 @@
 		if(istype(src.loc,/mob))
 			pickup(src.loc)
 		else
-			src.SetLuminosity(round(potency/10,1))
+			src.ul_SetLuminosity(round(potency/10,1))
 	lifespan = 120 //ten times that is the delay
 	endurance = 30
 	maturation = 15
@@ -896,16 +895,16 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/mushroom/glowshroom/Del()
 	if(istype(loc,/mob))
-		loc.SetLuminosity(round(loc.luminosity - potency/10,1))
+		loc.ul_SetLuminosity(round(loc.luminosity - potency/10,1))
 	..()
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/mushroom/glowshroom/pickup(mob/user)
-	SetLuminosity(0)
-	user.SetLuminosity(round(user.luminosity + (potency/10),1))
+	ul_SetLuminosity(0)
+	user.ul_SetLuminosity(round(user.luminosity + (potency/10),1))
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/mushroom/glowshroom/dropped(mob/user)
-	user.SetLuminosity(round(user.luminosity + (potency/10),1))
-	SetLuminosity(round(potency/10,1))
+	user.ul_SetLuminosity(round(user.luminosity + (potency/10),1))
+	ul_SetLuminosity(round(potency/10,1))
 
 
 // *************************************

@@ -19,12 +19,12 @@
 /obj/machinery/bot/proc/turn_on()
 	if(stat)	return 0
 	on = 1
-	SetLuminosity(initial(luminosity))
+	ul_SetLuminosity(initial(luminosity))
 	return 1
 
 /obj/machinery/bot/proc/turn_off()
 	on = 0
-	SetLuminosity(0)
+	ul_SetLuminosity(0)
 
 /obj/machinery/bot/proc/explode()
 	del(src)

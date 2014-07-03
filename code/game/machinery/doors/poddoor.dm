@@ -27,7 +27,7 @@
 			src.operating = 1
 			flick("pdoorc0", src)
 			src.icon_state = "pdoor0"
-			src.SetOpacity(0)
+			src.ul_SetOpacity(0)
 			sleep(15)
 			src.density = 0
 			src.operating = 0
@@ -43,7 +43,7 @@
 		src.operating = 1
 	flick("pdoorc0", src)
 	src.icon_state = "pdoor0"
-	src.SetOpacity(0)
+	src.ul_SetOpacity(0)
 	playsound(src.loc, 'sound/machines/poddoor.ogg', 30, 1)
 	sleep(10)
 	src.density = 0
@@ -63,7 +63,7 @@
 	flick("pdoorc1", src)
 	src.icon_state = "pdoor1"
 	src.density = 1
-	src.SetOpacity(initial(opacity))
+	src.ul_SetOpacity(initial(opacity))
 	update_nearby_tiles()
 	playsound(src.loc, 'sound/machines/poddoor2.ogg', 30, 1)
 

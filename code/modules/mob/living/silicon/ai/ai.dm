@@ -456,13 +456,13 @@ var/list/ai_list = list()
 
 /mob/living/silicon/ai/reset_view(atom/A)
 	if(current)
-		current.SetLuminosity(0)
+		current.ul_SetLuminosity(0)
 	if(istype(A,/obj/machinery/camera))
 		current = A
 	..()
 	if(istype(A,/obj/machinery/camera))
-		if(camera_light_on)	A.SetLuminosity(AI_CAMERA_LUMINOSITY)
-		else				A.SetLuminosity(0)
+		if(camera_light_on)	A.ul_SetLuminosity(AI_CAMERA_LUMINOSITY)
+		else				A.ul_SetLuminosity(0)
 
 
 /mob/living/silicon/ai/proc/switchCamera(var/obj/machinery/camera/C)
@@ -674,7 +674,7 @@ var/list/ai_list = list()
 	src << "Camera lights [camera_light_on ? "activated" : "deactivated"]."
 	if(!camera_light_on)
 		if(src.current)
-			src.current.SetLuminosity(0)
+			src.current.ul_SetLuminosity(0)
 	else
 		src.lightNearbyCamera()
 
@@ -688,20 +688,20 @@ var/list/ai_list = list()
 		if(src.current)
 			var/obj/machinery/camera/camera = near_range_camera(src.eyeobj)
 			if(camera && src.current != camera)
-				src.current.SetLuminosity(0)
+				src.current.ul_SetLuminosity(0)
 				if(!camera.light_disabled)
 					src.current = camera
-					src.current.SetLuminosity(AI_CAMERA_LUMINOSITY)
+					src.current.ul_SetLuminosity(AI_CAMERA_LUMINOSITY)
 				else
 					src.current = null
 			else if(isnull(camera))
-				src.current.SetLuminosity(0)
+				src.current.ul_SetLuminosity(0)
 				src.current = null
 		else
 			var/obj/machinery/camera/camera = near_range_camera(src.eyeobj)
 			if(camera && !camera.light_disabled)
 				src.current = camera
-				src.current.SetLuminosity(AI_CAMERA_LUMINOSITY)
+				src.current.ul_SetLuminosity(AI_CAMERA_LUMINOSITY)
 		camera_light_on = world.timeofday + 1 * 20 // Update the light every 2 seconds.
 
 

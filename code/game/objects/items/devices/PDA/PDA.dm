@@ -266,13 +266,13 @@ var/global/list/obj/item/device/pda/PDAs = list()
  */
 /obj/item/device/pda/pickup(mob/user)
 	if(fon)
-		SetLuminosity(0)
-		user.SetLuminosity(user.luminosity + f_lum)
+		ul_SetLuminosity(0)
+		user.ul_SetLuminosity(user.LuminosityRed + f_lum , user.LuminosityGreen + f_lum , user.LuminosityBlue + f_lum)
 
 /obj/item/device/pda/dropped(mob/user)
 	if(fon)
-		user.SetLuminosity(user.luminosity - f_lum)
-		SetLuminosity(f_lum)
+		user.ul_SetLuminosity(user.LuminosityRed - f_lum, user.LuminosityGreen - f_lum, user.LuminosityBlue - f_lum)
+		ul_SetLuminosity(f_lum, f_lum, f_lum)
 
 /obj/item/device/pda/New()
 	..()
@@ -581,14 +581,14 @@ var/global/list/obj/item/device/pda/PDAs = list()
 //MAIN FUNCTIONS===================================
 
 			if("Light")
-				if(fon)
-					fon = 0
-					if(src in U.contents)	U.SetLuminosity(U.luminosity - f_lum)
-					else					SetLuminosity(0)
+				fon = (!fon)
+				if (src in U.contents)
+					if (fon)
+						U.ul_SetLuminosity(U.LuminosityRed + f_lum , U.LuminosityGreen + f_lum, U.LuminosityBlue + f_lum)
+					else
+						U.ul_SetLuminosity(U.LuminosityRed - f_lum , U.LuminosityGreen - f_lum , U.LuminosityBlue - f_lum )
 				else
-					fon = 1
-					if(src in U.contents)	U.SetLuminosity(U.luminosity + f_lum)
-					else					SetLuminosity(f_lum)
+					ul_SetLuminosity(fon * f_lum)
 			if("Medical Scan")
 				if(scanmode == 1)
 					scanmode = 0

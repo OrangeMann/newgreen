@@ -211,16 +211,9 @@
 	if (!N)
 		return
 
-	var/old_lumcount = lighting_lumcount - initial(lighting_lumcount)
-
 	if(ispath(N, /turf/simulated/floor))
 		var/turf/simulated/W = new N( locate(src.x, src.y, src.z) )
 		W.Assimilate_Air()
-
-		W.lighting_lumcount += old_lumcount
-		if(old_lumcount != W.lighting_lumcount)
-			W.lighting_changed = 1
-			lighting_controller.changed_turfs += W
 
 		if (istype(W,/turf/simulated/floor))
 			W.RemoveLattice()
@@ -241,10 +234,6 @@
 			src.zone.rebuild = 1*/
 
 		var/turf/W = new N( locate(src.x, src.y, src.z) )
-		W.lighting_lumcount += old_lumcount
-		if(old_lumcount != W.lighting_lumcount)
-			W.lighting_changed = 1
-			lighting_controller.changed_turfs += W
 
 		if(src.zone)
 			src.zone.RemoveTurf(src)

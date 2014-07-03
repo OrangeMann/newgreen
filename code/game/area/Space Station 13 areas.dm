@@ -127,7 +127,7 @@ proc/process_ghost_teleport_locs()
 /area/shuttle //DO NOT TURN THE lighting_use_dynamic STUFF ON FOR SHUTTLES. IT BREAKS THINGS.
 	requires_power = 0
 	luminosity = 1
-	lighting_use_dynamic = 0
+	ul_Lighting = 0
 
 /area/shuttle/arrival
 	name = "\improper Arrival Shuttle"
@@ -229,14 +229,14 @@ proc/process_ghost_teleport_locs()
 	name = "\improper Alien Shuttle Base"
 	requires_power = 1
 	luminosity = 0
-	lighting_use_dynamic = 1
+	ul_Lighting = 1
 
 /area/shuttle/alien/mine
 	icon_state = "shuttle"
 	name = "\improper Alien Shuttle Mine"
 	requires_power = 1
 	luminosity = 0
-	lighting_use_dynamic = 1
+	ul_Lighting = 1
 
 /area/shuttle/prison/
 	name = "\improper Prison Shuttle"
@@ -323,7 +323,7 @@ proc/process_ghost_teleport_locs()
 	icon_state = "start"
 	requires_power = 0
 	luminosity = 1
-	lighting_use_dynamic = 0
+	ul_Lighting = 0
 	has_gravity = 1
 
 // === end remove
@@ -868,7 +868,7 @@ proc/process_ghost_teleport_locs()
 	name = "\improper Holodeck"
 	icon_state = "Holodeck"
 	luminosity = 1
-	lighting_use_dynamic = 0
+	ul_Lighting = 0
 
 /area/holodeck/alphadeck
 	name = "\improper Holodeck Alpha"
@@ -954,7 +954,7 @@ proc/process_ghost_teleport_locs()
 /area/solar
 	requires_power = 0
 	luminosity = 1
-	lighting_use_dynamic = 0
+	ul_Lighting = 0
 
 	auxport
 		name = "\improper Fore Port Solar Array"
@@ -1581,25 +1581,25 @@ proc/process_ghost_teleport_locs()
 	name = "\improper AI Sat Ext"
 	icon_state = "storage"
 	luminosity = 1
-	lighting_use_dynamic = 0
+	ul_Lighting = 0
 
 /area/turret_protected/AIsatextFS
 	name = "\improper AI Sat Ext"
 	icon_state = "storage"
 	luminosity = 1
-	lighting_use_dynamic = 0
+	ul_Lighting = 0
 
 /area/turret_protected/AIsatextAS
 	name = "\improper AI Sat Ext"
 	icon_state = "storage"
 	luminosity = 1
-	lighting_use_dynamic = 0
+	ul_Lighting = 0
 
 /area/turret_protected/AIsatextAP
 	name = "\improper AI Sat Ext"
 	icon_state = "storage"
 	luminosity = 1
-	lighting_use_dynamic = 0
+	ul_Lighting = 0
 
 /area/turret_protected/NewAIMain
 	name = "\improper AI Main New"
@@ -1764,7 +1764,7 @@ proc/process_ghost_teleport_locs()
 	name = "Beach"
 	icon_state = "null"
 	luminosity = 1
-	lighting_use_dynamic = 0
+	ul_Lighting = 0
 	requires_power = 0
 	var/sound/mysound = null
 
@@ -1889,7 +1889,7 @@ var/list/the_station_areas = list (
 	name = "Keelin's private beach"
 	icon_state = "null"
 	luminosity = 1
-	lighting_use_dynamic = 0
+	ul_Lighting = 0
 	requires_power = 0
 	var/sound/mysound = null
 

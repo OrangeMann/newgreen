@@ -352,72 +352,75 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		icon_off = "lighter-[item_color]"
 		icon_state = icon_off
 
-/obj/item/weapon/lighter/attack_self(mob/living/user)
-	if(user.r_hand == src || user.l_hand == src)
-		if(!lit)
-			lit = 1
-			icon_state = icon_on
-			item_state = icon_on
-			if(istype(src, /obj/item/weapon/lighter/zippo) )
-				user.visible_message("<span class='rose'>Without even breaking stride, [user] flips open and lights [src] in one smooth movement.</span>")
-			else
-				if(prob(75))
-					user.visible_message("<span class='notice'>After a few attempts, [user] manages to light the [src].</span>")
+/obj/item/weapon/lighter
+
+	attack_self(mob/user)
+		if(user.r_hand == src || user.l_hand == src)
+			if(!src.lit)
+				src.lit = 1
+				src.icon_state = icon_on
+				src.item_state = icon_on
+				if( istype(src,/obj/item/weapon/lighter/zippo) )
+					for(var/mob/O in viewers(user, null))
+						O.show_message(text("\red Without even breaking stride, \the [] flips open and lights \the [] in one smooth movement.", user, src), 1)
 				else
-					user << "<span class='warning'>You burn yourself while lighting the lighter.</span>"
-					user.adjustFireLoss(5)
-					user.visible_message("<span class='notice'>After a few attempts, [user] manages to light the [src], they however burn their finger in the process.</span>")
+					if(prob(75))
+						for(var/mob/O in viewers(user, null))
+							O.show_message("\red After a few attempts, \the [user] manages to light \the [src].", 1)
+					else
+						user << "\red <b>You burn yourself while lighting the lighter.</b>"
+						for(var/mob/O in viewers(user, null))
+							O.show_message("\red After a few attempts, \the [user] manages to light \the [src], they however burn themself in the process.", 1)
 
-			user.SetLuminosity(user.luminosity + 2)
-			processing_objects.Add(src)
-		else
-			lit = 0
-			icon_state = icon_off
-			item_state = icon_off
-			if(istype(src, /obj/item/weapon/lighter/zippo) )
-				user.visible_message("<span class='rose'>You hear a quiet click, as [user] shuts off [src] without even looking at what they're doing. Wow.")
+				user.ul_SetLuminosity(user.LuminosityRed + 2, user.LuminosityGreen + 1, user.LuminosityBlue)
+				processing_objects.Add(src)
 			else
-				user.visible_message("<span class='notice'>[user] quietly shuts off the [src].")
+				src.lit = 0
+				src.icon_state = icon_off
+				src.item_state = icon_off
+				if( istype(src,/obj/item/weapon/lighter/zippo) )
+					for(var/mob/O in viewers(user, null))
+						O.show_message(text("\red You hear a quiet click, as [] shuts off the [] without even looking at what they're doing. Wow.", user, src), 1)
+				else
+					for(var/mob/O in viewers(user, null))
+						O.show_message("\red [user] quietly shuts off the [src].", 1)
 
-			user.SetLuminosity(user.luminosity - 2)
-			processing_objects.Remove(src)
-	else
-		return ..()
-	return
-
-
-/obj/item/weapon/lighter/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
-	if(!istype(M, /mob))
+				user.ul_SetLuminosity(user.LuminosityRed - 2, user.LuminosityGreen - 1, user.LuminosityBlue)
+				processing_objects.Remove(src)
+		else
+			return ..()
 		return
 
-	if(istype(M.wear_mask, /obj/item/clothing/mask/cigarette) && user.zone_sel.selecting == "mouth" && lit)
-		var/obj/item/clothing/mask/cigarette/cig = M.wear_mask
-		if(M == user)
-			cig.attackby(src, user)
-		else
-			if(istype(src, /obj/item/weapon/lighter/zippo))
-				cig.light("<span class='rose'>[user] whips the [name] out and holds it for [M]. Their arm is as steady as the unflickering flame they light \the [cig] with.</span>")
+
+	attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+		if(!istype(M, /mob))
+			return
+
+		if(istype(M.wear_mask,/obj/item/clothing/mask/cigarette) && user.zone_sel.selecting == "mouth" && src.lit)
+			if(M == user)
+				M.wear_mask:light("\red With a single flick of their wrist, [user] smoothly lights their [M.wear_mask.name] with their [src.name]. Damn they're cool.")
 			else
-				cig.light("<span class='notice'>[user] holds the [name] out for [M], and lights the [cig.name].</span>")
-	else
-		..()
-
-/obj/item/weapon/lighter/process()
-	var/turf/location = get_turf(src)
-	if(location)
-		location.hotspot_expose(700, 5)
-	return
+				M.wear_mask:light("\red [user] whips the [src.name] out and holds it for [M]. Their arm is as steady as the unflickering flame they light the [M.wear_mask.name] with.")
+		else
+			..()
 
 
-/obj/item/weapon/lighter/pickup(mob/user)
-	if(lit)
-		SetLuminosity(0)
-		user.SetLuminosity(user.luminosity+2)
-	return
+	process()
+		var/turf/location = get_turf(src)
+		if(location)
+			location.hotspot_expose(700, 5)
+		return
 
 
-/obj/item/weapon/lighter/dropped(mob/user)
-	if(lit)
-		user.SetLuminosity(user.luminosity-2)
-		SetLuminosity(2)
-	return
+	pickup(mob/user)
+		if(lit)
+			ul_SetLuminosity(0)
+			user.ul_SetLuminosity(user.LuminosityRed + 2, user.LuminosityGreen + 1, user.LuminosityBlue)
+		return
+
+
+	dropped(mob/user)
+		if(lit)
+			user.ul_SetLuminosity(user.LuminosityRed - 2, user.LuminosityGreen - 1, user.LuminosityBlue)
+			ul_SetLuminosity(2,1,0)
+		return

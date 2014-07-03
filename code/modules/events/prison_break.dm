@@ -27,11 +27,6 @@
 		if(istype(A, /area/security/prison) || istype(A, /area/security/brig))
 			prisonAreas += A
 
-	if(prisonAreas && prisonAreas.len > 0)
-		for(var/area/A in prisonAreas)
-			for(var/obj/machinery/light/L in A)
-				L.flicker(10)
-
 /datum/event/prison_break/tick()
 	if(activeFor == releaseWhen)
 		if(prisonAreas && prisonAreas.len > 0)

@@ -41,7 +41,7 @@
 		icon_state = "glowshroomf"
 
 	spawn(delay)
-		SetLuminosity(round(potency/10))
+		ul_SetLuminosity(round(potency/10))
 		Spread()
 
 /obj/effect/glowshroom/proc/Spread()

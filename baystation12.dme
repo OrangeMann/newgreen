@@ -751,6 +751,7 @@
 #include "code\modules\assembly\signaler.dm"
 #include "code\modules\assembly\timer.dm"
 #include "code\modules\assembly\voice.dm"
+#include "code\modules\awaymissions\loot.dm"
 #include "code\modules\client\client defines.dm"
 #include "code\modules\client\client procs.dm"
 #include "code\modules\client\preferences.dm"

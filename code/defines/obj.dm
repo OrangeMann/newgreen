@@ -274,9 +274,6 @@
 	desc = "You can't resist."
 	// name = ""
 
-/obj/effect/spawner
-	name = "object spawner"
-
 // Basically this Metroid Core catalyzes reactions that normally wouldn't happen anywhere
 // Standart, useless type 6 core
 /obj/item/metroid_core
@@ -305,3 +302,6 @@
 /obj/item/metroid_core/t4
 /obj/item/metroid_core/t5
 // see Chemistry-Recipes.dm
+
+/obj/effect/spawner
+	name = "object spawner"

@@ -243,7 +243,7 @@
 	icon_state = "door0"
 	src.ul_SetOpacity(0)
 	sleep(10)
-	src.layer = 2.6		//NO, FIREDOOR, NO!
+	src.layer = 2.5		//NO, FIREDOOR, NO!
 	src.density = 0
 	explosion_resistance = 0
 	update_icon()

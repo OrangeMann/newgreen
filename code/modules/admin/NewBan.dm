@@ -232,7 +232,6 @@ var/list/bwhitelist
 	if(!dbcon.IsConnected())
 		log_admin("Failed to load bwhitelist. Error: [dbcon.ErrorMsg()]")
 		return
-	dbcon.Connect("dbi:mysql:forum2:[sqladdress]:[sqlport]","[sqllogin]","[sqlpass]")
 	var/DBQuery/query = dbcon.NewQuery("SELECT byond FROM whitelist ORDER BY byond ASC")
 	query.Execute()
 	while(query.NextRow())
@@ -240,7 +239,6 @@ var/list/bwhitelist
 	if (bwhitelist==list(  ))
 		log_admin("Failed to load bwhitelist or its empty")
 		return
-	dbcon.Disconnect()
 
 /proc/check_bwhitelist(var/K)
 	if (!bwhitelist)

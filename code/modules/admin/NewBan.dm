@@ -1,6 +1,6 @@
 var/CMinutes = null
 var/savefile/Banlist
-//var/list/bwhitelist
+var/list/bwhitelist
 
 
 /proc/CheckBan(var/ckey, var/id, var/address)
@@ -224,23 +224,23 @@ var/savefile/Banlist
 	Banlist.cd = "/base"
 	for (var/A in Banlist.dir)
 		RemoveBan(A)
-/*
+
 /proc/load_bwhitelist()
 	log_admin("Loading whitelist")
 	bwhitelist = list()
-	var/DBConnection/dbcon1 = new()
-	dbcon1.Connect("dbi:mysql:forum2:[sqladdress]:[sqlport]","[sqllogin]","[sqlpass]")
-	if(!dbcon1.IsConnected())
-		log_admin("Failed to load bwhitelist. Error: [dbcon1.ErrorMsg()]")
+	establish_db_connection()
+	if(!dbcon.IsConnected())
+		log_admin("Failed to load bwhitelist. Error: [dbcon.ErrorMsg()]")
 		return
-	var/DBQuery/query = dbcon1.NewQuery("SELECT byond FROM Z_whitelist ORDER BY byond ASC")
+	dbcon.Connect("dbi:mysql:forum2:[sqladdress]:[sqlport]","[sqllogin]","[sqlpass]")
+	var/DBQuery/query = dbcon.NewQuery("SELECT byond FROM whitelist ORDER BY byond ASC")
 	query.Execute()
 	while(query.NextRow())
 		bwhitelist += "[query.item[1]]"
 	if (bwhitelist==list(  ))
 		log_admin("Failed to load bwhitelist or its empty")
 		return
-	dbcon1.Disconnect()
+	dbcon.Disconnect()
 
 /proc/check_bwhitelist(var/K)
 	if (!bwhitelist)
@@ -250,35 +250,3 @@ var/savefile/Banlist
 	if (K in bwhitelist)
 		return 1
 	return 0
-	*/
-//////////////////////////////////// WHITELIST ////////////////////////////////////
-
-
-
-/*/proc/load_bwhitelist()
-	log_admin("Loading whitelist")
-	bwhitelist = list()
-	var/DBConnection/dbcon = new()
-	dbcon.Connect("dbi:mysql:[sqldb]:[sqladdress]:[sqlport]","[sqllogin]","[sqlpass]")
-	if(!dbcon.IsConnected())
-		log_admin("Failed to load bwhitelist. Error: [dbcon.ErrorMsg()]")
-		return
-	var/DBQuery/query = dbcon.NewQuery("SELECT byond FROM forum2.Z_whitelist ORDER BY byond ASC")
-	query.Execute()
-	while(query.NextRow())
-
-	if (bwhitelist==list( ))
-		log_admin("Failed to load black whitelist or its empty")
-		dbcon.Disconnect() // ??? ????? ?????
-		return
-
-	query = dbcon.NewQuery("SELECT byond FROM green.whitelist ORDER BY byond ASC")
-	query.Execute()
-	while(query.NextRow())
-		bwhitelist += "[query.item[1]]"
-	if (bwhitelist==list( ))
-		log_admin("Failed to load green whitelist or its empty")
-		dbcon.Disconnect() // ??? ????? ?????
-		return
-	dbcon.Disconnect()
-	log_admin("whitelist init complete. it consists of [bwhitelist.len] users")*/

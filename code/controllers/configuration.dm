@@ -157,280 +157,288 @@
 		if (!name)
 			continue
 
-		if(type == "config")
-			switch (name)
-				if ("admin_legacy_system")
-					config.admin_legacy_system = 1
+		switch (name)
 
-				if ("use_bwhitelist")
-					config.use_bwhitelist = 1
+			if ("admin_legacy_system")
+				config.admin_legacy_system = 1
 
-				if ("use_age_restriction_for_jobs")
-					config.use_age_restriction_for_jobs = 1
+			if ("use_bwhitelist")
+				config.use_bwhitelist = 1
 
-				if ("jobs_have_minimal_access")
-					config.jobs_have_minimal_access = 1
+			if ("use_age_restriction_for_jobs")
+				config.use_age_restriction_for_jobs = 1
 
-				if ("use_recursive_explosions")
-					use_recursive_explosions = 1
+			if ("jobs_have_minimal_access")
+				config.jobs_have_minimal_access = 1
 
-				if ("log_ooc")
-					config.log_ooc = 1
+			if ("use_recursive_explosions")
+				use_recursive_explosions = 1
 
-				if ("log_looc")
-					config.log_looc = 1
+			if ("log_ooc")
+				config.log_ooc = 1
 
-				if ("log_access")
-					config.log_access = 1
+			if ("log_looc")
+				config.log_looc = 1
 
-				if ("log_say")
-					config.log_say = 1
+			if ("log_access")
+				config.log_access = 1
 
-				if ("log_admin")
-					config.log_admin = 1
+			if ("log_say")
+				config.log_say = 1
 
-				if ("log_debug")
-					config.log_debug = text2num(value)
+			if ("log_admin")
+				config.log_admin = 1
 
-				if ("log_game")
-					config.log_game = 1
+			if ("log_debug")
+				config.log_debug = text2num(value)
 
-				if ("log_vote")
-					config.log_vote = 1
+			if ("log_game")
+				config.log_game = 1
 
-				if ("log_whisper")
-					config.log_whisper = 1
+			if ("log_vote")
+				config.log_vote = 1
 
-				if ("log_attack")
-					config.log_attack = 1
+			if ("log_whisper")
+				config.log_whisper = 1
 
-				if ("log_emote")
-					config.log_emote = 1
+			if ("log_attack")
+				config.log_attack = 1
 
-				if ("log_adminchat")
-					config.log_adminchat = 1
+			if ("log_emote")
+				config.log_emote = 1
 
-				if ("log_adminwarn")
-					config.log_adminwarn = 1
+			if ("log_adminchat")
+				config.log_adminchat = 1
 
-				if ("log_pda")
-					config.log_pda = 1
+			if ("log_adminwarn")
+				config.log_adminwarn = 1
 
-				if ("log_hrefs")
-					config.log_hrefs = 1
+			if ("log_pda")
+				config.log_pda = 1
 
-				if("allow_admin_ooccolor")
-					config.allow_admin_ooccolor = 1
+			if ("log_hrefs")
+				config.log_hrefs = 1
 
-				if ("allow_vote_restart")
-					config.allow_vote_restart = 1
+			if("allow_admin_ooccolor")
+				config.allow_admin_ooccolor = 1
 
-				if ("allow_vote_mode")
-					config.allow_vote_mode = 1
+			if ("allow_vote_restart")
+				config.allow_vote_restart = 1
 
-				if ("allow_admin_jump")
-					config.allow_admin_jump = 1
+			if ("allow_vote_mode")
+				config.allow_vote_mode = 1
 
-				if("allow_admin_rev")
-					config.allow_admin_rev = 1
+			if ("allow_admin_jump")
+				config.allow_admin_jump = 1
 
-				if ("allow_admin_spawning")
-					config.allow_admin_spawning = 1
+			if("allow_admin_rev")
+				config.allow_admin_rev = 1
 
-				if ("no_dead_vote")
-					config.vote_no_dead = 1
+			if ("allow_admin_spawning")
+				config.allow_admin_spawning = 1
 
-				if ("default_no_vote")
-					config.vote_no_default = 1
+			if ("no_dead_vote")
+				config.vote_no_dead = 1
 
-				if ("vote_delay")
-					config.vote_delay = text2num(value)
+			if ("default_no_vote")
+				config.vote_no_default = 1
 
-				if ("vote_period")
-					config.vote_period = text2num(value)
+			if ("vote_delay")
+				config.vote_delay = text2num(value)
 
-				if ("allow_ai")
-					config.allow_ai = 1
+			if ("vote_period")
+				config.vote_period = text2num(value)
+
+			if ("allow_ai")
+				config.allow_ai = 1
 
 //				if ("authentication")
 //					config.enable_authentication = 1
 
-				if ("norespawn")
-					config.respawn = 0
+			if ("norespawn")
+				config.respawn = 0
 
-				if ("servername")
-					config.server_name = value
+			if ("servername")
+				config.server_name = value
 
-				if ("serversuffix")
-					config.server_suffix = 1
+			if ("serversuffix")
+				config.server_suffix = 1
 
-				if ("hostedby")
-					config.hostedby = value
+			if ("hostedby")
+				config.hostedby = value
 
-				if ("server")
-					config.server = value
+			if ("server")
+				config.server = value
 
-				if ("banappeals")
-					config.banappeals = value
+			if ("banappeals")
+				config.banappeals = value
 
-				if ("wikiurl")
-					config.wikiurl = value
+			if ("wikiurl")
+				config.wikiurl = value
 
-				if ("forumurl")
-					config.forumurl = value
+			if ("forumurl")
+				config.forumurl = value
 
-				if ("guest_jobban")
-					config.guest_jobban = 1
+			if ("guest_jobban")
+				config.guest_jobban = 1
 
-				if ("guest_ban")
-					guests_allowed = 0
+			if ("guest_ban")
+				guests_allowed = 0
 
-				if ("usewhitelist")
-					config.usewhitelist = 1
+			if ("usewhitelist")
+				config.usewhitelist = 1
 
-				if ("feature_object_spell_system")
-					config.feature_object_spell_system = 1
+			if ("feature_object_spell_system")
+				config.feature_object_spell_system = 1
 
-				if ("allow_metadata")
-					config.allow_Metadata = 1
+			if ("allow_metadata")
+				config.allow_Metadata = 1
 
-				if ("traitor_scaling")
-					config.traitor_scaling = 1
+			if ("traitor_scaling")
+				config.traitor_scaling = 1
 
-				if("protect_roles_from_antagonist")
-					config.protect_roles_from_antagonist = 1
+			if("protect_roles_from_antagonist")
+				config.protect_roles_from_antagonist = 1
 
-				if ("probability")
-					var/prob_pos = findtext(value, " ")
-					var/prob_name = null
-					var/prob_value = null
+			if ("probability")
+				var/prob_pos = findtext(value, " ")
+				var/prob_name = null
+				var/prob_value = null
 
-					if (prob_pos)
-						prob_name = lowertext(copytext(value, 1, prob_pos))
-						prob_value = copytext(value, prob_pos + 1)
-						if (prob_name in config.modes)
-							config.probabilities[prob_name] = text2num(prob_value)
-						else
-							diary << "Unknown game mode probability configuration definition: [prob_name]."
+				if (prob_pos)
+					prob_name = lowertext(copytext(value, 1, prob_pos))
+					prob_value = copytext(value, prob_pos + 1)
+					if (prob_name in config.modes)
+						config.probabilities[prob_name] = text2num(prob_value)
 					else
-						diary << "Incorrect probability configuration definition: [prob_name]  [prob_value]."
-
-				if("allow_random_events")
-					config.allow_random_events = 1
-
-				if("kick_inactive")
-					config.kick_inactive = 1
-
-				if("load_jobs_from_txt")
-					load_jobs_from_txt = 1
-
-				if("alert_red_upto")
-					config.alert_desc_red_upto = value
-
-				if("alert_red_downto")
-					config.alert_desc_red_downto = value
-
-				if("alert_blue_downto")
-					config.alert_desc_blue_downto = value
-
-				if("alert_blue_upto")
-					config.alert_desc_blue_upto = value
-
-				if("alert_green")
-					config.alert_desc_green = value
-
-				if("alert_delta")
-					config.alert_desc_delta = value
-
-				if("forbid_singulo_possession")
-					forbid_singulo_possession = 1
-
-				if("popup_admin_pm")
-					config.popup_admin_pm = 1
-
-				if("allow_holidays")
-					Holiday = 1
-
-				if("ticklag")
-					Ticklag = text2num(value)
-
-				if("tickcomp")
-					Tickcomp = 1
-
-				if("humans_need_surnames")
-					humans_need_surnames = 1
-
-				if("tor_ban")
-					ToRban = 1
-
-				if("automute_on")
-					automute_on = 1
-
-				if("usealienwhitelist")
-					usealienwhitelist = 1
-
-				if("alien_player_ratio")
-					limitalienplayers = 1
-					alien_to_human_ratio = text2num(value)
-
-				if("assistant_maint")
-					config.assistant_maint = 1
-
-				if("gateway_delay")
-					config.gateway_delay = text2num(value)
-
-				if("continuous_rounds")
-					config.continous_rounds = 1
-
-				if("ghost_interaction")
-					config.ghost_interaction = 1
-
+						diary << "Unknown game mode probability configuration definition: [prob_name]."
 				else
-					diary << "Unknown setting in configuration: '[name]'"
+					diary << "Incorrect probability configuration definition: [prob_name]  [prob_value]."
 
+			if("allow_random_events")
+				config.allow_random_events = 1
 
-		else if(type == "game_options")
-			if(!value)
-				diary << "Unknown value for setting [name] in [filename]."
-			value = text2num(value)
+			if("kick_inactive")
+				config.kick_inactive = 1
 
-			switch(name)
-				if("health_threshold_crit")
-					config.health_threshold_crit = value
-				if("health_threshold_dead")
-					config.health_threshold_dead = value
-				if("revival_pod_plants")
-					config.revival_pod_plants = value
-				if("revival_cloning")
-					config.revival_cloning = value
-				if("revival_brain_life")
-					config.revival_brain_life = value
-				if("run_speed")
-					config.run_speed = value
-				if("walk_speed")
-					config.walk_speed = value
-				if("human_delay")
-					config.human_delay = value
-				if("robot_delay")
-					config.robot_delay = value
-				if("monkey_delay")
-					config.monkey_delay = value
-				if("alien_delay")
-					config.alien_delay = value
-				if("metroid_delay")
-					config.metroid_delay = value
-				if("animal_delay")
-					config.animal_delay = value
-				if("organ_health_multiplier")
-					config.organ_health_multiplier = value / 100
-				if("organ_regeneration_multiplier")
-					config.organ_regeneration_multiplier = value / 100
-				if("bones_can_break")
-					config.bones_can_break = value
-				if("limbs_can_break")
-					config.limbs_can_break = value
-				else
-					diary << "Unknown setting in configuration: '[name]'"
+			if("load_jobs_from_txt")
+				load_jobs_from_txt = 1
+
+			if("alert_red_upto")
+				config.alert_desc_red_upto = value
+
+			if("alert_red_downto")
+				config.alert_desc_red_downto = value
+
+			if("alert_blue_downto")
+				config.alert_desc_blue_downto = value
+
+			if("alert_blue_upto")
+				config.alert_desc_blue_upto = value
+
+			if("alert_green")
+				config.alert_desc_green = value
+
+			if("alert_delta")
+				config.alert_desc_delta = value
+
+			if("forbid_singulo_possession")
+				forbid_singulo_possession = 1
+
+			if("popup_admin_pm")
+				config.popup_admin_pm = 1
+
+			if("allow_holidays")
+				Holiday = 1
+
+			if("ticklag")
+				Ticklag = text2num(value)
+
+			if("tickcomp")
+				Tickcomp = 1
+
+			if("humans_need_surnames")
+				humans_need_surnames = 1
+
+			if("tor_ban")
+				ToRban = 1
+
+			if("automute_on")
+				automute_on = 1
+
+			if("usealienwhitelist")
+				usealienwhitelist = 1
+
+			if("alien_player_ratio")
+				limitalienplayers = 1
+				alien_to_human_ratio = text2num(value)
+
+			if("assistant_maint")
+				config.assistant_maint = 1
+
+			if("gateway_delay")
+				config.gateway_delay = text2num(value)
+
+			if("continuous_rounds")
+				config.continous_rounds = 1
+
+			if("ghost_interaction")
+				config.ghost_interaction = 1
+
+			if("health_threshold_crit")
+				config.health_threshold_crit = text2num(value)
+
+			if("health_threshold_dead")
+				config.health_threshold_dead = text2num(value)
+
+			if("revival_pod_plants")
+				config.revival_pod_plants = text2num(value)
+
+			if("revival_cloning")
+				config.revival_cloning = text2num(value)
+
+			if("revival_brain_life")
+				config.revival_brain_life = text2num(value)
+
+			if("run_speed")
+				config.run_speed = text2num(value)
+
+			if("walk_speed")
+				config.walk_speed = text2num(value)
+
+			if("human_delay")
+				config.human_delay = text2num(value)
+
+			if("robot_delay")
+				config.robot_delay = text2num(value)
+
+			if("monkey_delay")
+				config.monkey_delay = text2num(value)
+
+			if("alien_delay")
+				config.alien_delay = text2num(value)
+
+			if("metroid_delay")
+				config.metroid_delay = text2num(value)
+
+			if("animal_delay")
+				config.animal_delay = text2num(value)
+
+			if("organ_health_multiplier")
+				config.organ_health_multiplier = text2num(value) / 100
+
+			if("organ_regeneration_multiplier")
+				config.organ_regeneration_multiplier = text2num(value) / 100
+
+			if("bones_can_break")
+				config.bones_can_break = text2num(value)
+
+			if("limbs_can_break")
+				config.limbs_can_break = text2num(value)
+
+			else
+				diary << "Unknown setting in configuration: '[name]'"
+
 
 /datum/configuration/proc/loadsql(filename)  // -- TLE
 	var/list/Lines = file2list(filename)

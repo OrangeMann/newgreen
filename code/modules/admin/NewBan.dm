@@ -239,6 +239,10 @@ var/list/bwhitelist
 		bwhitelist += "[query.item[1]]"
 	if (bwhitelist==list(  ))
 		log_admin("Failed to load bwhitelist or its empty")
+		world.log << "Failed to load bwhitelist or its empty"
+	else
+		log_admin("Loaded [bwhitelist.len] ckeys in bwhitelist.")
+		world.log << "Loaded [bwhitelist.len] ckeys in bwhitelist."
 		return
 
 /proc/check_bwhitelist(var/K)

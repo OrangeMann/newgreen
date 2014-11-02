@@ -54,6 +54,10 @@
 	dizziness = 0
 	jitteriness = 0
 
+	if(becoming_zombie == 1)
+		zombify()
+		return
+
 	//Handle brain slugs.
 	var/datum/organ/external/head = get_organ("head")
 	var/mob/living/simple_animal/borer/B
@@ -93,6 +97,12 @@
 
 		update_canmove()
 		if(client)	blind.layer = 0
+
+	if(!suiciding)
+		unlock_medal("Downsizing", 0, "You are no longer a profitable asset.", "easy")
+	else
+		unlock_medal("I can't take it anymore!", 0, "Kill yourself...", "easy")
+
 
 	tod = worldtime2text()		//weasellos time of death patch
 	if(mind)	mind.store_memory("Time of death: [tod]", 0)

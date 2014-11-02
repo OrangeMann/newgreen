@@ -512,6 +512,8 @@
 			owner.visible_message("\red [owner.name]'s [display_name] flies off in an arc.",\
 			"<span class='moderate'><b>Your [display_name] goes flying off!</b></span>",\
 			"You hear a terrible sound of ripping tendons and flesh.")
+			owner.unlock_medal("Lost something?", 0, "Lose a limb.", "easy")
+
 
 			//Throw organs around
 			var/lol = pick(cardinal)
@@ -554,6 +556,7 @@
 		return
 	owner.visible_message("\red You hear a loud cracking sound coming from \the [owner].","\red <b>Something feels like it shattered in your [display_name]!</b>","You hear a sickening crack.")
 	owner.emote("scream")
+	owner.unlock_medal("Broke Yarrr Bones!", 0, "Break a bone.", "easy")
 	status |= ORGAN_BROKEN
 	broken_description = pick("broken","fracture","hairline fracture")
 	perma_injury = brute_dam

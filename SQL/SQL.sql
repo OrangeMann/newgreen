@@ -72,3 +72,11 @@ CREATE TABLE `erro_player` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `ckey` (`ckey`)
 ) DEFAULT CHARACTER SET=latin1;
+
+CREATE TABLE IF NOT EXISTS `medals` (
+  `ckey` varchar(255) NOT NULL,
+  `medal` text NOT NULL,
+  `medaldesc` text NOT NULL,
+  `medaldiff` text NOT NULL,
+  UNIQUE KEY `NODUPES` (`ckey`,`medal`(8))
+);

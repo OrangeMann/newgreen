@@ -70,9 +70,11 @@ var/list/admin_verbs_admin = list(
 	/datum/admins/proc/show_skills,
 	/client/proc/man_up,
 	/client/proc/global_man_up,
-	/client/proc/response_team, // Response Teams admin verb
+	/client/proc/response_team,				// Response Teams admin verb
 	/client/proc/delbook,
-	/client/proc/job_lock_panel			/*allow to lock main jobs. Only work on late join players*/
+	/client/proc/job_lock_panel,			/*allow to lock main jobs. Only work on late join players*/
+	/client/proc/admin_infect_zombie,
+	/client/proc/add_p_to_bwhitelist
 )
 var/list/admin_verbs_ban = list(
 	/client/proc/unban_panel,
@@ -124,7 +126,8 @@ var/list/admin_verbs_server = list(
 	/datum/admins/proc/toggle_aliens,
 	/datum/admins/proc/toggle_space_ninja,
 	/client/proc/toggle_random_events,
-	/client/proc/delbook
+	/client/proc/delbook,
+	/proc/load_bwhitelist
 	)
 var/list/admin_verbs_debug = list(
 	/client/proc/cmd_admin_list_open_jobs,

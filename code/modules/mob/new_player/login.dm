@@ -14,6 +14,8 @@
 		loc = locate(1,1,1)
 	lastarea = loc
 
+	unlock_medal("First Timer", 0, "Welcome!", "easy")
+
 	sight |= SEE_TURFS
 	player_list |= src
 

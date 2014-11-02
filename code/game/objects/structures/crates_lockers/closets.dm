@@ -249,6 +249,7 @@
 			lastbang = 1
 			for (var/mob/M in hearers(src, null))
 				M << text("<FONT size=[]>BANG, bang!</FONT>", max(0, 5 - get_dist(src, M)))
+			user.unlock_medal("It's a trap!", 0, "Get locked or welded into a locker...", "easy")
 			spawn(30)
 				lastbang = 0
 

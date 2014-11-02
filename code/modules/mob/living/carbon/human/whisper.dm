@@ -5,6 +5,9 @@
 		usr << "\red Speech is currently admin-disabled."
 		return
 
+	if(zombie)
+		return
+
 	message = trim(copytext(strip_html_simple(message), 1, MAX_MESSAGE_LEN))
 
 	if (!message || silent || miming)

@@ -7,7 +7,7 @@
 	w_class = 3.0
 	m_amt = 2000
 	origin_tech = "combat=3;magnets=2"
-	projectile_type = "/obj/item/projectile/beam"
+	projectile_type = "/obj/item/projectile/energy/laser"
 
 /obj/item/weapon/gun/energy/laser/practice
 	name = "practice laser gun"

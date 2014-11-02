@@ -50,7 +50,7 @@
 ////////////////////////SPECIAL/////////////////////////////////
 /datum/disease2/effect/alien
 	name = "Unidentified Foreign Body"
-	stage = 4
+	stage = 4																//TODO: Rewrite alien trnsformation.
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob << "\red You feel something tearing its way out of your stomach..."
 		mob.adjustToxLoss(10)
@@ -63,6 +63,34 @@
 			var/datum/disease2/disease/D = mob:virus2
 			mob:gib()
 			del D
+
+/datum/disease2/effect/zombie
+	name = "Tombstone Syndrome"
+	stage = 4
+	activate(var/mob/living/carbon/mob,var/multiplier)
+		if(istype(mob,/mob/living/carbon/human))
+			var/mob/living/carbon/human/H = mob
+			if(!H.zombie)
+				H.zombify()
+	deactivate(var/mob/living/carbon/mob,var/multiplier)
+		if(istype(mob,/mob/living/carbon/human))
+			var/mob/living/carbon/human/H = mob
+			if(H.zombie)
+				H.unzombify()
+
+/datum/disease2/effect/zombie_prepare
+	name = "Tombstone Syndrome"
+	activate(var/mob/living/carbon/mob,var/multiplier)
+		if(istype(mob,/mob/living/carbon/human))
+			var/mob/living/carbon/human/H = mob
+			if(!H.zombie && !H.becoming_zombie)
+				H.becoming_zombie = 1
+	deactivate(var/mob/living/carbon/mob,var/multiplier)
+		if(istype(mob,/mob/living/carbon/human))
+			var/mob/living/carbon/human/H = mob
+			H.becoming_zombie = 0
+
+
 
 /datum/disease2/effect/invisible
 	name = "Waiting Syndrome"

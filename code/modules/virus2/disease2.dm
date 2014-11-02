@@ -30,6 +30,43 @@
 	antigen |= text2num(pick(ANTIGENS))
 	spreadtype = "Airborne"
 
+/datum/disease2/disease/proc/makezombie()
+
+	var/datum/disease2/effectholder/holder = new /datum/disease2/effectholder
+	holder.stage = 1
+	holder.chance = 10
+	holder.effect = new/datum/disease2/effect/zombie_prepare()
+	effects += holder
+
+	holder = new /datum/disease2/effectholder
+	holder.stage = 1
+	holder.chance = 10
+	holder.effect = new/datum/disease2/effect/gunck()
+	effects += holder
+
+	holder = new /datum/disease2/effectholder
+	holder.stage = 2
+	holder.chance = 10
+	holder.effect = new/datum/disease2/effect/hungry()
+	effects += holder
+
+	holder = new /datum/disease2/effectholder
+	holder.stage = 3
+	holder.chance = 10
+	holder.effect = new/datum/disease2/effect/groan()
+	effects += holder
+
+	holder = new /datum/disease2/effectholder
+	holder.stage = 4
+	holder.chance = 10
+	holder.effect = new/datum/disease2/effect/zombie()
+	effects += holder
+
+	uniqueID = 1220 // all zombie diseases have the same ID
+	infectionchance = 0
+	spreadtype = "Blood"
+
+
 /datum/disease2/disease/proc/activate(var/mob/living/carbon/mob)
 	if(dead)
 		cure(mob)

@@ -681,17 +681,30 @@
 			if( C.handcuffed )
 				C.next_move = world.time + 100
 				C.last_special = world.time + 100
-				C << "\red You attempt to unbuckle yourself. (This will take around 2 minutes and you need to stand still)"
-				for(var/mob/O in viewers(L))
-					O.show_message("\red <B>[usr] attempts to unbuckle themself!</B>", 1)
-				spawn(0)
-					if(do_after(usr, 1200))
-						if(!C.buckled)
-							return
-						for(var/mob/O in viewers(C))
-							O.show_message("\red <B>[usr] manages to unbuckle themself!</B>", 1)
-						C << "\blue You successfully unbuckle yourself."
-						C.buckled.manual_unbuckle(C)
+				if(isalienadult(C) || (HULK in usr.mutations) || iszombie(C))
+					C << "\red You attempt to unbuckle yourself. (This will take around 5 seconds and you need to stand still)"
+					for(var/mob/O in viewers(L))
+						O.show_message("\red <B>[usr] attempts to unbuckle themself!</B>", 1)
+					spawn(0)
+						if(do_after(usr, 50))
+							if(!C.buckled)
+								return
+							for(var/mob/O in viewers(C))
+								O.show_message("\red <B>[usr] manages to unbuckle themself!</B>", 1)
+							C << "\blue You successfully unbuckle yourself."
+							C.buckled.manual_unbuckle(C)
+				else
+					C << "\red You attempt to unbuckle yourself. (This will take around 2 minutes and you need to stand still)"
+					for(var/mob/O in viewers(L))
+						O.show_message("\red <B>[usr] attempts to unbuckle themself!</B>", 1)
+					spawn(0)
+						if(do_after(usr, 1200))
+							if(!C.buckled)
+								return
+							for(var/mob/O in viewers(C))
+								O.show_message("\red <B>[usr] manages to unbuckle themself!</B>", 1)
+							C << "\blue You successfully unbuckle yourself."
+							C.buckled.manual_unbuckle(C)
 		else
 			L.buckled.manual_unbuckle(L)
 
@@ -768,7 +781,7 @@
 		if(CM.handcuffed && CM.canmove && (CM.last_special <= world.time))
 			CM.next_move = world.time + 100
 			CM.last_special = world.time + 100
-			if(isalienadult(CM) || (HULK in usr.mutations))//Don't want to do a lot of logic gating here.
+			if(isalienadult(CM) || (HULK in usr.mutations) || iszombie(CM))//Don't want to do a lot of logic gating here.
 				usr << "\red You attempt to break your handcuffs. (This will take around 5 seconds and you need to stand still)"
 				for(var/mob/O in viewers(CM))
 					O.show_message(text("\red <B>[] is trying to break the handcuffs!</B>", CM), 1)
@@ -806,7 +819,7 @@
 		else if(CM.legcuffed && CM.canmove && (CM.last_special <= world.time))
 			CM.next_move = world.time + 100
 			CM.last_special = world.time + 100
-			if(isalienadult(CM) || (HULK in usr.mutations))//Don't want to do a lot of logic gating here.
+			if(isalienadult(CM) || (HULK in usr.mutations) || iszombie(CM))//Don't want to do a lot of logic gating here.
 				usr << "\red You attempt to break your legcuffs. (This will take around 5 seconds and you need to stand still)"
 				for(var/mob/O in viewers(CM))
 					O.show_message(text("\red <B>[] is trying to break the legcuffs!</B>", CM), 1)

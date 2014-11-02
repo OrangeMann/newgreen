@@ -123,6 +123,13 @@ proc/isorgan(A)
 proc/hasorgans(A)
 	return ishuman(A)
 
+proc/iszombie(A)
+	if(istype(A, /mob/living/carbon/human))
+		if(A:zombie)
+			return 1
+	return 0
+
+
 /proc/hsl2rgb(h, s, l)
 	return
 

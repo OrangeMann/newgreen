@@ -142,6 +142,7 @@
 					for(var/mob/M in A)
 						M.bullet_act(src, def_zone)
 				density = 0
+				ul_SetLuminosity(0,0,0)
 				invisibility = 101
 				del(src)
 		return 1
@@ -158,12 +159,14 @@
 
 	process()
 		if(kill_count < 1)
+			ul_SetLuminosity(0,0,0)
 			del(src)
 		kill_count--
 		spawn while(src)
 			if((!( current ) || loc == current))
 				current = locate(min(max(x + xo, 1), world.maxx), min(max(y + yo, 1), world.maxy), z)
 			if((x == 1 || x == world.maxx || y == 1 || y == world.maxy))
+				ul_SetLuminosity(0,0,0)
 				del(src)
 				return
 			step_towards(src, current)

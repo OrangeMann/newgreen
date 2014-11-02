@@ -477,3 +477,9 @@ proc/get_nt_opposed()
 				dudes += man
 	if(dudes.len == 0) return null
 	return pick(dudes)
+
+/datum/game_mode/proc/check_round()
+	for(var/client/C)
+		if(C.mob)
+			if(C.mob.stat != 2)
+				C.mob.unlock_medal("Survivor", 0, "What do you think?", "easy")

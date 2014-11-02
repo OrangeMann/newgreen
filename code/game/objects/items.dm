@@ -139,6 +139,12 @@
 	src.pickup(user)
 	add_fingerprint(user)
 	user.put_in_active_hand(src)
+	if(iszombie(user))						//Dirty, but in such a way it will not break the item's layer
+		var/mob/living/carbon/human/H = user
+		if(H.l_hand)
+			H.drop_from_inventory(H.l_hand)
+		if(H.r_hand)
+			H.drop_from_inventory(H.r_hand)
 	return
 
 

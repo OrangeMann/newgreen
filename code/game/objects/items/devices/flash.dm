@@ -87,7 +87,8 @@
 	if(iscarbon(M))
 		var/safety = M:eyecheck()
 		if(safety <= 0)
-			M.Weaken(12)
+			if(!iszombie(M))
+				M.Weaken(10)
 			flick("e_flash", M.flash)
 
 			if(ishuman(M) && ishuman(user) && M.stat!=DEAD)

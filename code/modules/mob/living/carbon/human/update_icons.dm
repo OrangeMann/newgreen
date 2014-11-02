@@ -296,6 +296,13 @@ proc/get_damage_icon_part(damage_state, body_part)
 		husk_over.Blend(mask, ICON_ADD)
 		stand_icon.Blend(husk_over, ICON_OVERLAY)
 
+	if(zombie)
+		var/icon/mask = new(stand_icon)
+		var/icon/zombie_over = new(race_icon,"overlay_zombie_[g]")
+		mask.MapColors(0,0,0,1, 0,0,0,1, 0,0,0,1, 0,0,0,1, 0,0,0,0)
+		zombie_over.Blend(mask, ICON_ADD)
+		stand_icon.Blend(zombie_over, ICON_OVERLAY)
+
 	if(has_head)
 		//Eyes
 		if(!skeleton)

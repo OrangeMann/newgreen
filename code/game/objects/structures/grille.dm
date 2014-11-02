@@ -24,7 +24,11 @@
 
 
 /obj/structure/grille/Bumped(atom/user)
-	if(ismob(user)) shock(user, 70)
+	if(ismob(user))
+		shock(user, 70)
+		if(iszombie(user))
+			src.attack_hand(user)
+		return ..()
 
 
 /obj/structure/grille/attack_paw(mob/user as mob)
@@ -32,16 +36,27 @@
 
 /obj/structure/grille/attack_hand(mob/user as mob)
 	playsound(loc, 'sound/effects/grillehit.ogg', 80, 1)
-	user.visible_message("<span class='warning'>[user] kicks [src].</span>", \
-						 "<span class='warning'>You kick [src].</span>", \
-						 "You hear twisting metal.")
-
 	if(shock(user, 70))
 		return
-	if(HULK in user.mutations)
-		health -= 5
+	if(iszombie(usr))			//If it's a zombie
+		user.visible_message("<span class='danger'>[user] [pick("bangs on","slashes against")] the [src.name]!</span>", \
+						 "<span class='warning'>You bang on the [src.name].</span>", \
+						 "You hear twisting metal.")
+		src.health -= pick(3,4)
+		healthcheck()
+		return
+	if(HULK in user.mutations)		//Or hulk
+		user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!"))
+		user.visible_message("<span class='danger'>[user] tears the [src.name] apart!</span>", \
+						 "<span class='warning'>You tear the [src.name] apart.</span>", \
+						 "You hear a sound of twisting metal followed by a crack.")
+		health -= 10
+		return
 	else
-		health -= 3
+		health -= pick(1,2)
+		user.visible_message("<span class='warning'>[user] kicks [src].</span>", \
+						 "<span class='warning'>You kick [src].</span>", \
+						 "You hear twisting metal.")
 	healthcheck()
 
 /obj/structure/grille/attack_alien(mob/user as mob)

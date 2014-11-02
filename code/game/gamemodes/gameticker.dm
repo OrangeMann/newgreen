@@ -381,4 +381,6 @@ var/global/datum/controller/gameticker/ticker
 	for(var/i in total_antagonists)
 		log_game("[i]s[total_antagonists[i]].")
 
+	mode.check_round()
+
 	return 1

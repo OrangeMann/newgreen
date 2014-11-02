@@ -173,6 +173,7 @@
 #include "code\datums\diseases\advance\symptoms\vomit.dm"
 #include "code\datums\diseases\advance\symptoms\weight.dm"
 #include "code\datums\diseases\advance\symptoms\youth.dm"
+#include "code\datums\diseases\advance\symptoms\zombie.dm"
 #include "code\datums\helper_datums\construction_datum.dm"
 #include "code\datums\helper_datums\events.dm"
 #include "code\datums\helper_datums\global_iterator.dm"
@@ -1368,6 +1369,8 @@
 #include "code\WorkInProgress\Cael_Aislinn\Supermatter\ZeroPointLaser.dm"
 #include "code\WorkInProgress\Chinsky\ashtray.dm"
 #include "code\WorkInProgress\Cib\MedicalSideEffects.dm"
+#include "code\WorkInProgress\Guap6512\medals.dm"
+#include "code\WorkInProgress\Guap6512\zombies.dm"
 #include "code\WorkInProgress\Mini\ATM.dm"
 #include "code\WorkInProgress\Mini\atmos_control.dm"
 #include "code\WorkInProgress\Ported\policetape.dm"
@@ -1386,5 +1389,5 @@
 #include "code\ZAS\ZAS_Zones.dm"
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
-#include "maps\fernflower_1.4.dmm"
+#include "maps\fernflower_1.3.dmm"
 // END_INCLUDE

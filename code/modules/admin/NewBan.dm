@@ -226,6 +226,9 @@ var/list/bwhitelist
 		RemoveBan(A)
 
 /proc/load_bwhitelist()
+	set name = "Reload bwhitelist"
+	set category = "Server"
+
 	log_admin("Loading whitelist")
 	bwhitelist = list()
 	establish_db_connection()
@@ -253,3 +256,33 @@ var/list/bwhitelist
 	if (K in bwhitelist)
 		return 1
 	return 0
+
+/proc/add_to_bwhitelist(var/K)				//INSERT INTO whitelist VALUES('ckey')
+	establish_db_connection()
+	if(!dbcon.IsConnected())
+		log_admin("Failed to connect to bwhitelist. Error: [dbcon.ErrorMsg()]")
+		world.log << "Failed to connect to bwhitelist. Error: [dbcon.ErrorMsg()]"
+		return
+	var/DBQuery/query = dbcon.NewQuery("INSERT INTO whitelist VALUES('[K]')")
+	query.Execute()
+	log_admin("Added [K] to bwhitelist.")
+	load_bwhitelist()
+	return
+
+/client/proc/add_p_to_bwhitelist()
+	set name = "Add ckey to whitelist"
+	set category = "Admin"
+	var/added_key
+	if(!src.holder)
+		src << "Only administrators may use this command."
+		return
+	added_key = input("What ckey would you like to add?","Adding to Whitelist", null) as text|null
+	if(added_key)
+		if(!check_bwhitelist(added_key))
+			add_to_bwhitelist(added_key)
+			log_admin("[usr] attempted to add [added_key] to bwhitelist.")
+		else
+			usr << "\red That ckey is already in whitelist!"
+			return
+	else
+		return

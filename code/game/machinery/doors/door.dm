@@ -19,6 +19,8 @@
 	var/normalspeed = 1
 	var/heat_proof = 0 // For glass airlocks/opacity firedoors
 	var/air_properties_vary_with_direction = 0
+	var/locked = 0									//Moved it here to simplify zombie-interaction code.
+	var/zombiedamage
 
 	//Multi-tile doors
 	dir = EAST
@@ -125,6 +127,22 @@
 	if(istype(I, /obj/item/device/detective_scanner))
 		return
 	if(src.operating || isrobot(user))	return //borgs can't attack doors open because it conflicts with their AI-like interaction with them.
+	if(iszombie(user))
+		user.visible_message("<span class='danger'>[user] [pick("bangs on","slashes against")] the airlock!</span>", \
+						 "<span class='warning'>You claw the airlock.</span>", \
+						 "You hear loud banging.")
+		zombiedamage += rand(4,8)
+		if(zombiedamage > 80 || (locked && zombiedamage > 200))
+			src.locked = 0
+			user << "\blue You break the circuitry"
+			flick("door_spark", src)
+			sleep(6)
+			open(1)
+			operating = -1
+			return 1
+		operating = 1
+		spawn(6) operating = 0
+		return 1
 	src.add_fingerprint(user)
 	if(!src.requiresID())
 		user = null

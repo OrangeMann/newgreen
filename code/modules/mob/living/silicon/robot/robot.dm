@@ -72,6 +72,8 @@
 	spark_system.set_up(5, 0, src)
 	spark_system.attach(src)
 
+	unlock_medal("Slave to the Overmind", 0, "You are a pawn of the AI", "easy")
+
 	ident = rand(1, 999)
 	updatename("Default")
 	updateicon()

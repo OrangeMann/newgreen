@@ -186,7 +186,7 @@
 
 /datum/game_mode/proc/auto_declare_completion_traitor()
 	if(traitors.len)
-		var/text = "<FONT size = 2><B>The traitors were:</B></FONT>"
+		var/text = "<FONT size = 2><B>The syndicate traitors were:</B></FONT>"
 		for(var/datum/mind/traitor in traitors)
 			var/traitorwin = 1
 
@@ -208,6 +208,7 @@
 					if(objective.check_completion())
 						text += "<br><B>Objective #[count]</B>: [objective.explanation_text] <font color='green'><B>Success!</B></font>"
 						feedback_add_details("traitor_objective","[objective.type]|SUCCESS")
+
 					else
 						text += "<br><B>Objective #[count]</B>: [objective.explanation_text] <font color='red'>Fail.</font>"
 						feedback_add_details("traitor_objective","[objective.type]|FAIL")
@@ -226,6 +227,9 @@
 			else
 				text += "<br><font color='red'><B>The [special_role_text] has failed!</B></font>"
 				feedback_add_details("traitor_success","FAIL")
+			for(var/client/C)
+				if(C.key == traitor.key)
+					C.mob.unlock_medal("Oh I'm a terrorist?", 0, "Kinda", "medium")
 
 		world << text
 	return 1

@@ -229,6 +229,8 @@
 						t1 = "Unconscious"
 					else
 						t1 = "*dead*"
+				if(occupant.zombie)
+					t1 = "*dead*"
 				if (!istype(occupant,/mob/living/carbon/human))
 					dat += "<font color='red'>This device can only scan human occupants.</FONT>"
 				else
@@ -236,6 +238,9 @@
 
 					if(occupant.virus2.len)
 						dat += text("<font color='red'>Viral pathogen detected in blood stream.</font><BR>")
+					if(occupant.zombie || occupant.becoming_zombie)
+						dat += text("<font color='red'>Unknown infectious agent detected.</FONT><BR><BR>",)
+
 
 					dat += text("[]\t-Brute Damage %: []</FONT><BR>", (occupant.getBruteLoss() < 60 ? "<font color='blue'>" : "<font color='red'>"), occupant.getBruteLoss())
 					dat += text("[]\t-Respiratory Damage %: []</FONT><BR>", (occupant.getOxyLoss() < 60 ? "<font color='blue'>" : "<font color='red'>"), occupant.getOxyLoss())

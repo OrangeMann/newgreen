@@ -248,6 +248,9 @@
 			else
 				text += "<br><font color='red'><B>The wizard has failed!</B></font>"
 				feedback_add_details("wizard_success","FAIL")
+			for(var/client/C)
+				if(C.key == wizard.key)
+					C.mob.unlock_medal("Oh I'm a terrorist?", 0, "Kinda", "medium")
 
 		world << text
 	return 1

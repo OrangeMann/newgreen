@@ -100,10 +100,27 @@
 /obj/structure/window/attack_hand(mob/user as mob)
 	if(HULK in user.mutations)
 		user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!"))
-		user.visible_message("<span class='danger'>[user] smashes through [src]!</span>")
+		user.visible_message("<span class='danger'>[user] smashes through the [src.name]!</span>")
 		new /obj/item/weapon/shard(loc)
 		if(reinf) new /obj/item/stack/rods(loc)
 		del(src)
+	else if(iszombie(usr))
+		if(prob(50))
+			user.emote("me", 1, "roars!")
+		usr << text("\red You bang on the [src.name].")
+		for(var/mob/O in oviewers())
+			if ((O.client && !( O.blinded )))
+				O << text("\red [] [pick("bangs on the [src.name]","smashes against the [src.name]")]", usr)
+		if(prob(24))
+			for(var/mob/O in oviewers())
+				if ((O.client && !( O.blinded )))
+					O << text("\red [] smashes through the [src.name].", usr)
+			src.health = 0
+			new /obj/item/weapon/shard( src.loc )
+			if(reinf) new /obj/item/stack/rods( src.loc)
+			src.density = 0
+			del(src)
+			return
 	else if (usr.a_intent == "hurt")
 		playsound(src.loc, 'sound/effects/glassknock.ogg', 80, 1)
 		usr.visible_message("\red [usr.name] bangs against the [src.name]!", \
@@ -147,6 +164,11 @@
 //obj/structure/window/attack_metroid(mob/user as mob)
 //	if(!ismetroidadult(user)) return
 //	attack_generic(user, rand(10, 15))
+
+/obj/structure/window/Bumped(AM as mob|obj)
+	if(ismob(AM) && iszombie(AM))
+		src.attack_hand(AM)
+	return ..()
 
 
 /obj/structure/window/attackby(obj/item/weapon/W as obj, mob/user as mob)

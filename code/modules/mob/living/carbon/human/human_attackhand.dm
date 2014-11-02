@@ -148,28 +148,36 @@
 			return 1
 
 		if("hurt")
-
+			var/att_verb = M.species.attack_verb
+			var/sharpness = 0
 			if (M != src)
-				M.attack_log += text("\[[time_stamp()]\] <font color='red'>[M.species.attack_verb]ed [src.name] ([src.ckey])</font>")
-				src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been [M.species.attack_verb]ed by [M.name] ([M.ckey])</font>")
+				M.attack_log += text("\[[time_stamp()]\] <font color='red'>[att_verb]ed [src.name] ([src.ckey])</font>")
+				src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been [att_verb]ed by [M.name] ([M.ckey])</font>")
 
-				msg_admin_attack("[M.name] ([M.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[M]'>JMP</A>) [M.species.attack_verb]ed [src.name] ([src.ckey])",0)
-				log_attack("[M.name] ([M.ckey]) [M.species.attack_verb]ed [src.name] ([src.ckey])")
+				msg_admin_attack("[M.name] ([M.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[M]'>JMP</A>) [att_verb]ed [src.name] ([src.ckey])",0)
+				log_attack("[M.name] ([M.ckey]) [att_verb]ed [src.name] ([src.ckey])")
 			else
-				src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been [M.species.attack_verb]ed by [gender_text]</font>")
+				src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been [att_verb]ed by [gender_text]</font>")
 
 				msg_admin_attack("[src.name] ([src.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[src]'>JMP</A>) [src.species.attack_verb]ed [gender_text]",0)
 				log_attack("[src.name] ([src.ckey]) [src.species.attack_verb]ed [gender_text]")
 
 			var/damage = rand(0, 5)//BS12 EDIT
+			if(M.zombie)
+				damage = rand(0, 7)
+				att_verb = pick("claw", "slash", "scrap")
+				sharpness = 1
+				if(prob(15) && !zombie)
+					zombie_bit(M)
+					return
 			if(!damage)
-				if(M.species.attack_verb == "punch")
+				if(att_verb == "punch")
 					playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
 				else
 					playsound(loc, 'sound/weapons/slashmiss.ogg', 25, 1, -1)
 
 				if (M != src)
-					visible_message("\red <B>[M] has attempted to [M.species.attack_verb] [src]!</B>")
+					visible_message("\red <B>[M] has attempted to [att_verb] [src]!</B>")
 				else
 					visible_message("\red <B>[src] has attempted to [src.species.attack_verb] \himself!</B>")
 				return 0
@@ -181,13 +189,13 @@
 			if(HULK in M.mutations)			damage += 5
 
 
-			if(M.species.attack_verb == "punch")
+			if(att_verb == "punch")
 				playsound(loc, "punch", 25, 1, -1)
 			else
 				playsound(loc, 'sound/weapons/slice.ogg', 25, 1, -1)
 
 			if (M != src)
-				visible_message("\red <B>[M] has [M.species.attack_verb]ed [src]!</B>")
+				visible_message("\red <B>[M] has [att_verb]ed [src]!</B>")
 			else
 				visible_message("\red <B>[src] has [src.species.attack_verb]ed \himself!</B>")
 			//Rearranged, so claws don't increase weaken chance.
@@ -198,8 +206,8 @@
 					visible_message("\red <B>[src] has weakened \himself!</B>")
 				apply_effect(2, WEAKEN, armor_block)
 
-			if(M.species.attack_verb != "punch")	damage += 5
-			apply_damage(damage, BRUTE, affecting, armor_block)
+			if(att_verb != "punch")	damage += 5
+			apply_damage(damage, BRUTE, affecting, armor_block, sharpness)
 
 
 		if("disarm")

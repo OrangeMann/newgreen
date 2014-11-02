@@ -20,7 +20,7 @@
 				charge_cost = 100
 				fire_sound = 'sound/weapons/Laser.ogg'
 				user << "\red [src.name] is now set to kill."
-				projectile_type = "/obj/item/projectile/beam"
+				projectile_type = "/obj/item/projectile/energy/laser"
 				modifystate = "energykill"
 			if(1)
 				mode = 0
@@ -46,7 +46,7 @@
 				charge_cost = 250
 				fire_sound = 'sound/weapons/Laser.ogg'
 				user << "\red [src.name] is now set to kill."
-				projectile_type = "/obj/item/projectile/beam"
+				projectile_type = "/obj/item/projectile/energy/laser"
 				modifystate = "energy_minikill"
 				item_state = "energykill[round(power_supply.charge / power_supply.maxcharge, 0.25) * 100]" //3: ~Intercross
 			if(1)

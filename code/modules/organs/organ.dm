@@ -118,7 +118,7 @@
 				leg_tally--			// let it fail even if just foot&leg
 
 	// standing is poor
-	if(leg_tally <= 0 && !paralysis && !(lying || resting) && prob(1))
+	if(leg_tally <= 0 && !paralysis && !(lying || resting) && prob(5) && !zombie)
 		emote("scream")
 		emote("collapse")
 		paralysis = 3

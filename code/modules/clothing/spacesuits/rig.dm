@@ -50,22 +50,26 @@
 			return
 		on = !on
 		icon_state = "rig[on]-[item_color]"
-		item_state = "rig[on]-[item_color]"
+//		item_state = "rig[on]-[color]"
 
-		if(on)
-			user.ul_SetLuminosity(user.LuminosityRed + brightness_on, user.LuminosityGreen + (brightness_on - 1), user.LuminosityBlue)
-		else
-			user.ul_SetLuminosity(user.LuminosityRed - brightness_on, user.LuminosityGreen - (brightness_on - 1), user.LuminosityBlue)
-	
+		if(on)	user.ul_SetLuminosity(user.luminosity + brightness_on)
+		else	user.ul_SetLuminosity(user.luminosity - brightness_on)
+
+		if(istype(user,/mob/living/carbon/human))
+			var/mob/living/carbon/human/H = user
+			H.update_inv_head()
+
 	pickup(mob/user)
 		if(on)
-			user.ul_SetLuminosity(user.LuminosityRed + brightness_on, user.LuminosityGreen + (brightness_on - 1), user.LuminosityBlue)
+			user.ul_SetLuminosity(user.luminosity + brightness_on)
+//			user.UpdateLuminosity()
 			ul_SetLuminosity(0)
 
 	dropped(mob/user)
 		if(on)
-			user.ul_SetLuminosity(user.LuminosityRed - brightness_on, user.LuminosityGreen - (brightness_on - 1), user.LuminosityBlue)
-			ul_SetLuminosity(brightness_on, brightness_on - 1, 0)
+			user.ul_SetLuminosity(user.luminosity - brightness_on)
+//			user.UpdateLuminosity()
+			ul_SetLuminosity(brightness_on)
 
 /obj/item/clothing/suit/space/rig
 	name = "engineering hardsuit"

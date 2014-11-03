@@ -49,14 +49,14 @@
 			user << "You cannot turn the light on while in this [user.loc]" //To prevent some lighting anomalities.
 			return
 		on = !on
-		icon_state = "rig[on]-[color]"
-		item_state = "rig[on]-[color]"
+		icon_state = "rig[on]-[item_color]"
+		item_state = "rig[on]-[item_color]"
 
 		if(on)
 			user.ul_SetLuminosity(user.LuminosityRed + brightness_on, user.LuminosityGreen + (brightness_on - 1), user.LuminosityBlue)
 		else
-			user.ul_SetLuminosity(user.LuminosityRed + brightness_on, user.LuminosityGreen + (brightness_on - 1), user.LuminosityBlue)
-
+			user.ul_SetLuminosity(user.LuminosityRed - brightness_on, user.LuminosityGreen - (brightness_on - 1), user.LuminosityBlue)
+	
 	pickup(mob/user)
 		if(on)
 			user.ul_SetLuminosity(user.LuminosityRed + brightness_on, user.LuminosityGreen + (brightness_on - 1), user.LuminosityBlue)
@@ -64,8 +64,8 @@
 
 	dropped(mob/user)
 		if(on)
-			user.ul_SetLuminosity(user.LuminosityRed + brightness_on, user.LuminosityGreen + (brightness_on - 1), user.LuminosityBlue)
-			ul_SetLuminosity(brightness_on, brightness_on-1, 0)
+			user.ul_SetLuminosity(user.LuminosityRed - brightness_on, user.LuminosityGreen - (brightness_on - 1), user.LuminosityBlue)
+			ul_SetLuminosity(brightness_on, brightness_on - 1, 0)
 
 /obj/item/clothing/suit/space/rig
 	name = "engineering hardsuit"

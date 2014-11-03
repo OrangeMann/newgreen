@@ -55,6 +55,7 @@
 	desc = "A jukebox is a partially automated music-playing device, usually a coin-operated machine, that will play a patron's selection from self-contained media."
 	icon = 'icons/effects/lasers2.dmi'
 	icon_state = "Jukebox7"
+	var/obj/item/weapon/disk/music/disk
 	var/playing = 0
 	var/datum/turntable_soundtrack/track = null
 	var/volume = 100
@@ -73,14 +74,14 @@
 		if(D.path)
 			turntable_soundtracks.Add(D)
 
-/*
+
 /obj/machinery/party/turntable/attackby(obj/O, mob/user)
 	if(istype(O, /obj/item/weapon/disk/music) && !disk)
 		user.drop_item()
 		O.loc = src
 		disk = O
 		attack_hand(user)
-*/
+
 
 /obj/machinery/party/turntable/attack_paw(user as mob)
 	return src.attack_hand(user)
@@ -94,8 +95,8 @@
 
 	var/t = "<body background='turntable_back.jpg'><br><br><br><div align='center'><table border='0'><B><font color='maroon' size='6'>J</font><font size='5' color='purple'>uke Box</font> <font size='5' color='green'>Interface</font></B><br><br><br><br>"
 	t += "<A href='?src=\ref[src];on=1'>On</A><br>"
-//	if(disk)
-//		t += "<A href='?src=\ref[src];eject=1'>Eject disk</A><br>"
+	if(disk)
+		t += "<A href='?src=\ref[src];eject=1'>Eject disk</A><br>"
 	t += "<tr><td height='50' weight='50'></td><td height='50' weight='50'><A href='?src=\ref[src];off=1'><font color='maroon'>T</font><font color='lightgreen'>urn</font> <font color='red'>Off</font></A></td><td height='50' weight='50'></td></tr>"
 	t += "<tr>"
 
@@ -120,11 +121,11 @@
 			i = 0
 			t += "</tr><tr>"
 
-//	if(disk)
-//		if(disk.data)
-//			t += "<td height='50' weight='50'><A href='?src=\ref[src];on=\ref[disk.data]'><font color='maroon'>[disk.data.f_name]</font><font color='[lastcolor]'>[disk.data.name]</font></A></td>"
-//		else
-//			t += "<td height='50' weight='50'><font color='maroon'>D</font><font color='[lastcolor]'>isk empty</font></td>"
+	if(disk)
+		if(disk.data)
+			t += "<td height='50' weight='50'><A href='?src=\ref[src];on=\ref[disk.data]'><font color='maroon'>[disk.data.f_name]</font><font color='[lastcolor]'>[disk.data.name]</font></A></td>"
+		else
+			t += "<td height='50' weight='50'><font color='maroon'>D</font><font color='[lastcolor]'>isk empty</font></td>"
 
 	t += "</table></div></body>"
 	user << browse(t, "window=turntable;size=450x700;can_resize=0")
@@ -146,13 +147,13 @@
 	else if(href_list["set_volume"])
 		set_volume(text2num(href_list["set_volume"]))
 
-//	else if(href_list["eject"])
-//		if(disk)
-//			disk.loc = src.loc
-//			if(disk.data && track == disk.data)
-//				turn_off()
-//				track = null
-//			disk = null
+	else if(href_list["eject"])
+		if(disk)
+			disk.loc = src.loc
+			if(disk.data && track == disk.data)
+				turn_off()
+				track = null
+			disk = null
 
 /obj/machinery/party/turntable/process()
 	if(playing)

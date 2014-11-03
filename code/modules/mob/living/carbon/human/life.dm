@@ -981,12 +981,8 @@
 				src << "<font size='3' color='green'><b>You feel yourself better and beast inside gone to deepest part of your mind</b></font>"*/
 		if(nutrition < 50)
 			if(prob(20))
-				src << pick("\red Food... i need some food.. Horrible pain in stomack...", "\red I'm starving...", "\red I feel horrible! Food...")
+				src << pick("\red Food... I need some food.. Horrible pain in stomack...", "\red I'm starving...", "\red I feel horrible! Food...")
 
-		if(nutrition < 30)
-			if(prob(5))
-				src << "\red You have fallen unconcious from starvation"
-				src.AdjustParalysis(1)
 /*		if(nutrition < 1)
 			if(getBrainLoss() < 70)
 				adjustBrainLoss(1)

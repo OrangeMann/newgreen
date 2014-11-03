@@ -2059,7 +2059,7 @@
 			for(var/row in M.attack_log)
 				text += row + "<BR>"
 		usr << browse(text, "window=mob_attacklog;size=650x620")
-/*
+
 	else if(href_list["listensound"])
 		var/sound/S = sound(locate(href_list["listensound"]))
 		if(!S)
@@ -2086,4 +2086,3 @@
 					T.turn_off()
 			disk.data = null
 			disk.name = "burned disk"
-*/

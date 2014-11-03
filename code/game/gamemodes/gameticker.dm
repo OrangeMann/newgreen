@@ -142,6 +142,8 @@ var/global/datum/controller/gameticker/ticker
 	supply_shuttle.process() 		//Start the supply shuttle regenerating points -- TLE
 	master_controller.process()		//Start master_controller.process()
 
+	for(var/obj/multiz/ladder/L in world) L.connect() //Lazy hackfix for ladders. TODO: move this to an actual controller. ~ Z
+
 	return 1
 
 /datum/controller/gameticker

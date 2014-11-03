@@ -72,7 +72,6 @@
 
 	src.update_status()
 
-	load_donators()
 
 	. = ..()
 

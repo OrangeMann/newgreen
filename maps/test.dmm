@@ -1,0 +1,88 @@
+"a" = (/turf/space,/area)
+"b" = (/turf/simulated/wall,/area/engine/port_gyro_bay)
+"c" = (/obj/structure/grille,/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{dir = 1},/turf/simulated/floor/plating,/area/engine/port_gyro_bay)
+"d" = (/obj/structure/grille,/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 1},/turf/simulated/floor/plating,/area/engine/port_gyro_bay)
+"e" = (/obj/structure/grille,/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 1},/turf/simulated/floor/plating,/area/engine/port_gyro_bay)
+"f" = (/obj/effect/landmark{name = "JoinLate"},/obj/effect/landmark/start{name = "Captain"},/obj/effect/landmark/start,/turf/simulated/floor,/area/engine/port_gyro_bay)
+"g" = (/turf/simulated/floor,/area/engine/port_gyro_bay)
+"h" = (/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor,/area/engine/port_gyro_bay)
+"i" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{dir = 1},/turf/simulated/floor/plating,/area/engine/port_gyro_bay)
+"j" = (/obj/machinery/power/apc{name = "Aft Hall APC"; dir = 8; pixel_x = -25; pixel_y = 1},/turf/simulated/floor,/area/engine/port_gyro_bay)
+"k" = (/obj/item/weapon/gun/energy/laser,/turf/simulated/floor,/area/engine/port_gyro_bay)
+"l" = (/obj/multiz/ladder{icon_state = "ladderup"},/turf/simulated/floor,/area/engine/port_gyro_bay)
+"m" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 8},/turf/simulated/floor/plating,/area/engine/port_gyro_bay)
+"n" = (/obj/structure/grille,/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 8},/turf/simulated/floor/plating,/area/engine/port_gyro_bay)
+"o" = (/obj/machinery/light,/turf/simulated/floor,/area/engine/port_gyro_bay)
+"p" = (/obj/effect/landmark/zcontroller{up = 1; up_target = 2},/turf/space,/area)
+"q" = (/turf/simulated/wall,/area/bridge/meeting_room)
+"r" = (/turf/simulated/floor,/area/bridge/meeting_room)
+"s" = (/obj/machinery/portable_atmospherics/canister/toxins,/turf/simulated/floor,/area/bridge/meeting_room)
+"t" = (/turf/simulated/floor/open,/area/bridge/meeting_room)
+"u" = (/obj/multiz/ladder,/turf/simulated/floor,/area/bridge/meeting_room)
+"v" = (/obj/effect/landmark/zcontroller{down = 1; down_target = 1},/turf/space,/area)
+
+(1,1,1) = {"
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaabbbbbcddebbbbaaaaaaaaaaaa
+aaaaabfggggggggghbaaaaaaaaaaaa
+aaaaabgggggggggggiaaaaaaaaaaaa
+aaaaabjggggkggglgmaaaaaaaaaaaa
+aaaaabgggggggggggmaaaaaaaaaaaa
+aaaaabgggggggggggmaaaaaaaaaaaa
+aaaaabgggggggggggnaaaaaaaaaaaa
+aaaaabgggogggggggbaaaaaaaaaaaa
+aaaaabbbbbcddebbbbaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+paaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+"}
+
+(1,1,2) = {"
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaqqqqqqqqqqqqqaaaaaaaaaaaa
+aaaaaqrrrrrrrsrrrqaaaaaaaaaaaa
+aaaaaqrrrrrrrrrrrqaaaaaaaaaaaa
+aaaaaqrrrtttttrurqaaaaaaaaaaaa
+aaaaaqrrrtttttrrrqaaaaaaaaaaaa
+aaaaaqrrrtttttrrrqaaaaaaaaaaaa
+aaaaaqrrrrrrrrrrrqaaaaaaaaaaaa
+aaaaaqrrrrrrrrrrrqaaaaaaaaaaaa
+aaaaaqqqqqqqqqqqqqaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+vaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+"}

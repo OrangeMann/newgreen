@@ -105,7 +105,7 @@
 			if(ismob(G.affecting))
 				var/mob/GM = G.affecting
 				for (var/mob/V in viewers(usr))
-					V.show_message("[usr] starts putting [GM.name] into the disposal.", 3)
+					V.show_message("[usr] starts putting [GM.name] into the [src].", 3)
 				if(do_after(usr, 20))
 					if (GM.client)
 						GM.client.perspective = EYE_PERSPECTIVE
@@ -116,9 +116,7 @@
 					del(G)
 					usr.attack_log += text("\[[time_stamp()]\] <font color='red'>Has placed [GM.name] ([GM.ckey]) in disposals.</font>")
 					GM.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been placed in disposals by [usr.name] ([usr.ckey])</font>")
-					//msg_admin_attack("[usr] ([usr.ckey]) placed [GM] ([GM.ckey]) in a disposals unit. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[usr.x];Y=[usr.y];Z=[usr.z]'>JMP</a>)")
-					msg_admin_attack("[user] ([user.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[user]'>JMP</A>) placed [GM.name] ([GM.ckey]) in a disposals unit at [get_area(src)]", 0)
-					log_attack("[user.name] ([user.ckey]) placed [GM.name] ([GM.ckey]) in a disposals unit at [src.x],[src.y],[src.z] in area ([get_area(src)])")
+					msg_admin_attack("[usr] ([usr.ckey]) placed [GM] ([GM.ckey]) in a disposals unit. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[usr.x];Y=[usr.y];Z=[usr.z]'>JMP</a>)")
 			return
 
 		if(!I)	return
@@ -146,10 +144,10 @@
 		var/msg
 		for (var/mob/V in viewers(usr))
 			if(target == user && !user.stat && !user.weakened && !user.stunned && !user.paralysis)
-				V.show_message("[usr] starts climbing into the disposal.", 3)
+				V.show_message("[usr] starts climbing into the [src].", 3)
 			if(target != user && !user.restrained() && !user.stat && !user.weakened && !user.stunned && !user.paralysis)
 				if(target.anchored) return
-				V.show_message("[usr] starts stuffing [target.name] into the disposal.", 3)
+				V.show_message("[usr] starts stuffing [target.name] into the [src].", 3)
 		if(!do_after(usr, 20))
 			return
 		if(target_loc != target.loc)
@@ -164,9 +162,7 @@
 
 			user.attack_log += text("\[[time_stamp()]\] <font color='red'>Has placed [target.name] ([target.ckey]) in disposals.</font>")
 			target.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been placed in disposals by [user.name] ([user.ckey])</font>")
-			//msg_admin_attack("[user] ([user.ckey]) placed [target] ([target.ckey]) in a disposals unit. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
-			msg_admin_attack("[user] ([user.ckey])(<A HREF='?_src_=holder;adminplayerobservejump=\ref[user]'>JMP</A>) placed [target.name] ([target.ckey]) in a disposals unit at [get_area(src)]", 0)
-			log_attack("[user.name] ([user.ckey]) placed [target.name] ([target.ckey]) in a disposals unit at [src.x],[src.y],[src.z] in area ([get_area(src)])")
+			msg_admin_attack("[user] ([user.ckey]) placed [target] ([target.ckey]) in a disposals unit. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 		else
 			return
 		if (target.client)
@@ -271,7 +267,7 @@
 			return
 
 		if(mode==-1 && !href_list["eject"]) // only allow ejecting if mode is -1
-			usr << "\red The disposal units power is disabled."
+			usr << "\red The [src]'s power is disabled."
 			return
 		..()
 		src.add_fingerprint(usr)
@@ -316,33 +312,36 @@
 
 	// update the icon & overlays to reflect mode & status
 	proc/update()
-		overlays.Cut()
-		if(stat & BROKEN)
-			icon_state = "disposal-broken"
-			mode = 0
-			flush = 0
+		if(icon != 'icons/obj/pipes/disposal.dmi')
 			return
+		else
+			overlays.Cut()
+			if(stat & BROKEN)
+				icon_state = "disposal-broken"
+				mode = 0
+				flush = 0
+				return
 
-		// flush handle
-		if(flush)
-			overlays += image('icons/obj/pipes/disposal.dmi', "dispover-handle")
+			// flush handle
+			if(flush)
+				overlays += image('icons/obj/pipes/disposal.dmi', "dispover-handle")
 
-		// only handle is shown if no power
-		if(stat & NOPOWER || mode == -1)
-			return
+			// only handle is shown if no power
+			if(stat & NOPOWER || mode == -1)
+				return
 
-		// 	check for items in disposal - occupied light
-		if(contents.len > 0)
-			overlays += image('icons/obj/pipes/disposal.dmi', "dispover-full")
+			// 	check for items in disposal - occupied light
+			if(contents.len > 0)
+				overlays += image('icons/obj/pipes/disposal.dmi', "dispover-full")
 
-		// charging and ready light
-		if(mode == 1)
-			overlays += image('icons/obj/pipes/disposal.dmi', "dispover-charge")
-		else if(mode == 2)
-			overlays += image('icons/obj/pipes/disposal.dmi', "dispover-ready")
+			// charging and ready light
+			if(mode == 1)
+				overlays += image('icons/obj/pipes/disposal.dmi', "dispover-charge")
+			else if(mode == 2)
+				overlays += image('icons/obj/pipes/disposal.dmi', "dispover-ready")
 
-	// timed process
-	// charge the gas reservoir and perform flush if ready
+		// timed process
+		// charge the gas reservoir and perform flush if ready
 	process()
 		if(stat & BROKEN)			// nothing can happen if broken
 			return
@@ -460,7 +459,7 @@
 	CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 		if (istype(mover,/obj/item) && mover.throwing)
 			var/obj/item/I = mover
-			if(istype(I, /obj/item/weapon/dummy) || istype(I, /obj/item/projectile))
+			if(istype(I, /obj/item/projectile))
 				return
 			if(prob(75))
 				I.loc = src
@@ -543,9 +542,9 @@
 	proc/move()
 		var/obj/structure/disposalpipe/last
 		while(active)
-			if(hasmob && prob(10))
+			if(hasmob && prob(3))
 				for(var/mob/living/H in src)
-					H.take_overall_damage(1, 0, "Blunt Trauma")
+					H.take_overall_damage(20, 0, "Blunt Trauma")//horribly maim any living creature jumping down disposals.  c'est la vie
 
 			if(has_fat_guy && prob(2)) // chance of becoming stuck per segment if contains a fat guy
 				active = 0
@@ -877,6 +876,12 @@
 				C.ptype = 9
 			if("pipe-j2s")
 				C.ptype = 10
+///// Z-Level stuff
+			if("pipe-u")
+				C.ptype = 11
+			if("pipe-d")
+				C.ptype = 12
+///// Z-Level stuff
 		src.transfer_fingerprints_to(C)
 		C.dir = dir
 		C.density = 0
@@ -904,8 +909,113 @@
 		update()
 		return
 
+///// Z-Level stuff
+/obj/structure/disposalpipe/crossZ/up
+	icon_state = "pipe-u"
 
+	New()
+		..()
+		dpdir = dir
+		update()
+		return
 
+	nextdir(var/fromdir)
+		var/nextdir
+		if(fromdir == 11)
+			nextdir = dir
+		else
+			nextdir = 12
+		return nextdir
+
+	transfer(var/obj/structure/disposalholder/H)
+		var/nextdir = nextdir(H.dir)
+		H.dir = nextdir
+
+		var/turf/T
+		var/obj/structure/disposalpipe/P
+
+		if(nextdir == 12)
+			var/turf/controllerlocation = locate(1, 1, src.z)
+			for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
+				if(controller.up)
+					T = locate(src.x, src.y, controller.up_target)
+			if(!T)
+				H.loc = src.loc
+				return
+			else
+				for(var/obj/structure/disposalpipe/crossZ/down/F in T)
+					P = F
+
+		else
+			T = get_step(src.loc, H.dir)
+			P = H.findpipe(T)
+
+		if(P)
+			// find other holder in next loc, if inactive merge it with current
+			var/obj/structure/disposalholder/H2 = locate() in P
+			if(H2 && !H2.active)
+				H.merge(H2)
+
+			H.loc = P
+		else			// if wasn't a pipe, then set loc to turf
+			H.loc = T
+			return null
+
+		return P
+
+/obj/structure/disposalpipe/crossZ/down
+	icon_state = "pipe-d"
+
+	New()
+		..()
+		dpdir = dir
+		update()
+		return
+
+	nextdir(var/fromdir)
+		var/nextdir
+		if(fromdir == 12)
+			nextdir = dir
+		else
+			nextdir = 11
+		return nextdir
+
+	transfer(var/obj/structure/disposalholder/H)
+		var/nextdir = nextdir(H.dir)
+		H.dir = nextdir
+
+		var/turf/T
+		var/obj/structure/disposalpipe/P
+
+		if(nextdir == 11)
+			var/turf/controllerlocation = locate(1, 1, src.z)
+			for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
+				if(controller.down)
+					T = locate(src.x, src.y, controller.down_target)
+			if(!T)
+				H.loc = src.loc
+				return
+			else
+				for(var/obj/structure/disposalpipe/crossZ/up/F in T)
+					P = F
+
+		else
+			T = get_step(src.loc, H.dir)
+			P = H.findpipe(T)
+
+		if(P)
+			// find other holder in next loc, if inactive merge it with current
+			var/obj/structure/disposalholder/H2 = locate() in P
+			if(H2 && !H2.active)
+				H.merge(H2)
+
+			H.loc = P
+		else			// if wasn't a pipe, then set loc to turf
+			H.loc = T
+			return null
+
+		return P
+///// Z-Level stuff
 
 //a three-way junction with dir being the dominant direction
 /obj/structure/disposalpipe/junction
@@ -1329,7 +1439,7 @@
 
 	src.streak(dirs)
 
-/obj/effect/decal/cleanable/robot_debris/gib/pipe_eject(var/direction)
+/obj/effect/decal/cleanable/blood/gibs/robot/pipe_eject(var/direction)
 	var/list/dirs
 	if(direction)
 		dirs = list( direction, turn(direction, -45), turn(direction, 45))

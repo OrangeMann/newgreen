@@ -724,6 +724,10 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 #define HAS_TAIL 2048
 #define IS_PLANT 4096
 
+//Flags for zone sleeping
+#define ZONE_ACTIVE 1
+#define ZONE_SLEEPING 0
+
 //Language flags.
 #define WHITELISTED 1  // Language is available if the speaker is whitelisted.
 #define RESTRICTED 2   // Language can only be accquired by spawning or an admin.

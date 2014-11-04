@@ -92,6 +92,7 @@
 		if(itemcount >= storage_capacity)
 			break
 		if(!I.anchored)
+			I.on_enter_storage(src)
 			I.loc = src
 			itemcount++
 

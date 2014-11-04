@@ -42,6 +42,13 @@
 			user.ul_SetLuminosity(user.LuminosityRed - brightness_on, user.LuminosityGreen - brightness_on, user.LuminosityBlue)
 		else if (isturf(src.loc))
 			ul_SetLuminosity(0)
+/obj/item/device/flashlight/on_enter_storage()
+	if(on)
+		icon_state = initial(icon_state)
+		usr.ul_SetLuminosity(usr.LuminosityRed - brightness_on, usr.LuminosityGreen - brightness_on, usr.LuminosityBlue)
+		on = 0
+	..()
+	return
 
 
 /obj/item/device/flashlight/attack_self(mob/user)

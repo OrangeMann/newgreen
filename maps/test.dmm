@@ -11,15 +11,17 @@
 "k" = (/obj/item/weapon/gun/energy/laser,/turf/simulated/floor,/area/engine/port_gyro_bay)
 "l" = (/obj/multiz/ladder{icon_state = "ladderup"},/turf/simulated/floor,/area/engine/port_gyro_bay)
 "m" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 8},/turf/simulated/floor/plating,/area/engine/port_gyro_bay)
-"n" = (/obj/structure/grille,/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 8},/turf/simulated/floor/plating,/area/engine/port_gyro_bay)
-"o" = (/obj/machinery/light,/turf/simulated/floor,/area/engine/port_gyro_bay)
-"p" = (/obj/effect/landmark/zcontroller{up = 1; up_target = 2},/turf/space,/area)
-"q" = (/turf/simulated/wall,/area/bridge/meeting_room)
-"r" = (/turf/simulated/floor,/area/bridge/meeting_room)
-"s" = (/obj/machinery/portable_atmospherics/canister/toxins,/turf/simulated/floor,/area/bridge/meeting_room)
-"t" = (/turf/simulated/floor/open,/area/bridge/meeting_room)
-"u" = (/obj/multiz/ladder,/turf/simulated/floor,/area/bridge/meeting_room)
-"v" = (/obj/effect/landmark/zcontroller{down = 1; down_target = 1},/turf/space,/area)
+"n" = (/obj/item/clothing/head/helmet/space/rig,/turf/simulated/floor,/area/engine/port_gyro_bay)
+"o" = (/obj/item/clothing/head/hardhat/red,/turf/simulated/floor,/area/engine/port_gyro_bay)
+"p" = (/obj/structure/grille,/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 8},/turf/simulated/floor/plating,/area/engine/port_gyro_bay)
+"q" = (/obj/machinery/light,/turf/simulated/floor,/area/engine/port_gyro_bay)
+"r" = (/obj/effect/landmark/zcontroller{up = 1; up_target = 2},/turf/space,/area)
+"s" = (/turf/simulated/wall,/area/bridge/meeting_room)
+"t" = (/turf/simulated/floor,/area/bridge/meeting_room)
+"u" = (/obj/machinery/portable_atmospherics/canister/toxins,/turf/simulated/floor,/area/bridge/meeting_room)
+"v" = (/turf/simulated/floor/open,/area/bridge/meeting_room)
+"w" = (/obj/multiz/ladder,/turf/simulated/floor,/area/bridge/meeting_room)
+"x" = (/obj/effect/landmark/zcontroller{down = 1; down_target = 1},/turf/space,/area)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -37,10 +39,10 @@ aaaaabbbbbcddebbbbaaaaaaaaaaaa
 aaaaabfggggggggghbaaaaaaaaaaaa
 aaaaabgggggggggggiaaaaaaaaaaaa
 aaaaabjggggkggglgmaaaaaaaaaaaa
+aaaaabggggnggggggmaaaaaaaaaaaa
 aaaaabgggggggggggmaaaaaaaaaaaa
-aaaaabgggggggggggmaaaaaaaaaaaa
-aaaaabgggggggggggnaaaaaaaaaaaa
-aaaaabgggogggggggbaaaaaaaaaaaa
+aaaaabggggggoggggpaaaaaaaaaaaa
+aaaaabgggqgggggggbaaaaaaaaaaaa
 aaaaabbbbbcddebbbbaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -51,7 +53,7 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-paaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+raaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
 
 (1,1,2) = {"
@@ -66,15 +68,15 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaqqqqqqqqqqqqqaaaaaaaaaaaa
-aaaaaqrrrrrrrsrrrqaaaaaaaaaaaa
-aaaaaqrrrrrrrrrrrqaaaaaaaaaaaa
-aaaaaqrrrtttttrurqaaaaaaaaaaaa
-aaaaaqrrrtttttrrrqaaaaaaaaaaaa
-aaaaaqrrrtttttrrrqaaaaaaaaaaaa
-aaaaaqrrrrrrrrrrrqaaaaaaaaaaaa
-aaaaaqrrrrrrrrrrrqaaaaaaaaaaaa
-aaaaaqqqqqqqqqqqqqaaaaaaaaaaaa
+aaaaasssssssssssssaaaaaaaaaaaa
+aaaaastttttttutttsaaaaaaaaaaaa
+aaaaastttttttttttsaaaaaaaaaaaa
+aaaaastttvvvvvtwtsaaaaaaaaaaaa
+aaaaastttvvvvvtttsaaaaaaaaaaaa
+aaaaastttvvvvvtttsaaaaaaaaaaaa
+aaaaastttttttttttsaaaaaaaaaaaa
+aaaaastttttttttttsaaaaaaaaaaaa
+aaaaasssssssssssssaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -84,5 +86,5 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-vaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+xaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}

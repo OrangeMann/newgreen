@@ -20,21 +20,29 @@
 		icon_state = "hardhat[on]_[item_color]"
 		item_state = "hardhat[on]_[item_color]"
 
-		if(on)	user.ul_SetLuminosity(user.luminosity + brightness_on)
-		else	user.ul_SetLuminosity(user.luminosity - brightness_on)
+		if(on)
+			user.ul_SetLuminosity(user.LuminosityRed + brightness_on, user.LuminosityGreen + (brightness_on - 1), user.LuminosityBlue)
+		else
+			user.ul_SetLuminosity(user.LuminosityRed - brightness_on, user.LuminosityGreen - (brightness_on - 1), user.LuminosityBlue)
 
 	pickup(mob/user)
 		if(on)
-			user.ul_SetLuminosity(user.luminosity + brightness_on)
-//			user.UpdateLuminosity()	//TODO: Carn
+			user.ul_SetLuminosity(user.LuminosityRed + brightness_on, user.LuminosityGreen + (brightness_on - 1), user.LuminosityBlue)
 			ul_SetLuminosity(0)
 
 	dropped(mob/user)
 		if(on)
-			user.ul_SetLuminosity(user.luminosity - brightness_on)
-//			user.UpdateLuminosity()
-			ul_SetLuminosity(brightness_on)
+			user.ul_SetLuminosity(user.LuminosityRed - brightness_on, user.LuminosityGreen - (brightness_on - 1), user.LuminosityBlue)
+			ul_SetLuminosity(brightness_on, brightness_on - 1, 0)
 
+	on_enter_storage()
+		if(on)
+			usr.ul_SetLuminosity(usr.LuminosityRed - brightness_on, usr.LuminosityGreen - (brightness_on - 1), usr.LuminosityBlue)
+			on = 0
+			icon_state = "hardhat[on]_[item_color]"
+			item_state = "hardhat[on]_[item_color]"
+		..()
+		return
 
 /obj/item/clothing/head/hardhat/orange
 	icon_state = "hardhat0_orange"

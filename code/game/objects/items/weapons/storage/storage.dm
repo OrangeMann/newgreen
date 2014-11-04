@@ -236,15 +236,16 @@
 //such as when picking up all the items on a tile with one click.
 /obj/item/weapon/storage/proc/handle_item_insertion(obj/item/W as obj, prevent_warning = 0)
 	if(!istype(W)) return 0
+	W.on_enter_storage(src)
 	if(usr)
 		usr.u_equip(W)
 		usr.update_icons()	//update our overlays
 	W.loc = src
-	W.on_enter_storage(src)
 	if(usr)
 		if (usr.client && usr.s_active != src)
 			usr.client.screen -= W
 		W.dropped(usr)
+//		W.on_enter_storage(src)					//Shitty, but might help me solve the lighting bug.
 		add_fingerprint(usr)
 
 		if(!prevent_warning && !istype(W, /obj/item/weapon/gun/energy/crossbow))

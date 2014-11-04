@@ -373,11 +373,12 @@
 				switchcount = L.switchcount
 				rigged = L.rigged
 				brightness = L.brightness
+				user.drop_item()
 				del(L)
 
 				on = has_power()
 				update()
-				user.drop_item()
+
 				if(on && rigged)
 					explode()
 			else

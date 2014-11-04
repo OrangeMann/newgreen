@@ -47,6 +47,8 @@
 		spawn while(stat != 2 && bot)
 			sleep(cycle_pause)
 			src.process()
+		src.zone_sel = new /obj/screen/zone_sel( null )
+		zone_sel.selecting = "chest"
 		real_name  = random_name()
 		name = real_name
 		voice_name = real_name
@@ -112,7 +114,6 @@
 			if(prob(30))
 				say("BRAAAINS")			//But he will say one of the prepared words, or do an emote from say.dm
 				return
-			world << "Attempted to attack [target]"
 			// sometimes push the enemy
 			if(prob(30))
 				step(src,direct)

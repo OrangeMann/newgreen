@@ -63,7 +63,7 @@
 		//	message = pick("...argh...", "...deaath...", "...haaaww...", "...diee...")
 			message = pick("...беги...", "...голод...", "...не жизнь...", "...убейте...", "...аагрх...", "...смерть...", "...жрать...", "...умрии...")
 		else
-			emote("me", 1, "[pick("roars!", "shouts!", "mutters.", "rawrs.")]")
+			emote(pick("z_roar","z_shout","z_mutter","z_rawr"))
 			return
 	..(message)
 

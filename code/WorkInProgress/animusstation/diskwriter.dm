@@ -39,7 +39,7 @@
 
 /obj/machinery/party/musicwriter/Topic(href, href_list)
 	if(href_list["write"])
-		if(!writing && !retard)
+		if(!writing && !retard && coin)
 			icon_state = "on"
 			writing = 1
 			retard = usr
@@ -62,5 +62,6 @@
 					message_admins("[M.real_name]([M.ckey]) uploaded <A HREF='?_src_=holder;listensound=\ref[S]'>sound</A> named as [N]. <A HREF='?_src_=holder;wipedata=\ref[disk]'>Wipe</A> data.")
 			icon_state = "off"
 			writing = 0
+			coin -= 1
 			retard = null
 			retard_name = null

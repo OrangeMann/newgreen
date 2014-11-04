@@ -1373,6 +1373,7 @@
 #include "code\WorkInProgress\Chinsky\ashtray.dm"
 #include "code\WorkInProgress\Cib\MedicalSideEffects.dm"
 #include "code\WorkInProgress\Guap6512\medals.dm"
+#include "code\WorkInProgress\Guap6512\zombieAI.dm"
 #include "code\WorkInProgress\Guap6512\zombies.dm"
 #include "code\WorkInProgress\Mini\ATM.dm"
 #include "code\WorkInProgress\Mini\atmos_control.dm"

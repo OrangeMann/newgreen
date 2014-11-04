@@ -556,6 +556,25 @@
 					if(affecting.take_damage(10, 15))
 						src.UpdateDamageIcon()
 					src.updatehealth()
+		if("z_roar")
+			if (!miming)
+				message = "<B>[src]</B> roars!"
+				m_type = 1
+				call_sound_emote("z_roar")
+		if("z_shout")
+			if (!miming)
+				message = "<B>[src]</B> shouts!"
+				m_type = 1
+				call_sound_emote("z_shout")
+		if("z_mutter")
+			if (!miming)
+				message = "<B>[src]</B> mutters!"
+				m_type = 1
+				call_sound_emote("z_mutter")
+		if("z_rawr")
+			if (!miming)
+				message = "<B>[src]</B> rawrs!"
+				m_type = 1
 
 
 		if ("help")
@@ -615,3 +634,12 @@
 
 		if("fart")
 			playsound(src.loc, 'sound/voice/fart1.ogg', 100, 1)
+
+		if("z_roar")
+			playsound(src.loc, 'sound/voice/z_roar.ogg', 100, 1)
+
+		if("z_shout")
+			playsound(src.loc, 'sound/voice/z_shout.ogg', 100, 1)
+
+		if("z_mutter")
+			playsound(src.loc, 'sound/voice/z_mutter.ogg', 100, 1)

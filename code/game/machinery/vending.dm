@@ -937,3 +937,18 @@
 					/obj/item/weapon/screwdriver = 5,/obj/item/weapon/crowbar = 5)
 	//everything after the power cell had no amounts, I improvised.  -Sayu
 
+/obj/machinery/vending/ammo
+	name = "Sgt. Flippy's ammo supplies."
+	desc = "Ammunition vending machine."
+	icon_state = "ammo"
+	icon_deny = "ammo-deny"
+	vend_reply = "Lock'n'load!; I hope you know where bullet comes out...; KILL 'EM ALL!; KABOOM!"
+	product_ads = "Any caliber or filling!; One shot - one kill!.. Just kidding.; With or without engravements?; Only nuke is more deadly. IFF systems are not included."
+	icon_state = "ammo"
+	req_access_txt = "1"
+	products = list(/obj/item/ammo_magazine/box/shotgun = 4, /obj/item/ammo_magazine/box/shotgun/stun = 4, /obj/item/ammo_magazine/box/c38 = 5,
+					/obj/item/ammo_magazine/external/mc9mm = 2)
+
+	premium = list(/obj/item/ammo_magazine/external/m50 = 2)
+
+	contraband = list(/obj/item/ammo_magazine/external/m75 = 4, /obj/item/ammo_magazine/external/m12mm = 4, /obj/item/ammo_magazine/external/m762 = 2)

@@ -41,16 +41,6 @@
 	msg_admin_attack("[user] ([user.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[user]'>JMP</A>) attacked [M] ([M.ckey]) with [src].", 2)
 	log_attack("[user.name] ([user.ckey]) attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])")
 
-	if (!(istype(user, /mob/living/carbon/human) || ticker) && ticker.mode.name != "monkey")
-		user << "\red You don't have the dexterity to do this!"
-		return
-
-	if ((CLUMSY in user.mutations) && prob(50))
-		user << "\red The rod slips out of your hand and hits your head."
-		user.take_organ_damage(10)
-		user.Paralyse(20)
-		return
-
 	if (M.stat !=2)
 		if((M.mind in ticker.mode.cult) && prob(33))
 			M << "\red The power of [src] clears your mind of the cult's influence!"
@@ -58,14 +48,11 @@
 			ticker.mode.remove_cultist(M.mind)
 			for(var/mob/O in viewers(M, null))
 				O.show_message(text("\red [] waves [] over []'s head.", user, src, M), 1)
-		else if(prob(10))
-			user << "\red The rod slips in your hand."
-			..()
 		else
-			user << "\red The rod appears to do nothing."
-			for(var/mob/O in viewers(M, null))
-				O.show_message(text("\red [] waves [] over []'s head.", user, src, M), 1)
-			return
+//			user << "\red The rod appears to do nothing."
+//			for(var/mob/O in viewers(M, null))
+//				O.show_message(text("\red [] waves [] over []'s head.", user, src, M), 1)
+//			return
 
 /obj/item/weapon/nullrod/afterattack(atom/A, mob/user as mob)
 	if (istype(A, /turf/simulated/floor))

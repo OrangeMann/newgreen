@@ -51,3 +51,11 @@
 	M.verbs += /proc/possess
 	M.verbs += /proc/release
 	feedback_add_details("admin_verb","GPV") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
+/client/proc/CarbonCopy(atom/movable/O as mob|obj in world)
+	set category = "Admin"
+	var/mob/NewObj = new O.type(usr.loc)
+	for(var/V in O.vars)
+		if (issaved(O.vars[V]))
+			NewObj.vars[V] = O.vars[V]
+	return

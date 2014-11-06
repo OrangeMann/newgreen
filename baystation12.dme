@@ -1372,6 +1372,7 @@
 #include "code\WorkInProgress\Cael_Aislinn\Supermatter\ZeroPointLaser.dm"
 #include "code\WorkInProgress\Chinsky\ashtray.dm"
 #include "code\WorkInProgress\Cib\MedicalSideEffects.dm"
+#include "code\WorkInProgress\Guap6512\combat.dm"
 #include "code\WorkInProgress\Guap6512\medals.dm"
 #include "code\WorkInProgress\Guap6512\zombieAI.dm"
 #include "code\WorkInProgress\Guap6512\zombies.dm"

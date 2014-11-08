@@ -378,6 +378,7 @@ proc/process_ghost_teleport_locs()
 	name = "\improper Syndicate Mothership"
 	icon_state = "syndie-ship"
 	requires_power = 0
+	luminosity = 1
 
 /area/syndicate_mothership/control
 	name = "\improper Syndicate Control Room"
@@ -450,6 +451,7 @@ proc/process_ghost_teleport_locs()
 	name = "\improper Syndicate Station"
 	icon_state = "yellow"
 	requires_power = 0
+	luminosity = 1
 
 /area/syndicate_station/start
 	name = "\improper Syndicate Forward Operating Base"
@@ -495,10 +497,12 @@ proc/process_ghost_teleport_locs()
 	name = "\improper Wizard's Den"
 	icon_state = "yellow"
 	requires_power = 0
+	luminosity = 1
 
 /area/vox_station/transit
 	name = "\improper hyperspace"
 	icon_state = "shuttle"
+	luminosity = 1
 
 /area/vox_station/southwest_solars
 	name = "\improper aft port solars"

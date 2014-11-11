@@ -306,3 +306,23 @@
 	if(paralysis || stunned || weakened || buckled || lockcharge) canmove = 0
 	else canmove = 1
 	return canmove
+
+//Robots on fire
+/mob/living/silicon/robot/handle_fire()
+	if(..())
+		return
+	adjustFireLoss(3)
+	return
+
+/mob/living/silicon/robot/update_fire()
+	overlays -= image("icon"='icons/mob/OnFire.dmi', "icon_state"="Standing")
+	if(on_fire)
+		overlays += image("icon"='icons/mob/OnFire.dmi', "icon_state"="Standing")
+	update_icons()
+	return
+
+/mob/living/silicon/robot/fire_act()
+	if(!on_fire) //Silicons don't gain stacks from hotspots, but hotspots can ignite them
+		IgniteMob()
+
+//Robots on fire

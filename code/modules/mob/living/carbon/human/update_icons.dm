@@ -119,6 +119,7 @@ Please contact me on #coderbus IRC. ~Carn x
 #define R_HAND_LAYER			20
 #define TAIL_LAYER				21		//bs12 specific. this hack is probably gonna come back to haunt me
 #define TARGETED_LAYER			22		//BS12: Layer for the target overlay from weapon targeting system
+#define FIRE_LAYER				22		//If you're on fire
 #define TOTAL_LAYERS			22
 //////////////////////////////////
 
@@ -137,28 +138,32 @@ Please contact me on #coderbus IRC. ~Carn x
 	update_hud()		//TODO: remove the need for this
 	overlays.Cut()
 
-	if(lying)		//can't be cloaked when lying. (for now)
-		icon = lying_icon
-		for(var/image/I in overlays_lying)
-			overlays += I
+	var/stealth = 0
+	//cloaking devices. //TODO: get rid of this :<
+	for(var/obj/item/weapon/cloaking_device/S in list(l_hand,r_hand,belt,l_store,r_store))
+		if(S.active)
+			stealth = 1
+			break
+	if(stealth)
+		icon = 'icons/mob/human.dmi'
+		icon_state = "body_cloaked"
+		var/image/I	= overlays_standing[L_HAND_LAYER]
+		if(istype(I))	overlays += I
+		I 			= overlays_standing[R_HAND_LAYER]
+		if(istype(I))	overlays += I
 	else
-		var/stealth = 0
-		//cloaking devices. //TODO: get rid of this :<
-		for(var/obj/item/weapon/cloaking_device/S in list(l_hand,r_hand,belt,l_store,r_store))
-			if(S.active)
-				stealth = 1
-				break
-		if(stealth)
-			icon = 'icons/mob/human.dmi'
-			icon_state = "body_cloaked"
-			var/image/I	= overlays_standing[L_HAND_LAYER]
-			if(istype(I))	overlays += I
-			I 			= overlays_standing[R_HAND_LAYER]
-			if(istype(I))	overlays += I
-		else
-			icon = stand_icon
-			for(var/image/I in overlays_standing)
-				overlays += I
+		icon = stand_icon
+		for(var/image/I in overlays_standing)
+			overlays += I
+	if(lying)
+		dir = 2
+		var/matrix/M = matrix()
+		M.Turn(90)
+		M.Translate(1,-6)
+		src.transform = M
+	else
+		var/matrix/M = matrix()
+		src.transform = M
 
 var/global/list/damage_icon_parts = list()
 proc/get_damage_icon_part(damage_state, body_part)
@@ -460,6 +465,14 @@ proc/get_damage_icon_part(damage_state, body_part)
 		overlays_standing[TARGETED_LAYER]	= null
 	if(update_icons)		update_icons()
 
+/mob/living/carbon/human/update_fire()
+
+	overlays_standing[FIRE_LAYER] = null
+	if(on_fire)
+		overlays_standing[FIRE_LAYER] = image("icon"='icons/mob/OnFire.dmi', "icon_state"="Standing", "layer"=-FIRE_LAYER)
+
+	update_icons()
+
 
 /* --------------------------------------- */
 //For legacy support.
@@ -485,6 +498,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 	update_inv_handcuffed(0)
 	update_inv_legcuffed(0)
 	update_inv_pockets(0)
+	update_fire()
 	UpdateDamageIcon()
 	update_icons()
 	//Hud Stuff
@@ -925,3 +939,4 @@ proc/get_damage_icon_part(damage_state, body_part)
 #undef TAIL_LAYER
 #undef TARGETED_LAYER
 #undef TOTAL_LAYERS
+#undef FIRE_LAYER

@@ -259,6 +259,14 @@ datum
 					if(!cube.wrapped)
 						cube.Expand()
 				return
+			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)//Splashing people with water can help put them out!
+				if(!istype(M, /mob/living))
+					return
+				if(method == TOUCH)
+					M.adjust_fire_stacks(-(volume / 10))
+					if(M.fire_stacks <= 0)
+						M.ExtinguishMob()
+					return
 
 		lube
 			name = "Space Lube"
@@ -1154,6 +1162,12 @@ datum
 			reaction_turf(var/turf/T, var/volume)
 				new /obj/effect/decal/cleanable/liquid_fuel(T, volume)
 				return
+			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)//Splashing people with welding fuel to make them easy to ignite!
+				if(!istype(M, /mob/living))
+					return
+				if(method == TOUCH)
+					M.adjust_fire_stacks(volume / 10)
+					return
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
 				M.adjustToxLoss(1)
@@ -1285,6 +1299,12 @@ datum
 				fuel.moles = 5
 				napalm.trace_gases += fuel
 				the_turf.assume_air(napalm)
+			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)//Splashing people with plasma is stronger than fuel!
+				if(!istype(M, /mob/living))
+					return
+				if(method == TOUCH)
+					M.adjust_fire_stacks(volume / 5)
+					return
 			reaction_turf(var/turf/T, var/volume)
 				src = null
 				var/datum/gas_mixture/napalm = new
@@ -2874,6 +2894,13 @@ datum
 					else
 						usr << "It wasn't enough..."
 				return
+			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)//Splashing people with ethanol isn't quite as good as fuel.
+				if(!istype(M, /mob/living))
+					return
+				if(method == TOUCH)
+					M.adjust_fire_stacks(volume / 15)
+					return
+
 
 			beer	//It's really much more stronger than other drinks.
 				name = "Beer"

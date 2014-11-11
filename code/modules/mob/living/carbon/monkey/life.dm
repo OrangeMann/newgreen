@@ -51,6 +51,9 @@
 	//to find it.
 	blinded = null
 
+	//Check if we're on fire
+	handle_fire()
+
 	//Handle temperature/pressure differences between body and environment
 	if(environment)	// More error checking -- TLE
 		handle_environment(environment)
@@ -375,10 +378,11 @@
 			var/turf/heat_turf = get_turf(src)
 			environment_heat_capacity = heat_turf.heat_capacity
 
-		if((environment.temperature > (T0C + 50)) || (environment.temperature < (T0C + 10)))
-			var/transfer_coefficient = 1
+		if(!on_fire)
+			if((environment.temperature > (T0C + 50)) || (environment.temperature < (T0C + 10)))
+				var/transfer_coefficient = 1
 
-			handle_temperature_damage(HEAD, environment.temperature, environment_heat_capacity*transfer_coefficient)
+				handle_temperature_damage(HEAD, environment.temperature, environment_heat_capacity*transfer_coefficient)
 
 		if(stat==2)
 			bodytemperature += 0.1*(environment.temperature - bodytemperature)*environment_heat_capacity/(environment_heat_capacity + 270000)
@@ -636,3 +640,10 @@
 	proc/handle_changeling()
 		if(mind && mind.changeling)
 			mind.changeling.regenerate()
+///FIRE CODE
+	handle_fire()
+		if(..())
+			return
+		adjustFireLoss(6)
+		return
+//END FIRE CODE

@@ -75,6 +75,9 @@ atom/proc/ul_SetLuminosity(var/Red, var/Green = Red, var/Blue = Red)
 
 	return
 
+atom/proc/ul_AddLuminosity(var/Red, var/Green = Red, var/Blue = Red)
+	ul_SetLuminosity(LuminosityRed + Red, LuminosityGreen + Green, LuminosityBlue + Blue)
+
 atom/proc/ul_Illuminate()
 	if (ul_Extinguished == UL_I_LIT)
 		return

@@ -1,0 +1,179 @@
+
+save = object(".0")
+	.0
+		type = /obj/item/ammo_box/magazine/m75
+		stored_ammo = list(object(".0"),object(".1"),object(".2"),object(".3"),object(".4"),object(".5"),object(".6"),object(".7"),object(".8"),object(".9"))
+			.0
+				type = /obj/item/ammo_casing/caseless
+				caliber = "energy"
+				BB = object(".0")
+					.0
+						type = /obj/item/projectile/beam
+				name = "laser charge"
+				icon_state = "s-casing-live"
+				icon = filedata("name=laserbullet0.dmi;length=254;crc32=0x73cdfe0e;encoding=base64",{"
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAFVBMVEXAwMD/MwAuLS0eHh7dLQAa
+GRsQEBDpLjO9AAAAAXRSTlMAQObYZgAAAHF6VFh0RGVzY3JpcHRpb24AAHicU1ZwcnX39FNw8fXk
+KkstKs7Mz1OwVTDRM+DiLM9MKckAcoyNuDgzUjPTM0ognOKSxJJUIFOpWDc5sTgzL103J7MsVYmL
+MyWzqBgobsjFmVaUmJsKYSsruPq5gI0HADWWHP1129RPAAAAGklEQVQokWNgGAUMDIxKyqgCLKFh
+A+OSwQYAAwkA9vdJ3ZMAAAAASUVORK5CYII=
+"})
+				contents = list(object("../BB/.0"))
+			.1
+				type = /obj/item/ammo_casing/caseless
+				caliber = "energy"
+				BB = object(".0")
+					.0
+						type = /obj/item/projectile/beam
+				name = "laser charge"
+				icon_state = "s-casing-live"
+				icon = filedata("name=laserbullet1.dmi;length=254;crc32=0x73cdfe0e;encoding=base64",{"
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAFVBMVEXAwMD/MwAuLS0eHh7dLQAa
+GRsQEBDpLjO9AAAAAXRSTlMAQObYZgAAAHF6VFh0RGVzY3JpcHRpb24AAHicU1ZwcnX39FNw8fXk
+KkstKs7Mz1OwVTDRM+DiLM9MKckAcoyNuDgzUjPTM0ognOKSxJJUIFOpWDc5sTgzL103J7MsVYmL
+MyWzqBgobsjFmVaUmJsKYSsruPq5gI0HADWWHP1129RPAAAAGklEQVQokWNgGAUMDIxKyqgCLKFh
+A+OSwQYAAwkA9vdJ3ZMAAAAASUVORK5CYII=
+"})
+				contents = list(object("../BB/.0"))
+			.2
+				type = /obj/item/ammo_casing/caseless
+				caliber = "energy"
+				BB = object(".0")
+					.0
+						type = /obj/item/projectile/beam
+				name = "laser charge"
+				icon_state = "s-casing-live"
+				icon = filedata("name=laserbullet2.dmi;length=254;crc32=0x73cdfe0e;encoding=base64",{"
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAFVBMVEXAwMD/MwAuLS0eHh7dLQAa
+GRsQEBDpLjO9AAAAAXRSTlMAQObYZgAAAHF6VFh0RGVzY3JpcHRpb24AAHicU1ZwcnX39FNw8fXk
+KkstKs7Mz1OwVTDRM+DiLM9MKckAcoyNuDgzUjPTM0ognOKSxJJUIFOpWDc5sTgzL103J7MsVYmL
+MyWzqBgobsjFmVaUmJsKYSsruPq5gI0HADWWHP1129RPAAAAGklEQVQokWNgGAUMDIxKyqgCLKFh
+A+OSwQYAAwkA9vdJ3ZMAAAAASUVORK5CYII=
+"})
+				contents = list(object("../BB/.0"))
+			.3
+				type = /obj/item/ammo_casing/caseless
+				caliber = "energy"
+				BB = object(".0")
+					.0
+						type = /obj/item/projectile/beam
+				name = "laser charge"
+				icon_state = "s-casing-live"
+				icon = filedata("name=laserbullet3.dmi;length=254;crc32=0x73cdfe0e;encoding=base64",{"
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAFVBMVEXAwMD/MwAuLS0eHh7dLQAa
+GRsQEBDpLjO9AAAAAXRSTlMAQObYZgAAAHF6VFh0RGVzY3JpcHRpb24AAHicU1ZwcnX39FNw8fXk
+KkstKs7Mz1OwVTDRM+DiLM9MKckAcoyNuDgzUjPTM0ognOKSxJJUIFOpWDc5sTgzL103J7MsVYmL
+MyWzqBgobsjFmVaUmJsKYSsruPq5gI0HADWWHP1129RPAAAAGklEQVQokWNgGAUMDIxKyqgCLKFh
+A+OSwQYAAwkA9vdJ3ZMAAAAASUVORK5CYII=
+"})
+				contents = list(object("../BB/.0"))
+			.4
+				type = /obj/item/ammo_casing/caseless
+				caliber = "energy"
+				BB = object(".0")
+					.0
+						type = /obj/item/projectile/beam
+				name = "laser charge"
+				icon_state = "s-casing-live"
+				icon = filedata("name=laserbullet4.dmi;length=254;crc32=0x73cdfe0e;encoding=base64",{"
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAFVBMVEXAwMD/MwAuLS0eHh7dLQAa
+GRsQEBDpLjO9AAAAAXRSTlMAQObYZgAAAHF6VFh0RGVzY3JpcHRpb24AAHicU1ZwcnX39FNw8fXk
+KkstKs7Mz1OwVTDRM+DiLM9MKckAcoyNuDgzUjPTM0ognOKSxJJUIFOpWDc5sTgzL103J7MsVYmL
+MyWzqBgobsjFmVaUmJsKYSsruPq5gI0HADWWHP1129RPAAAAGklEQVQokWNgGAUMDIxKyqgCLKFh
+A+OSwQYAAwkA9vdJ3ZMAAAAASUVORK5CYII=
+"})
+				contents = list(object("../BB/.0"))
+			.5
+				type = /obj/item/ammo_casing/caseless
+				caliber = "energy"
+				BB = object(".0")
+					.0
+						type = /obj/item/projectile/beam
+				name = "laser charge"
+				icon_state = "s-casing-live"
+				icon = filedata("name=laserbullet5.dmi;length=254;crc32=0x73cdfe0e;encoding=base64",{"
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAFVBMVEXAwMD/MwAuLS0eHh7dLQAa
+GRsQEBDpLjO9AAAAAXRSTlMAQObYZgAAAHF6VFh0RGVzY3JpcHRpb24AAHicU1ZwcnX39FNw8fXk
+KkstKs7Mz1OwVTDRM+DiLM9MKckAcoyNuDgzUjPTM0ognOKSxJJUIFOpWDc5sTgzL103J7MsVYmL
+MyWzqBgobsjFmVaUmJsKYSsruPq5gI0HADWWHP1129RPAAAAGklEQVQokWNgGAUMDIxKyqgCLKFh
+A+OSwQYAAwkA9vdJ3ZMAAAAASUVORK5CYII=
+"})
+				contents = list(object("../BB/.0"))
+			.6
+				type = /obj/item/ammo_casing/caseless
+				caliber = "energy"
+				BB = object(".0")
+					.0
+						type = /obj/item/projectile/beam
+				name = "laser charge"
+				icon_state = "s-casing-live"
+				icon = filedata("name=laserbullet6.dmi;length=254;crc32=0x73cdfe0e;encoding=base64",{"
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAFVBMVEXAwMD/MwAuLS0eHh7dLQAa
+GRsQEBDpLjO9AAAAAXRSTlMAQObYZgAAAHF6VFh0RGVzY3JpcHRpb24AAHicU1ZwcnX39FNw8fXk
+KkstKs7Mz1OwVTDRM+DiLM9MKckAcoyNuDgzUjPTM0ognOKSxJJUIFOpWDc5sTgzL103J7MsVYmL
+MyWzqBgobsjFmVaUmJsKYSsruPq5gI0HADWWHP1129RPAAAAGklEQVQokWNgGAUMDIxKyqgCLKFh
+A+OSwQYAAwkA9vdJ3ZMAAAAASUVORK5CYII=
+"})
+				contents = list(object("../BB/.0"))
+			.7
+				type = /obj/item/ammo_casing/caseless
+				caliber = "energy"
+				BB = object(".0")
+					.0
+						type = /obj/item/projectile/beam
+				name = "laser charge"
+				icon_state = "s-casing-live"
+				icon = filedata("name=laserbullet7.dmi;length=254;crc32=0x73cdfe0e;encoding=base64",{"
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAFVBMVEXAwMD/MwAuLS0eHh7dLQAa
+GRsQEBDpLjO9AAAAAXRSTlMAQObYZgAAAHF6VFh0RGVzY3JpcHRpb24AAHicU1ZwcnX39FNw8fXk
+KkstKs7Mz1OwVTDRM+DiLM9MKckAcoyNuDgzUjPTM0ognOKSxJJUIFOpWDc5sTgzL103J7MsVYmL
+MyWzqBgobsjFmVaUmJsKYSsruPq5gI0HADWWHP1129RPAAAAGklEQVQokWNgGAUMDIxKyqgCLKFh
+A+OSwQYAAwkA9vdJ3ZMAAAAASUVORK5CYII=
+"})
+				contents = list(object("../BB/.0"))
+			.8
+				type = /obj/item/ammo_casing/caseless
+				caliber = "energy"
+				BB = object(".0")
+					.0
+						type = /obj/item/projectile/beam
+				name = "laser charge"
+				icon_state = "s-casing-live"
+				icon = filedata("name=laserbullet8.dmi;length=254;crc32=0x73cdfe0e;encoding=base64",{"
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAFVBMVEXAwMD/MwAuLS0eHh7dLQAa
+GRsQEBDpLjO9AAAAAXRSTlMAQObYZgAAAHF6VFh0RGVzY3JpcHRpb24AAHicU1ZwcnX39FNw8fXk
+KkstKs7Mz1OwVTDRM+DiLM9MKckAcoyNuDgzUjPTM0ognOKSxJJUIFOpWDc5sTgzL103J7MsVYmL
+MyWzqBgobsjFmVaUmJsKYSsruPq5gI0HADWWHP1129RPAAAAGklEQVQokWNgGAUMDIxKyqgCLKFh
+A+OSwQYAAwkA9vdJ3ZMAAAAASUVORK5CYII=
+"})
+				contents = list(object("../BB/.0"))
+			.9
+				type = /obj/item/ammo_casing/caseless
+				caliber = "energy"
+				BB = object(".0")
+					.0
+						type = /obj/item/projectile/beam
+				name = "laser charge"
+				icon_state = "s-casing-live"
+				icon = filedata("name=laserbullet9.dmi;length=254;crc32=0x73cdfe0e;encoding=base64",{"
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAFVBMVEXAwMD/MwAuLS0eHh7dLQAa
+GRsQEBDpLjO9AAAAAXRSTlMAQObYZgAAAHF6VFh0RGVzY3JpcHRpb24AAHicU1ZwcnX39FNw8fXk
+KkstKs7Mz1OwVTDRM+DiLM9MKckAcoyNuDgzUjPTM0ognOKSxJJUIFOpWDc5sTgzL103J7MsVYmL
+MyWzqBgobsjFmVaUmJsKYSsruPq5gI0HADWWHP1129RPAAAAGklEQVQokWNgGAUMDIxKyqgCLKFh
+A+OSwQYAAwkA9vdJ3ZMAAAAASUVORK5CYII=
+"})
+				contents = list(object("../BB/.0"))
+		max_ammo = 10
+		caliber = "energy"
+		name = "energy cell"
+		desc = "An ammo container. There are 10 shells left!"
+		icon_state = "75-10"
+		icon = filedata("name=lasgun_ammo.dmi;length=287;crc32=0x43d65537;encoding=base64",{"
+iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgBAMAAABQs2O3AAAAG1BMVEXAwMD/MwAmJSndLQAeHh4a
+GRsQEBALCwsuLS2FQvD2AAAAAXRSTlMAQObYZgAAAG16VFh0RGVzY3JpcHRpb24AAHicU1ZwcnX3
+9FNw8fXkKkstKs7Mz1OwVTDRM+DiLM9MKckAcoyNuDgzUjPTM0ognOKSxJJUIFPJ3FTX0ECJizMl
+s6gYyDfk4kwrSsxNhbCRVeFUpKzg6ucCthsAeBsibCvbj3YAAAA5SURBVDiNY2AYBSMQMBJSoKyA
+yldA4zOoKODnM4QE4OcTVMCWloaXz8De0o6Xz8DW0oaXT9iKEQ8AEaELKc47N1oAAAAASUVORK5C
+YII=
+"})
+		contents = list(object("../stored_ammo/.0"),object("../stored_ammo/.1"),object("../stored_ammo/.2"),object("../stored_ammo/.3"),object("../stored_ammo/.4"),object("../stored_ammo/.5"),object("../stored_ammo/.6"),object("../stored_ammo/.7"),object("../stored_ammo/.8"),object("../stored_ammo/.9"))

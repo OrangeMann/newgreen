@@ -1,0 +1,171 @@
+
+save = object(".0")
+	.0
+		type = /obj/item/weapon/gun/projectile/automatic
+		mag_type = /obj/item/ammo_box/magazine/m12g/buckshot
+		magazine = object(".0")
+			.0
+				type = /obj/item/ammo_box/magazine/m12g/buckshot
+				stored_ammo = list(
+						object(".0"),
+						object(".1"),
+						object(".2"),
+						object(".3"),
+						object(".4"),
+						object(".5"),
+						object(".6"),
+						object(".7"),
+						object(".8"),
+						object(".9"),
+						object(".10"))
+					.0
+						type = /obj/item/ammo_casing/c38/e
+						caliber = "bolter"
+						BB = object(".0")
+							.0
+								type = /obj/item/projectile/bullet/midbullet4
+						icon_state = "s-casing-live"
+						contents = list(object("../BB/.0"))
+					.1
+						type = /obj/item/ammo_casing/c38/e
+						caliber = "bolter"
+						BB = object(".0")
+							.0
+								type = /obj/item/projectile/bullet/midbullet4
+						icon_state = "s-casing-live"
+						contents = list(object("../BB/.0"))
+					.2
+						type = /obj/item/ammo_casing/c38/e
+						caliber = "bolter"
+						BB = object(".0")
+							.0
+								type = /obj/item/projectile/bullet/midbullet4
+						icon_state = "s-casing-live"
+						contents = list(object("../BB/.0"))
+					.3
+						type = /obj/item/ammo_casing/c38/e
+						caliber = "bolter"
+						BB = object(".0")
+							.0
+								type = /obj/item/projectile/bullet/midbullet4
+						icon_state = "s-casing-live"
+						contents = list(object("../BB/.0"))
+					.4
+						type = /obj/item/ammo_casing/c38/e
+						caliber = "bolter"
+						BB = object(".0")
+							.0
+								type = /obj/item/projectile/bullet/midbullet4
+						icon_state = "s-casing-live"
+						contents = list(object("../BB/.0"))
+					.5
+						type = /obj/item/ammo_casing/c38/e
+						caliber = "bolter"
+						BB = object(".0")
+							.0
+								type = /obj/item/projectile/bullet/midbullet4
+						icon_state = "s-casing-live"
+						contents = list(object("../BB/.0"))
+					.6
+						type = /obj/item/ammo_casing/c38/e
+						caliber = "bolter"
+						BB = object(".0")
+							.0
+								type = /obj/item/projectile/bullet/midbullet4
+						icon_state = "s-casing-live"
+						contents = list(object("../BB/.0"))
+					.7
+						type = /obj/item/ammo_casing/c38/e
+						caliber = "bolter"
+						BB = object(".0")
+							.0
+								type = /obj/item/projectile/bullet/midbullet4
+						icon_state = "s-casing-live"
+						contents = list(object("../BB/.0"))
+					.8
+						type = /obj/item/ammo_casing/c38/e
+						caliber = "bolter"
+						BB = object(".0")
+							.0
+								type = /obj/item/projectile/bullet/midbullet4
+						icon_state = "s-casing-live"
+						contents = list(object("../BB/.0"))
+					.9
+						type = /obj/item/ammo_casing/c38/e
+						caliber = "bolter"
+						BB = object(".0")
+							.0
+								type = /obj/item/projectile/bullet/midbullet4
+						icon_state = "s-casing-live"
+						contents = list(object("../BB/.0"))
+					.10
+						type = /obj/item/ammo_casing/c38/e
+						BB = object(".0")
+							.0
+								type = /obj/item/projectile/bullet/midbullet4
+						icon_state = "s-casing-live"
+						contents = list(object("../BB/.0"))
+				max_ammo = 12
+				caliber = "bolter"
+				name = "bolter magazine"
+				desc = "An ammo container. There are 11 shells left!"
+				icon_state = "m12gb-16"
+				icon = filedata("name=bolter_mag.dmi;length=326;crc32=0x41ec0f7a;encoding=base64",{"
+iVBORw0KGgoAAAANSUhEUgAAAEAAAABABAMAAABYR2ztAAAAFVBMVEXAwMAtLS3o1E+IfS4UFBQ4
+NjbAwMB/QwBbAAAAAXRSTlMAQObYZgAAAHV6VFh0RGVzY3JpcHRpb24AAHicU1ZwcnX39FNw8fXk
+KkstKs7Mz1OwVTDRM+DiLM9MKckAcoyNuDgzUjPTM0ognOKSxJJUIFMp19AoPUnXQImLMyWzqBgo
+YsjFmVaUmJsKYaOpsyBSnaEZLoXKCq5+LmCXAgBFvy9o/FAj9QAAAF5JREFUSIljYBgF9AWMaHxF
+JQMUPougoAg+PgNLYGAIPv6gUMDgKirqgI9PWAFLaGgIPj4Di4uLCz7+KBgFQw+glwfoAKM8wFCA
+kRcHoQLM7E6yAozyAEPBaHlAcwAAkKIZzJUmTywAAAAASUVORK5CYII=
+"})
+				contents = list(
+						object("../stored_ammo/.0"),
+						object("../stored_ammo/.1"),
+						object("../stored_ammo/.2"),
+						object("../stored_ammo/.3"),
+						object("../stored_ammo/.4"),
+						object("../stored_ammo/.5"),
+						object("../stored_ammo/.6"),
+						object("../stored_ammo/.7"),
+						object("../stored_ammo/.8"),
+						object("../stored_ammo/.9"),
+						object("../stored_ammo/.10"))
+		chambered = object(".0")
+			.0
+				type = /obj/item/ammo_casing/c38/e
+				caliber = "bolter"
+				BB = object(".0")
+					.0
+						type = /obj/item/projectile/bullet/midbullet4
+				icon_state = "s-casing-live"
+				contents = list(object("../BB/.0"))
+		upgrades = list()
+		item_state_icon = filedata("name=bolter_hands.dmi;length=534;crc32=0x322b376a;encoding=base64",{"
+iVBORw0KGgoAAAANSUhEUgAAAGAAAABgBAMAAAAQtmoLAAAAJ1BMVEXAwMAUFBRjY2M4NjYAAAAe
+Hh5MAABmKABMHgB/MwAQEBCqqqrAwMBDFU5ZAAAAAXRSTlMAQObYZgAAAHN6VFh0RGVzY3JpcHRp
+b24AAHicU1ZwcnX39FNw8fXkKkstKs7Mz1OwVTDRM+DiLM9MKckAcoyNuDgzUjPTM0ognOKSxJJU
+IFMpvTQvvig+IzEvRYmLMyWzqBikk4szrSgxNxXENkRVmoNXqbKCq58L2BkA6i0o0640lxwAAAEe
+SURBVFiF7ZdBDoIwEEWFxD1FDwCRC2DiypUm7k00bFx7B2/i1jsY7yehnTK1f0KNS+dtCPQPg2D6
+2tlMUZSfyIovU2Wbcp9F7QdWuMOYsLE1xZruBivGhOW6t8f80N4fsAUlqOO5Go7LS2Fg3ieo42tn
+Lz+FvE84zNa+nNpshNdKCVd+MiW1xgUsMZyO1ZnwRB+fZ/rzJv0BFEVRIoA/8OxNV2N/ZBUqID8A
+fzRH2MH5IfZHbwhU4PwA/NEbAhZYPwB/SIawfgCjkiGsH+AoNIT3AxiFhvB+EPwRo35QlH8mbY/A
+EPYIwT2DE2GPwMl5pOmmH2LOVv+SAQL46l8yQABf/ct7BAZf/ct7BNYgXP0LewReEP7MhDleZ3eR
+Nw7eH6fqJRnWAAAAAElFTkSuQmCC
+"})
+		attack_verb = list("struck","hit","bashed")
+		force = 12
+		name = "bolter"
+		desc = "The most powerful hand-held ballistic anti-personnel weaponry in use by the military forces of the Imperium of Man."
+		icon_state = "saber-12"
+		icon = filedata("name=bolter.dmi;length=476;crc32=0x379a5e1e;encoding=base64",{"
+iVBORw0KGgoAAAANSUhEUgAAAEAAAABABAMAAABYR2ztAAAAKlBMVEXAwMAUFBQtLS1jY2M4NjYe
+Hh4AAABMAACqqqqMjIx/MwBmKABMHgDMAAAgHxDEAAAAAXRSTlMAQObYZgAAAHl6VFh0RGVzY3Jp
+cHRpb24AAHicU1ZwcnX39FNw8fXkKkstKs7Mz1OwVTDRM+DiLM9MKckAcoyNuDgzUjPTM0ognOKS
+xJJUIFOpODEptUjX0EiJizMls6gYKGTIxZlWlJibCmGjKiROFdA43VQileJUp6zg6ucC9hIAqgY8
+XY9CB6cAAADbSURBVEiJ7ZQxDoIwFIZfb9AaujA2GMPgBBegqTtVSJyNB3Bzd2LmGh5BFnd3J+9i
+W2JoyWM0JoZv4vvzN/zTA5j5Agx3Aoy5T8Io5rBgWZbvDFXNKeLAlVLycDRUokQc+OqcqNqi3Yux
+94Fq0raRqNtJpr1P24tmJeJ2bq4ZF0IsKe42OJOtEHrCIe7uJ2JHTTi5dqwHdxM8KBApC9994ltY
+cO4TbczPvIJzH+7WRElCfffo1wyFYV0AUarA8qEw8XDmX/nhfVi/wvswchM8w/sw8vk+fJjvA8Ab
+pYmD5fCN7mAAAAAASUVORK5CYII=
+"})
+		contents = list(object("../magazine/.0"),object("../chambered/.0"))

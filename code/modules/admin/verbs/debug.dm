@@ -532,6 +532,11 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 		return
 	//log_admin("[key_name(src)] has alienized [M.key].")
 	var/list/dresspacks = list(
+		"blood pact soldier",
+		"blood pact sergeant",
+		"krieg officer",
+		"krieg sergeant",
+		"commisar",
 		"strip",
 		"standard space gear",
 		"tournament standard red",

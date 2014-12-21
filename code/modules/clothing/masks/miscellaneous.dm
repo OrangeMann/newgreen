@@ -92,3 +92,14 @@
 	w_class = 2
 	var/voicechange = 0
 	siemens_coefficient = 0.9
+
+/obj/item/clothing/mask/BPmask
+	name = "Blood Pact mask"
+	desc = "Blood Pact mask"
+	icon = 'icons/Warhammer/BPmask.dmi'
+	icon_state = "mask"
+	item_state = "mask"
+	flags = FPRINT|TABLEPASS
+	flags_inv = HIDEFACE
+	w_class = 2
+	siemens_coefficient = 0.9

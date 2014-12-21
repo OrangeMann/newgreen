@@ -1,6 +1,6 @@
 /obj/item/weapon/gun/energy/ionrifle
 	name = "ion rifle"
-	desc = "A man portable anti-armor weapon designed to disable mechanical threats"
+	desc = "A man portable anti-armor weapon designed to disable mechanical threats. "
 	icon_state = "ionrifle"
 	fire_sound = 'sound/weapons/Laser.ogg'
 	origin_tech = "combat=2;magnets=4"
@@ -19,7 +19,7 @@
 
 /obj/item/weapon/gun/energy/decloner
 	name = "biological demolecularisor"
-	desc = "A gun that discharges high amounts of controlled radiation to slowly break a target into component elements."
+	desc = "A gun that discharges high amounts of controlled radiation to slowly break a target into component elements. "
 	icon_state = "decloner"
 	fire_sound = 'sound/weapons/pulse3.ogg'
 	origin_tech = "combat=5;materials=4;powerstorage=3"
@@ -63,6 +63,11 @@ obj/item/weapon/gun/energy/staff
 
 	update_icon()
 		return
+
+	eject_battery()
+		set hidden = 1
+		return
+
 /obj/item/weapon/gun/energy/staff/animate
 	name = "staff of animation"
 	desc = "An artefact that spits bolts of life-force which causes objects which are hit by it to animate and come to life! This magic doesn't affect machines."
@@ -71,7 +76,7 @@ obj/item/weapon/gun/energy/staff
 
 /obj/item/weapon/gun/energy/floragun
 	name = "floral somatoray"
-	desc = "A tool that discharges controlled radiation which induces mutation in plant cells."
+	desc = "A tool that discharges controlled radiation which induces mutation in plant cells. "
 	icon_state = "floramut100"
 	item_state = "obj/item/gun.dmi"
 	fire_sound = 'sound/effects/stealthoff.ogg'
@@ -120,7 +125,7 @@ obj/item/weapon/gun/energy/staff
 
 /obj/item/weapon/gun/energy/meteorgun
 	name = "meteor gun"
-	desc = "For the love of god, make sure you're aiming this the right way!"
+	desc = "For the love of god, make sure you're aiming this the right way! "
 	icon_state = "riotgun"
 	item_state = "c20r"
 	w_class = 4
@@ -153,7 +158,7 @@ obj/item/weapon/gun/energy/staff
 
 /obj/item/weapon/gun/energy/meteorgun/pen
 	name = "meteor pen"
-	desc = "The pen is mightier than the sword."
+	desc = "The pen is mightier than the sword. "
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "pen"
 	item_state = "pen"
@@ -162,7 +167,7 @@ obj/item/weapon/gun/energy/staff
 
 /obj/item/weapon/gun/energy/mindflayer
 	name = "mind flayer"
-	desc = "A prototype weapon recovered from the ruins of Research-Station Epsilon."
+	desc = "A prototype weapon recovered from the ruins of Research-Station Epsilon. "
 	icon_state = "xray"
 	projectile_type = "/obj/item/projectile/beam/mindflayer"
 	fire_sound = 'sound/weapons/Laser.ogg'

@@ -1,7 +1,7 @@
 /obj/item/weapon/gun/energy
 	icon_state = "energy"
 	name = "energy gun"
-	desc = "A basic energy-based gun."
+	desc = "A basic energy-based gun. "
 	fire_sound = 'sound/weapons/Taser.ogg'
 
 	var/obj/item/weapon/cell/power_supply //What type of power cell this uses
@@ -25,6 +25,31 @@
 		power_supply.give(power_supply.maxcharge)
 		return
 
+	verb/eject_battery(mob/living/user as mob)
+		set name = "Eject Battery"
+		set category = "Object"
+
+		if(power_supply)
+			power_supply.loc = get_turf(src.loc)
+			power_supply.update_icon()
+			user.put_in_hands(power_supply)
+			power_supply = null
+			update_icon()
+			user << "<span class='notice'>You pull the [power_supply] out of \the [src]!</span>"
+			return
+		else
+			user << "<span class='notice'>It has no cell!</span>"
+
+	attackby(var/obj/item/A as obj, mob/user as mob)
+		if(istype(A, /obj/item/weapon/cell) && !power_supply)
+			user.drop_item()
+			power_supply = A
+			power_supply.loc = src
+			user << "<span class='notice'>You load a new [power_supply] into \the [src]!</span>"
+			update_icon()
+		else
+			..()
+
 
 	process_chambered()
 		if(in_chamber)	return 1
@@ -36,9 +61,16 @@
 
 
 	update_icon()
-		var/ratio = power_supply.charge / power_supply.maxcharge
-		ratio = round(ratio, 0.25) * 100
-		if(modifystate)
-			icon_state = "[modifystate][ratio]"
+		if(power_supply)
+			var/ratio = power_supply.charge / power_supply.maxcharge
+			ratio = round(ratio, 0.25) * 100
+			if(modifystate)
+				icon_state = "[modifystate][ratio]"
+			else
+				icon_state = "[initial(icon_state)][ratio]"
 		else
-			icon_state = "[initial(icon_state)][ratio]"
+			var/ratio = 0
+			if(modifystate)
+				icon_state = "[modifystate][ratio]"
+			else
+				icon_state = "[initial(icon_state)][ratio]"

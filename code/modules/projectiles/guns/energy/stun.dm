@@ -1,7 +1,7 @@
 
 /obj/item/weapon/gun/energy/taser
 	name = "taser gun"
-	desc = "A small, low capacity gun used for non-lethal takedowns."
+	desc = "A small, low capacity gun used for non-lethal takedowns. "
 	icon_state = "taser"
 	item_state = null	//so the human update icon uses the icon_state instead.
 	fire_sound = 'sound/weapons/Taser.ogg'
@@ -11,7 +11,7 @@
 
 /obj/item/weapon/gun/energy/taser/cyborg
 	name = "taser gun"
-	desc = "A small, low capacity gun used for non-lethal takedowns."
+	desc = "A small, low capacity gun used for non-lethal takedowns. "
 	icon_state = "taser"
 	fire_sound = 'sound/weapons/Taser.ogg'
 	charge_cost = 100
@@ -28,6 +28,10 @@
 	Del()
 		processing_objects.Remove(src)
 		..()
+
+	eject_battery()
+		set hidden = 1
+		return
 
 	process() //Every [recharge_time] ticks, recharge a shot for the cyborg
 		charge_tick++
@@ -47,7 +51,7 @@
 
 /obj/item/weapon/gun/energy/stunrevolver
 	name = "stun revolver"
-	desc = "A high-tech revolver that fires stun cartridges. The stun cartridges can be recharged using a conventional energy weapon recharger."
+	desc = "A high-tech revolver that fires stun cartridges. The stun cartridges can be recharged using a conventional energy weapon recharger. "
 	icon_state = "stunrevolver"
 	fire_sound = 'sound/weapons/Gunshot.ogg'
 	origin_tech = "combat=3;materials=3;powerstorage=2"
@@ -81,6 +85,9 @@
 		processing_objects.Remove(src)
 		..()
 
+	eject_battery()
+		set hidden = 1
+		return
 
 	process()
 		charge_tick++

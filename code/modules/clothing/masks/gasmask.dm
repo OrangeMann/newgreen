@@ -137,3 +137,11 @@
 	siemens_coefficient = 0.5
 	can_breath = 0
 	can_eat = 1
+
+/obj/item/clothing/mask/gas/krieg
+	name = "Krieg gasmask"
+	desc = "krieg gasmask"
+	icon = 'icons/Warhammer/Mask.dmi'
+	siemens_coefficient = 0.9
+	can_breath = 1
+	can_eat = 0

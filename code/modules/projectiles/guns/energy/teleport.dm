@@ -1,6 +1,6 @@
 /obj/item/weapon/gun/energy/teleport_gun
 	name = "teleport gun"
-	desc = "A hacked together combination of a taser and a handheld teleportation unit."
+	desc = "A hacked together combination of a taser and a handheld teleportation unit. "
 	icon_state = "taser_h"
 	item_state = null	//so the human update icon uses the icon_state instead.
 	fire_sound = 'sound/weapons/Taser.ogg'

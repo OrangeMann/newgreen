@@ -19,14 +19,14 @@ Champion - melee - 35, laser - 50, bullet - 15, fire - 25
 
 /obj/item/clothing/under/warhammer/BPact
 	name = "Blood Pact uniform"
-	icon_state = "black"
+	icon_state = "bl_suit"
 	item_state = "bl_suit"
 	item_color = "bloodpact"
 	flags = FPRINT | TABLEPASS
 
 /obj/item/clothing/under/warhammer/BPact_sgt
 	name = "Blood Pact sergeant uniform"
-	icon_state = "black"
+	icon_state = "bl_suit"
 	item_state = "bl_suit"
 	item_color = "bloodpact_sgt"
 	flags = FPRINT | TABLEPASS
@@ -109,8 +109,8 @@ Champion - melee - 35, laser - 50, bullet - 15, fire - 25
 	name = "Blood Pact mask"
 	desc = "Blood Pact mask"
 	icon = 'icons/Warhammer/BPmask.dmi'
-	icon_state = "mask"
-	item_state = "mask"
+	icon_state = "bpact"
+	item_state = "bpact"
 	flags = FPRINT|TABLEPASS
 	flags_inv = HIDEFACE
 	w_class = 2
@@ -120,8 +120,8 @@ Champion - melee - 35, laser - 50, bullet - 15, fire - 25
 	name = "Krieg gasmask"
 	desc = "krieg gasmask"
 	icon = 'icons/Warhammer/Mask.dmi'
-	icon_state = "mask"
-	item_state = "mask"
+	icon_state = "krieg"
+	item_state = "krieg"
 	siemens_coefficient = 0.9
 	can_breath = 1
 	can_eat = 0

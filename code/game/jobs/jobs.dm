@@ -2,15 +2,17 @@
 var/const/KRIEG				=(1<<0)
 
 var/const/KRIEGS			=(1<<0)
-var/const/KRIEGSGT			=(1<<1)
-var/const/KRIEGCOMM			=(1<<2)
+var/const/KRIEGSUP			=(1<<1)
+var/const/KRIEGSGT			=(1<<3)
+var/const/KRIEGCOMM			=(1<<3)
 
 
 var/const/BPACT				=(1<<1)
 
 var/const/BPACTS			=(1<<0)
-var/const/BPSGT				=(1<<1)
-var/const/BPCOMM			=(1<<2)
+var/const/BPACTSUP			=(1<<1)
+var/const/BPSGT				=(1<<2)
+var/const/BPCOMM			=(1<<3)
 
 
 var/const/CIVILIAN			=(1<<2)

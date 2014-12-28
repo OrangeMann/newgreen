@@ -558,22 +558,22 @@
 					src.updatehealth()
 		if("z_roar")
 			if (!miming)
-				message = "<B>[src]</B> roars!"
+				message = "<red><B>[src]</B> roars!</red>"
 				m_type = 1
 				call_sound_emote("z_roar")
 		if("z_shout")
 			if (!miming)
-				message = "<B>[src]</B> shouts!"
+				message = "<red><B>[src]</B> shouts!</red>"
 				m_type = 1
 				call_sound_emote("z_shout")
 		if("z_mutter")
 			if (!miming)
-				message = "<B>[src]</B> mutters!"
+				message = "<red><B>[src]</B> mutters!</red>"
 				m_type = 1
 				call_sound_emote("z_mutter")
 		if("z_rawr")
 			if (!miming)
-				message = "<B>[src]</B> rawrs!"
+				message = "<red><B>[src]</B> rawrs!</red>"
 				m_type = 1
 
 

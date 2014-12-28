@@ -489,10 +489,3 @@
 			user << "Nothing to fix!"
 	else
 		return ..()
-
-/obj/item/weapon/spade
-	name = "spade"
-	desc = "Like a dildo..."
-	icon = 'icons/Warhammer/Dildo.dmi'
-	slot_flags = SLOT_BELT
-	force = 30

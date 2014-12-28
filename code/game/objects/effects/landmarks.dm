@@ -40,6 +40,14 @@
 			latejoin += loc
 			del(src)
 
+		if("JoinLateBPact")
+			latejoin_bpact += loc
+			del(src)
+
+		if("JoinLateKrieg")
+			latejoin_krieg += loc
+			del(src)
+
 		//prisoners
 		if("prisonwarp")
 			prisonwarp += loc

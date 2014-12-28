@@ -338,7 +338,7 @@ datum/preferences
 						if(4)
 							clothes_s.Blend(new /icon('icons/mob/back.dmi', "satchel"), ICON_OVERLAY)
 
-		else if(job_medsci_high)
+/*		else if(job_medsci_high)
 			switch(job_medsci_high)
 				if(RD)
 					clothes_s = new /icon('icons/mob/uniform.dmi', "director_s")
@@ -556,7 +556,7 @@ datum/preferences
 						clothes_s.Blend(new /icon('icons/mob/back.dmi', "backpack"), ICON_OVERLAY)
 					else if(backbag == 3 || backbag == 4)
 						clothes_s.Blend(new /icon('icons/mob/back.dmi', "satchel"), ICON_OVERLAY)
-
+*/
 		if(disabilities & NEARSIGHTED)
 			preview_icon.Blend(new /icon('icons/mob/eyes.dmi', "glasses"), ICON_OVERLAY)
 

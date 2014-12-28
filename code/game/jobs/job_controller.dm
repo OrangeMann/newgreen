@@ -224,12 +224,6 @@ var/global/datum/controller/occupations/job_master
 		Debug("Running DO")
 		SetupOccupations()
 
-		//Holder for Triumvirate is stored in the ticker, this just processes it
-		if(ticker)
-			for(var/datum/job/ai/A in occupations)
-				if(ticker.triai)
-					A.spawn_positions = 3
-
 		//Get the players who are ready
 		for(var/mob/new_player/player in player_list)
 			if(player.ready && player.mind && !player.mind.assigned_role)
@@ -344,6 +338,20 @@ var/global/datum/controller/occupations/job_master
 				unassigned -= player
 		return 1
 
+	proc/GetLocRank(var/mob/living/carbon/human/H, var/rank)
+		if(!H)	return 0
+		var/datum/job/job = GetJob(rank)
+		switch(job.department_flag)
+			if(BPACT)
+				H.loc = pick(latejoin_bpact)
+			if(KRIEG)
+				H.loc = pick(latejoin_krieg)
+			else
+				H.loc = pick(latejoin)
+		H.lastarea = get_area(H.loc)
+		return
+
+
 
 	proc/EquipRank(var/mob/living/carbon/human/H, var/rank, var/joined_late = 0)
 		if(!H)	return 0
@@ -457,7 +465,7 @@ var/global/datum/controller/occupations/job_master
 				break
 
 		if(job)
-			if(job.title == "Cyborg")
+			if(job.title == "Cyborg" || job.department_flag == BPACT || job.department_flag == KRIEG)
 				return
 			else
 				C = new job.idtype(H)

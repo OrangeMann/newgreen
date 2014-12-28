@@ -33,9 +33,9 @@ Champion - melee - 35, laser - 50, bullet - 15, fire - 25
 
 /obj/item/clothing/under/warhammer/krieg
 	name = "Krieg uniform"
-	icon_state = "hos"
-	item_state = "r_suit"
-	item_color = "hosred"
+	icon_state = "hos_corporate"
+	item_state = "hos_corporate"
+	item_color = "hos_corporate"
 	flags = FPRINT | TABLEPASS
 
 
@@ -120,6 +120,15 @@ Champion - melee - 35, laser - 50, bullet - 15, fire - 25
 	name = "Krieg gasmask"
 	desc = "krieg gasmask"
 	icon = 'icons/Warhammer/Mask.dmi'
+	icon_state = "mask"
+	item_state = "mask"
 	siemens_coefficient = 0.9
 	can_breath = 1
 	can_eat = 0
+
+/obj/item/weapon/spade
+	name = "spade"
+	desc = "Dig a trench. Or chop enemies!"
+	icon_state = "spade"
+	slot_flags = SLOT_BELT
+	force = 30

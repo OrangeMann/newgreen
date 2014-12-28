@@ -9,6 +9,17 @@
 	origin_tech = "combat=3;magnets=2"
 	projectile_type = "/obj/item/projectile/energy/laser"
 
+/obj/item/weapon/gun/energy/laser/wh
+	icon_state = "har_laser"
+	item_state = "har_laser"
+
+	update_icon()
+		if(power_supply)
+			icon_state = "har_laser"
+		else
+			icon_state = "har_laser_u"
+
+
 /obj/item/weapon/gun/energy/laser/practice
 	name = "practice laser gun"
 	desc = "A modified version of the basic laser gun, this one fires less concentrated energy bolts designed for target practice. "

@@ -249,7 +249,6 @@ var/list/bwhitelist
 		return
 
 /proc/check_bwhitelist(var/K)
-	return 0
 	if (!bwhitelist)
 		load_bwhitelist()
 		if (!bwhitelist)

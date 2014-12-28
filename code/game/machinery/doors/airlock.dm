@@ -1274,7 +1274,11 @@ About the new airlock wires panel:
 	if(istype(src, /obj/machinery/door/airlock/clown))
 		playsound(src.loc, 'sound/items/bikehorn.ogg', 30, 1)
 	else
-		playsound(src.loc, 'sound/machines/airlock.ogg', 30, 1)
+		if(forced)
+			playsound(src.loc, 'sound/machines/airlock_close_force.ogg', 30, 1)
+		else
+			playsound(src.loc, 'sound/machines/airlock_open_force.ogg', 30, 1)
+
 	if(src.closeOther != null && istype(src.closeOther, /obj/machinery/door/airlock/) && !src.closeOther.density)
 		src.closeOther.close()
 	return ..()
@@ -1327,7 +1331,10 @@ About the new airlock wires panel:
 	if(istype(src, /obj/machinery/door/airlock/clown))
 		playsound(src.loc, 'sound/items/bikehorn.ogg', 30, 1)
 	else
-		playsound(src.loc, 'sound/machines/airlock.ogg', 30, 1)
+		if(forced)
+			playsound(src.loc, 'sound/machines/airlock_close_force.ogg', 30, 1)
+		else
+			playsound(src.loc, 'sound/machines/airlock_close.ogg', 30, 1)
 	for(var/turf/turf in locs)
 		var/obj/structure/window/killthis = (locate(/obj/structure/window) in turf)
 		if(killthis)

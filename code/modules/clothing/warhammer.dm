@@ -112,7 +112,7 @@ Champion - melee - 35, laser - 50, bullet - 15, fire - 25
 	icon_state = "bpact"
 	item_state = "bpact"
 	flags = FPRINT|TABLEPASS
-	flags_inv = MASKCOVERSMOUTH | MASKINTERNALS
+	flags_inv = HIDEFACE
 	w_class = 2
 	siemens_coefficient = 0.9
 
@@ -122,7 +122,6 @@ Champion - melee - 35, laser - 50, bullet - 15, fire - 25
 	icon = 'icons/Warhammer/Mask.dmi'
 	icon_state = "krieg"
 	item_state = "krieg"
-	flags_inv = MASKCOVERSMOUTH | MASKINTERNALS
 	siemens_coefficient = 0.9
 	can_breath = 1
 	can_eat = 0

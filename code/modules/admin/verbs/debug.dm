@@ -562,11 +562,6 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 		"nanotrasen representative",
 		"nanotrasen officer",
 		"nanotrasen captain"
-		"krieg sergeant",
-		"commisar",
-		"blood pact soldier",
-		"blood pact sergeant",
-		"krieg officer"
 		)
 	var/dresscode = input("Select dress for [M]", "Robust quick dress shop") as null|anything in dresspacks
 	if (isnull(dresscode))

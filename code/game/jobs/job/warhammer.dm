@@ -45,6 +45,7 @@
 		H.equip_to_slot_or_del(new /obj/item/weapon/cell/(H), slot_in_backpack)
 		H.equip_to_slot_or_del(new /obj/item/weapon/cell/(H), slot_in_backpack)
 		H.equip_to_slot_or_del(new /obj/item/weapon/storage/belt/utility/full(H), slot_belt)
+		H.equip_to_slot_or_del(new /obj/item/device/radio(H), slot_r_hand)
 		return 1
 
 /datum/job/BPact_sergeant
@@ -65,7 +66,7 @@
 		H.equip_to_slot_or_del(new /obj/item/clothing/gloves/black(H), slot_gloves)
 		H.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/warhammer/BPact_sgt(H), slot_head)
 		H.equip_to_slot_or_del(new /obj/item/clothing/mask/BPmask(H), slot_wear_mask)
-		H.equip_to_slot_or_del(new /obj/item/weapon/gun/energy/laser/wh(H), slot_r_hand)
+		H.equip_to_slot_or_del(new /obj/item/weapon/gun/energy/laser/captain(H), slot_r_hand)
 		H.equip_to_slot_or_del(new /obj/item/device/radio(H), slot_l_store)
 		return 1
 
@@ -138,6 +139,7 @@
 		H.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/krieg(H), slot_wear_mask)
 		H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack(H), slot_back)
 		H.equip_to_slot_or_del(new /obj/item/weapon/storage/belt/utility/full(H), slot_belt)
+		H.equip_to_slot_or_del(new /obj/item/device/radio(H), slot_r_hand)
 		H.equip_to_slot_or_del(new /obj/item/weapon/gun/energy/laser/wh(H), slot_in_backpack)
 		H.equip_to_slot_or_del(new /obj/item/weapon/cell(H), slot_in_backpack)
 		H.equip_to_slot_or_del(new /obj/item/weapon/cell(H), slot_in_backpack)
@@ -163,7 +165,7 @@
 		H.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/warhammer/khelmet_sgt(H), slot_head)
 		H.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/krieg(H), slot_wear_mask)
 		H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack(H), slot_back)
-		H.equip_to_slot_or_del(new /obj/item/weapon/gun/energy/laser/wh(H), slot_r_hand)
+		H.equip_to_slot_or_del(new /obj/item/weapon/gun/energy/laser/captain(H), slot_r_hand)
 		H.equip_to_slot_or_del(new /obj/item/device/radio(H), slot_l_store)
 		return 1
 

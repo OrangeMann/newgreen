@@ -1119,13 +1119,8 @@
 				handle_organs()
 				handle_blood()
 
-			if((health <= config.health_threshold_dead || brain_op_stage == 4.0) && !zombie)
-				death()
-				blinded = 1
-				silent = 0
-				return 1
-			else if(zombie)
-				if(health <= (config.health_threshold_dead - 100))
+			if(health <= config.health_threshold_dead || brain_op_stage == 4.0)
+				if(!zombie)
 					death()
 					blinded = 1
 					silent = 0

@@ -6,37 +6,16 @@
 	origin_tech = "combat=4;materials=2"
 	mag_type = /obj/item/ammo_magazine/external/msmg9mm
 	var/alarmed = 0
-	var/mode = 0
 
 /obj/item/weapon/gun/projectile/automatic/update_icon()
 	..()
 	icon_state = "[initial(icon_state)][magazine ? "-[magazine.max_ammo]" : ""][chambered ? "" : "-e"]"
 	return
 
-/obj/item/weapon/gun/projectile/automatic/Fire(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, params, reflex = 0)
-	if(mode)
-		..()
-		sleep(1)
-		..()
-		sleep(1)
-		..()
-	else
-		..()
-
-/obj/item/weapon/gun/projectile/automatic/verb/toggle_fire(mob/user as mob)
-	set name = "Toggle Firing Mode"
-	set category = "Object"
-	if(mode)
-		mode = 0
-		user << "<span class='notice'>The [src] will now fire single shots.</span>"
-	else
-		mode = 1
-		user << "<span class='notice'>The [src] will now fire bursts.</span>"
-	playsound(src.loc, 'sound/weapons/empty.ogg', 100, 1)
-
 /obj/item/weapon/gun/projectile/automatic/attackby(var/obj/item/A as obj, mob/user as mob)
 	if(..() && chambered)
 		alarmed = 0
+
 
 /obj/item/weapon/gun/projectile/automatic/mini_uzi
 	name = "Uzi"
@@ -99,6 +78,9 @@
 	user << "<span class='notice'>You [cover_open ? "open" : "close"] [src]'s cover.</span>"
 	update_icon()
 
+
+/obj/item/weapon/gun/projectile/automatic/l6_saw/update_icon()
+	icon_state = "l6[cover_open ? "open" : "closed"][magazine ? round(magazine.ammo_count() * 2, 25) : "-empty"]"
 
 
 /obj/item/weapon/gun/projectile/automatic/l6_saw/afterattack(atom/target as mob|obj|turf, mob/living/user as mob|obj, flag, params) //what I tried to do here is just add a check to see if the cover is open or not and add an icon_state change because I can't figure out how c-20rs do it with overlays

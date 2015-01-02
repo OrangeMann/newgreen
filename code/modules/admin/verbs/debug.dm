@@ -606,7 +606,6 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 			M.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack(M), slot_back)
 			M.equip_to_slot_or_del(new /obj/item/weapon/spade(M), slot_belt)
 			M.equip_to_slot_or_del(new /obj/item/device/radio(M), slot_r_hand)
-			M.equip_to_slot_or_del(new /obj/item/weapon/gun/energy/laser/wh(M), slot_in_backpack)
 			M.equip_to_slot_or_del(new /obj/item/weapon/cell(M), slot_in_backpack)
 			M.equip_to_slot_or_del(new /obj/item/weapon/cell(M), slot_in_backpack)
 			M.equip_to_slot_or_del(new /obj/item/weapon/spade(M), slot_belt)

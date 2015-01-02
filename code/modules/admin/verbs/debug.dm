@@ -609,6 +609,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 			M.equip_to_slot_or_del(new /obj/item/weapon/gun/energy/laser/wh(M), slot_in_backpack)
 			M.equip_to_slot_or_del(new /obj/item/weapon/cell(M), slot_in_backpack)
 			M.equip_to_slot_or_del(new /obj/item/weapon/cell(M), slot_in_backpack)
+			M.equip_to_slot_or_del(new /obj/item/weapon/spade(M), slot_belt)
 
 		if("krieg sergeant")
 			M.equip_to_slot_or_del(new /obj/item/clothing/under/warhammer/krieg(M), slot_w_uniform)
@@ -634,6 +635,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 			M.equip_to_slot_or_del(new /obj/item/weapon/cell(M), slot_in_backpack)
 			M.equip_to_slot_or_del(new /obj/item/weapon/cell(M), slot_in_backpack)
 			M.equip_to_slot_or_del(new /obj/item/weapon/melee/baton(M), slot_in_backpack)
+			M.equip_to_slot_or_del(new /obj/item/weapon/spade(M), slot_belt)
 
 		if("krieg commisar")
 			M.equip_to_slot_or_del(new /obj/item/clothing/under/warhammer/krieg(M), slot_w_uniform)
@@ -646,6 +648,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 			M.equip_to_slot_or_del(new /obj/item/weapon/cell(M), slot_in_backpack)
 			M.equip_to_slot_or_del(new /obj/item/weapon/cell(M), slot_in_backpack)
 			M.equip_to_slot_or_del(new /obj/item/weapon/melee/baton(M), slot_in_backpack)
+			M.equip_to_slot_or_del(new /obj/item/weapon/spade(M), slot_belt)
 
 		if ("strip")
 			//do nothing

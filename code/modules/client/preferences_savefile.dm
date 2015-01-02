@@ -127,12 +127,12 @@
 	S["job_civilian_high"]	>> job_civilian_high
 	S["job_civilian_med"]	>> job_civilian_med
 	S["job_civilian_low"]	>> job_civilian_low
-	S["job_krieg_high"]		>> job_krieg_high
-	S["job_krieg_med"]		>> job_krieg_med
-	S["job_krieg_low"]		>> job_krieg_low
-	S["job_bpact_high"]	>> job_bpact_high
-	S["job_bpact_med"]		>> job_bpact_med
-	S["job_bpact_low"]		>> job_bpact_low
+	S["job_medsci_high"]	>> job_medsci_high
+	S["job_medsci_med"]		>> job_medsci_med
+	S["job_medsci_low"]		>> job_medsci_low
+	S["job_engsec_high"]	>> job_engsec_high
+	S["job_engsec_med"]		>> job_engsec_med
+	S["job_engsec_low"]		>> job_engsec_low
 
 	//Miscellaneous
 	S["flavor_text"]		>> flavor_text
@@ -180,12 +180,12 @@
 	job_civilian_high = sanitize_integer(job_civilian_high, 0, 65535, initial(job_civilian_high))
 	job_civilian_med = sanitize_integer(job_civilian_med, 0, 65535, initial(job_civilian_med))
 	job_civilian_low = sanitize_integer(job_civilian_low, 0, 65535, initial(job_civilian_low))
-	job_krieg_high = sanitize_integer(job_krieg_high, 0, 65535, initial(job_krieg_high))
-	job_krieg_med = sanitize_integer(job_krieg_med, 0, 65535, initial(job_krieg_med))
-	job_krieg_low = sanitize_integer(job_krieg_low, 0, 65535, initial(job_krieg_low))
-	job_bpact_high = sanitize_integer(job_bpact_high, 0, 65535, initial(job_bpact_high))
-	job_bpact_med = sanitize_integer(job_bpact_med, 0, 65535, initial(job_bpact_med))
-	job_bpact_low = sanitize_integer(job_bpact_low, 0, 65535, initial(job_bpact_low))
+	job_medsci_high = sanitize_integer(job_medsci_high, 0, 65535, initial(job_medsci_high))
+	job_medsci_med = sanitize_integer(job_medsci_med, 0, 65535, initial(job_medsci_med))
+	job_medsci_low = sanitize_integer(job_medsci_low, 0, 65535, initial(job_medsci_low))
+	job_engsec_high = sanitize_integer(job_engsec_high, 0, 65535, initial(job_engsec_high))
+	job_engsec_med = sanitize_integer(job_engsec_med, 0, 65535, initial(job_engsec_med))
+	job_engsec_low = sanitize_integer(job_engsec_low, 0, 65535, initial(job_engsec_low))
 
 	if(!skills) skills = list()
 	if(!used_skillpoints) used_skillpoints= 0
@@ -231,12 +231,12 @@
 	S["job_civilian_high"]	<< job_civilian_high
 	S["job_civilian_med"]	<< job_civilian_med
 	S["job_civilian_low"]	<< job_civilian_low
-	S["job_krieg_high"]	<< job_krieg_high
-	S["job_krieg_med"]		<< job_krieg_med
-	S["job_krieg_low"]		<< job_krieg_low
-	S["job_bpact_high"]	<< job_bpact_high
-	S["job_bpact_med"]		<< job_bpact_med
-	S["job_bpact_low"]		<< job_bpact_low
+	S["job_medsci_high"]	<< job_medsci_high
+	S["job_medsci_med"]		<< job_medsci_med
+	S["job_medsci_low"]		<< job_medsci_low
+	S["job_engsec_high"]	<< job_engsec_high
+	S["job_engsec_med"]		<< job_engsec_med
+	S["job_engsec_low"]		<< job_engsec_low
 
 	//Miscellaneous
 	S["flavor_text"]		<< flavor_text

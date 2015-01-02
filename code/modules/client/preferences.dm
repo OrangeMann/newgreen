@@ -78,13 +78,13 @@ datum/preferences
 	var/job_civilian_med = 0
 	var/job_civilian_low = 0
 
-	var/job_krieg_high = 0
-	var/job_krieg_med = 0
-	var/job_krieg_low = 0
+	var/job_medsci_high = 0
+	var/job_medsci_med = 0
+	var/job_medsci_low = 0
 
-	var/job_bpact_high = 0
-	var/job_bpact_med = 0
-	var/job_bpact_low = 0
+	var/job_engsec_high = 0
+	var/job_engsec_med = 0
+	var/job_engsec_low = 0
 
 	//Keeps track of preferrence for not getting any wanted jobs
 	var/alternate_option = 0
@@ -563,14 +563,13 @@ datum/preferences
 		job_civilian_med = 0
 		job_civilian_low = 0
 
-		job_krieg_high = 0
-		job_krieg_med = 0
-		job_krieg_low = 0
+		job_medsci_high = 0
+		job_medsci_med = 0
+		job_medsci_low = 0
 
-		job_bpact_high = 0
-		job_bpact_med = 0
-		job_bpact_low = 0
-
+		job_engsec_high = 0
+		job_engsec_med = 0
+		job_engsec_low = 0
 
 
 	proc/GetJobDepartment(var/datum/job/job, var/level)
@@ -584,22 +583,22 @@ datum/preferences
 						return job_civilian_med
 					if(3)
 						return job_civilian_low
-			if(BPACT)
+			if(MEDSCI)
 				switch(level)
 					if(1)
-						return job_bpact_high
+						return job_medsci_high
 					if(2)
-						return job_bpact_med
+						return job_medsci_med
 					if(3)
-						return job_bpact_low
-			if(KRIEG)
+						return job_medsci_low
+			if(ENGSEC)
 				switch(level)
 					if(1)
-						return job_krieg_high
+						return job_engsec_high
 					if(2)
-						return job_krieg_med
+						return job_engsec_med
 					if(3)
-						return job_krieg_low
+						return job_engsec_low
 		return 0
 
 	proc/SetJobDepartment(var/datum/job/job, var/level)
@@ -607,16 +606,16 @@ datum/preferences
 		switch(level)
 			if(1)//Only one of these should ever be active at once so clear them all here
 				job_civilian_high = 0
-				job_krieg_high = 0
-				job_bpact_high = 0
+				job_medsci_high = 0
+				job_engsec_high = 0
 				return 1
 			if(2)//Set current highs to med, then reset them
 				job_civilian_med |= job_civilian_high
-				job_krieg_med |= job_krieg_high
-				job_bpact_med |= job_bpact_high
+				job_medsci_med |= job_medsci_high
+				job_engsec_med |= job_engsec_high
 				job_civilian_high = 0
-				job_krieg_high = 0
-				job_bpact_high = 0
+				job_medsci_high = 0
+				job_engsec_high = 0
 
 		switch(job.department_flag)
 			if(CIVILIAN)
@@ -629,26 +628,26 @@ datum/preferences
 						job_civilian_low &= ~job.flag
 					else
 						job_civilian_low |= job.flag
-			if(KRIEG)
+			if(MEDSCI)
 				switch(level)
 					if(2)
-						job_krieg_high = job.flag
-						job_krieg_med &= ~job.flag
+						job_medsci_high = job.flag
+						job_medsci_med &= ~job.flag
 					if(3)
-						job_krieg_med |= job.flag
-						job_krieg_low &= ~job.flag
+						job_medsci_med |= job.flag
+						job_medsci_low &= ~job.flag
 					else
-						job_krieg_low |= job.flag
-			if(BPACT)
+						job_medsci_low |= job.flag
+			if(ENGSEC)
 				switch(level)
 					if(2)
-						job_bpact_high = job.flag
-						job_bpact_med &= ~job.flag
+						job_engsec_high = job.flag
+						job_engsec_med &= ~job.flag
 					if(3)
-						job_bpact_med |= job.flag
-						job_bpact_low &= ~job.flag
+						job_engsec_med |= job.flag
+						job_engsec_low &= ~job.flag
 					else
-						job_bpact_low |= job.flag
+						job_engsec_low |= job.flag
 		return 1
 
 	proc/process_link(mob/user, list/href_list)

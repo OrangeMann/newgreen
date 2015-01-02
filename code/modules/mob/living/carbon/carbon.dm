@@ -129,7 +129,6 @@
 		else
 			hud_used.l_hand_hud_object.icon_state = "hand_inactive"
 			hud_used.r_hand_hud_object.icon_state = "hand_active"
-	unlock_medal("How to change hands?", 0, "A nice start.", "easy")
 	/*if (!( src.hand ))
 		src.hands.dir = NORTH
 	else

@@ -93,22 +93,3 @@ Champion - melee - 35, laser - 50, bullet - 15, fire - 25
 	flags = FPRINT|TABLEPASS|BLOCKHAIR
 	flags_inv = HIDEEARS
 	siemens_coefficient = 1
-
-/obj/item/clothing/mask/BPmask
-	name = "Blood Pact mask"
-	desc = "Blood Pact mask"
-	icon = 'icons/Warhammer/BPmask.dmi'
-	icon_state = "mask"
-	item_state = "mask"
-	flags = FPRINT|TABLEPASS
-	flags_inv = HIDEFACE
-	w_class = 2
-	siemens_coefficient = 0.9
-
-/obj/item/clothing/mask/gas/krieg
-	name = "Krieg gasmask"
-	desc = "krieg gasmask"
-	icon = 'icons/Warhammer/Mask.dmi'
-	siemens_coefficient = 0.9
-	can_breath = 1
-	can_eat = 0

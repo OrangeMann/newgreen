@@ -94,7 +94,6 @@
 	siemens_coefficient = 0.8
 
 /obj/item/clothing/under/rank/head_of_security/corp
-	name = "krieg jumpsuit"
 	icon_state = "hos_corporate"
 	item_state = "hos_corporate"
 	item_color = "hos_corporate"
@@ -110,7 +109,7 @@
 	siemens_coefficient = 0.8
 
 /obj/item/clothing/suit/armor/hos
-	name = "krieg coat"
+	name = "armored coat"
 	desc = "A greatcoat enhanced with a special alloy for some protection and style."
 	icon_state = "hos"
 	item_state = "hos"

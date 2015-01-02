@@ -15,7 +15,6 @@ Champion - melee - 35, laser - 50, bullet - 15, fire - 25
 /obj/item/clothing/under/warhammer
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	desc = "It's made of a slightly sturdier material than standard jumpsuits, to allow for more robust protection."
-	siemens_coefficient = 1
 
 /obj/item/clothing/under/warhammer/BPact
 	name = "Blood Pact uniform"
@@ -24,20 +23,12 @@ Champion - melee - 35, laser - 50, bullet - 15, fire - 25
 	item_color = "bloodpact"
 	flags = FPRINT | TABLEPASS
 
-/obj/item/clothing/under/warhammer/BPact_sgt
+/obj/item/clothing/under/warhammer/BPact_serg
 	name = "Blood Pact sergeant uniform"
 	icon_state = "black"
 	item_state = "bl_suit"
 	item_color = "bloodpact_sgt"
 	flags = FPRINT | TABLEPASS
-
-/obj/item/clothing/under/warhammer/krieg
-	name = "Krieg uniform"
-	icon_state = "hos"
-	item_state = "r_suit"
-	item_color = "hosred"
-	flags = FPRINT | TABLEPASS
-
 
 /obj/item/clothing/suit/armor/warhammer
 	name = "armor"
@@ -50,60 +41,58 @@ Champion - melee - 35, laser - 50, bullet - 15, fire - 25
 /obj/item/clothing/suit/armor/warhammer/bloodpact
 	name = "Blood Pact armor"
 	item_state = "bloodpact"
-	icon_state = "bloodpact"
 
 /obj/item/clothing/suit/armor/warhammer/bloodpact_sgt
 	name = "Blood Pact sergeant armor"
 	item_state = "bloodpact_sgt"
-	icon_state = "bloodpact_sgt"
-
-/obj/item/clothing/suit/armor/warhammer/krieg
-	name = "Krieg armor"
-	item_state = "krieg"
-	icon_state = "krieg"
-
-/obj/item/clothing/suit/armor/warhammer/krieg_sgt
-	name = "Krieg sergeant armor"
-	item_state = "krieg_officer"
-	icon_state = "krieg_officer"
-
-/obj/item/clothing/suit/armor/warhammer/krieg_com
-	name = "Krieg commissar armor"
-	item_state = "krieg_commissar"
-	icon_state = "krieg_commissar"
 
 
-/obj/item/clothing/head/helmet/warhammer
+
+/obj/item/clothing/head/warhammer
 	name = "helmet"
 	desc = "Standard Security gear. Protects the head from impacts."
 	icon_state = "helmet"
+	flags = FPRINT | TABLEPASS
 	item_state = "helmet"
-	siemens_coefficient = 1
+	armor = list(melee = 15, bullet = 5, laser = 15, energy = 10, bomb = 5, bio = 0, rad = 0)
+	flags_inv = HIDEEARS
+	cold_protection = HEAD
+	min_cold_protection_temperature = HELMET_MIN_COLD_PROTECITON_TEMPERATURE
+	heat_protection = HEAD
+	max_heat_protection_temperature = HELMET_MAX_HEAT_PROTECITON_TEMPERATURE
+	siemens_coefficient = 0.7
 
-/obj/item/clothing/head/helmet/warhammer/khelmet
+/obj/item/clothing/head/warhammer/khelmet
 	name = "Krieg helmet"
 	desc = "Krieg helmet"
-	icon_state = "helmetkrieg"
-	item_state = "helmetkrieg"
+	icon = 'icons/Warhammer/Head.dmi'
+	flags = FPRINT|TABLEPASS|BLOCKHAIR
+	flags_inv = HIDEEARS
+	siemens_coefficient = 1
 
-/obj/item/clothing/head/helmet/warhammer/khelmet_sgt
+/obj/item/clothing/head/warhammer/khelmet_sgt
 	name = "Krieg sergeant helmet"
 	desc = "Krieg sergeant helmet"
-	icon_state = "helmetkriegoff"
-	item_state = "helmetkriegoff"
+	icon = 'icons/Warhammer/Head2.dmi'
+	flags = FPRINT|TABLEPASS|BLOCKHAIR
+	flags_inv = HIDEEARS
+	siemens_coefficient = 1
 
-/obj/item/clothing/head/helmet/warhammer/BPact_sgt
+/obj/item/clothing/head/warhammer/BPact_sgt
 	name = "Blood Pact sergeant helmet"
 	desc = "Blood Pact sergeant helmet"
-	icon_state = "bloodpact_sgt"
-	item_state = "bloodpact_sgt"
+	icon = 'icons/Warhammer/sgthlm.dmi'
+	flags = FPRINT|TABLEPASS|BLOCKHAIR
+	flags_inv = HIDEEARS
+	siemens_coefficient = 1
 
-
-/obj/item/clothing/head/helmet/warhammer/BPact
+/obj/item/clothing/head/warhammer/BPact
 	name = "Blood Pact helmet"
 	desc = "Blood Pact helmet"
-	icon_state = "bloodpact"
-	item_state = "bloodpact"
+	icon = 'icons/Warhammer/sldhlm.dmi'
+	flags = FPRINT|TABLEPASS|BLOCKHAIR
+	flags_inv = HIDEEARS
+	siemens_coefficient = 1
 
 /obj/item/clothing/mask/BPmask
 	name = "Blood Pact mask"

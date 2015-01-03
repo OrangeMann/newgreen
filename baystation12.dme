@@ -280,6 +280,7 @@
 #include "code\game\gamemodes\wizard\veilrender.dm"
 #include "code\game\gamemodes\wizard\wizard.dm"
 #include "code\game\greencode\closing_credits.dm"
+#include "code\game\greencode\emotions.dm"
 #include "code\game\jobs\access.dm"
 #include "code\game\jobs\job_controller.dm"
 #include "code\game\jobs\jobprocs.dm"

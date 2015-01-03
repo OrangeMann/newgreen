@@ -5,15 +5,9 @@
 # Ranks can be anything defined in admin_ranks.txt           ~Carn   #
 ######################################################################
 
-# not_a_user - Admin
-lethalghost - Host
-macleod962 - Host
-barka - Host
-odst97 - Developer
-gazbax - Host
-mishapepyaka - Host
-account12 - Host
-strinkor - Host
-fiodoss - Host
-guap6512 - Host
-egorkillerua - Host
+Guap6512 - Developer
+Strinkor - Developer
+Egorkillerua - Chief
+Uncle Nurgle - Host
+MasterDares - Game Master
+Fey Cot - Game Master

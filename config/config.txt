@@ -86,10 +86,10 @@ PROBABILITY CHANGELING 1
 PROBABILITY CULT 2
 ##PROBABILITY MONKEY 0
 PROBABILITY TRAITORCHAN 2
-PROBABILITY EXTEND-A-TRAITORMONGOUS 4
+PROBABILITY EXTEND-A-TRAITORMONGOUS 0
 ##PROBABILITY EPIDEMIC 0
 PROBABILITY MEME 1
-PROBABILITY RP-REVOLUTION 0
+PROBABILITY RP-REVOLUTION 1
 
 ## Hash out to disable random events during the round.
 ALLOW_RANDOM_EVENTS
@@ -176,7 +176,7 @@ BANAPPEALS http://forum.ss13.ru/index.php?showforum=40
 ## Remove the # to allow special 'Easter-egg' events on special holidays such as seasonal holidays and stuff like 'Talk Like a Pirate Day' :3 YAARRR
 ALLOW_HOLIDAYS
 ##Defines the ticklag for the world.  0.9 is the normal one, 0.5 is smoother.
-TICKLAG 0.5
+TICKLAG 0.6
 
 ## Defines if Tick Compensation is used.  It results in a minor slowdown of movement of all mobs, but attempts to result in a level movement speed across all ticks.  Recommended if tickrate is lowered.
 TICKCOMP 0
